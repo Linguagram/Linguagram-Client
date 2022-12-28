@@ -1,13 +1,16 @@
 import './App.css';
+import Setting from './components/setting';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faAddressCard, faCircle, faSun, faGlobe, faGear, faUserLarge, faUserGroup, faMessage, faCommentDots } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+library.add(faCommentDots, faAddressCard, faCircle, faSun, faGlobe, faGear, faUserGroup, faMessage, faUserLarge)
 
 function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <>
+      <Setting/>
+    </>
   );
 }
 
