@@ -1,7 +1,7 @@
 import { SET_ACTIVE_SECTION } from "../actions/actionTypes"
 
 const initialState = {
-    user: false,
+    user: true,
     group: false,
     message: false,
     address: false,

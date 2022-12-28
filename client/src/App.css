@@ -1,7 +1,7 @@
-/* setting / side-menu */
+/* setting */
 
 
-.side-menu {
+.setting {
   background-color: #36404a;
   width: 4%;
 }
@@ -29,3 +29,45 @@
   height: 30px;
 }
 
+/* sidebar */
+
+.sidebar {
+  background-color: #303841;
+  width: 21%;
+}
+
+#avatar {
+  clip-path: circle();
+  width: 90px;
+  height: 90px;
+}
+
+.status-icon {
+  width: 8px;
+  height: 8px;
+  color: aqua;
+}
+
+.line-break {
+  border-color: gray;
+}
+
+.triggerCollapsible {
+  background-color: #36404a;
+  height: 50px;
+  padding: 20px;
+}
+
+.bg-black-blue {
+  background-color: #262d36;
+}
+
+.Collapsible__trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Collapsible__trigger.is-open svg {
+  transform: rotate(90deg);
+}

@@ -17,7 +17,7 @@ export default function Setting() {
 
 
   return (
-    <div className='flex flex-col items-center py-5 justify-between side-menu h-screen'>
+    <div className='flex flex-col items-center py-5 justify-between setting h-screen'>
         <div>
           <FontAwesomeIcon className='medium-icons main-color' icon="comment-dots" />
         </div>
