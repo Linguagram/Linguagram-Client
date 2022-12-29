@@ -1,3 +1,24 @@
+.bg-gray {
+  background-color: #36404a;
+}
+
+.bg-darker-gray {
+  background-color: #303841;
+}
+
+.bg-black-blue {
+  background-color: #262d36;
+}
+
+.small-icons {
+  width: 20px;
+  height: 20px;
+}
+
+.bg-main-color-blur {
+  background-color: rgba(0, 87, 146, 0.5);
+}
+
 /* setting */
 
 
@@ -31,12 +52,13 @@
 
 /* sidebar */
 
+/* sidebar profile */
 .sidebar {
   background-color: #303841;
   width: 21%;
 }
 
-#avatar {
+#avatar-profile {
   clip-path: circle();
   width: 90px;
   height: 90px;
@@ -58,10 +80,6 @@
   padding: 20px;
 }
 
-.bg-black-blue {
-  background-color: #262d36;
-}
-
 .Collapsible__trigger {
   display: flex;
   justify-content: space-between;
@@ -70,4 +88,41 @@
 
 .Collapsible__trigger.is-open svg {
   transform: rotate(90deg);
+}
+
+/* sidebar chats */
+
+.search-chat-container {
+  height: 50px;
+}
+
+.avatar-container {
+  width: 70px;
+}
+
+.avatar-profile {
+  clip-path: circle();
+  width: 40px;
+  height: 40px;
+  margin-top: -30px;
+}
+
+.bg-red-900-blur {
+  background-color: rgba(240, 50, 50, 0.15);
+}
+
+.max-h-140 {
+  max-height: 35rem;
+}
+
+.avatar-chat {
+  clip-path: circle();
+  width: 40px;
+  height: 40px;
+}
+
+/* sidebar groups */ 
+
+.max-h-160 {
+  max-height: 45rem;
 }
