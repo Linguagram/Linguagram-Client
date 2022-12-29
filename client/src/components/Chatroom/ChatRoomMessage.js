@@ -20,7 +20,7 @@ export default function ChatRoomMessage() {
                                 <h6 className='text-gray-400 text-xs'>10.00</h6>
                             </div>
                         </div>
-                        <FontAwesomeIcon className='text-gray-400 text-sm' icon='ellipsis-vertical'/>
+                        <FontAwesomeIcon className='text-gray-400 text-sm cursor-pointer' icon='ellipsis-vertical'/>
                     </div>
                     <div className='text-gray-400'>
                         Doris Brown
@@ -33,7 +33,7 @@ export default function ChatRoomMessage() {
             <div className='flex items-end gap-3 mb-7'>
                 <div className='flex flex-col gap-1'>
                     <div className='flex gap-2'>
-                        <FontAwesomeIcon className='text-gray-400 text-sm' icon='ellipsis-vertical'/>
+                        <FontAwesomeIcon className='text-gray-400 text-sm cursor-pointer' icon='ellipsis-vertical'/>
                         <div className='bg-gray rounded message-box flex flex-col gap-3 p-3'>
                             <h5 className='text-white'>Good morning, How are you? What about our next meeting?</h5>
                             <div className='flex items-center gap-1'>
@@ -66,7 +66,7 @@ export default function ChatRoomMessage() {
                                 <h6 className='text-gray-400 text-xs'>10.00</h6>
                             </div>
                         </div>
-                        <FontAwesomeIcon className='text-gray-400 text-sm' icon='ellipsis-vertical'/>
+                        <FontAwesomeIcon className='text-gray-400 text-sm cursor-pointer' icon='ellipsis-vertical'/>
                     </div>
                     <div className='text-gray-400'>
                         Doris Brown
@@ -89,7 +89,7 @@ export default function ChatRoomMessage() {
                                 <h6 className='text-gray-400 text-xs'>10.00</h6>
                             </div>
                         </div>
-                        <FontAwesomeIcon className='text-gray-400 text-sm' icon='ellipsis-vertical'/>
+                        <FontAwesomeIcon className='text-gray-400 text-sm cursor-pointer' icon='ellipsis-vertical'/>
                     </div>
                     <div className='text-gray-400'>
                         Doris Brown
@@ -112,7 +112,7 @@ export default function ChatRoomMessage() {
                                 <h6 className='text-gray-400 text-xs'>10.00</h6>
                             </div>
                         </div>
-                        <FontAwesomeIcon className='text-gray-400 text-sm' icon='ellipsis-vertical'/>
+                        <FontAwesomeIcon className='text-gray-400 text-sm cursor-pointer' icon='ellipsis-vertical'/>
                     </div>
                     <div className='text-gray-400'>
                         Doris Brown
@@ -125,7 +125,7 @@ export default function ChatRoomMessage() {
             <div className='flex items-end gap-3 mb-7'>
                 <div className='flex flex-col gap-1'>
                     <div className='flex gap-2'>
-                        <FontAwesomeIcon className='text-gray-400 text-sm' icon='ellipsis-vertical'/>
+                        <FontAwesomeIcon className='text-gray-400 text-sm cursor-pointer' icon='ellipsis-vertical'/>
                         <div className='bg-gray rounded message-box flex flex-col gap-3 p-3'>
                             <h5 className='text-white'>Good morning, How are you? What about our next meeting?</h5>
                             <div className='flex items-center gap-1'>
@@ -158,7 +158,7 @@ export default function ChatRoomMessage() {
                                 <h6 className='text-gray-400 text-xs'>10.00</h6>
                             </div>
                         </div>
-                        <FontAwesomeIcon className='text-gray-400 text-sm' icon='ellipsis-vertical'/>
+                        <FontAwesomeIcon className='text-gray-400 text-sm cursor-pointer' icon='ellipsis-vertical'/>
                     </div>
                     <div className='text-gray-400'>
                         Doris Brown
@@ -181,7 +181,7 @@ export default function ChatRoomMessage() {
                                 <h6 className='text-gray-400 text-xs'>10.00</h6>
                             </div>
                         </div>
-                        <FontAwesomeIcon className='text-gray-400 text-sm' icon='ellipsis-vertical'/>
+                        <FontAwesomeIcon className='text-gray-400 text-sm cursor-pointer' icon='ellipsis-vertical'/>
                     </div>
                     <div className='text-gray-400'>
                         Doris Brown
@@ -189,7 +189,7 @@ export default function ChatRoomMessage() {
                 </div>
             </div>
         </div>
-        
+
     </div>
   )
 }
