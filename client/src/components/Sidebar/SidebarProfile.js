@@ -1,7 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Collapsible from 'react-collapsible';
-import avatar from '../pictures/avatar-1.3921191a8acf79d3e907.jpg'
+import avatar from '../../pictures/avatar-1.3921191a8acf79d3e907.jpg'
 
 export default function SidebarProfile() {
   return (
@@ -9,9 +9,6 @@ export default function SidebarProfile() {
       <div className='flex justify-between text-white mb-8'>
         <div className='text-white text-xl'>
           My Profile
-        </div>
-        <div>
-          <FontAwesomeIcon icon='ellipsis-vertical'/>
         </div>
       </div>
 
@@ -22,7 +19,7 @@ export default function SidebarProfile() {
             Patricia Smith
           </div>
           <div className='flex items-center gap-2'>
-            <FontAwesomeIcon className='status-icon text-success' icon='circle-dot'/>
+            <FontAwesomeIcon className='status-icon' icon='circle-dot'/>
             <div className='text-gray-400 text-sm'>Active</div>
           </div>
         </div>

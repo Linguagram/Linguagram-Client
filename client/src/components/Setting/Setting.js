@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { handleSetActiveSection } from '../store/middlewares/thunk'
+import { handleSetActiveSection } from '../../store/middlewares/thunk'
 
 export default function Setting() {
 

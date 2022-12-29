@@ -1,6 +1,5 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import avatar from '../pictures/avatar-1.3921191a8acf79d3e907.jpg'
 
 
 export default function SidebarGroups() {
@@ -21,105 +20,85 @@ export default function SidebarGroups() {
         </div>
 
 
-        <div className='mt-16 mx-3 flex flex-col gap-3 max-h-160 overflow-y-auto'>
-            <div className='flex items-center p-2 gap-4'>
+        <div className='mt-16 ml-3 flex flex-col gap-3 max-h-160 overflow-y-auto'>
+            <div className='flex items-center rounded hover:bg-gray-700 cursor-pointer p-2 gap-4'>
                 <div className='text-gray-500 flex justify-center items-center font-bold bg-main-color-blur w-12 h-10 rounded-full'>G</div>
                 <div className='flex items-center w-full justify-between'>
                     <h4 className='text-white text-base'>#Groups</h4>
                     <div className='bg-red-900-blur font-bold text-center w-7 h-5 text-red-700 text-sm'>24+</div>
                 </div>
             </div>
-            <div className='flex items-center p-2 gap-4'>
+            <div className='flex items-center rounded hover:bg-gray-700 cursor-pointer p-2 gap-4'>
                 <div className='text-gray-500 flex justify-center items-center font-bold bg-main-color-blur w-12 h-10 rounded-full'>G</div>
                 <div className='flex items-center w-full justify-between'>
                     <h4 className='text-white text-base'>#Groups</h4>
                     <div className='bg-red-900-blur font-bold text-center w-7 h-5 text-red-700 text-sm'>24+</div>
                 </div>
             </div>
-            <div className='flex items-center p-2 gap-4'>
+            <div className='flex items-center rounded hover:bg-gray-700 cursor-pointer p-2 gap-4'>
                 <div className='text-gray-500 flex justify-center items-center font-bold bg-main-color-blur w-12 h-10 rounded-full'>G</div>
                 <div className='flex items-center w-full justify-between'>
                     <h4 className='text-white text-base'>#Groups</h4>
                     <div className='bg-red-900-blur font-bold text-center w-7 h-5 text-red-700 text-sm'>24+</div>
                 </div>
             </div>
-            <div className='flex items-center p-2 gap-4'>
+            <div className='flex items-center rounded hover:bg-gray-700 cursor-pointer p-2 gap-4'>
                 <div className='text-gray-500 flex justify-center items-center font-bold bg-main-color-blur w-12 h-10 rounded-full'>G</div>
                 <div className='flex items-center w-full justify-between'>
                     <h4 className='text-white text-base'>#Groups</h4>
                     <div className='bg-red-900-blur font-bold text-center w-7 h-5 text-red-700 text-sm'>24+</div>
                 </div>
             </div>
-            <div className='flex items-center p-2 gap-4'>
+            <div className='flex items-center rounded hover:bg-gray-700 cursor-pointer p-2 gap-4'>
                 <div className='text-gray-500 flex justify-center items-center font-bold bg-main-color-blur w-12 h-10 rounded-full'>G</div>
                 <div className='flex items-center w-full justify-between'>
                     <h4 className='text-white text-base'>#Groups</h4>
                     <div className='bg-red-900-blur font-bold text-center w-7 h-5 text-red-700 text-sm'>24+</div>
                 </div>
             </div>
-            <div className='flex items-center p-2 gap-4'>
+            <div className='flex items-center rounded hover:bg-gray-700 cursor-pointer p-2 gap-4'>
                 <div className='text-gray-500 flex justify-center items-center font-bold bg-main-color-blur w-12 h-10 rounded-full'>G</div>
                 <div className='flex items-center w-full justify-between'>
                     <h4 className='text-white text-base'>#Groups</h4>
                     <div className='bg-red-900-blur font-bold text-center w-7 h-5 text-red-700 text-sm'>24+</div>
                 </div>
             </div>
-            <div className='flex items-center p-2 gap-4'>
+            <div className='flex items-center rounded hover:bg-gray-700 cursor-pointer p-2 gap-4'>
                 <div className='text-gray-500 flex justify-center items-center font-bold bg-main-color-blur w-12 h-10 rounded-full'>G</div>
                 <div className='flex items-center w-full justify-between'>
                     <h4 className='text-white text-base'>#Groups</h4>
                     <div className='bg-red-900-blur font-bold text-center w-7 h-5 text-red-700 text-sm'>24+</div>
                 </div>
             </div>
-            <div className='flex items-center p-2 gap-4'>
+            <div className='flex items-center rounded hover:bg-gray-700 cursor-pointer p-2 gap-4'>
                 <div className='text-gray-500 flex justify-center items-center font-bold bg-main-color-blur w-12 h-10 rounded-full'>G</div>
                 <div className='flex items-center w-full justify-between'>
                     <h4 className='text-white text-base'>#Groups</h4>
                     <div className='bg-red-900-blur font-bold text-center w-7 h-5 text-red-700 text-sm'>24+</div>
                 </div>
             </div>
-            <div className='flex items-center p-2 gap-4'>
+            <div className='flex items-center rounded hover:bg-gray-700 cursor-pointer p-2 gap-4'>
                 <div className='text-gray-500 flex justify-center items-center font-bold bg-main-color-blur w-12 h-10 rounded-full'>G</div>
                 <div className='flex items-center w-full justify-between'>
                     <h4 className='text-white text-base'>#Groups</h4>
                     <div className='bg-red-900-blur font-bold text-center w-7 h-5 text-red-700 text-sm'>24+</div>
                 </div>
             </div>
-            <div className='flex items-center p-2 gap-4'>
+            <div className='flex items-center rounded hover:bg-gray-700 cursor-pointer p-2 gap-4'>
                 <div className='text-gray-500 flex justify-center items-center font-bold bg-main-color-blur w-12 h-10 rounded-full'>G</div>
                 <div className='flex items-center w-full justify-between'>
                     <h4 className='text-white text-base'>#Groups</h4>
                     <div className='bg-red-900-blur font-bold text-center w-7 h-5 text-red-700 text-sm'>24+</div>
                 </div>
             </div>
-            <div className='flex items-center p-2 gap-4'>
+            <div className='flex items-center rounded hover:bg-gray-700 cursor-pointer p-2 gap-4'>
                 <div className='text-gray-500 flex justify-center items-center font-bold bg-main-color-blur w-12 h-10 rounded-full'>G</div>
                 <div className='flex items-center w-full justify-between'>
                     <h4 className='text-white text-base'>#Groups</h4>
                     <div className='bg-red-900-blur font-bold text-center w-7 h-5 text-red-700 text-sm'>24+</div>
                 </div>
             </div>
-            <div className='flex items-center p-2 gap-4'>
-                <div className='text-gray-500 flex justify-center items-center font-bold bg-main-color-blur w-12 h-10 rounded-full'>G</div>
-                <div className='flex items-center w-full justify-between'>
-                    <h4 className='text-white text-base'>#Groups</h4>
-                    <div className='bg-red-900-blur font-bold text-center w-7 h-5 text-red-700 text-sm'>24+</div>
-                </div>
-            </div><div className='flex items-center p-2 gap-4'>
-                <div className='text-gray-500 flex justify-center items-center font-bold bg-main-color-blur w-12 h-10 rounded-full'>G</div>
-                <div className='flex items-center w-full justify-between'>
-                    <h4 className='text-white text-base'>#Groups</h4>
-                    <div className='bg-red-900-blur font-bold text-center w-7 h-5 text-red-700 text-sm'>24+</div>
-                </div>
-            </div>
-            <div className='flex items-center p-2 gap-4'>
-                <div className='text-gray-500 flex justify-center items-center font-bold bg-main-color-blur w-12 h-10 rounded-full'>G</div>
-                <div className='flex items-center w-full justify-between'>
-                    <h4 className='text-white text-base'>#Groups</h4>
-                    <div className='bg-red-900-blur font-bold text-center w-7 h-5 text-red-700 text-sm'>24+</div>
-                </div>
-            </div>
-            <div className='flex items-center p-2 gap-4'>
+            <div className='flex items-center rounded hover:bg-gray-700 cursor-pointer p-2 gap-4'>
                 <div className='text-gray-500 flex justify-center items-center font-bold bg-main-color-blur w-12 h-10 rounded-full'>G</div>
                 <div className='flex items-center w-full justify-between'>
                     <h4 className='text-white text-base'>#Groups</h4>

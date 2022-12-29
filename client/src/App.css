@@ -10,6 +10,10 @@
   background-color: #262d36;
 }
 
+.bg-main-color {
+  background-color: #005792;
+}
+
 .small-icons {
   width: 20px;
   height: 20px;
@@ -25,6 +29,7 @@
 .setting {
   background-color: #36404a;
   width: 4%;
+  min-width: 4%;
 }
 
 .main-color {
@@ -56,6 +61,7 @@
 .sidebar {
   background-color: #303841;
   width: 21%;
+  min-width: 21%;
 }
 
 #avatar-profile {
@@ -125,4 +131,30 @@
 
 .max-h-160 {
   max-height: 45rem;
+}
+
+/* sidebar setting */ 
+
+#edit-avatar {
+  z-index: 3;
+  margin-left: -20px;
+}
+
+
+/* chatroom header */ 
+
+.height-header-footer {
+  height: 100px;
+  min-height: 10%;
+}
+
+/* chatroom header */ 
+
+.h-chatroom-message {
+  max-height: 45rem;
+  min-height: 45rem;
+}
+
+.message-box {
+  min-height: 50px;
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Collapsible from 'react-collapsible';
-import avatar from '../pictures/avatar-1.3921191a8acf79d3e907.jpg'
+import avatar from '../../pictures/avatar-1.3921191a8acf79d3e907.jpg'
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
@@ -20,7 +20,10 @@ export default function SidebarSetting() {
         </div>
 
         <div className='flex flex-col items-center gap-6'>
-            <img src={avatar} id='avatar-profile' alt='avatar'></img>
+            <div className='flex items-end'>
+                <img src={avatar} id='avatar-profile' alt='avatar'></img>
+                <div id='edit-avatar' className='bg-gray-700 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer'><FontAwesomeIcon className='text-white' icon='pen'/></div>
+            </div>
             <div className='flex flex-col items-center'>
                 <div className='text-white'>
                     Patricia Smith

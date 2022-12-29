@@ -1,12 +1,14 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Fragment } from 'react'
+import { Menu, Transition } from '@headlessui/react'
 
 export default function SidebarContacts() {
   return (
     <>
         <div className='flex items-center justify-between  text-xl mb-8'>
           <h4 className='text-white'>Contacts</h4>
-          <FontAwesomeIcon className='text-gray-400 small-icons' icon='user-plus'/>
+          <FontAwesomeIcon className='text-gray-400 small-icons cursor-pointer' icon='bell'/>
         </div>
 
         <div className='bg-gray search-chat-container rounded flex items-center'>
@@ -18,74 +20,18 @@ export default function SidebarContacts() {
           </div>
         </div>
 
-        <div className='mt-16 mx-3 flex flex-col gap-10 max-h-160 overflow-y-auto'>
+        <div className='mt-16 ml-3 flex flex-col gap-10 max-h-160 overflow-y-auto'>
            
             <div className='flex flex-col'>
                 <div className='main-color'>A</div>
                 <div className='flex flex-col gap-5 pl-2 pt-5 pr-5'>    
                     <div className='flex justify-between'>
-                        <h5 className='text-white'>Albert Rodarte</h5>
-                        <FontAwesomeIcon className='text-gray-400' icon='ellipsis-vertical'/>
+                        <h5 className='text-white cursor-pointer'>Albert Rodarte</h5>
+                        <FontAwesomeIcon className='text-gray-400 cursor-pointer' icon='trash-can'/>
                     </div>
                     <div className='flex justify-between'>
-                        <h5 className='text-white'>Albert Rodarte</h5>
-                        <FontAwesomeIcon className='text-gray-400' icon='ellipsis-vertical'/>
-                    </div>
-                </div>
-            </div>
-
-            <div className='flex flex-col'>
-                <div className='main-color'>A</div>
-                <div className='flex flex-col gap-5 pl-2 pt-5 pr-5'>    
-                    <div className='flex justify-between'>
-                        <h5 className='text-white'>Albert Rodarte</h5>
-                        <FontAwesomeIcon className='text-gray-400' icon='ellipsis-vertical'/>
-                    </div>
-                    <div className='flex justify-between'>
-                        <h5 className='text-white'>Albert Rodarte</h5>
-                        <FontAwesomeIcon className='text-gray-400' icon='ellipsis-vertical'/>
-                    </div>
-                </div>
-            </div>
-
-            <div className='flex flex-col'>
-                <div className='main-color'>A</div>
-                <div className='flex flex-col gap-5 pl-2 pt-5 pr-5'>    
-                    <div className='flex justify-between'>
-                        <h5 className='text-white'>Albert Rodarte</h5>
-                        <FontAwesomeIcon className='text-gray-400' icon='ellipsis-vertical'/>
-                    </div>
-                    <div className='flex justify-between'>
-                        <h5 className='text-white'>Albert Rodarte</h5>
-                        <FontAwesomeIcon className='text-gray-400' icon='ellipsis-vertical'/>
-                    </div>
-                </div>
-            </div>
-
-            <div className='flex flex-col'>
-                <div className='main-color'>A</div>
-                <div className='flex flex-col gap-5 pl-2 pt-5 pr-5'>    
-                    <div className='flex justify-between'>
-                        <h5 className='text-white'>Albert Rodarte</h5>
-                        <FontAwesomeIcon className='text-gray-400' icon='ellipsis-vertical'/>
-                    </div>
-                    <div className='flex justify-between'>
-                        <h5 className='text-white'>Albert Rodarte</h5>
-                        <FontAwesomeIcon className='text-gray-400' icon='ellipsis-vertical'/>
-                    </div>
-                </div>
-            </div>
-
-            <div className='flex flex-col'>
-                <div className='main-color'>A</div>
-                <div className='flex flex-col gap-5 pl-2 pt-5 pr-5'>    
-                    <div className='flex justify-between'>
-                        <h5 className='text-white'>Albert Rodarte</h5>
-                        <FontAwesomeIcon className='text-gray-400' icon='ellipsis-vertical'/>
-                    </div>
-                    <div className='flex justify-between'>
-                        <h5 className='text-white'>Albert Rodarte</h5>
-                        <FontAwesomeIcon className='text-gray-400' icon='ellipsis-vertical'/>
+                        <h5 className='text-white cursor-pointer'>Albert Rodarte</h5>
+                        <FontAwesomeIcon className='text-gray-400 cursor-pointer' icon='trash-can'/>
                     </div>
                 </div>
             </div>
@@ -93,26 +39,77 @@ export default function SidebarContacts() {
                 <div className='main-color'>A</div>
                 <div className='flex flex-col gap-5 pl-2 pt-5 pr-5'>    
                     <div className='flex justify-between'>
-                        <h5 className='text-white'>Albert Rodarte</h5>
-                        <FontAwesomeIcon className='text-gray-400' icon='ellipsis-vertical'/>
+                        <h5 className='text-white cursor-pointer'>Albert Rodarte</h5>
+                        <FontAwesomeIcon className='text-gray-400 cursor-pointer' icon='trash-can'/>
                     </div>
                     <div className='flex justify-between'>
-                        <h5 className='text-white'>Albert Rodarte</h5>
-                        <FontAwesomeIcon className='text-gray-400' icon='ellipsis-vertical'/>
+                        <h5 className='text-white cursor-pointer'>Albert Rodarte</h5>
+                        <FontAwesomeIcon className='text-gray-400 cursor-pointer' icon='trash-can'/>
                     </div>
                 </div>
             </div>
-
             <div className='flex flex-col'>
                 <div className='main-color'>A</div>
                 <div className='flex flex-col gap-5 pl-2 pt-5 pr-5'>    
                     <div className='flex justify-between'>
-                        <h5 className='text-white'>Albert Rodarte</h5>
-                        <FontAwesomeIcon className='text-gray-400' icon='ellipsis-vertical'/>
+                        <h5 className='text-white cursor-pointer'>Albert Rodarte</h5>
+                        <FontAwesomeIcon className='text-gray-400 cursor-pointer' icon='trash-can'/>
                     </div>
                     <div className='flex justify-between'>
-                        <h5 className='text-white'>Albert Rodarte</h5>
-                        <FontAwesomeIcon className='text-gray-400' icon='ellipsis-vertical'/>
+                        <h5 className='text-white cursor-pointer'>Albert Rodarte</h5>
+                        <FontAwesomeIcon className='text-gray-400 cursor-pointer' icon='trash-can'/>
+                    </div>
+                </div>
+            </div>
+            <div className='flex flex-col'>
+                <div className='main-color'>A</div>
+                <div className='flex flex-col gap-5 pl-2 pt-5 pr-5'>    
+                    <div className='flex justify-between'>
+                        <h5 className='text-white cursor-pointer'>Albert Rodarte</h5>
+                        <FontAwesomeIcon className='text-gray-400 cursor-pointer' icon='trash-can'/>
+                    </div>
+                    <div className='flex justify-between'>
+                        <h5 className='text-white cursor-pointer'>Albert Rodarte</h5>
+                        <FontAwesomeIcon className='text-gray-400 cursor-pointer' icon='trash-can'/>
+                    </div>
+                </div>
+            </div>
+            <div className='flex flex-col'>
+                <div className='main-color'>A</div>
+                <div className='flex flex-col gap-5 pl-2 pt-5 pr-5'>    
+                    <div className='flex justify-between'>
+                        <h5 className='text-white cursor-pointer'>Albert Rodarte</h5>
+                        <FontAwesomeIcon className='text-gray-400 cursor-pointer' icon='trash-can'/>
+                    </div>
+                    <div className='flex justify-between'>
+                        <h5 className='text-white cursor-pointer'>Albert Rodarte</h5>
+                        <FontAwesomeIcon className='text-gray-400 cursor-pointer' icon='trash-can'/>
+                    </div>
+                </div>
+            </div>
+            <div className='flex flex-col'>
+                <div className='main-color'>A</div>
+                <div className='flex flex-col gap-5 pl-2 pt-5 pr-5'>    
+                    <div className='flex justify-between'>
+                        <h5 className='text-white cursor-pointer'>Albert Rodarte</h5>
+                        <FontAwesomeIcon className='text-gray-400 cursor-pointer' icon='trash-can'/>
+                    </div>
+                    <div className='flex justify-between'>
+                        <h5 className='text-white cursor-pointer'>Albert Rodarte</h5>
+                        <FontAwesomeIcon className='text-gray-400 cursor-pointer' icon='trash-can'/>
+                    </div>
+                </div>
+            </div>
+            <div className='flex flex-col'>
+                <div className='main-color'>A</div>
+                <div className='flex flex-col gap-5 pl-2 pt-5 pr-5'>    
+                    <div className='flex justify-between'>
+                        <h5 className='text-white cursor-pointer'>Albert Rodarte</h5>
+                        <FontAwesomeIcon className='text-gray-400 cursor-pointer' icon='trash-can'/>
+                    </div>
+                    <div className='flex justify-between'>
+                        <h5 className='text-white cursor-pointer'>Albert Rodarte</h5>
+                        <FontAwesomeIcon className='text-gray-400 cursor-pointer' icon='trash-can'/>
                     </div>
                 </div>
             </div>
