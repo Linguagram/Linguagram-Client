@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { handleSetActiveSection } from '../../store/middlewares/thunk'
 
-export default function Setting() {
+export default function Sidebar() {
 
   const dispatch = useDispatch()
 

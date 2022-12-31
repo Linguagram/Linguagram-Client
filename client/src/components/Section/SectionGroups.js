@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-export default function SidebarGroups() {
+export default function SectionGroups() {
   return (
     <>
         <div className='flex items-center justify-between  text-xl mb-8'>

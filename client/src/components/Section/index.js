@@ -1,10 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import SidebarProfile from './SidebarProfile'
-import SidebarChats from './SidebarChats'
-import SidebarGroups from './SidebarGroups'
-import SidebarContacts from './SidebarContacts'
-import SidebarSetting from './SidebarSetting'
+import SectionProfile from './SectionProfile'
+import SectionChats from './SectionChats'
+import SectionGroups from './SectionGroups'
+import SectionContacts from './SectionContacts'
+import SectionSetting from './SectionSetting'
 
 export default function Sidebar() {
 
@@ -13,19 +13,19 @@ export default function Sidebar() {
   return (
     <div className='sidebar px-7 py-5 max-h-screen'>
       {sections.user && 
-        <SidebarProfile/>
+        <SectionProfile/>
       }
       {sections.message && 
-        <SidebarChats/>
+        <SectionChats/>
       }
       {sections.group && 
-        <SidebarGroups/>
+        <SectionGroups/>
       }
       {sections.address && 
-        <SidebarContacts/>
+        <SectionContacts/>
       }
       {sections.gear && 
-        <SidebarSetting/>
+        <SectionSetting/>
       }
     </div>
   )

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Collapsible from 'react-collapsible';
 import avatar from '../../pictures/avatar-1.3921191a8acf79d3e907.jpg'
 
-export default function SidebarProfile() {
+export default function SectionProfile() {
   return (
     <>
       <div className='flex justify-between text-white mb-8'>

@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import avatar from '../../pictures/avatar-1.3921191a8acf79d3e907.jpg'
 
-export default function SidebarChats() {
+export default function SectionChats() {
   return (
     <>
         <div className='text-white text-xl mb-8'>

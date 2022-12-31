@@ -10,7 +10,7 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function SidebarSetting() {
+export default function SectionSetting() {
   return (
     <>
         <div className='flex justify-between text-white mb-8'>
@@ -87,7 +87,6 @@ export default function SidebarSetting() {
                                 </a>
                             )}
                             </Menu.Item>
-                            <form method="POST" action="#">
                             <Menu.Item>
                                 {({ active }) => (
                                 <button
@@ -101,7 +100,6 @@ export default function SidebarSetting() {
                                 </button>
                                 )}
                             </Menu.Item>
-                            </form>
                         </div>
                         </Menu.Items>
                     </Transition>

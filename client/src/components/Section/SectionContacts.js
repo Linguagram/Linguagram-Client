@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 
-export default function SidebarContacts() {
+export default function SectionContacts() {
   return (
     <>
         <div className='flex items-center justify-between  text-xl mb-8'>
