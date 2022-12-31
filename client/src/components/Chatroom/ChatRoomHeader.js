@@ -6,7 +6,7 @@ export default function ChatRoomHeader() {
   return (
     <div className='flex justify-between items-center height-header-footer p-5'>
         <div className='flex items-center gap-3'>
-            <img src={avatar} class='avatar-chat' alt='avatar'></img>
+            <img src={avatar} className='avatar-chat' alt='avatar'></img>
             <div className='flex items-center gap-1'>
                 <h4 className='text-white'>Doris Brown</h4>
                 <FontAwesomeIcon className='status-icon' icon='circle-dot'/>

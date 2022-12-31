@@ -9,7 +9,7 @@ export default function ChatRoomMessage() {
         <div className=''>
             <div className='flex items-end gap-3 mb-7'>
                 <div>
-                    <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                    <img src={avatar} className='avatar-chat' alt='avatar'></img>
                 </div>
                 <div className='flex flex-col gap-1'>
                     <div className='flex gap-2'>
@@ -47,7 +47,7 @@ export default function ChatRoomMessage() {
                     </div>
                 </div>
                 <div>
-                    <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                    <img src={avatar} className='avatar-chat' alt='avatar'></img>
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@ export default function ChatRoomMessage() {
         <div className=''>
             <div className='flex items-end gap-3 mb-7'>
                 <div>
-                    <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                    <img src={avatar} className='avatar-chat' alt='avatar'></img>
                 </div>
                 <div className='flex flex-col gap-1'>
                     <div className='flex gap-2'>
@@ -78,7 +78,7 @@ export default function ChatRoomMessage() {
         <div className=''>
             <div className='flex items-end gap-3 mb-7'>
                 <div>
-                    <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                    <img src={avatar} className='avatar-chat' alt='avatar'></img>
                 </div>
                 <div className='flex flex-col gap-1'>
                     <div className='flex gap-2'>
@@ -101,7 +101,7 @@ export default function ChatRoomMessage() {
         <div className=''>
             <div className='flex items-end gap-3 mb-7'>
                 <div>
-                    <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                    <img src={avatar} className='avatar-chat' alt='avatar'></img>
                 </div>
                 <div className='flex flex-col gap-1'>
                     <div className='flex gap-2'>
@@ -139,7 +139,7 @@ export default function ChatRoomMessage() {
                     </div>
                 </div>
                 <div>
-                    <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                    <img src={avatar} className='avatar-chat' alt='avatar'></img>
                 </div>
             </div>
         </div>
@@ -147,7 +147,7 @@ export default function ChatRoomMessage() {
         <div className=''>
             <div className='flex items-end gap-3 mb-7'>
                 <div>
-                    <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                    <img src={avatar} className='avatar-chat' alt='avatar'></img>
                 </div>
                 <div className='flex flex-col gap-1'>
                     <div className='flex gap-2'>
@@ -170,7 +170,7 @@ export default function ChatRoomMessage() {
         <div className=''>
             <div className='flex items-end gap-3 mb-7'>
                 <div>
-                    <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                    <img src={avatar} className='avatar-chat' alt='avatar'></img>
                 </div>
                 <div className='flex flex-col gap-1'>
                     <div className='flex gap-2'>
