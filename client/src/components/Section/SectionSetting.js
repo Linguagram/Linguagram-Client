@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import ChangeAvatar from '../Modal/ChangeAvatar';
+import ChangeProfile from '../Modal/ChangeProfile';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Collapsible from 'react-collapsible';
 import avatar from '../../pictures/avatar-1.3921191a8acf79d3e907.jpg'
@@ -13,20 +14,11 @@ function classNames(...classes) {
 
 export default function SectionSetting() {
 
+    const [isAvatarModalVisible, setIsAvatarModalVisible] = useState(false)
+    const [isProfileModalBisible, setisProfileModalVisible] = useState(false)
 
-    // const showModal = () => {
-    //     document.getElementById('modal').classList.add('active')
-    //     document.getElementById('overlay').classList.add('active')
-    // }
-
-    // const closeModal = () => {
-    //     document.getElementById('modal').classList.remove('active')
-    //     document.getElementById('overlay').classList.remove('active')
-    // }
-
-    const [isModalVisible, setIsModalVisible] = useState(false)
-
-    const handleCloseModal = () => setIsModalVisible(false)
+    const handleCloseAvatarModal = () => setIsAvatarModalVisible(false)
+    const handleCloseProfileModal = () => setisProfileModalVisible(false)
 
 
 
@@ -41,7 +33,7 @@ export default function SectionSetting() {
         <div className='flex flex-col items-center gap-6'>
             <div className='flex items-end'>
                 <img src={avatar} id='avatar-profile' alt='avatar'></img>
-                <div onClick={() => setIsModalVisible(true)} id='edit-avatar' className='bg-gray-700 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer'><FontAwesomeIcon className='text-white' icon='pen'/></div>
+                <div onClick={() => setIsAvatarModalVisible(true)} id='edit-avatar' className='bg-gray-700 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer'><FontAwesomeIcon className='text-white' icon='pen'/></div>
             </div>
             <div className='flex flex-col items-center'>
                 <div className='text-white'>
@@ -144,7 +136,7 @@ export default function SectionSetting() {
                 <p className='text-gray-400'>Name</p>
                 <p className='font-bold'>Patricia Smith</p>
             </div>
-            <div className='flex bg-gray h-min p-2 rounded items-center gap-2'>
+            <div onClick={() => setisProfileModalVisible(true)} className='flex bg-gray h-min p-2 rounded items-center gap-2 cursor-pointer'>
                 <FontAwesomeIcon icon='pen-to-square'/>
                 <h4>Edit</h4>
             </div>
@@ -166,14 +158,8 @@ export default function SectionSetting() {
         </Collapsible>
       </div>
 
-      <ChangeAvatar onClose={handleCloseModal} visible={isModalVisible} />
-
-        {/* <div class="modal" id="modal">
-            <div className='bg-darker-gray'>
-                abs
-            </div>
-        </div>                                  
-        <div class="" id="overlay"></div>  */}
+      <ChangeAvatar onClose={handleCloseAvatarModal} visible={isAvatarModalVisible} />
+      <ChangeProfile onClose={handleCloseProfileModal} visible={isProfileModalBisible} />
 
     </>
   )
