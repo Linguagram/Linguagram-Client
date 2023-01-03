@@ -48,12 +48,17 @@ export default function SectionProfile() {
                 <p className="font-bold">patty@mail.com</p>
               </div>
               <div className="flex flex-col gap-2">
+                <p className="text-gray-400">Country</p>
+                <p className="font-bold">USA</p>
+              </div>
+              <div className="flex flex-col gap-2">
                 <p className="text-gray-400">Native Language</p>
                 <p className="font-bold">English</p>
               </div>
               <div className="flex flex-col gap-2">
-                <p className="text-gray-400">Country</p>
-                <p className="font-bold">USA</p>
+                <p className="text-gray-400">Language in Learning</p>
+                <p className="font-bold">Indonesian</p>
+                <p className="font-bold">Korean</p>
               </div>
             </div>
           </Collapsible>
