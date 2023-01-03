@@ -18,7 +18,7 @@ export default function SectionChats() {
           </div>
         </div>
 
-        <div className='flex flex-col h-full gap-3 mt-5 overflow-y-auto'>
+        <div className='flex flex-col h-full gap-3 mt-5 overflow-y-auto scrollbar-hide'>
           <div className='flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700'>
             <img src={avatar} class='avatar-chat' alt='avatar'></img>
             <div className='flex flex-col w-full gap-1'>

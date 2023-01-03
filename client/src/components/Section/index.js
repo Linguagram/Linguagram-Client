@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import SectionProfile from './SectionProfile'
 import SectionChats from './SectionChats'
 import SectionGroups from './SectionGroups'
-import SectionContacts from './SectionContacts'
+import SectionFriends from './SectionFriends'
 import SectionSetting from './SectionSetting'
 
 export default function Sidebar() {
@@ -22,7 +22,7 @@ export default function Sidebar() {
         <SectionGroups/>
       }
       {sections.address && 
-        <SectionContacts/>
+        <SectionFriends/>
       }
       {sections.gear && 
         <SectionSetting/>
