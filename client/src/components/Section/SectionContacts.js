@@ -1,14 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
+import FriendRequest from '../Modal/FriendRequest'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 
 export default function SectionContacts() {
+
+    const [isFriendRequestModalVisible, setisFriendRequestModalVisible] = useState(false)
+
+    const handleCloseFriendRequestModal = () => setisFriendRequestModalVisible(false)
+
   return (
     <>
         <div className='flex items-center justify-between  text-xl mb-8'>
           <h4 className='text-white'>Contacts</h4>
-          <FontAwesomeIcon className='text-gray-400 small-icons cursor-pointer' icon='bell'/>
+          <FontAwesomeIcon onClick={() => setisFriendRequestModalVisible(true)} className='text-gray-400 small-icons cursor-pointer' icon='bell'/>
         </div>
 
         <div className='bg-gray search-chat-container rounded flex items-center'>
@@ -115,6 +121,8 @@ export default function SectionContacts() {
             </div>
            
         </div>
+
+        <FriendRequest onClose={handleCloseFriendRequestModal} visible={isFriendRequestModalVisible} />
     </>
   )
 }
