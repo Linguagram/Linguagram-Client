@@ -10,26 +10,26 @@ export default function ChangeAvatar({onClose, visible}) {
   if(!visible) return null;
 
   return (
-    <div className='fixed z-10 flex justify-center items-center bg-black bg-opacity-60 inset-0'>
+    <div className='fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-60'>
 
-      <div className='bg-darker-gray w-1/4 h-1/3 flex flex-col gap-3 rounded p-5'>
+      <div className='flex flex-col w-1/2 gap-3 p-5 rounded bg-darker-gray lg:h-2/5 2xl:h-1/5 2xl:w-1/5 h-3/5'>
         <div className='flex items-center justify-between'>
-          <h3 className='text-white text-xl'>Select an Image</h3>
-          <h3 onClick={handleOnClose} className='text-gray-400 text-4xl cursor-pointer'>&times;</h3>
+          <h3 className='text-xl text-white'>Select an Image</h3>
+          <h3 onClick={handleOnClose} className='text-4xl text-gray-400 cursor-pointer'>&times;</h3>
         </div>
-        <div className='flex h-4/5 gap-10'>
-          <div className='bg-black-blue w-full rounded cursor-pointer'>
-            <div className='flex items-center flex-col p-5 gap-5'>
-              <div className='bg-main-color-icon flex justify-center items-center w-32 h-32'>
-                <FontAwesomeIcon className='text-white text-xl' icon='cloud-arrow-up'/>
+        <div className='flex justify-between w-full h-full gap-4'>
+          <div className='flex items-center justify-center w-full rounded cursor-pointer -flex-col bg-black-blue'>
+            <div className='flex flex-col items-center gap-5 p-5'>
+              <div className='flex items-center justify-center w-32 h-32 bg-main-color-icon'>
+                <FontAwesomeIcon className='text-xl text-white' icon='cloud-arrow-up'/>
               </div>
               <h3 className='text-gray-400'>Upload Image</h3>
             </div>
           </div>
-          <div className='bg-black-blue w-full rounded cursor-pointer'>
-            <div className='flex items-center flex-col p-5 gap-5'>
-              <div className='bg-main-color-icon flex justify-center items-center w-32 h-32'>
-                <FontAwesomeIcon className='text-white text-xl' icon='ban'/>
+          <div className='flex items-center justify-center w-full rounded cursor-pointer -flex-col bg-black-blue'>
+            <div className='flex flex-col items-center gap-5 p-5'>
+              <div className='flex items-center justify-center w-32 h-32 bg-main-color-icon'>
+                <FontAwesomeIcon className='text-xl text-white' icon='ban'/>
               </div>
               <h3 className='text-gray-400'>Remove Picture</h3>
             </div>
