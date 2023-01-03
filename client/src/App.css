@@ -140,6 +140,11 @@
   margin-left: -20px;
 }
 
+.bg-main-color-icon {
+  background: url('../src/pictures/main-color-bg.png');
+  clip-path: circle();
+}
+
 
 /* chatroom header */ 
 
@@ -158,3 +163,4 @@
 .message-box {
   min-height: 50px;
 }
+

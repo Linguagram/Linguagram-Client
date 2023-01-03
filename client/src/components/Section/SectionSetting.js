@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useState} from 'react'
+import ChangeAvatar from '../Modal/ChangeAvatar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Collapsible from 'react-collapsible';
 import avatar from '../../pictures/avatar-1.3921191a8acf79d3e907.jpg'
@@ -11,6 +12,24 @@ function classNames(...classes) {
 }
 
 export default function SectionSetting() {
+
+
+    // const showModal = () => {
+    //     document.getElementById('modal').classList.add('active')
+    //     document.getElementById('overlay').classList.add('active')
+    // }
+
+    // const closeModal = () => {
+    //     document.getElementById('modal').classList.remove('active')
+    //     document.getElementById('overlay').classList.remove('active')
+    // }
+
+    const [isModalVisible, setIsModalVisible] = useState(false)
+
+    const handleCloseModal = () => setIsModalVisible(false)
+
+
+
   return (
     <>
         <div className='flex justify-between text-white mb-8'>
@@ -22,7 +41,7 @@ export default function SectionSetting() {
         <div className='flex flex-col items-center gap-6'>
             <div className='flex items-end'>
                 <img src={avatar} id='avatar-profile' alt='avatar'></img>
-                <div id='edit-avatar' className='bg-gray-700 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer'><FontAwesomeIcon className='text-white' icon='pen'/></div>
+                <div onClick={() => setIsModalVisible(true)} id='edit-avatar' className='bg-gray-700 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer'><FontAwesomeIcon className='text-white' icon='pen'/></div>
             </div>
             <div className='flex flex-col items-center'>
                 <div className='text-white'>
@@ -145,7 +164,16 @@ export default function SectionSetting() {
 
         </div>
         </Collapsible>
-      </div> 
+      </div>
+
+      <ChangeAvatar onClose={handleCloseModal} visible={isModalVisible} />
+
+        {/* <div class="modal" id="modal">
+            <div className='bg-darker-gray'>
+                abs
+            </div>
+        </div>                                  
+        <div class="" id="overlay"></div>  */}
 
     </>
   )
