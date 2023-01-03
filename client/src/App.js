@@ -10,7 +10,7 @@ library.add(faCommentDots, faEllipsisVertical, faAddressCard, faCheck, faBan, fa
 
 function App() {
   return (
-    <div className='flex'>
+    <div className='flex w-screen h-screen'>
       <Sidebar/>
       <Section/>
       <ChatRoom/>

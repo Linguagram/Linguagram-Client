@@ -164,3 +164,7 @@
   min-height: 50px;
 }
 
+/* hiding the scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
