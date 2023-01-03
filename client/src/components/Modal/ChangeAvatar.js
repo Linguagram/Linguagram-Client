@@ -31,7 +31,7 @@ export default function ChangeAvatar({onClose, visible}) {
               <div className='bg-main-color-icon flex justify-center items-center w-32 h-32'>
                 <FontAwesomeIcon className='text-white text-xl' icon='ban'/>
               </div>
-              <h3 className='text-gray-400'>Upload Image</h3>
+              <h3 className='text-gray-400'>Remove Picture</h3>
             </div>
           </div>
         </div>
