@@ -11,7 +11,7 @@ export default function ChatRoomMessage() {
     }
 
   return (
-    <div className='flex flex-col flex-grow p-5 overflow-y-auto'>
+    <div className='flex flex-col flex-grow p-5 overflow-x-hidden overflow-y-auto'>
 
         <div className=''>
             <div className='flex items-end gap-3 mb-7'>
@@ -97,7 +97,7 @@ export default function ChatRoomMessage() {
                                 leaveFrom="transform opacity-100 scale-100"
                                 leaveTo="transform opacity-0 scale-95"
                             >
-                                <Menu.Items className="absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <Menu.Items className="absolute left-0 z-10 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <div className="py-1 bg-darker-gray">
                                         <Menu.Item>
                                         {({ active }) => (
@@ -398,7 +398,7 @@ export default function ChatRoomMessage() {
                             </Transition>
                         </Menu>  
                         <div className='flex flex-col gap-3 p-3 rounded bg-gray message-box'>
-                            <h5 className='text-white'>Good morning, How are you? What about our next meeting?</h5>
+                            <h5 className='text-white'>Good lakakdmsjdfniergnr </h5>
                             <div className='flex items-center gap-1'>
                                 <FontAwesomeIcon className='text-xs text-gray-400' icon='clock'/>
                                 <h6 className='text-xs text-gray-400'>10.00</h6>
