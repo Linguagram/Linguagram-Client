@@ -1,38 +1,170 @@
-.App {
-  text-align: center;
+.bg-gray {
+  background-color: #36404a;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.bg-darker-gray {
+  background-color: #303841;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.bg-black-blue {
+  background-color: #262d36;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.bg-main-color {
+  background-color: #005792;
+}
+
+.small-icons {
+  width: 20px;
+  height: 20px;
+}
+
+.bg-main-color-blur {
+  background-color: rgba(0, 87, 146, 0.5);
+}
+
+/* setting */
+
+
+.setting {
+  background-color: #36404a;
+  width: 4%;
+  min-width: 4%;
+}
+
+.main-color {
+  color: #005792;
+}
+
+.icons-container {
+  width: 50px;
+  height: 50px;
+}
+
+.icons-container-active {
+  background-color: #3e4a56;
+}
+
+.medium-smaller-icons {
+  width: 25px;
+  height: 25px;
+}
+
+.medium-icons {
+  width: 30px;
+  height: 30px;
+}
+
+/* sidebar */
+
+/* sidebar profile */
+.sidebar {
+  background-color: #303841;
+  width: 21%;
+  min-width: 21%;
+}
+
+#avatar-profile {
+  clip-path: circle();
+  width: 90px;
+  height: 90px;
+}
+
+.status-icon {
+  width: 8px;
+  height: 8px;
+  color: aqua;
+}
+
+.line-break {
+  border-color: gray;
+}
+
+.triggerCollapsible {
+  background-color: #36404a;
+  height: 50px;
+  padding: 20px;
+}
+
+.Collapsible__trigger {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.Collapsible__trigger.is-open svg {
+  transform: rotate(90deg);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* sidebar chats */
+
+.search-chat-container {
+  height: 50px;
+}
+
+.avatar-container {
+  width: 70px;
+}
+
+.avatar-profile {
+  clip-path: circle();
+  width: 40px;
+  height: 40px;
+  margin-top: -30px;
+}
+
+.bg-red-900-blur {
+  background-color: rgba(240, 50, 50, 0.15);
+}
+
+.max-h-140 {
+  max-height: 35rem;
+}
+
+.avatar-chat {
+  clip-path: circle();
+  width: 40px;
+  height: 40px;
+}
+
+/* sidebar groups */ 
+
+.max-h-160 {
+  max-height: 45rem;
+}
+
+/* sidebar setting */ 
+
+#edit-avatar {
+  z-index: 3;
+  margin-left: -20px;
+}
+
+.bg-main-color-icon {
+  background: url('../src/pictures/main-color-bg.png');
+  clip-path: circle();
+}
+
+
+/* chatroom header */ 
+
+.height-header-footer {
+  height: 100px;
+  min-height: 10%;
+}
+
+/* chatroom header */ 
+
+.h-chatroom-message {
+  max-height: 45rem;
+  min-height: 45rem;
+}
+
+.message-box {
+  min-height: 50px;
+}
+
+/* hiding the scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
 }
