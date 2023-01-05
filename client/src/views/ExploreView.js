@@ -12,10 +12,10 @@ export default function ExploreView() {
         <div className="text-2xl font-semibold text-center text-white">
           Explore
         </div>
-        <div className="flex justify-center mt-2">
+        <div className="flex justify-center mt-6">
           <div
             onClick={() => navigate("people")}
-            className={`px-2 py-1 border-b-2 cursor-pointer hover:border-gray-300 ${
+            className={`px-5 py-1 border-b-2 cursor-pointer hover:border-gray-300 hover:text-gray-300 ${
               currentRoute.pathname.includes("people")
                 ? "text-gray-300 border-gray-300"
                 : "text-gray-500 border-gray-500"
@@ -25,7 +25,7 @@ export default function ExploreView() {
           </div>
           <div
             onClick={() => navigate("groups")}
-            className={`px-2 py-1 border-b-2 cursor-pointer hover:border-gray-300 ${
+            className={`px-5 py-1 border-b-2 cursor-pointer hover:border-gray-300 hover:text-gray-300 ${
               currentRoute.pathname.includes("groups")
                 ? "text-gray-300 border-gray-300"
                 : "text-gray-500 border-gray-500"
