@@ -28,7 +28,10 @@ import {
   faMessage,
   faCommentDots,
   faBars,
-  faXmark
+  faXmark,
+  faLock,
+  faEnvelope,
+  faPhone
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -61,7 +64,10 @@ library.add(
   faMessage,
   faUserLarge,
   faBars,
-  faXmark
+  faXmark,
+  faLock,
+  faEnvelope,
+  faPhone
 );
 
 function App() {
