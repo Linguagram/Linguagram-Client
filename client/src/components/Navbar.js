@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className={`flex flex-1 justify-end ease-in-out duration-500  ${drawer ? 'translate-x-full' : 'translate-x-0'}`}>
+      <div className={`flex flex-1 justify-end ease-in-out duration-500  ${drawer ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="h-screen bg-darker-gray fixed w-3/5 z-100 p-4 flex flex-1 gap-4 flex-col">
           <div className="flex justify-end mb-2">
           <button onClick={toggleDrawer}>
