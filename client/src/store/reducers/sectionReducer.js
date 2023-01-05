@@ -1,11 +1,12 @@
 import { SET_ACTIVE_SECTION } from "../actions/actionTypes"
 
 const initialState = {
-    user: true,
+    user: false,
     group: false,
-    message: false,
+    message: true,
     address: false,
-    gear: false
+    gear: false,
+    explore: false
 }
 
 export default function sectionReducer(state = initialState, action) {
@@ -17,6 +18,7 @@ export default function sectionReducer(state = initialState, action) {
                 message: false,
                 address: false,
                 gear: false,
+                explore: false,
                 [action.payload]: true
             }
         default:

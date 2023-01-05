@@ -28,7 +28,8 @@ import {
   faMessage,
   faCommentDots,
   faBars,
-  faXmark
+  faXmark,
+  faRightFromBracket
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -61,7 +62,8 @@ library.add(
   faMessage,
   faUserLarge,
   faBars,
-  faXmark
+  faXmark,
+  faRightFromBracket
 );
 
 function App() {
