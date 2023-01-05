@@ -27,8 +27,11 @@ import {
   faUserGroup,
   faMessage,
   faCommentDots,
-  faLock,
+  faBars,
+  faXmark,
+  faLock
 } from "@fortawesome/free-solid-svg-icons";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { RouterProvider } from "react-router-dom";
 
@@ -58,6 +61,8 @@ library.add(
   faUserGroup,
   faMessage,
   faUserLarge,
+  faBars,
+  faXmark,
   faLock
 );
 
