@@ -51,7 +51,7 @@ export default function Navbar() {
           <div className="text-2xl font-bold flex items-center">
             <NavLink to={"/"}>Linguagram</NavLink>
           </div>
-          <div className="justify-end">
+          <div className="flex justify-end">
             <div className="hidden sm:flex justify-end items-center gap-4">
               <NavLink to={"/register"}>Register</NavLink>
               <NavLink to={"/login"}>Login</NavLink>
