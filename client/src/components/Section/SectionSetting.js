@@ -138,12 +138,12 @@ export default function SectionSetting() {
             trigger={["Personal Info", <FontAwesomeIcon icon="caret-right" />]}
           >
             <div className="flex flex-col gap-5 p-2">
-              {/* <div className="flex justify-between">
+              <div className="flex justify-between">
                 <div onClick={() => setisProfileModalVisible(true)} className='flex items-center gap-2 p-2 rounded cursor-pointer bg-gray h-min'>
                 <FontAwesomeIcon icon='pen-to-square'/>
                 <h4>Edit</h4>
                 </div>
-              </div> */}
+              </div>
               <div className="flex flex-col gap-2">
                 <p className="text-gray-400">Name</p>
                 <p className="font-bold">Patricia Smith</p>
