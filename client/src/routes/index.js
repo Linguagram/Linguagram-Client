@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Groups from "../components/Explore/Groups";
 import People from "../components/Explore/People";
 import Root from "../components/Root";
 import ExploreView from "../views/ExploreView";
@@ -39,7 +40,8 @@ const router = createBrowserRouter([
         element: <People />
       },
       {
-        path: 'groups'
+        path: 'groups',
+        element: <Groups />
       }
     ]
   }

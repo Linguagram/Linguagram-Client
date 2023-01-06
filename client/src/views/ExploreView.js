@@ -7,7 +7,7 @@ export default function ExploreView() {
   const currentRoute = useLocation();
 
   return (
-    <div className="flex w-screen h-screen fixed">
+    <div className="fixed flex w-screen h-screen">
       <Sidebar />
       <div className="flex flex-col w-full h-screen py-4 overflow-hidden bg-darker-gray">
         <div className="text-2xl font-semibold text-center text-white">
@@ -35,10 +35,9 @@ export default function ExploreView() {
             Groups
           </div>
         </div>
-        <div className="overflow-hidden">
-          <People />
-        {/* <Outlet /> */}
-        </div>
+        <Outlet />
+        {/* <div className="overflow-hidden">
+        </div> */}
       </div>
     </div>
   );
