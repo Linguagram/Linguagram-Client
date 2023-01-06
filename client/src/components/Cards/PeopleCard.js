@@ -8,27 +8,45 @@ export default function PeopleCard() {
           class="h-full w-1/3 rounded-lg object-cover shadow-sm"
         />
       </div>
-      <div className="flex justify-between w-full">
-        <div>name</div>
-        <div>country</div>
+      <div className="flex flex-col items-center justify-between w-full">
+        <div className="text-lg">budigunawan</div>
+        <div className="text-sm text-gray-300">Indonesia</div>
       </div>
       <div className="flex justify-between w-full">
-        <div>Native in</div>
-        <div>Indonesian</div>
+        <div className="text-gray-400">Native</div>
+        <div>Indonesia</div>
       </div>
       <div className="flex justify-between w-full">
-        <div>Learning</div>
-        <div>Korean, English</div>
+        <div className="text-gray-400">Learning</div>
+        <div className="w-1/2 text-right">Korean, English</div>
       </div>
-      <div className="grid items-center justify-center w-full grid-cols-3 text-center">
-        <div>interest</div>
-        <div>interest</div>
-        <div>interest</div>
-        <div>interest</div>
+      <div>Interests</div>
+      <div className="flex flex-wrap items-center justify-center w-full gap-2 text-center">
+        <span class="px-3 py-1 text-sm rounded-full text-gray-200  bg-black-blue ">
+        Technology
+        </span>
+        <span class="px-3 py-1 text-sm rounded-full text-gray-200  bg-black-blue ">
+        Sports
+        </span>
+        <span class="px-3 py-1 text-sm rounded-full text-gray-200  bg-black-blue ">
+        Cooking
+        </span>
       </div>
-      <div className="flex w-full gap-2 mb-5">
-        <button>send friend req</button>
-        <button>chat</button>
+      <div className="flex justify-center w-full gap-2 mb-5 text-sm">
+        <a
+          className="inline-block p-2 text-center text-white border rounded-lg bg-main-color border-main-color hover:bg-black-blue hover:border-black-blue focus:outline-none focus:ring active:text-main-color"
+          href="/download"
+        >
+          <span className="sr-only"> Add Friend </span>
+          Add Friend
+        </a>
+        <a
+          className="inline-block p-2 text-center text-white border rounded-lg bg-main-color border-main-color hover:bg-black-blue hover:border-black-blue focus:outline-none focus:ring active:text-main-color"
+          href="/download"
+        >
+          <span className="sr-only"> Chat </span>
+          Chat
+        </a>
       </div>
     </div>
   );
