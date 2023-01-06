@@ -4,7 +4,7 @@ import ChatRoom from "../components/Chatroom";
 
 export default function HomeView() {
   return (
-    <div className="flex w-screen h-screen">
+    <div className="flex w-screen h-screen fixed">
       <Sidebar />
       <Section />
       <ChatRoom />

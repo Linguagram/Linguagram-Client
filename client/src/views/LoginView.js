@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function LoginView() {
   return (
-    <div className="bg-darker-gray h-screen flex text-white justify-center items-center">
+    <div className="bg-darker-gray min-h-screen flex text-white justify-center items-center fixed w-full overflow-auto">
       <div className="flex flex-col gap-8 flex-1">
         <div>
           <h1 className="text-center text-3xl font-bold mb-2">Login</h1>
