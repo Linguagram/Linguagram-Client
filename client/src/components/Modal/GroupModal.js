@@ -54,7 +54,7 @@ export default function GroupModal({ isOpen, closeModal }) {
                       type="button"
                       className="inline-flex justify-center gap-1 rounded-md border border-transparent bg-main-color-blur p-2 text-sm items-center flex-col font-medium text-white hover:bg-main-color focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}>
-                      <p>Join Group</p>
+                      <p>Leave Group</p>
                     </button>
                   </div>
                 </Dialog.Panel>
