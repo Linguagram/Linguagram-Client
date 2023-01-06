@@ -31,7 +31,8 @@ import {
   faXmark,
   faLock,
   faEnvelope,
-  faPhone
+  faPhone,
+  faRightToBracket
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -67,7 +68,8 @@ library.add(
   faXmark,
   faLock,
   faEnvelope,
-  faPhone
+  faPhone,
+  faRightToBracket
 );
 
 function App() {

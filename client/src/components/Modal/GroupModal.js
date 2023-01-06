@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 
-export default function UserModal({ isOpen, closeModal }) {
+export default function GroupModal({ isOpen, closeModal }) {
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -44,24 +44,17 @@ export default function UserModal({ isOpen, closeModal }) {
                   <Dialog.Title
                     as="h3"
                     className="text-2xl text-center font-medium leading-6 text-white">
-                    Doris Brown
+                    Group Name
                   </Dialog.Title>
                   <p className="text-center text-white mt-4 text-sm">
-                    user profile goes here
+                    Patricia Smith, Doris Brown and 2 others
                   </p>
                   <div className="mt-4 flex justify-center border-t border-light-gray pt-4">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-transparent p-4 text-sm font-medium text-white hover:bg-main-color focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center gap-1 rounded-md border border-transparent bg-main-color-blur p-2 text-sm items-center flex-col font-medium text-white hover:bg-main-color focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}>
-                      <FontAwesomeIcon icon="video" className="text-2xl" />
-                    </button>
-
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-transparent p-4 text-sm font-medium text-white hover:bg-main-color focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}>
-                      <FontAwesomeIcon icon="phone" className="text-2xl" />
+                      <p>Join Group</p>
                     </button>
                   </div>
                 </Dialog.Panel>
