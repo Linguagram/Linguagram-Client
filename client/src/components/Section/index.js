@@ -15,7 +15,7 @@ export default function Sidebar() {
 
   return (
     <div className='flex flex-col w-3/5 h-screen py-5 lg:w-2/5 2xl:w-1/5 bg-darker-gray px-7'>
-      {currentPath === 'chats' && 
+      {(currentPath === 'chats') && 
         <SectionChats/>
       }
       {currentPath === 'groups' && 
