@@ -1,6 +1,6 @@
 export default function PeopleCard() {
   return (
-    <div className="flex flex-col items-center justify-between w-full px-4 text-white rounded-lg bg-light-gray h-96">
+    <div className="flex flex-col items-center justify-between w-1/4 px-4 text-white rounded-lg bg-light-gray h-96">
       <div className="flex justify-center w-full mt-5">
         <img
           alt="Paul Clapton"
@@ -20,7 +20,7 @@ export default function PeopleCard() {
         <div className="text-gray-400">Learning</div>
         <div className="w-1/2 text-right">Korean, English</div>
       </div>
-      <div>Interests</div>
+      <div className="text-lg font-semibold">Interests</div>
       <div className="flex flex-wrap items-center justify-center w-full gap-2 text-center">
         <span class="px-3 py-1 text-sm rounded-full text-gray-200  bg-black-blue ">
         Technology

@@ -1,4 +1,5 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import People from "../components/Explore/People";
 import Sidebar from "../components/Sidebar/Sidebar";
 
 export default function ExploreView() {
@@ -6,9 +7,9 @@ export default function ExploreView() {
   const currentRoute = useLocation();
 
   return (
-    <div className="flex w-screen h-screen">
+    <div className="flex w-screen h-screen ">
       <Sidebar />
-      <div className="flex flex-col w-full py-4 bg-darker-gray">
+      <div className="flex flex-col w-full h-screen py-4 overflow-hidden bg-darker-gray">
         <div className="text-2xl font-semibold text-center text-white">
           Explore
         </div>
@@ -34,7 +35,10 @@ export default function ExploreView() {
             Groups
           </div>
         </div>
-        <Outlet />
+        <div className="overflow-hidden">
+          <People />
+        {/* <Outlet /> */}
+        </div>
       </div>
     </div>
   );
