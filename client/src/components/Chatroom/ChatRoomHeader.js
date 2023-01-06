@@ -4,16 +4,18 @@ import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 import UserModal from "../Modal/UserModal";
 
 export default function ChatRoomHeader() {
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+  let [isOpen, setIsOpen] = useState(false);
 
-  function openModal() {
-    setModalIsOpen(true)
-    console.log(modalIsOpen)
+  function closeModal() {
+    setIsOpen(false);
   }
 
+  function openModal() {
+    setIsOpen(true);
+  }
   return (
     <div className="flex items-center justify-between w-full p-5 h-1/6 max-h-16">
-      <UserModal modalIsOpen={modalIsOpen}/>
+      <UserModal isOpen={isOpen} closeModal={closeModal}/>
 
       <div className="flex items-center w-full gap-3">
         <img src={avatar} className="avatar-chat" alt="avatar"></img>

@@ -1,17 +1,9 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useEffect, useState } from 'react'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment } from "react";
+import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 
-export default function UserModal() {
-  let [isOpen, setIsOpen] = useState(false)
-
-  function closeModal() {
-    setIsOpen(false)
-  }
-
-  function openModal() {
-    setIsOpen(true)
-  }
-
+export default function UserModal({ isOpen, closeModal }) {
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -23,8 +15,7 @@ export default function UserModal() {
             enterTo="opacity-100"
             leave="ease-in duration-200"
             leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
+            leaveTo="opacity-0">
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
 
@@ -37,29 +28,40 @@ export default function UserModal() {
                 enterTo="opacity-100 scale-100"
                 leave="ease-in duration-200"
                 leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                leaveTo="opacity-0 scale-95">
+                <Dialog.Panel className="w-72 transform overflow-hidden rounded-lg bg-darker-gray p-6 text-left align-middle shadow-lg transition-all">
+                  <div className="w-full flex justify-end mb-2">
+                  <button onClick={closeModal}>
+                    <FontAwesomeIcon
+                      icon={"xmark"}
+                      className="text-white text-xl hover:text-red-400"
+                    />
+                  </button>
+                  </div>
+                  <div className="flex justify-center my-4">
+                    <img src={avatar} id="avatar-profile" alt="avatar"></img>
+                  </div>
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
-                  >
-                    Payment successful
+                    className="text-2xl text-center font-medium leading-6 text-white">
+                    Doris Brown
                   </Dialog.Title>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Your payment has been successfully submitted. We’ve sent
-                      you an email with all of the details of your order.
-                    </p>
-                  </div>
-
-                  <div className="mt-4">
+                  <p className="text-center text-white mt-4 text-sm">
+                    user profile goes here
+                  </p>
+                  <div className="mt-4 flex justify-center border-t border-light-gray pt-4">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Got it, thanks!
+                      className="inline-flex justify-center rounded-md border border-transparent bg-transparent p-4 text-sm font-medium text-white hover:bg-main-color focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      onClick={closeModal}>
+                      <FontAwesomeIcon icon="video" className="text-2xl" />
+                    </button>
+
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-transparent p-4 text-sm font-medium text-white hover:bg-main-color focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      onClick={closeModal}>
+                      <FontAwesomeIcon icon="phone" className="text-2xl" />
                     </button>
                   </div>
                 </Dialog.Panel>
@@ -69,5 +71,5 @@ export default function UserModal() {
         </Dialog>
       </Transition>
     </>
-  )
+  );
 }
