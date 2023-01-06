@@ -16,8 +16,8 @@ export default function ChatRoomHeader() {
   }
   return (
     <div className="flex items-center justify-between w-full p-5 h-1/6 max-h-16">
-      {/* <UserModal isOpen={isOpen} closeModal={closeModal}/> */}
-      <GroupModal isOpen={isOpen} closeModal={closeModal}/>
+      <UserModal isOpen={isOpen} closeModal={closeModal}/>
+      {/* <GroupModal isOpen={isOpen} closeModal={closeModal}/> */}
 
       <div className="flex items-center w-full gap-3">
         <img src={avatar} className="avatar-chat" alt="avatar"></img>

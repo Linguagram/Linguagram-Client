@@ -29,7 +29,7 @@ export default function UserModal({ isOpen, closeModal }) {
                 leave="ease-in duration-200"
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95">
-                <Dialog.Panel className="w-72 transform overflow-hidden rounded-lg bg-darker-gray p-6 text-left align-middle shadow-lg transition-all">
+                <Dialog.Panel className="w-80 transform overflow-hidden rounded-lg bg-darker-gray p-6 text-left align-middle shadow-lg transition-all">
                   <div className="w-full flex justify-end mb-2">
                     <button onClick={closeModal}>
                       <FontAwesomeIcon
@@ -41,27 +41,40 @@ export default function UserModal({ isOpen, closeModal }) {
                   <div className="flex justify-center my-4">
                     <img src={avatar} id="avatar-profile" alt="avatar"></img>
                   </div>
+                    {/* username, email, phone number, country */}
                   <Dialog.Title
                     as="h3"
                     className="text-2xl text-center font-medium leading-6 text-white">
                     Doris Brown
                   </Dialog.Title>
-                  <p className="text-center text-white mt-4 text-sm">
-                    user profile goes here
-                  </p>
+                  <div>
+                    <p className="text-center text-slate-400 mt-1 text-sm">
+                      dorisbrown@mail.com
+                    </p>
+
+                    <p className="text-center text-slate-400 text-sm">
+                      +62-123-123-123
+                    </p>
+
+                    <p className="text-center text-slate-400 text-sm">
+                      ID - Indonesia
+                    </p>
+
+                    <p className="text-center text-slate-400 text-sm mt-3">
+                      Interested in: <br /> English
+                    </p>
+ 
+                    <p className="text-center text-slate-400 text-sm mt-3">
+                      Matching topics: <br /> Sport, Music, Philosophy
+                    </p>
+ 
+                  </div>
                   <div className="mt-4 flex justify-center border-t border-light-gray pt-4">
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-transparent p-4 text-sm font-medium text-white hover:bg-main-color focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}>
                       <FontAwesomeIcon icon="video" className="text-2xl" />
-                    </button>
-
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-transparent p-4 text-sm font-medium text-white hover:bg-main-color focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}>
-                      <FontAwesomeIcon icon="phone" className="text-2xl" />
                     </button>
                   </div>
                 </Dialog.Panel>
