@@ -4,6 +4,21 @@ import { Fragment } from "react";
 import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 
 export default function GroupModal({ isOpen, closeModal }) {
+
+  // Mock data to test user list
+  const users = [
+    {id: 1, name: "Patricia Smith"},
+    {id: 2, name: "John Smith"},
+    {id: 3, name: "Adam Smith"},
+    {id: 4, name: "Doris Brown"},
+    {id: 5, name: "Jack White"},
+    {id: 6, name: "Slash"},
+    {id: 7, name: "Lead Belly"},
+    {id: 8, name: "Howling Wolf"},
+    {id: 9, name: "Chet Baker"},
+    {id: 10, name: "Good Day"},
+  ]
+
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -29,7 +44,7 @@ export default function GroupModal({ isOpen, closeModal }) {
                 leave="ease-in duration-200"
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95">
-                <Dialog.Panel className="w-72 transform overflow-hidden rounded-lg bg-darker-gray p-6 text-left align-middle shadow-lg transition-all">
+                <Dialog.Panel className="w-96 transform overflow-hidden rounded-lg bg-darker-gray p-6 text-left align-middle shadow-lg transition-all">
                   <div className="w-full flex justify-end mb-2">
                     <button onClick={closeModal}>
                       <FontAwesomeIcon
@@ -46,9 +61,14 @@ export default function GroupModal({ isOpen, closeModal }) {
                     className="text-2xl text-center font-medium leading-6 text-white">
                     Group Name
                   </Dialog.Title>
-                  <p className="text-center text-white mt-4 text-sm">
-                    Patricia Smith, Doris Brown and 2 others
-                  </p>
+                  <div className="text-white mt-2 text-center text-lg font-light">
+                    Members: {users.length}
+                  </div>
+                  <div className="bg-black-blue p-4 flex flex-1 flex-col mt-6 text-white text-sm text-center h-48 overflow-auto">
+                    {users.map(user => {
+                      return <p key={user.id}>{user.name}</p>
+                    })}
+                  </div>
                   <div className="mt-4 flex justify-center border-t border-light-gray pt-4">
                     <button
                       type="button"
