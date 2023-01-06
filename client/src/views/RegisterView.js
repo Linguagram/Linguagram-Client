@@ -4,7 +4,7 @@ import MyListbox from "../components/Form/ListBox";
 
 export default function RegisterView() {
   return (
-    <div className="bg-light-gray h-screen flex text-white justify-center">
+    <div className="bg-light-gray h-screen w-screen fixed overflow-auto flex text-white justify-center">
       <div className="flex flex-col gap-8 flex-1">
         <div>
           <h1 className="text-center text-3xl font-bold mb-2 mt-20">
