@@ -9,7 +9,7 @@ export default function ExploreView() {
     <div className="fixed flex w-screen h-screen">
       <Sidebar />
       <div className="flex flex-col w-full h-screen py-4 overflow-hidden bg-darker-gray">
-        <div className="ml-10 text-3xl font-semibold text-white">
+        <div className="ml-10 text-3xl font-semibold text-white lg:text-4xl">
           Explore
         </div>
         <div className="flex justify-center mt-2">
