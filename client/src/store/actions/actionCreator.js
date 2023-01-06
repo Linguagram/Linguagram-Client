@@ -1,15 +1,22 @@
-import { SET_ACTIVE_SECTION, SUCCESS_FETCH_USER } from "./actionTypes"
+import { SET_USER, FETCH_GROUPS, FETCH_ALL_MESSAGES } from "./actionTypes"
 
-export const setActiveSection = (payload) => {
+export const setUser = (payload) => {
     return {
-        type: SET_ACTIVE_SECTION,
+        type: SET_USER,
         payload
     }
 }
 
-export const setUser = (payload) => {
+export const setGroups = (payload) => {
     return {
-        type: SUCCESS_FETCH_USER,
+        type: FETCH_GROUPS,
+        payload
+    }
+}
+
+export const setAllMessages = (payload) => {
+    return {
+        type: FETCH_ALL_MESSAGES,
         payload
     }
 }

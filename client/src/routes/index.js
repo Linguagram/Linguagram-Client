@@ -27,6 +27,24 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <HomeView />,
+    children: [
+      {
+        path: "chats",
+        element: <HomeView />,
+      },
+      {
+        path: "contacts",
+        element: <HomeView />,
+      },
+      {
+        path: "groups",
+        element: <HomeView />,
+      },
+      {
+        path: "setting",
+        element: <HomeView />,
+      }
+    ]
   },
 ]);
 
