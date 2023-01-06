@@ -7,7 +7,7 @@ export default function ExploreView() {
   const currentRoute = useLocation();
 
   return (
-    <div className="flex w-screen h-screen ">
+    <div className="flex w-screen h-screen fixed">
       <Sidebar />
       <div className="flex flex-col w-full h-screen py-4 overflow-hidden bg-darker-gray">
         <div className="text-2xl font-semibold text-center text-white">
