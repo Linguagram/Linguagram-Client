@@ -29,6 +29,7 @@ import {
   faCommentDots,
   faBars,
   faXmark,
+  faRightFromBracket
   faLock,
   faEnvelope,
   faPhone
@@ -65,6 +66,7 @@ library.add(
   faUserLarge,
   faBars,
   faXmark,
+  faRightFromBracket
   faLock,
   faEnvelope,
   faPhone
