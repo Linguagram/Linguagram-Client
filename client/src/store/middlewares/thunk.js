@@ -1,7 +1,7 @@
-import { setActiveSection } from "../actions/actionCreator";
+// import { setActiveSection } from "../actions/actionCreator";
 
-export const handleSetActiveSection = (section) => {
-    return (dispatch, getState) => {
-        dispatch(setActiveSection(section))
-    }
-}
+// export const handleSetActiveSection = (section) => {
+//     return (dispatch, getState) => {
+//         dispatch(setActiveSection(section))
+//     }
+// }

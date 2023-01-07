@@ -35,7 +35,7 @@ export default function GroupModal({ isOpen, closeModal }) {
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
+            <div className="flex items-center justify-center h-full p-4 text-center">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -44,12 +44,12 @@ export default function GroupModal({ isOpen, closeModal }) {
                 leave="ease-in duration-200"
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95">
-                <Dialog.Panel className="w-96 transform overflow-hidden rounded-lg bg-darker-gray p-6 text-left align-middle shadow-lg transition-all">
-                  <div className="w-full flex justify-end mb-2">
+                <Dialog.Panel className="p-6 overflow-hidden text-left align-middle transition-all transform rounded-lg shadow-lg w-96 bg-darker-gray">
+                  <div className="flex justify-end w-full mb-2">
                     <button onClick={closeModal}>
                       <FontAwesomeIcon
                         icon={"xmark"}
-                        className="text-white text-xl hover:text-red-400"
+                        className="text-xl text-white hover:text-red-400"
                       />
                     </button>
                   </div>
@@ -58,21 +58,21 @@ export default function GroupModal({ isOpen, closeModal }) {
                   </div>
                   <Dialog.Title
                     as="h3"
-                    className="text-2xl text-center font-medium leading-6 text-white">
+                    className="text-2xl font-medium leading-6 text-center text-white">
                     Group Name
                   </Dialog.Title>
-                  <div className="text-white mt-2 text-center text-lg font-light">
+                  <div className="mt-2 text-lg font-light text-center text-white">
                     Members: {users.length}
                   </div>
-                  <div className="bg-black-blue p-4 flex flex-1 flex-col mt-6 text-white text-sm text-center h-48 overflow-auto">
+                  <div className="flex flex-col flex-1 h-48 p-4 mt-6 overflow-auto text-sm text-center text-white bg-black-blue">
                     {users.map(user => {
                       return <p key={user.id}>{user.name}</p>
                     })}
                   </div>
-                  <div className="mt-4 flex justify-center border-t border-light-gray pt-4">
+                  <div className="flex justify-center pt-4 mt-4 border-t border-light-gray">
                     <button
                       type="button"
-                      className="inline-flex justify-center gap-1 rounded-md border border-transparent bg-main-color-blur p-2 text-sm items-center flex-col font-medium text-white hover:bg-main-color focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex flex-col items-center justify-center gap-1 p-2 text-sm font-medium text-white border border-transparent rounded-md bg-main-color-blur hover:bg-main-color focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}>
                       <p>Leave Group</p>
                     </button>

@@ -1,10 +1,14 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
-import { setHomeDrawer } from "../../store/actions/actionCreator";
+import { setHomeDrawer, setOpenChat } from "../../store/actions/actionCreator";
 
 export default function SectionGroups() {
   const dispatch = useDispatch()
+
+  function openChat() {
+    dispatch(setOpenChat(true))
+  }
 
   return (
     <>
@@ -35,128 +39,7 @@ export default function SectionGroups() {
       </div>
 
       <div className="flex flex-col h-full gap-3 mt-5 overflow-y-auto scrollbar-hide">
-        <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
-            G
-          </div>
-          <div className="flex items-center justify-between w-full">
-            <h4 className="text-base text-white">#Groups</h4>
-            <div className="h-5 text-sm font-bold text-center text-red-700 bg-red-900-blur w-7">
-              24+
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
-            G
-          </div>
-          <div className="flex items-center justify-between w-full">
-            <h4 className="text-base text-white">#Groups</h4>
-            <div className="h-5 text-sm font-bold text-center text-red-700 bg-red-900-blur w-7">
-              24+
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
-            G
-          </div>
-          <div className="flex items-center justify-between w-full">
-            <h4 className="text-base text-white">#Groups</h4>
-            <div className="h-5 text-sm font-bold text-center text-red-700 bg-red-900-blur w-7">
-              24+
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
-            G
-          </div>
-          <div className="flex items-center justify-between w-full">
-            <h4 className="text-base text-white">#Groups</h4>
-            <div className="h-5 text-sm font-bold text-center text-red-700 bg-red-900-blur w-7">
-              24+
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
-            G
-          </div>
-          <div className="flex items-center justify-between w-full">
-            <h4 className="text-base text-white">#Groups</h4>
-            <div className="h-5 text-sm font-bold text-center text-red-700 bg-red-900-blur w-7">
-              24+
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
-            G
-          </div>
-          <div className="flex items-center justify-between w-full">
-            <h4 className="text-base text-white">#Groups</h4>
-            <div className="h-5 text-sm font-bold text-center text-red-700 bg-red-900-blur w-7">
-              24+
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
-            G
-          </div>
-          <div className="flex items-center justify-between w-full">
-            <h4 className="text-base text-white">#Groups</h4>
-            <div className="h-5 text-sm font-bold text-center text-red-700 bg-red-900-blur w-7">
-              24+
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
-            G
-          </div>
-          <div className="flex items-center justify-between w-full">
-            <h4 className="text-base text-white">#Groups</h4>
-            <div className="h-5 text-sm font-bold text-center text-red-700 bg-red-900-blur w-7">
-              24+
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
-            G
-          </div>
-          <div className="flex items-center justify-between w-full">
-            <h4 className="text-base text-white">#Groups</h4>
-            <div className="h-5 text-sm font-bold text-center text-red-700 bg-red-900-blur w-7">
-              24+
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
-            G
-          </div>
-          <div className="flex items-center justify-between w-full">
-            <h4 className="text-base text-white">#Groups</h4>
-            <div className="h-5 text-sm font-bold text-center text-red-700 bg-red-900-blur w-7">
-              24+
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
-            G
-          </div>
-          <div className="flex items-center justify-between w-full">
-            <h4 className="text-base text-white">#Groups</h4>
-            <div className="h-5 text-sm font-bold text-center text-red-700 bg-red-900-blur w-7">
-              24+
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
+        <div onClick={openChat} className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
           <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
             G
           </div>

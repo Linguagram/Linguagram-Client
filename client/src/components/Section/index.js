@@ -1,30 +1,10 @@
 import React from 'react'
-import SectionProfile from './SectionProfile'
-import SectionChats from './SectionChats'
-import SectionGroups from './SectionGroups'
-import SectionFriends from './SectionFriends'
-import SectionSetting from './SectionSetting'
 import { Outlet } from 'react-router-dom'
 
-export default function Section({ sections, toggleDrawer }) {
+export default function Section({ openChat }) {
   return (
-    <div className='flex-col w-full h-screen py-5 md:w-3/5 md:flex lg:w-2/5 2xl:w-1/5 bg-darker-gray px-7'>
-      <Outlet toggleDrawer={toggleDrawer} />
-      {/* {sections.user && 
-        <SectionProfile/>
-      }
-      {sections.message && 
-        <SectionChats toggleDrawer={toggleDrawer}/>
-      }
-      {sections.group && 
-        <SectionGroups/>
-      }
-      {sections.address && 
-        <SectionFriends/>
-      }
-      {sections.gear && 
-        <SectionSetting/>
-      } */}
+    <div className={`${openChat ? "hidden" : "" } flex-col w-full h-screen py-5 md:w-3/5 md:flex lg:w-2/5 2xl:w-1/5 bg-darker-gray px-7`}>
+      <Outlet />
     </div>
   )
 }

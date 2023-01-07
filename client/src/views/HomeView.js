@@ -12,21 +12,13 @@ export default function HomeView() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { homeDrawer } = useSelector((state) => state.drawerReducer)
-
-  const changeSection = (section) => {
-    if(currentRoute.pathname.includes('/explore')) {
-      navigate('/home')
-    } else if (section === 'explore') {
-      navigate('/explore/people')
-    }
-
-    dispatch(handleSetActiveSection(section))
-  }
+  const { openChat } = useSelector((state) => state.sectionReducer)
+  
 
   return (
     <div className="fixed flex w-screen h-screen md:flex-row">
       <Sidebar />
-      <Section />
+      <Section openChat={openChat} />
 
       <div className="fixed top-0 z-50 w-full">
         <HomeDrawer homeDrawer={homeDrawer} />

@@ -1,8 +1,8 @@
-import { SET_ACTIVE_SECTION, SET_HOME_DRAWER } from "./actionTypes"
+import { SET_HOME_DRAWER, SET_OPEN_CHAT } from "./actionTypes"
 
-export const setActiveSection = (payload) => {
+export const setOpenChat = (payload) => {
     return {
-        type: SET_ACTIVE_SECTION,
+        type: SET_OPEN_CHAT,
         payload
     }
 }

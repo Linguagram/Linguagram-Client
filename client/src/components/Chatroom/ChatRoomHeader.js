@@ -3,9 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 import UserModal from "../Modal/UserModal";
 import GroupModal from "../Modal/GroupModal";
+import { useDispatch } from 'react-redux'
+import { setOpenChat } from "../../store/actions/actionCreator";
 
 export default function ChatRoomHeader() {
   let [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch()
 
   function closeModal() {
     setIsOpen(false);
@@ -14,12 +17,23 @@ export default function ChatRoomHeader() {
   function openModal() {
     setIsOpen(true);
   }
+
+  function closeChat() {
+    dispatch(setOpenChat(false))
+  }
+
   return (
     <div className="flex items-center justify-between w-full p-5 h-1/6 max-h-16">
-      <UserModal isOpen={isOpen} closeModal={closeModal}/>
-      {/* <GroupModal isOpen={isOpen} closeModal={closeModal}/> */}
+      {/* <UserModal isOpen={isOpen} closeModal={closeModal}/> */}
+      <GroupModal isOpen={isOpen} closeModal={closeModal}/>
 
       <div className="flex items-center w-full gap-3">
+        <div onClick={closeChat} className="md:hidden">
+          <FontAwesomeIcon
+          className="w-8 h-8 text-gray-400 cursor-pointer"
+          icon="angle-left"
+        />
+        </div>
         <img src={avatar} className="avatar-chat" alt="avatar"></img>
         <div className="flex items-center gap-1">
           <button onClick={openModal}>

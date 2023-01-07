@@ -33,7 +33,8 @@ import {
   faLock,
   faEnvelope,
   faPhone,
-  faRightToBracket
+  faRightToBracket,
+  faAngleLeft
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -71,7 +72,8 @@ library.add(
   faLock,
   faEnvelope,
   faPhone,
-  faRightToBracket
+  faRightToBracket,
+  faAngleLeft
 );
 
 function App() {
