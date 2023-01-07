@@ -1,15 +1,17 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Sidebar({ changeSection, sections }) {
+  const currentRoute = useLocation()
   const navigate = useNavigate()
 
   return (
     <div className="flex-col items-center justify-between hidden h-screen py-5 md:flex w-18 bg-light-gray">
       <div>
         <FontAwesomeIcon
-            onClick={() => changeSection('message')}
+            // onClick={() => changeSection('message')}
+            onClick={() => navigate('/home/chats')}
           className="w-full text-main-color"
           icon="comment-dots"
         />
@@ -17,52 +19,56 @@ export default function Sidebar({ changeSection, sections }) {
       <div className="flex flex-col gap-1">
         <div
           className={`icons-container flex justify-center items-center rounded ${
-            sections.message ? "icons-container-active" : ""
+           currentRoute.pathname.includes('/home/chats') ? "icons-container-active" : ""
           }`}
         >
           <FontAwesomeIcon
-            onClick={() => changeSection("message")}
+            // onClick={() => changeSection("message")}
+            onClick={() => navigate('/home/chats')}
             className={`w-full cursor-pointer ${
-              sections.message ? "text-main-color" : "text-gray-400"
+              currentRoute.pathname.includes('/home/chats') ? "text-main-color" : "text-gray-400"
             }`}
             icon="message"
           />
         </div>
         <div
           className={`icons-container flex justify-center items-center rounded ${
-            sections.address ? "icons-container-active" : ""
+            currentRoute.pathname.includes('/home/friends') ? "icons-container-active" : ""
           }`}
         >
           <FontAwesomeIcon
-            onClick={() => changeSection("address")}
+            // onClick={() => changeSection("address")}
+            onClick={() => navigate('/home/friends')}
             className={`w-full cursor-pointer ${
-              sections.address ? "text-main-color" : "text-gray-400"
+              currentRoute.pathname.includes('/home/friends') ? "text-main-color" : "text-gray-400"
             }`}
             icon="address-card"
           />
         </div>
         <div
           className={`icons-container flex justify-center items-center rounded ${
-            sections.group ? "icons-container-active" : ""
+            currentRoute.pathname.includes('/home/groups') ? "icons-container-active" : ""
           }`}
         >
           <FontAwesomeIcon
-            onClick={() => changeSection("group")}
+            // onClick={() => changeSection("group")}
+            onClick={() => navigate('/home/groups')}
             className={`w-full cursor-pointer ${
-              sections.group ? "text-main-color" : "text-gray-400"
+              currentRoute.pathname.includes('/home/groups') ? "text-main-color" : "text-gray-400"
             }`}
             icon="user-group"
           />
         </div>
         <div
           className={`icons-container flex justify-center items-center rounded ${
-            sections.gear ? "icons-container-active" : ""
+            currentRoute.pathname.includes('/home/setting') ? "icons-container-active" : ""
           }`}
         >
           <FontAwesomeIcon
-            onClick={() => changeSection("gear")}
+            // onClick={() => changeSection("gear")}
+            onClick={() => navigate('/home/setting')}
             className={`w-full cursor-pointer ${
-              sections.gear ? "text-main-color" : "text-gray-400"
+              currentRoute.pathname.includes('/home/setting') ? "text-main-color" : "text-gray-400"
             }`}
             icon="user-large"
           />
@@ -70,12 +76,13 @@ export default function Sidebar({ changeSection, sections }) {
       </div>
       <div className="flex flex-col gap-1">
         <div className={`flex items-center justify-center rounded icons-container ${
-            sections.explore ? "icons-container-active" : ""
+            currentRoute.pathname.includes('explore') ? "icons-container-active" : ""
         }`}>
           <FontAwesomeIcon
-            onClick={() => changeSection('explore')}
+            // onClick={() => changeSection('explore')}
+            onClick={() => navigate('/explore/people')}
             className={`w-full cursor-pointer ${
-                sections.explore ? "text-main-color" : "text-gray-400"
+                currentRoute.pathname.includes('explore') ? "text-main-color" : "text-gray-400"
             }`}
             icon="globe"
           />
