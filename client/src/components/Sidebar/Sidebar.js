@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export default function Sidebar({ changeSection, sections }) {
+export default function Sidebar() {
   const currentRoute = useLocation()
   const navigate = useNavigate()
 
@@ -10,7 +10,6 @@ export default function Sidebar({ changeSection, sections }) {
     <div className="flex-col items-center justify-between hidden h-screen py-5 md:flex w-18 bg-light-gray">
       <div>
         <FontAwesomeIcon
-            // onClick={() => changeSection('message')}
             onClick={() => navigate('/home/chats')}
           className="w-full text-main-color"
           icon="comment-dots"
@@ -23,7 +22,6 @@ export default function Sidebar({ changeSection, sections }) {
           }`}
         >
           <FontAwesomeIcon
-            // onClick={() => changeSection("message")}
             onClick={() => navigate('/home/chats')}
             className={`w-full cursor-pointer ${
               currentRoute.pathname.includes('/home/chats') ? "text-main-color" : "text-gray-400"
@@ -37,7 +35,6 @@ export default function Sidebar({ changeSection, sections }) {
           }`}
         >
           <FontAwesomeIcon
-            // onClick={() => changeSection("address")}
             onClick={() => navigate('/home/friends')}
             className={`w-full cursor-pointer ${
               currentRoute.pathname.includes('/home/friends') ? "text-main-color" : "text-gray-400"
@@ -51,7 +48,6 @@ export default function Sidebar({ changeSection, sections }) {
           }`}
         >
           <FontAwesomeIcon
-            // onClick={() => changeSection("group")}
             onClick={() => navigate('/home/groups')}
             className={`w-full cursor-pointer ${
               currentRoute.pathname.includes('/home/groups') ? "text-main-color" : "text-gray-400"
@@ -65,7 +61,6 @@ export default function Sidebar({ changeSection, sections }) {
           }`}
         >
           <FontAwesomeIcon
-            // onClick={() => changeSection("gear")}
             onClick={() => navigate('/home/setting')}
             className={`w-full cursor-pointer ${
               currentRoute.pathname.includes('/home/setting') ? "text-main-color" : "text-gray-400"
@@ -79,7 +74,6 @@ export default function Sidebar({ changeSection, sections }) {
             currentRoute.pathname.includes('explore') ? "icons-container-active" : ""
         }`}>
           <FontAwesomeIcon
-            // onClick={() => changeSection('explore')}
             onClick={() => navigate('/explore/people')}
             className={`w-full cursor-pointer ${
                 currentRoute.pathname.includes('explore') ? "text-main-color" : "text-gray-400"

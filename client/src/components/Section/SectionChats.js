@@ -1,12 +1,21 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setHomeDrawer } from '../../store/actions/actionCreator';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 
-export default function SectionChats({ toggleDrawer }) {
+export default function SectionChats() {
+  const dispatch = useDispatch()
+
+  // function toggleDrawer() {
+  //   if(drawer) dispatch(setHomeDrawer(false))
+  //   else dispatch(setHomeDrawer(true))
+  // }
+  
   return (
     <>
       <div className="flex items-center gap-3 mb-4 text-xl text-white md:mb-8">
-        <button onClick={toggleDrawer} className="md:hidden">
+        <button onClick={() => dispatch(setHomeDrawer(true))} className="md:hidden">
           <FontAwesomeIcon className="text-xl text-white" icon="bars" />
         </button>
         <div>Chats</div>
@@ -27,7 +36,7 @@ export default function SectionChats({ toggleDrawer }) {
 
       <div className="flex flex-col h-full gap-3 mt-5 overflow-y-auto scrollbar-hide">
         <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <img src={avatar} class="avatar-chat" alt="avatar"></img>
+          <img src={avatar} className="avatar-chat" alt="avatar"></img>
           <div className="flex flex-col w-full gap-1">
             <div className="flex items-center justify-between">
               <h4 className="text-base text-white">Patrick Hendriks</h4>
@@ -42,7 +51,7 @@ export default function SectionChats({ toggleDrawer }) {
           </div>
         </div>
         <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <img src={avatar} class="avatar-chat" alt="avatar"></img>
+          <img src={avatar} className="avatar-chat" alt="avatar"></img>
           <div className="flex flex-col w-full gap-1">
             <div className="flex items-center justify-between">
               <h4 className="text-base text-white">Patrick Hendriks</h4>
@@ -57,7 +66,7 @@ export default function SectionChats({ toggleDrawer }) {
           </div>
         </div>
         <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <img src={avatar} class="avatar-chat" alt="avatar"></img>
+          <img src={avatar} className="avatar-chat" alt="avatar"></img>
           <div className="flex flex-col w-full gap-1">
             <div className="flex items-center justify-between">
               <h4 className="text-base text-white">Patrick Hendriks</h4>
@@ -72,7 +81,7 @@ export default function SectionChats({ toggleDrawer }) {
           </div>
         </div>
         <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <img src={avatar} class="avatar-chat" alt="avatar"></img>
+          <img src={avatar} className="avatar-chat" alt="avatar"></img>
           <div className="flex flex-col w-full gap-1">
             <div className="flex items-center justify-between">
               <h4 className="text-base text-white">Patrick Hendriks</h4>
@@ -87,7 +96,7 @@ export default function SectionChats({ toggleDrawer }) {
           </div>
         </div>
         <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <img src={avatar} class="avatar-chat" alt="avatar"></img>
+          <img src={avatar} className="avatar-chat" alt="avatar"></img>
           <div className="flex flex-col w-full gap-1">
             <div className="flex items-center justify-between">
               <h4 className="text-base text-white">Patrick Hendriks</h4>
@@ -102,7 +111,7 @@ export default function SectionChats({ toggleDrawer }) {
           </div>
         </div>
         <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <img src={avatar} class="avatar-chat" alt="avatar"></img>
+          <img src={avatar} className="avatar-chat" alt="avatar"></img>
           <div className="flex flex-col w-full gap-1">
             <div className="flex items-center justify-between">
               <h4 className="text-base text-white">Patrick Hendriks</h4>
@@ -117,7 +126,7 @@ export default function SectionChats({ toggleDrawer }) {
           </div>
         </div>
         <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <img src={avatar} class="avatar-chat" alt="avatar"></img>
+          <img src={avatar} className="avatar-chat" alt="avatar"></img>
           <div className="flex flex-col w-full gap-1">
             <div className="flex items-center justify-between">
               <h4 className="text-base text-white">Patrick Hendriks</h4>
@@ -132,7 +141,7 @@ export default function SectionChats({ toggleDrawer }) {
           </div>
         </div>
         <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <img src={avatar} class="avatar-chat" alt="avatar"></img>
+          <img src={avatar} className="avatar-chat" alt="avatar"></img>
           <div className="flex flex-col w-full gap-1">
             <div className="flex items-center justify-between">
               <h4 className="text-base text-white">Patrick Hendriks</h4>
@@ -147,7 +156,7 @@ export default function SectionChats({ toggleDrawer }) {
           </div>
         </div>
         <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <img src={avatar} class="avatar-chat" alt="avatar"></img>
+          <img src={avatar} className="avatar-chat" alt="avatar"></img>
           <div className="flex flex-col w-full gap-1">
             <div className="flex items-center justify-between">
               <h4 className="text-base text-white">Patrick Hendriks</h4>
@@ -162,7 +171,7 @@ export default function SectionChats({ toggleDrawer }) {
           </div>
         </div>
         <div className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <img src={avatar} class="avatar-chat" alt="avatar"></img>
+          <img src={avatar} className="avatar-chat" alt="avatar"></img>
           <div className="flex flex-col w-full gap-1">
             <div className="flex items-center justify-between">
               <h4 className="text-base text-white">Patrick Hendriks</h4>

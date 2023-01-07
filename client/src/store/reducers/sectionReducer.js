@@ -1,4 +1,4 @@
-import { SET_ACTIVE_SECTION } from "../actions/actionTypes"
+import { SET_ACTIVE_SECTION, SET_HOME_DRAWER } from "../actions/actionTypes"
 
 const initialState = {
     user: false,
@@ -6,7 +6,8 @@ const initialState = {
     message: true,
     address: false,
     gear: false,
-    explore: false
+    explore: false,
+    homeDrawer: false
 }
 
 export default function sectionReducer(state = initialState, action) {
@@ -20,6 +21,12 @@ export default function sectionReducer(state = initialState, action) {
                 gear: false,
                 explore: false,
                 [action.payload]: true
+            }
+
+        case SET_HOME_DRAWER:
+            return {
+                ...state,
+                homeDrawer: action.payload
             }
         default:
             return state

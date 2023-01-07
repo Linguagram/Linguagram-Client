@@ -8,11 +8,10 @@ import HomeDrawer from "../components/HomeDrawer/HomeDrawer";
 import { useState } from "react";
 
 export default function HomeView() {
-  const [drawer, setDrawer] = useState(false);
   const currentRoute = useLocation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const sections = useSelector((state) => state.sectionReducer)
+  const { homeDrawer } = useSelector((state) => state.drawerReducer)
 
   const changeSection = (section) => {
     if(currentRoute.pathname.includes('/explore')) {
@@ -24,18 +23,13 @@ export default function HomeView() {
     dispatch(handleSetActiveSection(section))
   }
 
-  function toggleDrawer() {
-    if(drawer) setDrawer(false)
-    else setDrawer(true)
-  }
-
   return (
     <div className="fixed flex flex-col w-screen h-screen md:flex-row">
-      <Sidebar changeSection={changeSection} sections={sections} />
-      <Section sections={sections} toggleDrawer={toggleDrawer} />
+      <Sidebar />
+      <Section />
 
       <div className="fixed top-0 z-50 w-full">
-        <HomeDrawer drawer={drawer} toggleDrawer={toggleDrawer} />
+        <HomeDrawer homeDrawer={homeDrawer} />
       </div>
 
       <ChatRoom />
