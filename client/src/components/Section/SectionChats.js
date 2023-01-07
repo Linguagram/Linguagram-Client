@@ -2,11 +2,11 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 
-export default function SectionChats() {
+export default function SectionChats({ toggleDrawer }) {
   return (
     <>
       <div className="flex items-center gap-3 mb-4 text-xl text-white md:mb-8">
-        <button className="md:hidden">
+        <button onClick={toggleDrawer} className="md:hidden">
           <FontAwesomeIcon className="text-xl text-white" icon="bars" />
         </button>
         <div>Chats</div>
