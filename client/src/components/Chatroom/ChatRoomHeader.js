@@ -24,6 +24,7 @@ export default function ChatRoomHeader() {
   const userVideo = useRef();
   const partnerVideo = useRef();
   const socket = useRef();
+  const peerRef = useRef();
 
   useEffect(() => {
     socket.current = io.connect(URL_SERVER);
@@ -48,6 +49,15 @@ export default function ChatRoomHeader() {
       setCaller(data.from);
       setCallerSignal(data.signal);
     })
+
+    socket.current.on("user left", () => {
+      setReceivingCall(false);
+      setCaller("");
+      setCallAccepted(false)
+      setUsers({})
+      socket.current.off("callAccepted")
+      peerRef.current.destroy()
+    })
   }, []);
 
   let key;
@@ -62,25 +72,9 @@ export default function ChatRoomHeader() {
   
 
   function callPeer(id) {
-    console.log(id, "id to call")
     const peer = new Peer({
       initiator: true,
       trickle: false,
-      config: {
-
-        iceServers: [
-            {
-                urls: "stun:numb.viagenie.ca",
-                username: "sultan1640@gmail.com",
-                credential: "98376683"
-            },
-            {
-                urls: "turn:numb.viagenie.ca",
-                username: "sultan1640@gmail.com",
-                credential: "98376683"
-            }
-        ]
-    },
       stream: stream,
     });
 
@@ -93,11 +87,13 @@ export default function ChatRoomHeader() {
         partnerVideo.current.srcObject = stream;
       }
     });
-    
+
     socket.current.on("callAccepted", signal => {
       setCallAccepted(true);
       peer.signal(signal);
     })
+
+    peerRef.current = peer
 
   }
 
@@ -108,6 +104,7 @@ export default function ChatRoomHeader() {
       trickle: false,
       stream: stream,
     });
+
     peer.on("signal", data => {
       socket.current.emit("acceptCall", { signal: data, to: caller })
     })
@@ -117,6 +114,7 @@ export default function ChatRoomHeader() {
     });
 
     peer.signal(callerSignal);
+    peerRef.current = peer
   }
 
   // let UserVideo = <video playsInline className='h-48 w-48' muted ref={userVideo} autoPlay />
