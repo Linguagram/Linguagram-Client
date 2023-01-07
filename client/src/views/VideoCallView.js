@@ -22,7 +22,7 @@ export default function VideoCallView() {
         </button>
         <button
           type="button"
-          className="w-16 h-16 inline-flex items-center justify-center rounded-full bg-red-500 bg-transparent font-medium text-white hover:bg-main-color focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+          className="w-16 h-16 inline-flex items-center justify-center rounded-full bg-red-500 bg-transparent font-medium text-white hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
           <FontAwesomeIcon icon="phone-slash" className="text-xl p-6" />
         </button>
         <button
