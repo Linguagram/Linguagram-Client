@@ -4,12 +4,28 @@ export default function VideoCallView() {
   return (
     <div className="bg-darker-gray w-screen h-screen flex flex-1 flex-col items-center justify-between fixed">
       {/* Video call body */}
-      <div className="flex flex-1 flex-col justify-center items-center gap-2 md:flex-row md:px-4">
-        <div className="">
+      <div className="flex flex-1 flex-col justify-center items-center gap-4 md:flex-row md:px-4">
+        <div>
           <img src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" />
+          <div className="text-slate-400 py-1 flex justify-between items-center px-4 text-sm lg:gap-8 lg:text-base 2xl:text-xl 2xl:mt-2 2xl:justify-center">
+            <div>Sandra Brown</div>
+            <div className="flex items-center gap-3">
+            <FontAwesomeIcon icon="video" />
+            <FontAwesomeIcon icon="microphone" />
+            </div>
+          </div>
         </div>
         <div>
+        <div>
           <img src="https://images.unsplash.com/photo-1532032877540-0793b44545a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" />
+          <div className="text-slate-400 py-1 flex justify-between items-center px-4 text-sm lg:gap-8 lg:text-base 2xl:text-xl 2xl:mt-2 2xl:justify-center">
+            <div>Sandra Brown</div>
+            <div className="flex items-center gap-3">
+            <FontAwesomeIcon icon="video" />
+            <FontAwesomeIcon icon="microphone" />
+            </div>
+          </div>
+        </div>
         </div>
       </div>
 
