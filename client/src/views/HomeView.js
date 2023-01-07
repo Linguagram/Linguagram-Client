@@ -24,7 +24,7 @@ export default function HomeView() {
   }
 
   return (
-    <div className="fixed flex flex-col w-screen h-screen md:flex-row">
+    <div className="fixed flex w-screen h-screen md:flex-row">
       <Sidebar />
       <Section />
 

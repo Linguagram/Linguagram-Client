@@ -1,6 +1,6 @@
 export default function PeopleCard() {
   return (
-    <div className="w-full p-4 h-96 2xl:h-full">
+    <div className="w-full p-0 py-2 md:p-4 h-96 2xl:h-full">
       <div className="flex flex-col items-center justify-between w-full h-full px-4 text-white rounded-lg bg-light-gray">
         <div className="flex justify-center w-full mt-5">
           <img
@@ -22,7 +22,7 @@ export default function PeopleCard() {
           <div className="w-1/2 text-right">Korean, English</div>
         </div>
         <div className="text-base font-semibold 2xl:text-lg">Interests</div>
-        <div className="flex flex-wrap items-center justify-center w-full gap-2 mb-3 text-sm text-center lg:text-xs 2xl:text-base">
+        <div className="flex flex-wrap items-center justify-center w-full gap-2 mb-3 text-xs text-center md:text-sm lg:text-xs 2xl:text-base">
           <span class="px-3 py-1 rounded-full text-gray-200  bg-black-blue ">
             Technology
           </span>
@@ -35,14 +35,14 @@ export default function PeopleCard() {
         </div>
         <div className="flex justify-center w-full gap-2 mb-5 text-sm">
           <a
-            className="inline-block p-2 text-center text-white border rounded-lg bg-main-color border-main-color hover:bg-black-blue hover:border-black-blue focus:outline-none focus:ring active:text-main-color"
+            className="inline-block w-full p-2 text-center text-white border rounded-lg bg-main-color border-main-color hover:bg-black-blue hover:border-black-blue focus:outline-none focus:ring active:text-main-color md:w-fit"
             href="/download"
           >
             <span className="sr-only"> Add Friend </span>
             Add Friend
           </a>
           <a
-            className="inline-block p-2 text-center text-white border rounded-lg bg-main-color border-main-color hover:bg-black-blue hover:border-black-blue focus:outline-none focus:ring active:text-main-color"
+            className="inline-block w-full p-2 text-center text-white border rounded-lg bg-main-color border-main-color hover:bg-black-blue hover:border-black-blue focus:outline-none focus:ring active:text-main-color md:w-fit"
             href="/download"
           >
             <span className="sr-only"> Chat </span>
