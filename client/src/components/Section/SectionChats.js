@@ -18,18 +18,18 @@ export default function SectionChats() {
     return state.messageReducer
   })
 
-  useEffect(() => {
-    dispatch(handleFetchGroups())
-  }, [])
+  // useEffect(() => {
+  //   dispatch(handleFetchGroups())
+  // }, [])
 
-  useEffect(() => {
-    if(groups.length > 0) dispatch(handleFetchAllMessagesByGroupId(groups))
-  }, [groups])
+  // useEffect(() => {
+  //   if(groups.length > 0) dispatch(handleFetchAllMessagesByGroupId(groups))
+  // }, [groups])
 
-  useEffect(() => {
-    console.log(messages)
-    if(messages.length > 0) setIsMessagesReady(true)
-  }, [messages])
+  // useEffect(() => {
+  //   console.log(messages)
+  //   if(messages.length > 0) setIsMessagesReady(true)
+  // }, [messages])
 
   const renderMessages = (messages) => {
     return (

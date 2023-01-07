@@ -6,8 +6,8 @@ import { URL_SERVER } from "../baseUrl";
 import io from "socket.io-client";
 import { useEffect } from "react";
 
-const socket = io.connect(URL_SERVER);
-socket.emit("identify", JSON.stringify({userId: 2})); // diganti userID beneran kalau udah dapet data user abis login
+// const socket = io.connect(URL_SERVER);
+// socket.emit("identify", JSON.stringify({userId: 2})); // diganti userID beneran kalau udah dapet data user abis login
 
 export default function HomeView() {
 
