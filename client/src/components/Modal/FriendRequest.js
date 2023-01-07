@@ -8,12 +8,10 @@ export default function FriendRequest({onClose, visible}) {
     onClose()
   }
 
-  if(!visible) return null;
-
   return (
-    <div className='fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-60'>
+    <div className={`${ visible ? '' : 'hidden' } fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-60`}>
 
-        <div className='flex flex-col w-1/2 p-5 rounded lg:p-8 bg-darker-gray h-3/4'>
+        <div className='flex flex-col w-full p-5 mx-4 rounded md:mx-0 md:w-1/2 lg:p-8 bg-darker-gray h-3/4'>
             <div className='flex items-center justify-between'>
                 <h3 className='text-xl text-white'>Friend Requests</h3>
                 <h3 onClick={handleOnClose} className='text-4xl text-gray-400 cursor-pointer'>&times;</h3>

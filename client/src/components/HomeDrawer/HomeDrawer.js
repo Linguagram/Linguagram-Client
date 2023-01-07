@@ -14,7 +14,7 @@ export default function HomeDrawer({ homeDrawer }) {
         homeDrawer ? "translate-x-0" : "-translate-x-full"
       }`}
     >
-      <div className="fixed flex flex-col flex-1 w-3/5 h-screen gap-4 p-4 bg-darker-gray z-100">
+      <div className="fixed flex flex-col flex-1 w-3/5 h-screen gap-4 p-4 bg-light-gray z-100">
         <div className="flex justify-between mb-2">
           <div className="h-16">
             <img src="https://ik.imagekit.io/enybtlxa2/linguagram.-logo-only-cropped.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673084814327" alt="linguagram-logo" className="h-full" />
