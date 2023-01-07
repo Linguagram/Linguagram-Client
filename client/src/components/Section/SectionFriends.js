@@ -11,8 +11,13 @@ export default function SectionFriends() {
 
   return (
     <>
-      <div className="flex items-center justify-between mb-8 text-xl">
-        <h4 className="text-white">Friends</h4>
+      <div className="flex items-center justify-between mb-4 text-xl md:mb-8">
+        <div className="flex gap-3">
+          <button className="md:hidden">
+            <FontAwesomeIcon className="text-xl text-white" icon="bars" />
+          </button>
+          <h4 className="text-white">Friends</h4>
+        </div>
         <FontAwesomeIcon
           onClick={() => setisFriendRequestModalVisible(true)}
           className="text-gray-400 cursor-pointer small-icons"

@@ -1,13 +1,31 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar/Sidebar";
+import { handleSetActiveSection } from "../store/middlewares/thunk";
 
 export default function ExploreView() {
   const navigate = useNavigate();
   const currentRoute = useLocation();
+  const dispatch = useDispatch()
+  const sections = useSelector((state) => state.sectionReducer)
+
+  const changeSection = (section) => {
+    if(currentRoute.pathname.includes('/explore')) {
+      if (section === 'explore') {
+        navigate('/explore/people')
+      } else {
+        navigate('/home')
+      }
+    } else if (section === 'explore') {
+      navigate('/explore/people')
+    }
+
+    dispatch(handleSetActiveSection(section))
+  }
 
   return (
     <div className="fixed flex w-screen h-screen">
-      <Sidebar />
+      <Sidebar changeSection={changeSection} sections={sections} />
       <div className="flex flex-col w-full h-screen py-4 overflow-hidden bg-darker-gray">
         <div className="ml-10 text-3xl font-semibold text-white lg:text-4xl">
           Explore

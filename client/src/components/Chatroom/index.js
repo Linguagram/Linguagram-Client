@@ -5,7 +5,7 @@ import ChatRoomFooter from './ChatRoomFooter'
 
 export default function ChatRoom() {
   return (
-    <div className='flex flex-col w-full h-screen bg-black-blue'>
+    <div className='flex-col hidden w-full h-screen md:flex bg-black-blue'>
         <ChatRoomHeader/>
         <hr className='border-gray-700'/>
         <ChatRoomMessage/>

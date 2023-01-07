@@ -21,7 +21,10 @@ export default function SectionSetting() {
 
   return (
     <>
-      <div className="flex justify-between mb-8 text-white">
+      <div className="flex gap-3 mb-5 text-white md:gap-0 md:justify-between md:mb-8">
+        <button className="md:hidden">
+            <FontAwesomeIcon className="text-xl text-white" icon="bars" />
+          </button>
         <div className="text-xl text-white">Settings</div>
       </div>
 

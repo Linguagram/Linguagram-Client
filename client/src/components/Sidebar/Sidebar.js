@@ -1,26 +1,12 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { handleSetActiveSection } from "../../store/middlewares/thunk";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function Sidebar() {
-  const currentRoute = useLocation();
+export default function Sidebar({ changeSection, sections }) {
   const navigate = useNavigate()
-  const dispatch = useDispatch();
-  const sections = useSelector((state) => state.sectionReducer);
-
-  const changeSection = (section) => {
-    if(currentRoute.pathname.includes('/explore')) {
-        navigate('/home')
-    } else if (section === 'explore') {
-        navigate('/explore/people')
-    }
-    dispatch(handleSetActiveSection(section));
-  };
 
   return (
-    <div className="flex flex-col items-center justify-between h-screen py-5 w-18 bg-light-gray">
+    <div className="flex-col items-center justify-between hidden h-screen py-5 md:flex w-18 bg-light-gray">
       <div>
         <FontAwesomeIcon
             onClick={() => changeSection('message')}
