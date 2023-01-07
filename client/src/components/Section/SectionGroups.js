@@ -1,12 +1,16 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch } from "react-redux";
+import { setHomeDrawer } from "../../store/actions/actionCreator";
 
 export default function SectionGroups() {
+  const dispatch = useDispatch()
+
   return (
     <>
       <div className="flex items-center justify-between mb-4 text-xl md:mb-8">
         <div className="flex gap-3">
-          <button className="md:hidden">
+          <button className="md:hidden" onClick={() => dispatch(setHomeDrawer(true))}>
             <FontAwesomeIcon className="text-xl text-white" icon="bars" />
           </button>
           <h4 className="text-white">Groups</h4>

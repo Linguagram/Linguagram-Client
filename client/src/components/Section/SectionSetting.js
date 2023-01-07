@@ -7,12 +7,15 @@ import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { useDispatch } from "react-redux";
+import { setHomeDrawer } from "../../store/actions/actionCreator";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function SectionSetting() {
+  const dispatch = useDispatch()
   const [isAvatarModalVisible, setIsAvatarModalVisible] = useState(false);
   const [isProfileModalBisible, setisProfileModalVisible] = useState(false);
 
@@ -22,7 +25,7 @@ export default function SectionSetting() {
   return (
     <>
       <div className="flex gap-3 mb-5 text-white md:gap-0 md:justify-between md:mb-8">
-        <button className="md:hidden">
+        <button className="md:hidden" onClick={() => dispatch(setHomeDrawer(true))}>
             <FontAwesomeIcon className="text-xl text-white" icon="bars" />
           </button>
         <div className="text-xl text-white">Settings</div>

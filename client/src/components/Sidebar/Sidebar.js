@@ -8,13 +8,9 @@ export default function Sidebar() {
 
   return (
     <div className="flex-col items-center justify-between hidden h-screen py-5 md:flex w-18 bg-light-gray">
-      <div>
-        <FontAwesomeIcon
-            onClick={() => navigate('/home/chats')}
-          className="w-full text-main-color"
-          icon="comment-dots"
-        />
-      </div>
+      <div onClick={() => navigate('/home/chats')}>
+            <img src="https://ik.imagekit.io/enybtlxa2/linguagram.-logo-only-cropped.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673084814327" alt="linguagram-logo" className="h-full" />
+          </div>
       <div className="flex flex-col gap-1">
         <div
           className={`icons-container flex justify-center items-center rounded ${

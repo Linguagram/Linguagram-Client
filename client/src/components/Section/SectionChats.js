@@ -6,11 +6,6 @@ import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 
 export default function SectionChats() {
   const dispatch = useDispatch()
-
-  // function toggleDrawer() {
-  //   if(drawer) dispatch(setHomeDrawer(false))
-  //   else dispatch(setHomeDrawer(true))
-  // }
   
   return (
     <>
