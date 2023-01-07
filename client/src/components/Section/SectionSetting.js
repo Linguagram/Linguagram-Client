@@ -15,7 +15,7 @@ function classNames(...classes) {
 }
 
 export default function SectionSetting() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [isAvatarModalVisible, setIsAvatarModalVisible] = useState(false);
   const [isProfileModalBisible, setisProfileModalVisible] = useState(false);
 
@@ -25,9 +25,12 @@ export default function SectionSetting() {
   return (
     <>
       <div className="flex gap-3 mb-5 text-white md:gap-0 md:justify-between md:mb-8">
-        <button className="md:hidden" onClick={() => dispatch(setHomeDrawer(true))}>
-            <FontAwesomeIcon className="text-xl text-white" icon="bars" />
-          </button>
+        <button
+          className="md:hidden"
+          onClick={() => dispatch(setHomeDrawer(true))}
+        >
+          <FontAwesomeIcon className="text-xl text-white" icon="bars" />
+        </button>
         <div className="text-xl text-white">Settings</div>
       </div>
 
@@ -144,15 +147,21 @@ export default function SectionSetting() {
             trigger={["Personal Info", <FontAwesomeIcon icon="caret-right" />]}
           >
             <div className="flex flex-col gap-5 p-2">
-              {/* <div className="flex justify-between">
-                <div onClick={() => setisProfileModalVisible(true)} className='flex items-center gap-2 p-2 rounded cursor-pointer bg-gray h-min'>
-                <FontAwesomeIcon icon='pen-to-square'/>
-                <h4>Edit</h4>
+              <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-2">
+                  <p className="text-gray-400">Name</p>
+                  <p className="font-bold">Patricia Smith</p>
                 </div>
-              </div> */}
-              <div className="flex flex-col gap-2">
-                <p className="text-gray-400">Name</p>
-                <p className="font-bold">Patricia Smith</p>
+
+                <div className="flex justify-between">
+                  <div
+                    onClick={() => setisProfileModalVisible(true)}
+                    className="flex items-center w-full gap-2 p-2 rounded cursor-pointer bg-gray h-min"
+                  >
+                    <FontAwesomeIcon icon="pen-to-square" />
+                    <h4>Edit</h4>
+                  </div>
+                </div>
               </div>
               <div className="flex flex-col gap-2">
                 <p className="text-gray-400">Email</p>

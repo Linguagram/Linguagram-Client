@@ -10,34 +10,38 @@ export default function ChangeProfile({onClose, visible}) {
     if(!visible) return null;
   
     return (
-      <div className='fixed z-10 flex justify-center items-center bg-black bg-opacity-60 inset-0'>
+      <div className='fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-60'>
   
-        <div className='bg-darker-gray w-1/4 h-1/2 flex flex-col gap-10 rounded p-5'>
+        <div className='flex flex-col w-full gap-5 p-5 mx-4 rounded h-5/6 md:mx-0 bg-darker-gray md:w-1/2 2xl:w-1/3 lg:h-fit'>
             <div className='flex items-center justify-between'>
-                <h3 className='text-white text-xl'>Change Profile</h3>
+                <h3 className='text-xl text-white'>Change Profile</h3>
             </div>
-            <form className='flex flex-col gap-3'>
+            <form className='flex flex-col gap-3 overflow-y-auto'>
                 <div className='flex flex-col gap-1'>
                     <label className='text-gray-400' for='input-name'>NAME</label>
-                    <input className='bg-black-blue rounded text-white focus:border-none h-10 focus:outline-none p-2' id='input-name' type='text'></input>
+                    <input className='h-10 p-2 text-white rounded bg-black-blue focus:border-none focus:outline-none' id='input-name' type='text'></input>
                 </div>
                 <div className='flex flex-col gap-1'>
                     <label className='text-gray-400' for='input-email'>EMAIL</label>
-                    <input className='bg-black-blue rounded text-white focus:border-none h-10 focus:outline-none p-2' id='input-email' type='text'></input>
+                    <input className='h-10 p-2 text-white rounded bg-black-blue focus:border-none focus:outline-none' id='input-email' type='text'></input>
                 </div>
                 <div className='flex flex-col gap-1'>
                     <label className='text-gray-400' for='input-country'>COUNTRY</label>
-                    <input className='bg-black-blue rounded text-white focus:border-none h-10 focus:outline-none p-2' id='input-country' type='text'></input>
+                    <input className='h-10 p-2 text-white rounded bg-black-blue focus:border-none focus:outline-none' id='input-country' type='text'></input>
                 </div>
                 <div className='flex flex-col gap-1'>
                     <label className='text-gray-400' for='native-languages'>NATIVE LANGUAGES</label>
-                    <input className='bg-black-blue rounded text-white focus:border-none h-10 focus:outline-none p-2' id='native-languages' type='text'></input>
+                    <input className='h-10 p-2 text-white rounded bg-black-blue focus:border-none focus:outline-none' id='native-languages' type='text'></input>
                 </div>
-                <div className='flex mt-3 gap-10 justify-end'>
-                    <div onClick={handleOnClose} className='text-white flex items-center justify-center cursor-pointer hover:underline'>
+                <div className='flex flex-col gap-1'>
+                    <label className='text-gray-400' for='native-languages'>INTERESTS</label>
+                    <input className='h-10 p-2 text-white rounded bg-black-blue focus:border-none focus:outline-none' id='native-languages' type='text'></input>
+                </div>
+                <div className='flex justify-center gap-10 mt-3 md:gap-5 md:justify-end'>
+                    <div onClick={handleOnClose} className='flex items-center justify-center p-2 text-white cursor-pointer md:p-0 hover:underline'>
                         Cancel
                     </div>
-                    <button type='submit' className='rounded p-2 w-24 text-white bg-main-color'>
+                    <button type='submit' className='w-24 p-2 text-white rounded bg-main-color'>
                         DONE
                     </button>
                 </div>
