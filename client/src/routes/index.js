@@ -12,6 +12,7 @@ import LandingView from "../views/LandingView";
 import LoginView from "../views/LoginView";
 import RegisterView from "../views/RegisterView";
 import EmailVerification from "../views/EmailVerification";
+import VideoCallView from "../views/VideoCallView";
 
 const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
   {
     path: "/users/verify",
     element: <EmailVerification />
+  },
+  {
+    path: "/videocall",
+    element: <VideoCallView />
   }
 ]);
 
