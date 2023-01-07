@@ -11,6 +11,7 @@ import HomeView from "../views/HomeView";
 import LandingView from "../views/LandingView";
 import LoginView from "../views/LoginView";
 import RegisterView from "../views/RegisterView";
+import EmailVerification from "../components/EmailVerification";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
         element: <Groups />
       }
     ]
+  },
+  {
+    path: "/users/verify",
+    element: <EmailVerification />
   }
 ]);
 

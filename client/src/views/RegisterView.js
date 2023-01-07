@@ -29,6 +29,13 @@ export default function RegisterView() {
     }
 
     dispatch(register(inputs)) 
+
+    inputUsernameRef.current.value = ''
+    inputEmailRef.current.value = ''
+    inputPasswordRef.current.value = ''
+    inputConfirmPasswordRef.current.value = ''
+    inputPhoneNumberRef.current.value = ''
+    
   }
 
 

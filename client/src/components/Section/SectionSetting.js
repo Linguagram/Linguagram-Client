@@ -137,7 +137,7 @@ export default function SectionSetting() {
           is more simple and regular than that of the individual.
         </div>
 
-        <div className="text-sm text-white mt-7">
+        <div className="text-sm text-white mt-7" >
           <Collapsible
             className="w-full"
             triggerClassName="triggerCollapsible"

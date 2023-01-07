@@ -1,6 +1,7 @@
 import { setActiveSection, setUser, setGroups, setAllMessages } from "../actions/actionCreator";
 import { URL_SERVER } from '../../baseUrl'
 import axios from 'axios'
+import swal from 'sweetalert'
 
 const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjcyOTc4NjE4fQ.SUaOajp4WM-GI7qFy3BPq6wQR-j3VP11v8PXYjKa9pI'
 
@@ -33,9 +34,17 @@ export const register = (inputs) => {
                   country
                 }
             });
-            console.log(data)
+            
+            swal("", `Please check your inbox. We have sent a verification link to ${data.user.email}. `);
+
         } catch(err) {
             console.log(err)
+            if(err.response?.data?.message) {
+                swal({
+                    text: `${err.response.data.message}`,
+                    icon: "error",
+                });
+            }
         }
     }
 }
