@@ -1,8 +1,37 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRef } from "react";
 import InputField from "../components/Form/InputFiled";
 import MyListbox from "../components/Form/ListBox";
+import { register } from "../store/middlewares/thunk";
+import { useDispatch } from 'react-redux'
 
 export default function RegisterView() {
+
+  const dispatch = useDispatch()
+
+  const inputUsernameRef = useRef()
+  const inputEmailRef = useRef()
+  const inputPasswordRef = useRef()
+  const inputConfirmPasswordRef = useRef()
+  const inputPhoneNumberRef = useRef()
+  const inputCountryRef = useRef()
+
+  const handleRegisterSubmit = (e) => {
+    e.preventDefault()
+
+    const inputs = {
+      username: inputUsernameRef.current.value,
+      email: inputEmailRef.current.value,
+      password: inputPasswordRef.current.value,
+      confirmPassword: inputConfirmPasswordRef.current.value,
+      phoneNumber: inputPhoneNumberRef.current.value,
+      country: inputCountryRef.current.name
+    }
+
+    dispatch(register(inputs)) 
+  }
+
+
   return (
     <div className="bg-light-gray h-screen w-screen fixed overflow-auto flex text-white justify-center">
       <div className="flex flex-col gap-8 flex-1">
@@ -13,28 +42,39 @@ export default function RegisterView() {
           <h3 className="text-center">Create new account</h3>
         </div>
         <div className="bg-light-gray h-content px-4 w-full mx-auto pb-16 md:max-w-sm">
-          <form>
+          <form onSubmit={handleRegisterSubmit}>
             <div className="flex flex-col gap-8 p-4">
               <div className="flex flex-col gap-4">
                 <InputField
+                  inputRef={inputUsernameRef}
                   label={"Username"}
                   icon={"user-large"}
                   type={"text"}
                   placeholder={"Username"}
                 />
                 <InputField
+                  inputRef={inputEmailRef}
                   label={"Email"}
                   icon={"envelope"}
                   type={"text"}
                   placeholder={"Email"}
                 />
                 <InputField
+                  inputRef={inputPasswordRef}
                   label={"Password"}
                   icon={"lock"}
                   type={"password"}
                   placeholder={"*****"}
                 />
                 <InputField
+                  inputRef={inputConfirmPasswordRef}
+                  label={"Confirm Password"}
+                  icon={"lock"}
+                  type={"password"}
+                  placeholder={"*****"}
+                />
+                <InputField
+                  inputRef={inputPhoneNumberRef}
                   label={"Phone Number"}
                   icon={"phone"}
                   type={"text"}
@@ -45,15 +85,15 @@ export default function RegisterView() {
                   <div className="flex flex-1 items-center bg-darker-gray">
                     <FontAwesomeIcon
                       className="text-slate-500 text-xl bg-main-color-blur p-3"
-                      icon="phone"
+                      icon="globe"
                     />
                     <div className="w-full">
-                      <MyListbox />
+                      <MyListbox inputRef={inputCountryRef}/>
                     </div>
                   </div>
                 </div>
               </div>
-              <button className="bg-main-color rounded p-3 text-sm">
+              <button type='submit' className="bg-main-color rounded p-3 text-sm">
                 Login
               </button>
             </div>

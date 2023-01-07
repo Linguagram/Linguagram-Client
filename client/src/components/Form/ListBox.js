@@ -8,8 +8,10 @@ const people = [
   { name: 'France' },
 ]
 
-export default function MyListbox() {
+export default function MyListbox({inputRef}) {
   const [selected, setSelected] = useState(people[0])
+
+  inputRef.current = selected
 
   return (
     <div className="">
