@@ -8,6 +8,7 @@ import {
   setSocketConnect,
   setAllGroups,
   setCounterpartUser,
+  setExploreUsers
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
@@ -139,3 +140,20 @@ export const handleSetSocketConnect = (socket) => {
     dispatch(setSocketConnect(socket))
   };
 };
+
+export const handleFetchExploreUsers = () => {
+  return async(dispatch, getState) => {
+    try {
+      const { data } = await axios({
+        method: "get",
+        url: `${URL_SERVER}/explore/users`,
+        headers: {
+          access_token: getAccessToken(),
+        },
+      })
+      dispatch(setExploreUsers(data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}

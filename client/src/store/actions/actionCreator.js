@@ -1,4 +1,4 @@
-import { SET_ACTIVE_SECTION, SET_THIS_USER, FETCH_ALL_GROUPS, FETCH_MESSAGES_BY_GROUPID, SET_HOME_DRAWER, SET_OPEN_CHAT, FETCH_PRIVATE_GROUPS, FETCH_GROUP_GROUPS, SET_SOCKET, SET_COUNTERPART_USER } from "./actionTypes"
+import { SET_ACTIVE_SECTION, SET_THIS_USER, FETCH_ALL_GROUPS, FETCH_MESSAGES_BY_GROUPID, SET_HOME_DRAWER, SET_OPEN_CHAT, FETCH_PRIVATE_GROUPS, FETCH_GROUP_GROUPS, SET_SOCKET, SET_COUNTERPART_USER, FETCH_EXPLORE_USERS } from "./actionTypes"
 
 export const setActiveSection = (payload) => {
     return {
@@ -68,4 +68,11 @@ export const setSocketConnect = (payload) => {
         type: SET_SOCKET,
         payload
     }
+}
+
+export const setExploreUsers = (payload) => {
+  return {
+    type: FETCH_EXPLORE_USERS,
+    payload
+  }
 }
