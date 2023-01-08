@@ -1,4 +1,4 @@
-import { SET_ACTIVE_SECTION, SET_THIS_USER, FETCH_ALL_GROUPS, FETCH_MESSAGES_BY_GROUPID, SET_HOME_DRAWER, SET_OPEN_CHAT, FETCH_PRIVATE_GROUPS, FETCH_GROUP_GROUPS, SET_SOCKET, SET_COUNTERPART_USER, FETCH_EXPLORE_USERS, FETCH_EXPLORE_GROUPS } from "./actionTypes"
+import { SET_ACTIVE_SECTION, SET_THIS_USER, FETCH_ALL_GROUPS, FETCH_MESSAGES_BY_GROUPID, SET_HOME_DRAWER, SET_OPEN_CHAT, FETCH_PRIVATE_GROUPS, FETCH_GROUP_GROUPS, SET_SOCKET, SET_COUNTERPART_USER, FETCH_EXPLORE_USERS, FETCH_EXPLORE_GROUPS, SET_NATIVE_LANGUAGE, SET_INTEREST_LANGUAGE } from "./actionTypes"
 
 export const setActiveSection = (payload) => {
     return {
@@ -24,6 +24,20 @@ export const setHomeDrawer = (payload) => {
 export const setThisUser = (payload) => {
     return {
         type: SET_THIS_USER,
+        payload
+    }
+}
+
+export const setNativeLanguage = (payload) => {
+    return {
+        type: SET_NATIVE_LANGUAGE,
+        payload
+    }
+}
+
+export const setInterestLanguage = (payload) => {
+    return {
+        type: SET_INTEREST_LANGUAGE,
         payload
     }
 }

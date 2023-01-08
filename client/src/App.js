@@ -38,10 +38,9 @@ import {
   faMicrophone,
   faVideoSlash,
   faMicrophoneSlash,
-  faAngleLeft
+  faAngleLeft,
+  faCloudArrowUp
 } from "@fortawesome/free-solid-svg-icons";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { RouterProvider } from "react-router-dom";
 
 library.add(
@@ -81,7 +80,8 @@ library.add(
   faMicrophone,
   faVideoSlash,
   faMicrophoneSlash,
-  faAngleLeft
+  faAngleLeft,
+  faCloudArrowUp
 );
 
 function App() {

@@ -7,13 +7,14 @@ import {
   setGroupGroups,
   setSocketConnect,
   setAllGroups,
+  setNativeLanguage,
+  setInterestLanguage,
   setCounterpartUser,
   setExploreUsers,
   setExploreGroups,
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
-import swal from "sweetalert";
 
 const jwt =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjcyOTc4NjE4fQ.SUaOajp4WM-GI7qFy3BPq6wQR-j3VP11v8PXYjKa9pI";
@@ -24,7 +25,16 @@ const getAccessToken = () => {
 
 export const handleSetThisUser = (user) => {
   return (dispatch, getState) => {
+    const nativeLangObj = user.UserLanguages.find(
+      (el) => el.type === "native"
+    );
+    const interestLangObj = user.UserLanguages.find(
+      (el) => el.type === "interest"
+    );
+
     dispatch(setThisUser(user));
+    dispatch(setNativeLanguage(nativeLangObj.Language))
+    dispatch(setInterestLanguage(interestLangObj.Language))
   };
 };
 

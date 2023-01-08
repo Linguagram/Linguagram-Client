@@ -6,6 +6,10 @@ export const SET_HOME_DRAWER = 'drawer/setHomeDrawer'
 
 export const SET_THIS_USER = 'user/setThisUser'
 
+export const SET_NATIVE_LANGUAGE = 'user/setNativeLanguage'
+
+export const SET_INTEREST_LANGUAGE = 'user/setInterestLanguage'
+
 export const SET_COUNTERPART_USER = 'user/setCounterpartUser'
 
 export const FETCH_ALL_GROUPS = 'groups/successFetchAllGroups'
