@@ -15,7 +15,6 @@ export default function HomeView() {
   const { homeDrawer } = useSelector((state) => state.drawerReducer)
   const { openChat } = useSelector((state) => state.sectionReducer)
   const { thisUser } = useSelector((state) => state.userReducer)
-  const { privateGroups, groupGroups } = useSelector((state) => state.groupReducer)
   
   useEffect(() => {
     if(localStorage.access_token && !thisUser.id) {
