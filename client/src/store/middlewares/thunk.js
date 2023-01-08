@@ -3,6 +3,8 @@ import {
   setThisUser,
   setGroups,
   setAllMessages,
+  setPrivateGroups,
+  setGroupGroups,
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
@@ -79,14 +81,18 @@ export const handleFetchGroups = () => {
     try {
       const { data } = await axios({
         method: "get",
-        url: `${URL_SERVER}/groups`,
+        url: `${URL_SERVER}/groups/@me`,
         headers: {
-          access_token: jwt,
+          access_token: getAccessToken(),
         },
       });
-      dispatch(setGroups(data));
+      const privateGroups = data.filter(el => el.type === 'dm')
+      const groupGroups = data.filter(el => el.type === 'group')
+      dispatch(setPrivateGroups(privateGroups));
+      dispatch(setGroupGroups(groupGroups));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      return err
     }
   };
 };

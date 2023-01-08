@@ -3,10 +3,9 @@ import Section from "../components/Section";
 import ChatRoom from "../components/Chatroom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserLogin, handleSetActiveSection, handleSetThisUser } from "../store/middlewares/thunk";
+import { getUserLogin, handleFetchGroups, handleSetActiveSection, handleSetThisUser } from "../store/middlewares/thunk";
 import HomeDrawer from "../components/HomeDrawer/HomeDrawer";
-import { useEffect, useState } from "react";
-import swal from "sweetalert";
+import { useEffect } from "react";
 import { swalError } from "../util/swal";
 
 export default function HomeView() {
@@ -16,6 +15,7 @@ export default function HomeView() {
   const { homeDrawer } = useSelector((state) => state.drawerReducer)
   const { openChat } = useSelector((state) => state.sectionReducer)
   const { thisUser } = useSelector((state) => state.userReducer)
+  const { privateGroups, groupGroups } = useSelector((state) => state.groupReducer)
   
   useEffect(() => {
     if(localStorage.access_token && !thisUser.id) {
@@ -23,6 +23,10 @@ export default function HomeView() {
       .then((res) => {
         const user = res.data
         dispatch(handleSetThisUser(user))
+        dispatch(handleFetchGroups())
+      })
+      .then((_) => {
+        return
       })
       .catch((err) => {
         if(err.response?.data?.message) {

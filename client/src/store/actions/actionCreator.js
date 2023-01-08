@@ -1,4 +1,4 @@
-import { SET_ACTIVE_SECTION, SET_THIS_USER, FETCH_GROUPS, FETCH_ALL_MESSAGES, SET_HOME_DRAWER, SET_OPEN_CHAT } from "./actionTypes"
+import { SET_ACTIVE_SECTION, SET_THIS_USER, FETCH_GROUPS, FETCH_ALL_MESSAGES, SET_HOME_DRAWER, SET_OPEN_CHAT, FETCH_PRIVATE_GROUPS, FETCH_GROUP_GROUPS } from "./actionTypes"
 
 export const setActiveSection = (payload) => {
     return {
@@ -28,9 +28,16 @@ export const setThisUser = (payload) => {
     }
 }
 
-export const setGroups = (payload) => {
+export const setPrivateGroups = (payload) => {
     return {
-        type: FETCH_GROUPS,
+        type: FETCH_PRIVATE_GROUPS,
+        payload
+    }
+}
+
+export const setGroupGroups = (payload) => {
+    return {
+        type: FETCH_GROUP_GROUPS,
         payload
     }
 }
