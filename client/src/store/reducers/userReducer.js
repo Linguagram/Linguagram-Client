@@ -1,15 +1,16 @@
-import { SET_USER } from "../actions/actionTypes"
+import { SET_THIS_USER } from "../actions/actionTypes"
 
 const initialState = {
-    data: {}
+    thisUser: {},
+    friend: {}
 }
 
 export default function userReducer(state = initialState, action) {
     switch(action.type) {
-        case SET_USER:
+        case SET_THIS_USER:
             return {
                 ...state,
-                data: action.payload
+                thisUser: action.payload
             }
         default:
             return state

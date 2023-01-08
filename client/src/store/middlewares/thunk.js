@@ -1,13 +1,13 @@
-import { setActiveSection, setUser, setGroups, setAllMessages } from "../actions/actionCreator";
+import { setActiveSection, setThisUser, setGroups, setAllMessages } from "../actions/actionCreator";
 import { URL_SERVER } from '../../baseUrl'
 import axios from 'axios'
 import swal from 'sweetalert'
 
 const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjcyOTc4NjE4fQ.SUaOajp4WM-GI7qFy3BPq6wQR-j3VP11v8PXYjKa9pI'
 
-export const handleSetUser = (user) => {
+export const handleSetThisUser = (user) => {
     return (dispatch, getState) => {
-        dispatch(setUser(user))
+        dispatch(setThisUser(user))
     }
 }
 
@@ -38,7 +38,6 @@ export const register = (inputs) => {
             swal("", `Please check your inbox. We have sent a verification link to ${data.user.email}. `);
 
         } catch(err) {
-            console.log(err)
             if(err.response?.data?.message) {
                 swal({
                     text: `${err.response.data.message}`,
@@ -46,6 +45,21 @@ export const register = (inputs) => {
                 });
             }
         }
+    }
+}
+
+export const login = (inputs) => {
+    return (dispatch, getState) => {
+        const { email, password } = inputs
+
+        return axios({
+            method: 'POST',
+            url: `${URL_SERVER}/users/login`,
+            data: {
+              email,
+              password,
+            }
+        });
     }
 }
 

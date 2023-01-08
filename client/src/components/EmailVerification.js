@@ -31,10 +31,18 @@ export default function EmailVerification() {
             setLoading(false)
         } catch(err) {
             if(err.response?.data?.message) {
-                swal({
-                    text: `${err.response.data.message}`,
-                    icon: "error",
-                });
+                if(err.response.data.message === 'Your email address has been verified') {
+                    swal({
+                        text: `${err.response.data.message}`,
+                        icon: "success",
+                    });
+                    navigate('/home/chats')
+                } else {
+                    swal({
+                        text: `${err.response.data.message}`,
+                        icon: "error",
+                    });
+                }
             }
         }
     }
