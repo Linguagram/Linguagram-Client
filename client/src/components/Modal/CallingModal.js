@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 
-export default function UserModal({ isOpen, closeModal, calling }) {
+export default function CallingModal({ isOpen, closeModal }) {
   const navigate = useNavigate();
   return (
     <>
@@ -32,18 +32,9 @@ export default function UserModal({ isOpen, closeModal, calling }) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95">
                 <Dialog.Panel className="w-80 transform overflow-hidden rounded-lg bg-darker-gray p-6 text-left align-middle shadow-lg transition-all">
-                  <div className="w-full flex justify-end mb-2">
-                    <button onClick={closeModal}>
-                      <FontAwesomeIcon
-                        icon={"xmark"}
-                        className="text-white text-xl hover:text-red-400"
-                      />
-                    </button>
-                  </div>
                   <div className="flex justify-center my-4">
                     <img src={avatar} id="avatar-profile" alt="avatar"></img>
                   </div>
-                  {/* username, email, phone number, country */}
                   <Dialog.Title
                     as="h3"
                     className="text-2xl text-center font-medium leading-6 text-white">
@@ -51,31 +42,18 @@ export default function UserModal({ isOpen, closeModal, calling }) {
                   </Dialog.Title>
                   <div>
                     <p className="text-center text-slate-400 mt-1 text-sm">
-                      dorisbrown@mail.com
-                    </p>
-
-                    <p className="text-center text-slate-400 text-sm">
-                      +62-123-123-123
-                    </p>
-
-                    <p className="text-center text-slate-400 text-sm">
-                      ID - Indonesia
-                    </p>
-
-                    <p className="text-center text-slate-400 text-sm mt-3">
-                      Interested in: <br /> English
-                    </p>
-
-                    <p className="text-center text-slate-400 text-sm mt-3">
-                      Matching topics: <br /> Sport, Music, Philosophy
+                      Calling Doris Brown...
                     </p>
                   </div>
                   <div className="mt-4 flex justify-center border-t border-light-gray pt-4">
                     <button
+                      onClick={closeModal}
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-transparent p-4 text-sm font-medium text-white hover:bg-main-color focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={calling}>
-                      <FontAwesomeIcon icon="video" className="text-2xl" />
+                      className="w-16 h-16 inline-flex items-center justify-center rounded-full bg-red-500 font-medium text-white hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                      <FontAwesomeIcon
+                        icon="phone-slash"
+                        className="text-xl p-6"
+                      />
                     </button>
                   </div>
                 </Dialog.Panel>

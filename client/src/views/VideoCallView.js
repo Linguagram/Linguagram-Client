@@ -48,7 +48,7 @@ export default function VideoCallView() {
         />
 
         {/* User */}
-        <VidcallContent name={friendSetting.name} />
+        <VidcallContent video={friendSetting.video} mic={friendSetting.mic} name={friendSetting.name} />
       </div>
 
       {/* Call control */}
@@ -93,7 +93,7 @@ function VidcallContent({ name, video, mic }) {
   const userVideo = useRef();
   useEffect(() => {
     navigator.mediaDevices
-      .getUserMedia({ video: video, audio: true })
+      .getUserMedia({ video: video, audio: mic })
       .then((stream) => {
         if (userVideo.current) {
           userVideo.current.srcObject = stream;
