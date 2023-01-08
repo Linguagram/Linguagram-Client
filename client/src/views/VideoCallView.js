@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function VideoCallView() {
   const [mySetting, setMySetting] = useState({
@@ -12,17 +12,24 @@ export default function VideoCallView() {
     mic: true,
   });
 
-  const videoCallBodyStyle =
-    "flex flex-1 justify-center items-center p-4 min-w-0 min-h-0";
-  const videoLayout = "flex flex-col gap-4 md:flex-row overflow-auto";
+  function turnCamera() {
+    if(mySetting.camera) {
+      setMySetting({
+        ...mySetting, camera: false
+      })
+    } else {
+     setMySetting({ ...mySetting, camera: true }) 
+    }
+
+  }
 
   return (
     <div className="bg-darker-gray flex h-screen max-h-screen w-screen flex-1 flex-col items-stretch justify-between overflow-hidden">
       {/* Video call body */}
-      <div className="flex max-h-[calc(100%-8rem)] flex-1 flex-col lg:flex-row">
+      <div className="flex max-h-[calc(100%-8rem)] flex-1 flex-col lg:flex-row gap-4">
         {/* Friend */}
-        <VidcallContent />
-        
+        <VidcallContent video={mySetting.camera}/>
+
         {/* User */}
         <VidcallContent />
       </div>
@@ -31,7 +38,9 @@ export default function VideoCallView() {
       <div className="bg-black-blue flex w-full gap-8 justify-center py-4 items-center md:py-6 h-32">
         <button
           type="button"
-          className="w-16 h-16 inline-flex items-center justify-center rounded-full bg-main-color font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+          className="w-16 h-16 inline-flex items-center justify-center rounded-full bg-main-color font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+          onClick={turnCamera}
+        >
           <FontAwesomeIcon icon="video" className="text-xl p-4" />
         </button>
         <button
@@ -49,26 +58,39 @@ export default function VideoCallView() {
   );
 }
 
-function VidcallContent() {
-  return (
-    <div className="flex max-h-full flex-1 overflow-auto bg-red-200 p-4">
-      <div className="flex flex-col justify-center max-h-full flex-1 overflow-auto bg-green-200 p-4">
-        <img
-          className="h-full aspect-video object-contain"
-          src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-        />
-      </div>
-    </div>
-  );
-}
+function VidcallContent({video, mic}) {
+  const userVideo = useRef();
+  useEffect(() => {
+    navigator.mediaDevices
+      .getUserMedia({ video: true, audio: true })
+      .then((stream) => {
+        if (userVideo.current) {
+          userVideo.current.srcObject = stream;
+        }
+      });
+  }, [video]);
 
-function VidCallLabel() {
   return (
-    <div className="text-slate-400 py-1 flex justify-between items-center px-4 text-sm lg:gap-8 lg:text-base 2xl:text-xl 2xl:mt-2 2xl:justify-center">
-      <div>Sandra Brown</div>
-      <div className="flex items-center gap-3">
-        <FontAwesomeIcon icon="video" />
-        <FontAwesomeIcon icon="microphone" />
+    <div className="flex max-h-full flex-1 overflow-auto p-4">
+      <div className="flex flex-col justify-center max-h-full flex-1 overflow-auto relative object-contain">
+        { video ? 
+          <video
+          playsInline
+          className="h-full w-full"
+          muted
+          ref={userVideo}
+          autoPlay
+        /> : <div className="bg-black w-full aspect-video"></div>
+        }
+        <div className="absolute">
+          <div className="text-slate-400 w-full bg-black bg-opacity-50 flex justify-between items-center text-sm lg:gap-8 lg:text-base 2xl:text-xl 2xl:mt-2 2xl:justify-center px-4">
+            <div>Sandra Brown</div>
+            <div className="flex items-center gap-3">
+              <FontAwesomeIcon icon="video" />
+              <FontAwesomeIcon icon="microphone" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
