@@ -19,3 +19,5 @@ export const FETCH_MESSAGES_BY_GROUPID = 'groups/successFetchMessagesByGroupId'
 export const SET_SOCKET = 'socket/setSocketConnect'
 
 export const FETCH_EXPLORE_USERS = "explore/successFetchExploreUsers"
+
+export const FETCH_EXPLORE_GROUPS = "explore/successFetchExploreGroups"

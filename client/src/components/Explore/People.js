@@ -5,13 +5,13 @@ import PeopleCard from "../Cards/PeopleCard";
 import { swalError } from "../../util/swal";
 
 export default function People() {
-  const { users } = useSelector((state) => state.exploreReducer);
   const dispatch = useDispatch();
+  const { users } = useSelector((state) => state.exploreReducer);
 
   useEffect(() => {
     dispatch(handleFetchExploreUsers())
-      .then((res) => {
-        console.log(users);
+      .then((_) => {
+        return
       })
       .catch((err) => {
         if (err.response?.data?.message) {

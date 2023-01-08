@@ -8,7 +8,8 @@ import {
   setSocketConnect,
   setAllGroups,
   setCounterpartUser,
-  setExploreUsers
+  setExploreUsers,
+  setExploreGroups,
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
@@ -24,7 +25,6 @@ const getAccessToken = () => {
 export const handleSetThisUser = (user) => {
   return (dispatch, getState) => {
     dispatch(setThisUser(user));
-
   };
 };
 
@@ -77,7 +77,7 @@ export const login = (inputs) => {
 
 export const logOut = (inputs) => {
   return (dispatch, getState) => {
-    localStorage.clear()
+    localStorage.clear();
   };
 };
 
@@ -104,14 +104,14 @@ export const handleFetchGroups = () => {
         },
       });
 
-      const privateGroups = data.filter(el => el.type === 'dm')
-      const groupGroups = data.filter(el => el.type === 'group')
+      const privateGroups = data.filter((el) => el.type === "dm");
+      const groupGroups = data.filter((el) => el.type === "group");
       dispatch(setAllGroups(data));
       dispatch(setPrivateGroups(privateGroups));
       dispatch(setGroupGroups(groupGroups));
     } catch (err) {
       // console.log(err);
-      return err
+      return err;
     }
   };
 };
@@ -119,7 +119,6 @@ export const handleFetchGroups = () => {
 export const handleFetchMessagesByGroupId = (groupId) => {
   return async (dispatch, getState) => {
     try {
-
       const { data } = await axios({
         method: "get",
         url: `${URL_SERVER}/groups/${groupId}/messages`,
@@ -137,12 +136,12 @@ export const handleFetchMessagesByGroupId = (groupId) => {
 
 export const handleSetSocketConnect = (socket) => {
   return async (dispatch, getState) => {
-    dispatch(setSocketConnect(socket))
+    dispatch(setSocketConnect(socket));
   };
 };
 
 export const handleFetchExploreUsers = () => {
-  return async(dispatch, getState) => {
+  return async (dispatch, getState) => {
     try {
       const { data } = await axios({
         method: "get",
@@ -150,10 +149,27 @@ export const handleFetchExploreUsers = () => {
         headers: {
           access_token: getAccessToken(),
         },
-      })
-      dispatch(setExploreUsers(data))
+      });
+      dispatch(setExploreUsers(data));
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
-}
+  };
+};
+
+export const handleFetchExploreGroups = () => {
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await axios({
+        method: "get",
+        url: `${URL_SERVER}/explore/groups`,
+        headers: {
+          access_token: getAccessToken(),
+        },
+      });
+      dispatch(setExploreGroups(data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
