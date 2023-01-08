@@ -136,7 +136,7 @@ export default function SectionSetting() {
           </div>
         </div>
 
-        <hr className="mt-10 mb-5 line-break" />
+        <hr className="mt-5 line-break" />
 
         <div className="flex flex-col w-full h-full gap-2 overflow-y-auto scrollbar-hide">
           {/* <div className="text-sm text-gray-400">

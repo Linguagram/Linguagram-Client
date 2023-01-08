@@ -16,9 +16,6 @@ import {
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
 
-const jwt =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjcyOTc4NjE4fQ.SUaOajp4WM-GI7qFy3BPq6wQR-j3VP11v8PXYjKa9pI";
-
 const getAccessToken = () => {
   return localStorage.getItem("access_token");
 };
@@ -133,7 +130,7 @@ export const handleFetchMessagesByGroupId = (groupId) => {
         method: "get",
         url: `${URL_SERVER}/groups/${groupId}/messages`,
         headers: {
-          access_token: jwt,
+          access_token: getAccessToken(),
         },
       });
 

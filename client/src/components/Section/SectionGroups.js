@@ -2,14 +2,18 @@ import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { setHomeDrawer, setOpenChat } from "../../store/actions/actionCreator";
-import groupReducer from "../../store/reducers/groupReducer";
+import { handleFetchMessagesByGroupId, handleSetCounterpartUser } from "../../store/middlewares/thunk";
 
 export default function SectionGroups() {
   const dispatch = useDispatch();
   const { groupGroups } = useSelector((state) => state.groupReducer);
 
-  function openChat() {
-    dispatch(setOpenChat(true));
+  function openChat(group) {
+    dispatch(handleFetchMessagesByGroupId(group.id))
+    .then((_) => {
+      dispatch(handleSetCounterpartUser(group))
+      dispatch(setOpenChat(true));
+    })
   }
   console.log(groupGroups);
   return (
@@ -49,7 +53,7 @@ export default function SectionGroups() {
             return (
               <div
                 key={group.id}
-                onClick={openChat}
+                onClick={() => openChat(group)}
                 className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700"
               >
                 <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">

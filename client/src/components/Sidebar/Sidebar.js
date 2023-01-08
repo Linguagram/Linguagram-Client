@@ -15,7 +15,7 @@ export default function Sidebar() {
   }
 
   return (
-    <div className="flex-col items-center justify-between hidden w-16 h-screen py-5 md:flex bg-light-gray">
+    <div className="flex-col items-center justify-between hidden w-12 h-screen py-5 md:flex bg-light-gray">
       <div onClick={() => navigate("/home/chats")}>
         <img
           src="https://ik.imagekit.io/enybtlxa2/linguagram.-logo-only-cropped.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673084814327"
