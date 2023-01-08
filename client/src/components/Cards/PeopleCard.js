@@ -6,7 +6,7 @@ export default function PeopleCard() {
           <img
             alt="Paul Clapton"
             src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-            class="h-full w-1/3 2xl:w-1/4 rounded-lg object-cover shadow-sm"
+            className="h-full w-1/3 2xl:w-1/4 rounded-lg object-cover shadow-sm"
           />
         </div>
         <div className="flex flex-col items-center justify-between w-full">
@@ -23,13 +23,13 @@ export default function PeopleCard() {
         </div>
         <div className="text-base font-semibold 2xl:text-lg">Interests</div>
         <div className="flex flex-wrap items-center justify-center w-full gap-2 mb-3 text-xs text-center md:text-sm lg:text-xs 2xl:text-base">
-          <span class="px-3 py-1 rounded-full text-gray-200  bg-black-blue ">
+          <span className="px-3 py-1 rounded-full text-gray-200  bg-black-blue ">
             Technology
           </span>
-          <span class="px-3 py-1 rounded-full text-gray-200  bg-black-blue ">
+          <span className="px-3 py-1 rounded-full text-gray-200  bg-black-blue ">
             Sports
           </span>
-          <span class="px-3 py-1 rounded-full text-gray-200  bg-black-blue ">
+          <span className="px-3 py-1 rounded-full text-gray-200  bg-black-blue ">
             Cooking
           </span>
         </div>

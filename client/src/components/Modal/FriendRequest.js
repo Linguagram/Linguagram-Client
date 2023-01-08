@@ -19,7 +19,7 @@ export default function FriendRequest({onClose, visible}) {
             <div className='flex flex-col h-full gap-5 my-3 overflow-y-auto lg:my-5 scrollbar-hide'>
                 <div>
                     <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                        <img src={avatar} className='avatar-chat' alt='avatar'></img>
                     <div className='flex justify-between w-full gap-1'>
                         <div className='flex items-center justify-between'>
                             <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
@@ -33,7 +33,7 @@ export default function FriendRequest({onClose, visible}) {
                 </div>
                 <div>
                     <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                        <img src={avatar} className='avatar-chat' alt='avatar'></img>
                     <div className='flex justify-between w-full gap-1'>
                         <div className='flex items-center justify-between'>
                             <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
@@ -47,7 +47,7 @@ export default function FriendRequest({onClose, visible}) {
                 </div>
                 <div>
                     <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                        <img src={avatar} className='avatar-chat' alt='avatar'></img>
                     <div className='flex justify-between w-full gap-1'>
                         <div className='flex items-center justify-between'>
                             <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
@@ -61,7 +61,7 @@ export default function FriendRequest({onClose, visible}) {
                 </div>
                 <div>
                     <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                        <img src={avatar} className='avatar-chat' alt='avatar'></img>
                     <div className='flex justify-between w-full gap-1'>
                         <div className='flex items-center justify-between'>
                             <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
@@ -75,7 +75,7 @@ export default function FriendRequest({onClose, visible}) {
                 </div>
                 <div>
                     <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                        <img src={avatar} className='avatar-chat' alt='avatar'></img>
                     <div className='flex justify-between w-full gap-1'>
                         <div className='flex items-center justify-between'>
                             <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
@@ -89,7 +89,7 @@ export default function FriendRequest({onClose, visible}) {
                 </div>
                 <div>
                     <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                        <img src={avatar} className='avatar-chat' alt='avatar'></img>
                     <div className='flex justify-between w-full gap-1'>
                         <div className='flex items-center justify-between'>
                             <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
@@ -103,7 +103,7 @@ export default function FriendRequest({onClose, visible}) {
                 </div>
                 <div>
                     <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                        <img src={avatar} className='avatar-chat' alt='avatar'></img>
                     <div className='flex justify-between w-full gap-1'>
                         <div className='flex items-center justify-between'>
                             <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
@@ -117,7 +117,7 @@ export default function FriendRequest({onClose, visible}) {
                 </div>
                 <div>
                     <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                        <img src={avatar} className='avatar-chat' alt='avatar'></img>
                     <div className='flex justify-between w-full gap-1'>
                         <div className='flex items-center justify-between'>
                             <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
@@ -131,7 +131,7 @@ export default function FriendRequest({onClose, visible}) {
                 </div>
                 <div>
                     <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                        <img src={avatar} className='avatar-chat' alt='avatar'></img>
                     <div className='flex justify-between w-full gap-1'>
                         <div className='flex items-center justify-between'>
                             <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
@@ -145,7 +145,7 @@ export default function FriendRequest({onClose, visible}) {
                 </div>
                 <div>
                     <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                        <img src={avatar} className='avatar-chat' alt='avatar'></img>
                     <div className='flex justify-between w-full gap-1'>
                         <div className='flex items-center justify-between'>
                             <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
@@ -159,7 +159,7 @@ export default function FriendRequest({onClose, visible}) {
                 </div>
                 <div>
                     <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                        <img src={avatar} className='avatar-chat' alt='avatar'></img>
                     <div className='flex justify-between w-full gap-1'>
                         <div className='flex items-center justify-between'>
                             <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
@@ -173,7 +173,7 @@ export default function FriendRequest({onClose, visible}) {
                 </div>
                 <div>
                     <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                        <img src={avatar} className='avatar-chat' alt='avatar'></img>
                     <div className='flex justify-between w-full gap-1'>
                         <div className='flex items-center justify-between'>
                             <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
@@ -187,7 +187,7 @@ export default function FriendRequest({onClose, visible}) {
                 </div>
                 <div>
                     <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
+                        <img src={avatar} className='avatar-chat' alt='avatar'></img>
                     <div className='flex justify-between w-full gap-1'>
                         <div className='flex items-center justify-between'>
                             <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
