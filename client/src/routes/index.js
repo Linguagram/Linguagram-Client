@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import Groups from "../components/Explore/Groups";
 import People from "../components/Explore/People";
 import Root from "../components/Root";
@@ -31,7 +31,14 @@ const router = createBrowserRouter([
         path: "register",
         element: <RegisterView />,
       },
-    ]
+    ],
+    loader: () => {
+      const token = localStorage.getItem("access_token")
+      if(token) {
+        return redirect("/home/chats")
+      }
+      return token
+    }
   },
   {
     path: "/home",
@@ -53,7 +60,14 @@ const router = createBrowserRouter([
         path: "setting",
         element: <SectionSetting />
       },
-    ]
+    ],
+    loader: () => {
+      const token = localStorage.getItem("access_token")
+      if(!token) {
+        return redirect("/login")
+      }
+      return token
+    }
   },
   {
     path: "/explore",
@@ -67,7 +81,14 @@ const router = createBrowserRouter([
         path: 'groups',
         element: <Groups />
       }
-    ]
+    ],
+    loader: () => {
+      const token = localStorage.getItem("access_token")
+      if(!token) {
+        return redirect("/login")
+      }
+      return token
+    }
   },
   {
     path: "/users/verify",
