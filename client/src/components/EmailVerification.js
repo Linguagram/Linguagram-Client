@@ -4,13 +4,17 @@ import axios from 'axios'
 import swal from 'sweetalert'
 import { FerrisWheelSpinner } from 'react-spinner-overlay'
 import { URL_SERVER } from '../baseUrl'
+import { useDispatch } from 'react-redux'
+import { handleSetThisUser } from '../store/middlewares/thunk'
 
 export default function EmailVerification() {
 
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const [loading, setLoading] = useState(true)
 
-    const navigate = useNavigate()
-
+    
     const [searchParams] = useSearchParams();
     const token = searchParams.get('verification')
 
@@ -21,8 +25,11 @@ export default function EmailVerification() {
                 url: `${URL_SERVER}/users/verify/?verification=${token}`
             });
 
+            dispatch(handleSetThisUser(data.user))
+            localStorage.setItem('access_token', data.access_token)
+
             swal({
-                text: data,
+                text: data.message,
                 icon: "success",
             });
 
