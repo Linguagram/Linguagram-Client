@@ -22,16 +22,14 @@ const getAccessToken = () => {
 
 export const handleSetThisUser = (user) => {
   return (dispatch, getState) => {
-    const nativeLangObj = user.UserLanguages.find(
-      (el) => el.type === "native"
-    );
+    const nativeLangObj = user.UserLanguages.find((el) => el.type === "native");
     const interestLangObj = user.UserLanguages.find(
       (el) => el.type === "interest"
     );
 
     dispatch(setThisUser(user));
-    dispatch(setNativeLanguage(nativeLangObj.Language))
-    dispatch(setInterestLanguage(interestLangObj.Language))
+    dispatch(setNativeLanguage(nativeLangObj.Language));
+    dispatch(setInterestLanguage(interestLangObj.Language));
   };
 };
 
@@ -175,6 +173,39 @@ export const handleFetchExploreGroups = () => {
         },
       });
       dispatch(setExploreGroups(data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const sendFriendRequest = (friendId) => {
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await axios({
+        method: "post",
+        url: `${URL_SERVER}/friends/${friendId}`,
+        headers: {
+          access_token: getAccessToken(),
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const getFriendRequest = () => {
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await axios({
+        method: "get",
+        url: `${URL_SERVER}/friends`,
+        headers: {
+          access_token: getAccessToken(),
+        },
+      });
+      return data
     } catch (err) {
       console.log(err);
     }
