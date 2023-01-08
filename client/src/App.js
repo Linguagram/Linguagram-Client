@@ -80,7 +80,8 @@ library.add(
   faPhoneSlash,
   faMicrophone,
   faVideoSlash,
-  faMicrophoneSlash
+  faMicrophoneSlash,
+  faAngleLeft
 );
 
 function App() {
