@@ -11,3 +11,5 @@ export const FETCH_PRIVATE_GROUPS = 'groups/successFetchPrivateGroups'
 export const FETCH_GROUP_GROUPS = 'groups/successFetchGroupGroups'
 
 export const FETCH_ALL_MESSAGES = 'groups/successFetchAllMessages'
+
+export const SET_SOCKET = 'socket/setSocketConnect'

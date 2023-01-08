@@ -5,7 +5,6 @@ import { login } from "../store/middlewares/thunk";
 import swal from 'sweetalert'
 import { useNavigate } from "react-router-dom";
 import { handleSetThisUser } from "../store/middlewares/thunk";
-import { swalError } from "../util/swal";
 
 export default function LoginView() {
 
@@ -26,11 +25,10 @@ export default function LoginView() {
 
     dispatch(login(inputs))
     .then((response) => {
-
-      console.log(response.data.user)
-
+      
       dispatch(handleSetThisUser(response.data.user))
       localStorage.setItem('access_token', response.data.access_token)
+      localStorage.setItem('user_id', response.data.user.id)
 
       navigate('/home/chats')
 
@@ -39,11 +37,10 @@ export default function LoginView() {
     })
     .catch((err) => {
       if(err.response?.data?.message) {
-        // swal({
-        //   text: `${err.response.data.message}`,
-        //   icon: "error",
-        // });
-        swalError(err)
+        swal({
+          text: `${err.response.data.message}`,
+          icon: "error",
+        });
 
         if(err.response.data.message !== 'Email is required' && err.response.data.message !== 'Password is required') {
           inputEmailRef.current.value = '' 

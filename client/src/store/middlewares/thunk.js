@@ -5,6 +5,7 @@ import {
   setAllMessages,
   setPrivateGroups,
   setGroupGroups,
+  setSocketConnect,
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
@@ -117,5 +118,11 @@ export const handleFetchAllMessagesByGroupId = (groups) => {
     } catch (err) {
       console.log(err);
     }
+  };
+};
+
+export const handleSetSocketConnect = (socket) => {
+  return async (dispatch, getState) => {
+    dispatch(setSocketConnect(socket))
   };
 };

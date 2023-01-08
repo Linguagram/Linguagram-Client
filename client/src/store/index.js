@@ -5,13 +5,15 @@ import sectionReducer from "./reducers/sectionReducer";
 import groupReducer from "./reducers/groupReducer";
 import messageReducer from "./reducers/messageReducer";
 import drawerReducer from "./reducers/drawerReducer";
+import socketReducer from "./reducers/socketReducer";
 
 const rootReducer = combineReducers ({
     drawerReducer,
     userReducer,
     sectionReducer,
     groupReducer,
-    messageReducer
+    messageReducer,
+    socketReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware( thunk))
