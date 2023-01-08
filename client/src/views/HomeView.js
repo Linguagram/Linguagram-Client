@@ -11,7 +11,7 @@ import io from "socket.io-client";
 import { URL_SERVER } from "../baseUrl";
 
 const socket = io.connect(`${URL_SERVER}`)
-socket.emit("identify", {userId: localStorage.userId}); 
+if(localStorage.user_id) socket.emit("identify", {userId: localStorage.user_id}); 
 
 export default function HomeView() {
 
@@ -41,6 +41,8 @@ export default function HomeView() {
           console.log(err)
         }
       })
+    } else {
+      dispatch(handleFetchGroups())
     }
   }, [])
 

@@ -6,6 +6,7 @@ import {
   setPrivateGroups,
   setGroupGroups,
   setSocketConnect,
+  setAllGroups,
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
@@ -21,6 +22,7 @@ const getAccessToken = () => {
 export const handleSetThisUser = (user) => {
   return (dispatch, getState) => {
     dispatch(setThisUser(user));
+    console.log(user)
   };
 };
 
@@ -65,6 +67,12 @@ export const login = (inputs) => {
   };
 };
 
+export const logOut = (inputs) => {
+  return (dispatch, getState) => {
+    localStorage.clear()
+  };
+};
+
 export const getUserLogin = () => {
   return (dispatch, getState) => {
     return axios({
@@ -87,8 +95,10 @@ export const handleFetchGroups = () => {
           access_token: getAccessToken(),
         },
       });
+
       const privateGroups = data.filter(el => el.type === 'dm')
       const groupGroups = data.filter(el => el.type === 'group')
+      dispatch(setAllGroups(data));
       dispatch(setPrivateGroups(privateGroups));
       dispatch(setGroupGroups(groupGroups));
     } catch (err) {
@@ -98,23 +108,19 @@ export const handleFetchGroups = () => {
   };
 };
 
-export const handleFetchAllMessagesByGroupId = (groups) => {
+export const handleFetchAllMessagesByGroupId = (groupId) => {
   return async (dispatch, getState) => {
     try {
-      const array = [];
 
-      groups.forEach(async (el) => {
-        const { data } = await axios({
-          method: "get",
-          url: `${URL_SERVER}/groups/${el.GroupId}/messages`,
-          headers: {
-            access_token: jwt,
-          },
-        });
-        if (data.length > 0) array.push(data);
+      const { data } = await axios({
+        method: "get",
+        url: `${URL_SERVER}/groups/${groupId}/messages`,
+        headers: {
+          access_token: jwt,
+        },
       });
 
-      dispatch(setAllMessages(array));
+      dispatch(setAllMessages(data));
     } catch (err) {
       console.log(err);
     }

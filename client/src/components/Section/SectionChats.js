@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setHomeDrawer, setOpenChat } from "../../store/actions/actionCreator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,13 +6,16 @@ import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 
 export default function SectionChats() {
   const dispatch = useDispatch();
-  const { privateGroups } = useSelector((state) => state.groupReducer);
+
+  const { allGroups } = useSelector((state) => state.groupReducer);
 
   function openChat() {
     dispatch(setOpenChat(true));
   }
 
-  console.log(privateGroups);
+  useEffect(() => {
+    console.log(allGroups)
+  }, [allGroups])
 
   return (
     <>
@@ -40,25 +43,28 @@ export default function SectionChats() {
       </div>
 
       <div className="flex flex-col h-full gap-3 mt-5 overflow-y-auto scrollbar-hide">
-        {privateGroups &&
-          privateGroups.map((privateGroup) => {
+        {allGroups &&
+          allGroups.map((group) => {
             return (
               <div
-                key={privateGroup.id}
+                key={group.id}
                 onClick={openChat}
                 className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700"
               >
                 <img src={avatar} className="avatar-chat" alt="avatar"></img>
                 <div className="flex flex-col w-full gap-1">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-base text-white">Patrick Hendriks</h4>
+                    <h4 className="text-base text-white">{group.name}</h4>
                     <h5 className="text-sm text-gray-300">02:50</h5>
                   </div>
                   <div className="flex items-center justify-between">
                     <h4 className="text-sm text-gray-400">okay sure</h4>
-                    <div className="w-5 h-5 text-sm font-bold text-center text-red-700 rounded-full bg-red-900-blur">
-                      2
-                    </div>
+                    { group.unreadMessageCount > 0 &&
+                      <div className="w-5 h-5 text-sm font-bold text-center text-red-700 rounded-full bg-red-900-blur">
+                        {group.unreadMessageCount}
+                      </div>
+                    }
+                    
                   </div>
                 </div>
               </div>

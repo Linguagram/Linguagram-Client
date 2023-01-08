@@ -6,6 +6,8 @@ export const SET_HOME_DRAWER = 'drawer/setHomeDrawer'
 
 export const SET_THIS_USER = 'user/setThisUser'
 
+export const FETCH_ALL_GROUPS = 'groups/successFetchAllGroups'
+
 export const FETCH_PRIVATE_GROUPS = 'groups/successFetchPrivateGroups'
 
 export const FETCH_GROUP_GROUPS = 'groups/successFetchGroupGroups'

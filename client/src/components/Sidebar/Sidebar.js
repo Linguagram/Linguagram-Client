@@ -1,10 +1,18 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../store/middlewares/thunk";
 
 export default function Sidebar() {
   const currentRoute = useLocation();
+  const dispatch = useDispatch()
   const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    dispatch(logOut())
+    navigate('/')
+  }
 
   return (
     <div className="flex-col items-center justify-between hidden w-16 h-screen py-5 md:flex bg-light-gray">
@@ -105,7 +113,7 @@ export default function Sidebar() {
         </div>
         <div className="flex items-center justify-center rounded icons-container">
           <FontAwesomeIcon
-            onClick={() => navigate("/")}
+            onClick={() => handleLogOut()}
             className="w-full text-gray-400 cursor-pointer"
             icon="right-from-bracket"
           />
