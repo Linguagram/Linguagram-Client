@@ -12,8 +12,8 @@ const jwt =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjcyOTc4NjE4fQ.SUaOajp4WM-GI7qFy3BPq6wQR-j3VP11v8PXYjKa9pI";
 
 const getAccessToken = () => {
-  return localStorage.getItem("access_token")
-}
+  return localStorage.getItem("access_token");
+};
 
 export const handleSetThisUser = (user) => {
   return (dispatch, getState) => {
@@ -28,42 +28,22 @@ export const handleSetActiveSection = (section) => {
 };
 
 export const register = (inputs) => {
-  return async (dispatch, getState) => {
-    try {
-      const {
+  return (dispatch, getState) => {
+    const { username, email, password, confirmPassword, phoneNumber, country } =
+      inputs;
+
+    return axios({
+      method: "POST",
+      url: `${URL_SERVER}/users/register`,
+      data: {
         username,
         email,
         password,
         confirmPassword,
         phoneNumber,
         country,
-      } = inputs;
-
-      const { data } = await axios({
-        method: "POST",
-        url: `${URL_SERVER}/users/register`,
-        data: {
-          username,
-          email,
-          password,
-          confirmPassword,
-          phoneNumber,
-          country,
-        },
-      });
-
-      swal(
-        "",
-        `Please check your inbox. We have sent a verification link to ${data.user.email}. `
-      );
-    } catch (err) {
-      if (err.response?.data?.message) {
-        swal({
-          text: `${err.response.data.message}`,
-          icon: "error",
-        });
-      }
-    }
+      },
+    });
   };
 };
 
@@ -90,7 +70,7 @@ export const getUserLogin = () => {
       headers: {
         access_token: getAccessToken(),
       },
-    })
+    });
   };
 };
 

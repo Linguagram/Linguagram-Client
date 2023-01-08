@@ -27,6 +27,8 @@ export default function LoginView() {
     dispatch(login(inputs))
     .then((response) => {
 
+      console.log(response.data.user)
+
       dispatch(handleSetThisUser(response.data.user))
       localStorage.setItem('access_token', response.data.access_token)
 
