@@ -1,8 +1,8 @@
-import { SET_THIS_USER } from "../actions/actionTypes"
+import { SET_THIS_USER, SET_COUNTERPART_USER } from "../actions/actionTypes"
 
 const initialState = {
     thisUser: {},
-    friend: {}
+    counterpartUser: {}
 }
 
 export default function userReducer(state = initialState, action) {
@@ -11,6 +11,11 @@ export default function userReducer(state = initialState, action) {
             return {
                 ...state,
                 thisUser: action.payload
+            }
+        case SET_COUNTERPART_USER:
+            return {
+                ...state,
+                counterpartUser: action.payload
             }
         default:
             return state

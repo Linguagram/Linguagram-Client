@@ -2,11 +2,12 @@ import {
   setActiveSection,
   setThisUser,
   setGroups,
-  setAllMessages,
+  setCurrentMessages,
   setPrivateGroups,
   setGroupGroups,
   setSocketConnect,
   setAllGroups,
+  setCounterpartUser,
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
@@ -22,7 +23,13 @@ const getAccessToken = () => {
 export const handleSetThisUser = (user) => {
   return (dispatch, getState) => {
     dispatch(setThisUser(user));
-    console.log(user)
+
+  };
+};
+
+export const handleSetCounterpartUser = (user) => {
+  return (dispatch, getState) => {
+    dispatch(setCounterpartUser(user));
   };
 };
 
@@ -108,7 +115,7 @@ export const handleFetchGroups = () => {
   };
 };
 
-export const handleFetchAllMessagesByGroupId = (groupId) => {
+export const handleFetchMessagesByGroupId = (groupId) => {
   return async (dispatch, getState) => {
     try {
 
@@ -120,7 +127,7 @@ export const handleFetchAllMessagesByGroupId = (groupId) => {
         },
       });
 
-      dispatch(setAllMessages(data));
+      dispatch(setCurrentMessages(data));
     } catch (err) {
       console.log(err);
     }

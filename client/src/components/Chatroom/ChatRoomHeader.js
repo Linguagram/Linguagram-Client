@@ -4,10 +4,14 @@ import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 import UserModal from "../Modal/UserModal";
 import GroupModal from "../Modal/GroupModal";
 import CallingModal from "../Modal/CallingModal";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setOpenChat } from "../../store/actions/actionCreator";
 
 export default function ChatRoomHeader() {
+
+  const { counterpartUser } = useSelector((state) => state.userReducer);
+  const { thisUser } = useSelector((state) => state.userReducer);
+
   let [isOpen, setIsOpen] = useState(false);
   let [isCalling, setIscalling] = useState(false)
   const dispatch = useDispatch()
@@ -47,10 +51,29 @@ export default function ChatRoomHeader() {
           icon="angle-left"
         />
         </div>
-        <img src={avatar} className="avatar-chat" alt="avatar"></img>
+        {
+          counterpartUser.email
+          ?
+            <img src={counterpartUser.Avatar.url} className="avatar-chat" alt="avatar"></img>
+          :
+            <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
+              {counterpartUser.name[0].toUpperCase()}
+            </div>
+        }
+        
         <div className="flex items-center gap-1">
           <button onClick={openModal}>
-            <h4 className="text-white">Doris Brown</h4>
+            {
+              counterpartUser.email
+              ?
+                <h4 className="text-white">
+                  {
+                     counterpartUser.username
+                  }
+                </h4>
+              :
+                <h4 className="text-white">{counterpartUser.name}</h4>
+            }
           </button>
           <FontAwesomeIcon className="status-icon" icon="circle-dot" />
         </div>
@@ -60,10 +83,17 @@ export default function ChatRoomHeader() {
           className="text-gray-400 cursor-pointer small-icons"
           icon="magnifying-glass"
         />
-        <FontAwesomeIcon
-          className="text-gray-400 cursor-pointer small-icons"
-          icon="video"
-        />
+        {
+          counterpartUser.email
+          ?
+            <FontAwesomeIcon
+            className="text-gray-400 cursor-pointer small-icons"
+            icon="video"
+            />
+          :
+            null
+        }
+        
         <FontAwesomeIcon
           className="text-gray-400 cursor-pointer small-icons"
           icon="trash-can"

@@ -3,19 +3,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { setHomeDrawer, setOpenChat } from "../../store/actions/actionCreator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
+import { handleFetchMessagesByGroupId, handleSetCounterpartUser } from "../../store/middlewares/thunk";
 
 export default function SectionChats() {
   const dispatch = useDispatch();
 
   const { allGroups } = useSelector((state) => state.groupReducer);
+  const { thisUser } = useSelector((state) => state.userReducer);
 
-  function openChat() {
+  async function openChat(group) {
+    if(group.type === 'dm') {
+      for (const user of group.GroupMembers) {
+        if(user.User.id !== thisUser.id) {
+          dispatch(handleSetCounterpartUser(user.User))
+          break
+        }
+      }
+    } else {
+      dispatch(handleSetCounterpartUser(group))
+    }
+
     dispatch(setOpenChat(true));
+    dispatch(handleFetchMessagesByGroupId(group.id))
   }
-
-  useEffect(() => {
-    console.log(allGroups)
-  }, [allGroups])
 
   return (
     <>
@@ -48,13 +58,36 @@ export default function SectionChats() {
             return (
               <div
                 key={group.id}
-                onClick={openChat}
+                onClick={() => openChat(group)}
                 className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700"
               >
-                <img src={avatar} className="avatar-chat" alt="avatar"></img>
+                {
+                  group.name === 'private'
+                  ?
+                    group.GroupMembers[0] && group.GroupMembers[0].UserId === thisUser.id
+                    ?
+                    <img src={group.GroupMembers[1].User.Avatar.url} className="avatar-chat" alt="avatar"></img>
+                    :
+                    <img src={group.GroupMembers[0].User.Avatar.url} className="avatar-chat" alt="avatar"></img> 
+                  :
+                  <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
+                    {group.name[0].toUpperCase()}
+                  </div>
+                }
+                
                 <div className="flex flex-col w-full gap-1">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-base text-white">{group.name}</h4>
+                    {
+                      group.name === 'private'
+                      ?
+                        group.GroupMembers[0] && group.GroupMembers[0].UserId === thisUser.id
+                        ?
+                        <h4 className="text-base text-white">{group.GroupMembers[1].User.username}</h4>
+                        :
+                        <h4 className="text-base text-white">{group.GroupMembers[0].User.username}</h4>
+                      :
+                      <h4 className="text-base text-white">{group.name}</h4>
+                    }
                     <h5 className="text-sm text-gray-300">02:50</h5>
                   </div>
                   <div className="flex items-center justify-between">

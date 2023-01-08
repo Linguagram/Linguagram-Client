@@ -1,15 +1,15 @@
-import { FETCH_ALL_MESSAGES } from "../actions/actionTypes"
+import { FETCH_MESSAGES_BY_GROUPID } from "../actions/actionTypes"
 
 const initialState = {
-    messages: []
+    currentMessages: []
 }
 
 export default function messageReducer(state = initialState, action) {
     switch(action.type) {
-        case FETCH_ALL_MESSAGES:
+        case FETCH_MESSAGES_BY_GROUPID:
             return {
                 ...state,
-                messages: action.payload
+                currentMessages: action.payload
             }
         default:
             return state
