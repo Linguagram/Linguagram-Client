@@ -1,3 +1,5 @@
+import { useDispatch } from "react-redux";
+
 export default function PeopleCard({
   avatarUrl,
   username,
@@ -5,6 +7,9 @@ export default function PeopleCard({
   languages,
   interests,
 }) {
+
+  const dispatch = useDispatch()
+
   return (
     <div className="w-full p-0 py-2 md:p-4 h-96 2xl:h-full max-h-[400px] min-h-[400px]">
       <div className="flex flex-col items-center justify-between w-full h-full px-4 text-white rounded-lg bg-light-gray">

@@ -1,10 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getFriendRequest } from "../../store/middlewares/thunk";
 import FriendRequestCard from "../Cards/FriendRequestCard";
 
 export default function FriendRequest({ onClose, visible }) {
+  const dispatch = useDispatch();
   const handleOnClose = () => {
     onClose();
   };
+
+  const [friendRequests, setFriendRequests] = useState([])
+
+  //---------------------------------------------------------
+  //                    FRIEND REQUEST
+  //---------------------------------------------------------
+  /*
+    1. Get all friends
+    2. Filter every entry which isAccepted's value is false.
+    3. Set matched entry to friend request
+   */
+
+  useEffect(() => {
+    dispatch(getFriendRequest())
+      .then((friends) => {
+        console.log(friends)
+        let request = []
+        friends.forEach(friend => {
+          if(!friend.isAccepted) request.push(friend)
+        })
+        setFriendRequests(request)
+      })
+      .catch((err) => console.log);
+  }, []);
+
+  //---------------------------------------------------------
+
 
   return (
     <div
@@ -21,25 +51,13 @@ export default function FriendRequest({ onClose, visible }) {
           </h3>
         </div>
         <div className="flex flex-col gap-5 my-3 lg:my-5 scrollbar-hide overflow-auto">
-          <FriendRequestCard />
-          <FriendRequestCard />
-          <FriendRequestCard />
-          <FriendRequestCard />
-          <FriendRequestCard />
-          <FriendRequestCard />
-          <FriendRequestCard />
-          <FriendRequestCard />
-          <FriendRequestCard />
-          <FriendRequestCard />
-          <FriendRequestCard />
-          <FriendRequestCard />
-          <FriendRequestCard />
-          <FriendRequestCard />
-          <FriendRequestCard />
-          <FriendRequestCard />
-          <FriendRequestCard />
-          <FriendRequestCard />
-          <FriendRequestCard />
+          {friendRequests.length > 0 ? 
+            friendRequests.map(request => {
+              return <FriendRequestCard key={request.id} />
+            }) :
+            <p className="text-white">No friend request</p>
+          }
+          
         </div>
       </div>
     </div>
