@@ -4,10 +4,13 @@ import InputField from "../components/Form/InputFiled";
 import MyListbox from "../components/Form/ListBox";
 import { register } from "../store/middlewares/thunk";
 import { useDispatch } from 'react-redux'
+import swal from 'sweetalert'
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterView() {
 
   const dispatch = useDispatch()
+	const navigate = useNavigate()
 
   const inputUsernameRef = useRef()
   const inputEmailRef = useRef()
@@ -16,7 +19,7 @@ export default function RegisterView() {
   const inputPhoneNumberRef = useRef()
   const inputCountryRef = useRef()
 
-  const handleRegisterSubmit = (e) => {
+  const handleRegisterSubmit = async(e) => {
     e.preventDefault()
 
     const inputs = {
@@ -28,13 +31,28 @@ export default function RegisterView() {
       country: inputCountryRef.current.name
     }
 
-    dispatch(register(inputs)) 
+    dispatch(register(inputs))
+    .then((response) => {
+      swal("", `Please check your inbox. We have sent a verification link to ${response.data.user.email}. `);
 
-    inputUsernameRef.current.value = ''
-    inputEmailRef.current.value = ''
-    inputPasswordRef.current.value = ''
-    inputConfirmPasswordRef.current.value = ''
-    inputPhoneNumberRef.current.value = ''
+      inputUsernameRef.current.value = ''
+      inputEmailRef.current.value = ''
+      inputPasswordRef.current.value = ''
+      inputConfirmPasswordRef.current.value = ''
+      inputPhoneNumberRef.current.value = ''
+
+			navigate('/login')
+    })
+    .catch((err) => {
+      if(err.response?.data?.message) {
+        swal({
+            text: `${err.response.data.message}`,
+            icon: "error",
+        });
+        inputPasswordRef.current.value = ''
+      	inputConfirmPasswordRef.current.value = ''
+      }
+    }) 
     
   }
 

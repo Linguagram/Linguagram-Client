@@ -18,33 +18,22 @@ export const handleSetActiveSection = (section) => {
 }
 
 export const register = (inputs) => {
-    return async (dispatch, getState) => {
-        try {
-            const { username, email, password, confirmPassword, phoneNumber, country } = inputs
+    return (dispatch, getState) => {
 
-            const {data} = await axios({
-                method: 'POST',
-                url: `${URL_SERVER}/users/register`,
-                data: {
-                  username,
-                  email,
-                  password,
-                  confirmPassword,
-                  phoneNumber,
-                  country
-                }
-            });
-            
-            swal("", `Please check your inbox. We have sent a verification link to ${data.user.email}. `);
+        const { username, email, password, confirmPassword, phoneNumber, country } = inputs
 
-        } catch(err) {
-            if(err.response?.data?.message) {
-                swal({
-                    text: `${err.response.data.message}`,
-                    icon: "error",
-                });
+        return axios({
+            method: 'POST',
+            url: `${URL_SERVER}/users/register`,
+            data: {
+                username,
+                email,
+                password,
+                confirmPassword,
+                phoneNumber,
+                country
             }
-        }
+        });
     }
 }
 
