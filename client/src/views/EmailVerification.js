@@ -27,6 +27,7 @@ export default function EmailVerification() {
 
             dispatch(handleSetThisUser(data.user))
             localStorage.setItem('access_token', data.access_token)
+            localStorage.setItem('user_id', data.user.id)
 
             swal({
                 text: data.message,

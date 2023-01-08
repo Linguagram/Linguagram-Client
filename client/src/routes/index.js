@@ -11,7 +11,7 @@ import HomeView from "../views/HomeView";
 import LandingView from "../views/LandingView";
 import LoginView from "../views/LoginView";
 import RegisterView from "../views/RegisterView";
-import EmailVerification from "../components/EmailVerification";
+import EmailVerification from "../views/EmailVerification";
 
 const router = createBrowserRouter([
   {

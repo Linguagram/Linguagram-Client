@@ -3,12 +3,18 @@ import Section from "../components/Section";
 import ChatRoom from "../components/Chatroom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserLogin, handleFetchGroups, handleSetActiveSection, handleSetThisUser } from "../store/middlewares/thunk";
+import { getUserLogin, handleFetchGroups, handleSetActiveSection, handleSetSocketConnect, handleSetThisUser } from "../store/middlewares/thunk";
 import HomeDrawer from "../components/HomeDrawer/HomeDrawer";
 import { useEffect } from "react";
 import { swalError } from "../util/swal";
+import io from "socket.io-client";
+import { URL_SERVER } from "../baseUrl";
+
+const socket = io.connect(`${URL_SERVER}`)
+socket.emit("identify", {userId: localStorage.userId}); 
 
 export default function HomeView() {
+
   const currentRoute = useLocation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -16,7 +22,7 @@ export default function HomeView() {
   const { openChat } = useSelector((state) => state.sectionReducer)
   const { thisUser } = useSelector((state) => state.userReducer)
   const { privateGroups, groupGroups } = useSelector((state) => state.groupReducer)
-  
+
   useEffect(() => {
     if(localStorage.access_token && !thisUser.id) {
       dispatch(getUserLogin())
@@ -36,6 +42,10 @@ export default function HomeView() {
         }
       })
     }
+  }, [])
+
+  useEffect(() => {
+    dispatch(handleSetSocketConnect(socket))
   }, [])
 
   return (
