@@ -1,20 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setHomeDrawer, setOpenChat } from "../../store/actions/actionCreator";
+import groupReducer from "../../store/reducers/groupReducer";
 
 export default function SectionGroups() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const { groupGroups } = useSelector((state) => state.groupReducer);
 
   function openChat() {
-    dispatch(setOpenChat(true))
+    dispatch(setOpenChat(true));
   }
-
+  console.log(groupGroups);
   return (
     <>
       <div className="flex items-center justify-between mb-4 text-xl md:mb-8">
         <div className="flex gap-3">
-          <button className="md:hidden" onClick={() => dispatch(setHomeDrawer(true))}>
+          <button
+            className="md:hidden"
+            onClick={() => dispatch(setHomeDrawer(true))}
+          >
             <FontAwesomeIcon className="text-xl text-white" icon="bars" />
           </button>
           <h4 className="text-white">Groups</h4>
@@ -39,17 +44,29 @@ export default function SectionGroups() {
       </div>
 
       <div className="flex flex-col h-full gap-3 mt-5 overflow-y-auto scrollbar-hide">
-        <div onClick={openChat} className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700">
-          <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
-            G
-          </div>
-          <div className="flex items-center justify-between w-full">
-            <h4 className="text-base text-white">#Groups</h4>
-            <div className="h-5 text-sm font-bold text-center text-red-700 bg-red-900-blur w-7">
-              24+
-            </div>
-          </div>
-        </div>
+        {groupGroups &&
+          groupGroups.map((group) => {
+            return (
+              <div
+                key={group.id}
+                onClick={openChat}
+                className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700"
+              >
+                <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
+                  G
+                </div>
+                <div className="flex items-center justify-between w-full">
+                  <h4 className="text-base text-white">{group.name}</h4>
+                  {
+                    group.unreadMessageCount > 0 &&
+                      <div className="h-5 text-sm font-bold text-center text-red-700 bg-red-900-blur w-7">
+                        { group.unreadMessageCount }
+                      </div>
+                  }
+                </div>
+              </div>
+            );
+          })}
       </div>
     </>
   );
