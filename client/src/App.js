@@ -34,6 +34,10 @@ import {
   faEnvelope,
   faPhone,
   faRightToBracket,
+  faPhoneSlash,
+  faMicrophone,
+  faVideoSlash,
+  faMicrophoneSlash,
   faAngleLeft
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -73,7 +77,10 @@ library.add(
   faEnvelope,
   faPhone,
   faRightToBracket,
-  faAngleLeft
+  faPhoneSlash,
+  faMicrophone,
+  faVideoSlash,
+  faMicrophoneSlash
 );
 
 function App() {

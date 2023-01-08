@@ -3,11 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 import UserModal from "../Modal/UserModal";
 import GroupModal from "../Modal/GroupModal";
+import CallingModal from "../Modal/CallingModal";
 import { useDispatch } from 'react-redux'
 import { setOpenChat } from "../../store/actions/actionCreator";
 
 export default function ChatRoomHeader() {
   let [isOpen, setIsOpen] = useState(false);
+  let [isCalling, setIscalling] = useState(false)
   const dispatch = useDispatch()
 
   function closeModal() {
@@ -18,14 +20,25 @@ export default function ChatRoomHeader() {
     setIsOpen(true);
   }
 
+  function calling() {
+    setIsOpen(false)
+    setIscalling(true)
+  }
+
+  function stopCalling() {
+    setIscalling(false)
+  }
+
+
   function closeChat() {
     dispatch(setOpenChat(false))
   }
 
   return (
     <div className="flex items-center justify-between w-full p-5 h-1/6 max-h-16">
-      {/* <UserModal isOpen={isOpen} closeModal={closeModal}/> */}
-      <GroupModal isOpen={isOpen} closeModal={closeModal}/>
+      <UserModal isOpen={isOpen} closeModal={closeModal} calling={calling}/>
+      {/* <GroupModal isOpen={isOpen} closeModal={closeModal}/> */}
+      <CallingModal isOpen={isCalling} closeModal={stopCalling} />
 
       <div className="flex items-center w-full gap-3">
         <div onClick={closeChat} className="md:hidden">
