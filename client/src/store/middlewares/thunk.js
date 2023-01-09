@@ -223,6 +223,28 @@ export const sendFriendRequest = (friendId) => {
           access_token: getAccessToken(),
         },
       });
+
+      // !TODO: insert to friend list?
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const sendMessage = (groupId, formData) => {
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await axios({
+        method: "post",
+        url: `${URL_SERVER}/groups/${groupId}/messages`,
+        headers: {
+          access_token: getAccessToken(),
+          "Content-Type": "multipart/form-data",
+        },
+        data: formData,
+      });
+
+      // !TODO: insert to message cache
     } catch (err) {
       console.log(err);
     }

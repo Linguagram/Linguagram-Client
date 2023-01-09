@@ -5,9 +5,12 @@ import { useDispatch } from 'react-redux';
 function TextAttachmentName({ attachmentName, clearAttachment }) {
   return (
     <div className="" style={{ padding: "14px 0px 0px 20px", color: "white", fontWeight: "bold" }}>
-      <button onClick={clearAttachment}>
+      <span>
         Attachment: {attachmentName}
-      </button>
+      </span>
+      <span className="mx-2" onClick={clearAttachment}>
+        <FontAwesomeIcon className='text-gray-400 cursor-pointer small-icons' icon='trash-can'/>
+      </span>
     </div>
   );
 }
