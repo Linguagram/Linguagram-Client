@@ -98,6 +98,13 @@ export const getUserLogin = () => {
   };
 };
 
+export const handleSetSocket = (socket) => {
+    return (dispatch, getState) => {
+        // console.log(socket, "thunk")
+        dispatch(setSocketConnect(socket))
+    }
+}
+
 export const handleFetchGroups = () => {
   return async (dispatch, getState) => {
     try {

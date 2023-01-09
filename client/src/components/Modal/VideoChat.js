@@ -5,8 +5,7 @@ export default function VideoChat({onClose, visible, userVideo, partnerVideo}) {
     const handleOnClose = () => {
         onClose()
     }
-    console.log(userVideo, "user")
-    console.log(partnerVideo, 'partner')
+
     // if(!visible) return null;
 
   return (

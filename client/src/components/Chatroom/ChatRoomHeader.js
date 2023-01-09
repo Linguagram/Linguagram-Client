@@ -6,6 +6,9 @@ import GroupModal from "../Modal/GroupModal";
 import CallingModal from "../Modal/CallingModal";
 import { useDispatch, useSelector } from 'react-redux'
 import { setOpenChat } from "../../store/actions/actionCreator";
+import Peer from "simple-peer";
+import VideoChat from "../Modal/VideoChat";
+import swal from 'sweetalert';
 
 export default function ChatRoomHeader() {
 
@@ -25,6 +28,13 @@ export default function ChatRoomHeader() {
     setIsOpen(true);
   }
 
+  const { currentSocket } = useSelector((state) => state.socketReducer);
+
+  // console.log(currentSocket, "header")
+
+  const [isVideoModalVisible, setIsVideoModalVisible] = useState(false);
+  const handleCloseVideoModal = () => setIsVideoModalVisible(false);
+
   const [yourID, setYourID] = useState("");
   const [users, setUsers] = useState({});
   const [stream, setStream] = useState();
@@ -33,9 +43,14 @@ export default function ChatRoomHeader() {
   const [callerSignal, setCallerSignal] = useState();
   const [callAccepted, setCallAccepted] = useState(false);
 
+  const [peerCall, setpeerCall] = useState();
+  const [peerAccept, setpeerAccept] = useState();
+
   const userVideo = useRef();
   const partnerVideo = useRef();
   const peerRef = useRef();
+
+  let peerTest
 
   useEffect(() => {
     navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
@@ -45,7 +60,11 @@ export default function ChatRoomHeader() {
       if (userVideo.current) {
         userVideo.current.srcObject = stream;
       }
-    })
+      setpeerCall(new Peer({
+        initiator: true,
+        trickle: false,
+        stream: stream,
+      }))
 
     socketConnect.on("yourID", (id) => {
       setYourID(id);
@@ -67,8 +86,46 @@ export default function ChatRoomHeader() {
       setUsers({})
       socketConnect.off("callAccepted")
       peerRef.current.destroy()
+      // peerTest = new Peer({
+      //   initiator: true,
+      //   trickle: false,
+      //   stream: stream,
+      // })
+      // console.log(peerTest)
     })
+   })
   }, []);
+
+  useEffect(() => {
+    if(Object.keys(currentSocket).length > 0) {
+      console.log('masuk use effect chatroom header')
+      currentSocket.on("yourID", (id) => {
+        console.log(id)
+        setYourID(id);
+      })
+      currentSocket.on("allUsers", (users) => {
+        console.log(users)
+        setUsers(users);
+      })
+      
+  
+      currentSocket.on("hey", (data) => {
+        setReceivingCall(true);
+        setCaller(data.from);
+        setCallerSignal(data.signal);
+      })
+  
+      currentSocket.on("user left", () => {
+        setReceivingCall(false);
+        setCaller("");
+        setCallAccepted(false)
+        setUsers({})
+        currentSocket.off("callAccepted")
+        peerCall.destroy()
+        // peerRef.current.destroy()
+      })
+    }
+  }, [currentSocket])
 
   let key;
   useEffect(() => {
@@ -79,31 +136,50 @@ export default function ChatRoomHeader() {
     }
     console.log(yourID, key)
   }, [users])
-  
+
+  // useEffect(() => {
+  //   if(stream) {
+  //     setpeerCall(new Peer({
+  //       initiator: true,
+  //       trickle: false,
+  //       stream: stream,
+  //     }))
+  //   }
+  // }, [stream])
+
+ 
 
   function callPeer(id) {
-    const peer = new Peer({
-      initiator: true,
-      trickle: false,
-      stream: stream,
-    });
+    // const peer = new Peer({
+    //   initiator: true,
+    //   trickle: false,
+    //   stream: stream,
+    // });
+    console.log(key, "id yang mau di call")
+    console.log(peerCall, "peer call waktu nge call orang lain")
 
-    peer.on("signal", data => {
-      socketConnect.emit("callUser", { userToCall: id, signalData: data, from: yourID })
+    peerCall.on("signal", data => {
+      console.log('peer dapet signal')
+      if(Object.keys(currentSocket).length > 0) {
+        console.log(key, data, yourID)
+        currentSocket.emit("callUser", { userToCall: key, signalData: data, from: yourID })
+      }
     })
 
-    peer.on("stream", stream => {
+    peerCall.on("stream", stream => {
       if (partnerVideo.current) {
         partnerVideo.current.srcObject = stream;
       }
     });
 
-    socketConnect.on("callAccepted", signal => {
-      setCallAccepted(true);
-      peer.signal(signal);
-    })
+    if(Object.keys(currentSocket).length > 0) {
+      currentSocket.on("callAccepted", signal => {
+        setCallAccepted(true);
+        peerCall.signal(signal);
+      })
+    }
 
-    peerRef.current = peer
+    // peerRef.current = peer
 
   }
 
@@ -116,7 +192,9 @@ export default function ChatRoomHeader() {
     });
 
     peer.on("signal", data => {
-      socketConnect.emit("acceptCall", { signal: data, to: caller })
+      if(Object.keys(currentSocket).length > 0) {
+        currentSocket.emit("acceptCall", { signal: data, to: caller })
+      }
     })
 
     peer.on("stream", stream => {
