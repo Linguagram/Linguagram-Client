@@ -97,7 +97,7 @@ export default function ChatRoomHeader() {
   }, []);
 
   useEffect(() => {
-    if(Object.keys(currentSocket).length > 0) {
+    if(currentSocket) {
       console.log('masuk use effect chatroom header')
       currentSocket.on("yourID", (id) => {
         console.log(id)
@@ -160,7 +160,7 @@ export default function ChatRoomHeader() {
 
     peerCall.on("signal", data => {
       console.log('peer dapet signal')
-      if(Object.keys(currentSocket).length > 0) {
+      if(currentSocket) {
         console.log(key, data, yourID)
         currentSocket.emit("callUser", { userToCall: key, signalData: data, from: yourID })
       }
@@ -172,7 +172,7 @@ export default function ChatRoomHeader() {
       }
     });
 
-    if(Object.keys(currentSocket).length > 0) {
+    if(currentSocket) {
       currentSocket.on("callAccepted", signal => {
         setCallAccepted(true);
         peerCall.signal(signal);
@@ -192,7 +192,7 @@ export default function ChatRoomHeader() {
     });
 
     peer.on("signal", data => {
-      if(Object.keys(currentSocket).length > 0) {
+      if(currentSocket) {
         currentSocket.emit("acceptCall", { signal: data, to: caller })
       }
     })
