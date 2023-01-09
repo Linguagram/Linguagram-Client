@@ -1,6 +1,7 @@
 import {
   SET_ACTIVE_SECTION,
   SET_THIS_USER,
+  SET_INCOMING_CALLER,
   FETCH_ALL_GROUPS,
   FETCH_MESSAGES_BY_GROUPID,
   SET_HOME_DRAWER,
@@ -16,6 +17,7 @@ import {
   FETCH_ALL_FRIENDS,
   FETCH_ALL_FRIEND_REQUESTS,
   ADD_MESSAGE,
+  SET_AM_I_THE_CALLER
 } from "./actionTypes";
 
 export const setActiveSection = (payload) => {
@@ -66,6 +68,21 @@ export const setCounterpartUser = (payload) => {
     payload,
   };
 };
+
+export const setAmITheCaller = (payload) => {
+  return {
+      type: SET_AM_I_THE_CALLER,
+      payload
+  }
+}
+
+export const setIncomingCaller = (payload) => {
+  return {
+      type: SET_INCOMING_CALLER,
+      payload
+  }
+}
+
 
 export const setAllGroups = (payload) => {
   return {

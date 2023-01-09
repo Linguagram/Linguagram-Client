@@ -12,6 +12,10 @@ export const SET_INTEREST_LANGUAGE = 'user/setInterestLanguage'
 
 export const SET_COUNTERPART_USER = 'user/setCounterpartUser'
 
+export const SET_INCOMING_CALLER = 'user/setIncomingCaller'
+
+export const SET_AM_I_THE_CALLER = 'video/setAmITheCaller'
+
 export const FETCH_ALL_GROUPS = 'groups/successFetchAllGroups'
 
 export const FETCH_PRIVATE_GROUPS = 'groups/successFetchPrivateGroups'

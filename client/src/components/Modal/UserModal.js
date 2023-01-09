@@ -9,7 +9,7 @@ export default function UserModal({ isOpen, closeModal, calling }) {
   const navigate = useNavigate();
   const { counterpartUser } = useSelector((state) => state.userReducer);
   const { thisUser } = useSelector((state) => state.userReducer);
-  console.log(counterpartUser)
+  // console.log(counterpartUser)
 
   return (
     <>

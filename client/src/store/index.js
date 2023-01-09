@@ -6,6 +6,7 @@ import groupReducer from "./reducers/groupReducer";
 import messageReducer from "./reducers/messageReducer";
 import drawerReducer from "./reducers/drawerReducer";
 import socketReducer from "./reducers/socketReducer";
+import videoReducer from "./reducers/videoReducer";
 import exploreReducer from "./reducers/exploreReducer";
 import friendReducer from "./reducers/friendReducer";
 
@@ -15,6 +16,8 @@ const rootReducer = combineReducers ({
     sectionReducer,
     groupReducer,
     messageReducer,
+    socketReducer,
+    videoReducer,
     socketReducer,
     exploreReducer,
     friendReducer
