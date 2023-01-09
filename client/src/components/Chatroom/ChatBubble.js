@@ -165,7 +165,7 @@ export default function ChatBubble({ msg }) {
           <div>
             <img
               src={
-                counterpartUser.Avatar.url
+                counterpartUser.Avatar?.url
                   ? counterpartUser.Avatar.url
                   : "https://i.pravatar.cc/150?img=3"
               }
