@@ -1,7 +1,7 @@
 import { SET_SOCKET } from "../actions/actionTypes"
 
 const initialState = {
-    socketConnect: {}
+    socketConnect: null,
 }
 
 export default function socketReducer(state = initialState, action) {
