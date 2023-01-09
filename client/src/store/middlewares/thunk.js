@@ -14,6 +14,7 @@ import {
   setExploreGroups,
   setFriendRequests,
   setFriends,
+  addMessage,
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
@@ -244,7 +245,7 @@ export const sendMessage = (groupId, formData) => {
         data: formData,
       });
 
-      // !TODO: insert to message cache
+      dispatch(addMessage(data));
     } catch (err) {
       console.log(err);
     }

@@ -15,6 +15,7 @@ import {
   SET_INTEREST_LANGUAGE,
   FETCH_ALL_FRIENDS,
   FETCH_ALL_FRIEND_REQUESTS,
+  ADD_MESSAGE,
 } from "./actionTypes";
 
 export const setActiveSection = (payload) => {
@@ -125,6 +126,13 @@ export const setFriends = (payload) => {
 export const setFriendRequests = (payload) => {
   return {
     type: FETCH_ALL_FRIEND_REQUESTS,
+    payload,
+  };
+};
+
+export const addMessage = (payload) => {
+  return {
+    type: ADD_MESSAGE,
     payload,
   };
 };

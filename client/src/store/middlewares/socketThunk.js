@@ -20,6 +20,11 @@ export const initSocket = () => {
       socket.emit(SOCKET_EVENTS.IDENTIFY, { userId }); 
     });
 
+    socket.on(SOCKET_EVENTS.MESSAGE, (message) => {
+      console.log("[ws message]", message);
+      // !TODO: handle message event
+    });
+
     socket.on(SOCKET_EVENTS.ERROR, (error) => {
       console.error(error);
     });

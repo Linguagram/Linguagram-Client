@@ -1,6 +1,7 @@
 import React, {useRef, useState} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useDispatch } from 'react-redux';
+import { sendMessage } from '../../store/middlewares/thunk';
 
 function TextAttachmentName({ attachmentName, clearAttachment }) {
   return (
@@ -32,7 +33,7 @@ export default function ChatRoomFooter({ groupId }) {
         console.log(data.value);
       };
 
-      // dispatch(sendMessage(groupId, formData));
+      dispatch(sendMessage(groupId, formData));
     }
   }
 
