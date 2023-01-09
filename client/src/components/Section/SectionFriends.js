@@ -4,12 +4,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { setHomeDrawer } from "../../store/actions/actionCreator";
 import { getFriends } from "../../store/middlewares/thunk";
-import FriendCard from "../Cards/FriendCard";
+import {
+  getFriendsFirstLetter,
+  sortFriendsByFirstLetter,
+} from "../../util/friendFilters";
+import FriendCardContainers from "../Containers/FriendCardContainers";
 
 export default function SectionFriends() {
   const { friends, friendRequests } = useSelector(
     (state) => state.friendReducer
   );
+  const [firstLetters, setFirstLetters] = useState([]);
+  const [sortedFriends, setSortedFriends] = useState({});
+
   const dispatch = useDispatch();
   const [isFriendRequestModalVisible, setisFriendRequestModalVisible] =
     useState(false);
@@ -20,6 +27,10 @@ export default function SectionFriends() {
   useEffect(() => {
     dispatch(getFriends())
       .then((_) => {
+        const letters = getFriendsFirstLetter(friends);
+        const sorted = sortFriendsByFirstLetter(friends);
+        setFirstLetters(letters);
+        setSortedFriends(sorted);
         return;
       })
       .catch(console.log);
@@ -56,27 +67,15 @@ export default function SectionFriends() {
       </div>
 
       <div className="flex flex-col h-full gap-3 mt-5 overflow-y-auto scrollbar-hide">
-        <div className="flex flex-col gap-3">
-          <div className="flex flex-col">
-            <div className="text-main-color">A</div>
-            <div className="flex flex-col gap-5 pt-2 pl-2">
-            {friends.map(friend => {
-              return <FriendCard key={friend.User.id} friend={friend}/>
-            })}
-              
-            </div>
-          </div>
-        </div>
-
-        {/* <div className="flex flex-col gap-3">
-          <div className="flex flex-col">
-            <div className="text-main-color">A</div>
-            <div className="flex flex-col gap-5 pt-2 pl-2">
-              <FriendCard />
-            </div>
-          </div>
-        </div> */}
-
+        {firstLetters.map((letter, idx) => {
+          return (
+            <FriendCardContainers
+              key={idx}
+              letter={letter}
+              friends={sortedFriends[letter]}
+            />
+          );
+        })}
       </div>
 
       <FriendRequest
