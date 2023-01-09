@@ -1,30 +1,78 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useDispatch } from 'react-redux';
 
+function TextAttachmentName({ attachmentName, clearAttachment }) {
+  return (
+    <div className="" style={{ padding: "14px 0px 0px 20px", color: "white", fontWeight: "bold" }}>
+      <button onClick={clearAttachment}>
+        Attachment: {attachmentName}
+      </button>
+    </div>
+  );
+}
 
-export default function ChatRoomFooter() {
+export default function ChatRoomFooter({ groupId }) {
+  const dispatch = useDispatch();
+  const [attachmentName, setAttachmentName] = useState("");
 
-  const messageInput = useRef()
+  /**
+   * @type {{current: HTMLFormElement}}
+   */
+  const formData = useRef(null);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    console.log(messageInput.current.value)
+    if (groupId && formData.current) {
+      for (const data of formData.current.elements) {
+        console.log(data.value);
+      };
+
+      // dispatch(sendMessage(groupId, formData));
+    }
+  }
+
+  const fileInput = useRef(null);
+
+  const showFilePicker = (e) => {
+    e.preventDefault();
+
+    if (fileInput.current) {
+      fileInput.current.click();
+    }
+  }
+
+  const handleFileInputChange = (e) => {
+    setAttachmentName(e.target.files[0].name);
+  }
+
+  const clearAttachment = () => {
+    setAttachmentName("");
+    fileInput.current.value = "";
   }
 
   return (
-    <form onSubmit={handleSubmit} className='flex justify-between gap-5 p-5'>
+    <form ref={formData} encType="multipart/form-data" onSubmit={handleSubmit} className='flex flex-col'>
+      <div>
+        {
+        attachmentName && <TextAttachmentName clearAttachment={clearAttachment} attachmentName={attachmentName}/>
+      }
+      </div>
+      <div className="flex justify-between gap-5 p-5">
+        <input ref={fileInput} onChange={handleFileInputChange} style={{ display: "none" }} type="file" id="attachment-input" name="attachment" />
         <div className='flex items-center w-11/12 p-3 rounded 2xl:w-full bg-light-gray search-chat-container'>
-            <input ref={messageInput} className='text-sm text-white bg-transparent focus:border-none focus:outline-none' type='text' placeholder='Type your message..'></input>
+          <input name="content" className='text-sm text-white bg-transparent focus:border-none focus:outline-none' type='text' placeholder='Type your message..'></input>
         </div>
         <div className='flex items-center justify-around w-1/12 gap-2 2xl:max-w-fit 2xl:gap-5'>
-          <button type='button'>
+          <button type='button' onClick={showFilePicker}>
             <FontAwesomeIcon className='text-gray-400 cursor-pointer small-icons' icon='paperclip'/>
           </button>
-            <button type='submit'>
-                <FontAwesomeIcon className='text-gray-400 cursor-pointer small-icons' icon='paper-plane'/>
-            </button>
+          <button type='submit'>
+            <FontAwesomeIcon className='text-gray-400 cursor-pointer small-icons' icon='paper-plane'/>
+          </button>
         </div>
+      </div>
     </form>
   )
 }
