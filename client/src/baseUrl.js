@@ -1,1 +1,1 @@
-export const URL_SERVER = 'https://d19f-212-8-250-202.sa.ngrok.io'
+export const URL_SERVER = 'http://13.231.137.142:3000' || 'https://75bc-125-166-1-44.ngrok.io' || 'http://localhost:3000'

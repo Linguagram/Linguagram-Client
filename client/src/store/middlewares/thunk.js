@@ -246,9 +246,27 @@ export const sendFriendRequest = (friendId) => {
   };
 };
 
-export const sendMessage = (groupId, formData) => {
+export const sendMessage = (groupId, formData, content) => {
+  return;
   return async (dispatch, getState) => {
     try {
+      if (!formData) throw new TypeError("formData can't be empty");
+      let uploaded;
+
+      const file = formData.files[0];
+
+      if (file) {
+        uploaded = await axios({
+          method: "post",
+          url: `${URL_SERVER}/attachment`,
+          headers: {
+            access_token: getAccessToken(),
+            "Content-Type": "multipart/form-data",
+          },
+          data: file,
+        });
+      }
+
       const { data } = await axios({
         method: "post",
         url: `${URL_SERVER}/groups/${groupId}/messages`,
@@ -256,7 +274,10 @@ export const sendMessage = (groupId, formData) => {
           access_token: getAccessToken(),
           "Content-Type": "multipart/form-data",
         },
-        data: formData,
+        data: {
+          content,
+          Medium: uploaded.data,
+        },
       });
 
       dispatch(addMessage(data));

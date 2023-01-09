@@ -36,7 +36,7 @@ export default function ChatRoomHeader() {
     setIsUserModalOpen(false)
     setIscalling(true)
     dispatch(setAmITheCaller(true))
-    socketConnect.emit("identify", {userId: thisUser.id}); 
+    // socketConnect.emit("identify", {userId: thisUser.id}); 
     socketConnect.emit("clickCall", { userToCall: counterpartUser.id, from: thisUser.id })
   }
 
@@ -61,7 +61,7 @@ export default function ChatRoomHeader() {
   }
 
   useEffect(() => {
-    socketConnect.emit("identify", {userId: thisUser.id}); 
+    // socketConnect.emit("identify", {userId: thisUser.id}); 
 
     socketConnect.on("yourID", (id) => {
       console.log(id, "id diri sendiri")

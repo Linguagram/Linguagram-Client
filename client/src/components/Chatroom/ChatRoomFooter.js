@@ -33,7 +33,7 @@ export default function ChatRoomFooter({ groupId }) {
         console.log(data.value);
       };
 
-      dispatch(sendMessage(groupId, formData));
+      dispatch(sendMessage(groupId, formData.current));
     }
   }
 
