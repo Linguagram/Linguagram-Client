@@ -55,8 +55,17 @@ export const handleSetActiveSection = (section) => {
 
 export const register = (inputs) => {
   return (dispatch, getState) => {
-    const { username, email, password, confirmPassword, country, phoneNumber, nativeLanguage, interestLanguage, interests } =
-      inputs;
+    const {
+      username,
+      email,
+      password,
+      confirmPassword,
+      country,
+      phoneNumber,
+      nativeLanguage,
+      interestLanguage,
+      interests,
+    } = inputs;
 
     return axios({
       method: "POST",
@@ -70,7 +79,7 @@ export const register = (inputs) => {
         country,
         nativeLanguage,
         interestLanguage,
-        interests
+        interests,
       },
     });
   };
@@ -212,13 +221,10 @@ export const getFriends = () => {
           access_token: getAccessToken(),
         },
       });
-      const requests = data.filter(
-        (friend) =>
-          (friend.FriendId == localStorage.user_id) && !friend.isAccepted
-      );
-      const friends = data.filter(
-        (friend) => (friend.UserId == localStorage.user_id) && friend.isAccepted
-      );
+      console.log({data})
+      const requests = data.filter((friend) => friend.isAccepted === false);
+      const friends = data.filter((friend) => friend.isAccepted === true);
+      console.log({friends}, '<<< from thunk')
       dispatch(setFriendRequests(requests));
       dispatch(setFriends(friends));
     } catch (err) {

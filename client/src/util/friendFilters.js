@@ -13,13 +13,23 @@ const friends = [
 
 const getFriendsFirstLetter = (friends) => {
   let result = [];
+
   friends.forEach((friend) => {
-    const found = result.find(
-      (el) => el.toLowerCase() == friend.Friend.username[0].toLowerCase()
-    );
-    if (!found) result.push(friend.Friend.username[0]);
+    if(localStorage.user_id == friend.UserId) {
+      const found = result.find(
+        (el) => el.toLowerCase() == friend.Friend.username[0].toLowerCase()
+      );
+      if (!found) result.push(friend.Friend.username[0]);
+    } else {
+      const found = result.find(
+        (el) => el.toLowerCase() == friend.User.username[0].toLowerCase()
+      );
+      if (!found) result.push(friend.User.username[0]);
+    }
+
   });
   result.sort();
+  console.log({result}, 'from getFriendFirstLetter util')
   return result;
 };
 
@@ -28,14 +38,22 @@ const sortFriendsByFirstLetter = (friends) => {
   const firstLetters = getFriendsFirstLetter(friends);
 
   firstLetters.forEach((letter) => (result[letter] = []));
-  friends.forEach((friend) => {
-    result[friend.Friend.username[0].toUpperCase()].push(friend);
-  });
+  console.log({firstLetters} ,'<<<< from sortFriendsByFirstLetter')
 
+  friends.forEach((friend) => {
+    if(localStorage.user_id == friend.UserId) {
+      console.log({user_id: localStorage.user_id, UserId: friend.UserId}, '<<< willpush friend')
+      result[friend.Friend.username[0].toUpperCase()].push(friend.Friend); console.log('<<< willpush friend')
+    } else {
+      console.log({user_id: localStorage.user_id, UserId: friend.UserId}, '<<< willpush user')
+      result[friend.User.username[0].toUpperCase()].push(friend.User); console.log('<<< willpush user')
+    }
+  });
+  console.log({result} ,'<<<< from sortFriendsByFirstLetter', 'after pushed')
   for (let [key, value] of Object.entries(result)) {
     value.sort((val1, val2) => {
-      const userA = val1.Friend.username.toLowerCase();
-      const userB = val2.Friend.username.toLowerCase();
+      const userA =  val1.username.toLowerCase()
+      const userB =  val2.username.toLowerCase()
 
       if (userA > userB) {
         console.log(userA > userB);
@@ -50,7 +68,7 @@ const sortFriendsByFirstLetter = (friends) => {
       return 0;
     });
   }
-
+  console.log({result})
   return result;
 };
 
