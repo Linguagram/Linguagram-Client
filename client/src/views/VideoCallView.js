@@ -64,9 +64,9 @@ export default function VideoCallView() {
   const userVideo = useRef();
   const partnerVideo = useRef();
   const peerRef = useRef();
-
   
- 
+  let streamRef
+
 
 
   const call = () => {
@@ -76,6 +76,7 @@ export default function VideoCallView() {
       if (userVideo.current) {
         userVideo.current.srcObject = stream;
       }
+      streamRef = stream
       return stream
     })
     .then((stream) => {
@@ -151,6 +152,9 @@ export default function VideoCallView() {
           navigate('/home/chats')
         }
       }
+      streamRef.getTracks().forEach(function(track) {
+        track.stop();
+      });
     })
 
     socketConnect.on("anotherUserLeaveTheCall", (data) => {
@@ -169,6 +173,9 @@ export default function VideoCallView() {
           navigate('/home/chats')
         }
       }
+      streamRef.getTracks().forEach(function(track) {
+        track.stop();
+      });
     })
 
   }, []);
@@ -181,6 +188,9 @@ export default function VideoCallView() {
       socketConnect.emit("leaveCall", { userToInform: incomingCaller.id, from: thisUser.id })
       dispatch(setIncomingCaller({}))
     }
+    streamRef.getTracks().forEach(function(track) {
+      track.stop();
+    });
     socketConnect.off("callAccepted")
     navigate('/home/chats')
   }
@@ -199,6 +209,7 @@ export default function VideoCallView() {
       if (userVideo.current) {
         userVideo.current.srcObject = stream;
       }
+      streamRef = stream
       return stream
     })
     .then((stream) => {
