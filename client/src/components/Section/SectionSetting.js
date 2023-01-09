@@ -43,6 +43,7 @@ export default function SectionSetting() {
               src={thisUser.Avatar.url}
               id="avatar-profile"
               alt="avatar"
+              className="object-cover"
             ></img>
             <div
               onClick={() => setIsAvatarModalVisible(true)}
