@@ -35,3 +35,5 @@ export const FETCH_ALL_FRIENDS = "friends/successFetchAll"
 export const FETCH_ALL_FRIEND_REQUESTS = "friends/successFetchAllFriendRequests"
 
 export const ADD_MESSAGE = "groups/addMessage"
+
+export const FETCH_INTERESTS = "interests/fetchInterests"

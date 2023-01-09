@@ -1,20 +1,16 @@
 import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { useSelector } from 'react-redux';
 
-const people = [
-  { name: 'Indonesia' },
-  { name: 'Mexico' },
-  { name: 'France' },
-]
-
-export default function MyListbox({inputRef}) {
-  const [selected, setSelected] = useState(people[0])
+export default function MyListbox({ inputRef }) {
+  const { languageList } = useSelector((state) => state.languageReducer);
+  const [selected, setSelected] = useState(languageList[0])
 
   inputRef.current = selected
 
   return (
-    <div className="">
+    <>
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full cursor-default bg-darker-gray py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
@@ -32,16 +28,16 @@ export default function MyListbox({inputRef}) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-1 max-h-32 w-full overflow-auto bg-darker-gray py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {people.map((person, personIdx) => (
+            <Listbox.Options className="absolute mt-1 max-h-32 w-full overflow-auto bg-darker-gray py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-20 overflow-y-auto">
+              {languageList.map((language, idx) => (
                 <Listbox.Option
-                  key={personIdx}
+                  key={idx}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
                       active ? 'bg-main-color text-white' : 'text-white'
                     }`
                   }
-                  value={person}
+                  value={language}
                 >
                   {({ selected }) => (
                     <>
@@ -50,7 +46,7 @@ export default function MyListbox({inputRef}) {
                           selected ? 'font-medium' : 'font-normal'
                         }`}
                       >
-                        {person.name}
+                        {language.name}
                       </span>
                       {selected ? (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-white">
@@ -65,6 +61,6 @@ export default function MyListbox({inputRef}) {
           </Transition>
         </div>
       </Listbox>
-    </div>
+    </>
   )
 }

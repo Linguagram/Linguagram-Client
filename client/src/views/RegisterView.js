@@ -1,15 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import InputField from "../components/Form/InputFiled";
 import MyListbox from "../components/Form/ListBox";
 import { register } from "../store/middlewares/thunk";
 import { useDispatch } from "react-redux";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
+import ComboboxInterest from "../components/Form/Combobox";
 
 export default function RegisterView() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [selectedInterest, setSelectedInterest] = useState([]);
 
   const inputUsernameRef = useRef();
   const inputEmailRef = useRef();
@@ -31,36 +34,42 @@ export default function RegisterView() {
       confirmPassword: inputConfirmPasswordRef.current.value,
       country: inputCountryRef.current.name,
       phoneNumber: inputPhoneNumberRef.current.value,
-      nativeLanguage: [inputNativeLanguageRef.current.value],
-      interestLanguage: [inputInterestLanguageRef.current.value],
-      interests: inputInterestsRef.current.value,
+      nativeLanguage: [],
+      interestLanguage: [],
+      interests: []
     };
 
-    dispatch(register(inputs))
-      .then((response) => {
-        swal(
-          "",
-          `Please check your inbox. We have sent a verification link to ${response.data.user.email}. `
-        );
+    console.log(inputInterestLanguageRef.current);
 
-        inputUsernameRef.current.value = "";
-        inputEmailRef.current.value = "";
-        inputPasswordRef.current.value = "";
-        inputConfirmPasswordRef.current.value = "";
-        inputPhoneNumberRef.current.value = "";
+    inputs.interests = selectedInterest.map(el => el.id)
 
-        navigate("/login");
-      })
-      .catch((err) => {
-        if (err.response?.data?.message) {
-          swal({
-            text: `${err.response.data.message}`,
-            icon: "error",
-          });
-          inputPasswordRef.current.value = "";
-          inputConfirmPasswordRef.current.value = "";
-        }
-      });
+    console.log(inputs);
+
+    // dispatch(register(inputs))
+    //   .then((response) => {
+    //     swal(
+    //       "",
+    //       `Please check your inbox. We have sent a verification link to ${response.data.user.email}. `
+    //     );
+
+    //     inputUsernameRef.current.value = "";
+    //     inputEmailRef.current.value = "";
+    //     inputPasswordRef.current.value = "";
+    //     inputConfirmPasswordRef.current.value = "";
+    //     inputPhoneNumberRef.current.value = "";
+
+    //     navigate("/login");
+    //   })
+    //   .catch((err) => {
+    //     if (err.response?.data?.message) {
+    //       swal({
+    //         text: `${err.response.data.message}`,
+    //         icon: "error",
+    //       });
+    //       inputPasswordRef.current.value = "";
+    //       inputConfirmPasswordRef.current.value = "";
+    //     }
+    //   });
   };
 
   return (
@@ -107,18 +116,13 @@ export default function RegisterView() {
                   />
                 </div>
                 <div className="flex flex-col gap-4 w-full">
-                  <div className="flex flex-col">
-                    <label className="mb-2 text-sm">Country</label>
-                    <div className="flex flex-1 items-center bg-darker-gray">
-                      <FontAwesomeIcon
-                        className="text-slate-500 text-xl bg-main-color-blur p-3"
-                        icon="globe"
-                      />
-                      <div className="w-full">
-                        <MyListbox inputRef={inputCountryRef} />
-                      </div>
-                    </div>
-                  </div>
+                  <InputField
+                    inputRef={inputCountryRef}
+                    label={"Country"}
+                    icon={"globe"}
+                    type={"text"}
+                    placeholder={"Country"}
+                  />
                   <InputField
                     inputRef={inputPhoneNumberRef}
                     label={"Phone Number"}
@@ -153,21 +157,29 @@ export default function RegisterView() {
                 </div>
               </div>
               <div className="flex flex-col w-full">
-                    <label className="mb-2 text-sm">Interest Topic</label>
-                    <div className="flex flex-1 items-center bg-darker-gray">
-                      <FontAwesomeIcon
-                        className="text-slate-500 text-xl bg-main-color-blur p-3"
-                        icon="globe"
-                      />
-                      <div className="w-full">
-                        <MyListbox inputRef={inputInterestsRef} />
-                      </div>
-                    </div>
+                <label className="mb-2 text-sm">Interest Topic</label>
+                <div className="flex flex-1 items-center bg-darker-gray">
+                  <FontAwesomeIcon
+                    className="text-slate-500 text-xl bg-main-color-blur p-3"
+                    icon="globe"
+                  />
+                  <div className="w-full">
+                    <ComboboxInterest
+                      selectedInterest={selectedInterest}
+                      setSelectedInterest={setSelectedInterest}
+                    />
                   </div>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                {selectedInterest.map((interest) => (
+                  <div className="bg-darker-gray py-1 px-3 rounded" key={interest.id}>{interest.name}</div>
+                ))}
+              </div>
               <button
                 type="submit"
                 className="bg-main-color rounded p-3 text-sm w-full"
-              >
+                >
                 Login
               </button>
             </div>

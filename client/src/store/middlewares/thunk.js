@@ -15,6 +15,7 @@ import {
   setFriendRequests,
   setFriends,
   addMessage,
+  setInterests,
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
@@ -52,6 +53,18 @@ export const handleSetActiveSection = (section) => {
     dispatch(setActiveSection(section));
   };
 };
+
+export const getInterests = () => {
+  return (dispatch, getState) => {
+    return axios({
+      method: 'GET',
+      url: `${URL_SERVER}/interests`,
+      headers: {
+        access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjczMjQxMjMxfQ.jQMcuwSF_EaMQuOUFtL62YIgWqo3fW96qrhG3uD3jDo'
+      }
+    })
+  }
+}
 
 export const register = (inputs) => {
   return (dispatch, getState) => {

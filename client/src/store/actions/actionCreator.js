@@ -17,7 +17,8 @@ import {
   FETCH_ALL_FRIENDS,
   FETCH_ALL_FRIEND_REQUESTS,
   ADD_MESSAGE,
-  SET_AM_I_THE_CALLER
+  SET_AM_I_THE_CALLER,
+  FETCH_INTERESTS
 } from "./actionTypes";
 
 export const setActiveSection = (payload) => {
@@ -153,3 +154,10 @@ export const addMessage = (payload) => {
     payload,
   };
 };
+
+export const setInterests = (payload) => {
+  return {
+    type: FETCH_INTERESTS,
+    payload
+  }
+}
