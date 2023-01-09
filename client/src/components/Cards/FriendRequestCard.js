@@ -5,11 +5,11 @@ export default function FriendRequestCard({friend}) {
   return (
     <div>
       <div className="flex items-center gap-4 p-2 rounded">
-        <img src={friend.Friend.Avatar.url} className="avatar-chat" alt="avatar"></img>
+        <img src={friend.User.Avatar.url} className="avatar-chat" alt="avatar"></img>
         <div className="flex justify-between w-full gap-1">
           <div className="flex items-center justify-between">
             <h4 className="text-base text-white cursor-pointer hover:underline">
-              {friend.Friend.username}
+              {friend.User.username}
             </h4>
           </div>
           <div className="flex items-center justify-between gap-6">

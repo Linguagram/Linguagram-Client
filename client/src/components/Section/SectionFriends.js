@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { setHomeDrawer } from "../../store/actions/actionCreator";
 import { getFriends } from "../../store/middlewares/thunk";
+import FriendCard from "../Cards/FriendCard";
 
 export default function SectionFriends() {
   const { friends, friendRequests } = useSelector(
@@ -59,45 +60,23 @@ export default function SectionFriends() {
           <div className="flex flex-col">
             <div className="text-main-color">A</div>
             <div className="flex flex-col gap-5 pt-2 pl-2">
-              <div className="flex justify-between">
-                <h5 className="text-white cursor-pointer">Albert Rodarte</h5>
-                <FontAwesomeIcon
-                  className="text-gray-400 cursor-pointer"
-                  icon="trash-can"
-                />
-              </div>
-              <div className="flex justify-between">
-                <h5 className="text-white cursor-pointer">Albert Rodarte</h5>
-                <FontAwesomeIcon
-                  className="text-gray-400 cursor-pointer"
-                  icon="trash-can"
-                />
-              </div>
+            {friends.map(friend => {
+              return <FriendCard key={friend.User.id} friend={friend}/>
+            })}
+              
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col gap-3">
+        {/* <div className="flex flex-col gap-3">
           <div className="flex flex-col">
             <div className="text-main-color">A</div>
             <div className="flex flex-col gap-5 pt-2 pl-2">
-              <div className="flex justify-between">
-                <h5 className="text-white cursor-pointer">Albert Rodarte</h5>
-                <FontAwesomeIcon
-                  className="text-gray-400 cursor-pointer"
-                  icon="trash-can"
-                />
-              </div>
-              <div className="flex justify-between">
-                <h5 className="text-white cursor-pointer">Albert Rodarte</h5>
-                <FontAwesomeIcon
-                  className="text-gray-400 cursor-pointer"
-                  icon="trash-can"
-                />
-              </div>
+              <FriendCard />
             </div>
           </div>
-        </div>
+        </div> */}
+
       </div>
 
       <FriendRequest
