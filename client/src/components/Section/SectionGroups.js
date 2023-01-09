@@ -15,7 +15,7 @@ export default function SectionGroups() {
       dispatch(setOpenChat(true));
     })
   }
-  console.log(groupGroups);
+  
   return (
     <>
       <div className="flex items-center justify-between mb-4 text-xl md:mb-8">

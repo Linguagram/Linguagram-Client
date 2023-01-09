@@ -78,11 +78,7 @@ export default function ChatRoomHeader() {
           <FontAwesomeIcon className="status-icon" icon="circle-dot" />
         </div>
       </div>
-      <div className="flex items-center justify-between w-1/3 gap-3 lg:w-1/5 xl:w-1/6 2xl:max-w-fit 2xl:gap-4">
-        <FontAwesomeIcon
-          className="text-gray-400 cursor-pointer small-icons"
-          icon="magnifying-glass"
-        />
+      <div className="flex items-center justify-end w-1/3 gap-3 lg:w-1/5 xl:w-1/6 2xl:max-w-fit 2xl:gap-4">
         {
           counterpartUser.email
           ?
@@ -93,11 +89,6 @@ export default function ChatRoomHeader() {
           :
             null
         }
-        
-        <FontAwesomeIcon
-          className="text-gray-400 cursor-pointer small-icons"
-          icon="trash-can"
-        />
       </div>
     </div>
   );

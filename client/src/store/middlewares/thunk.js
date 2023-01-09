@@ -205,7 +205,6 @@ export const getFriends = () => {
       });
       const requests = data.filter(friend => ((friend.FriendId == localStorage.user_id) && !friend.isAccepted))
       const friends = data.filter(friend => ((friend.UserId == localStorage.user_id) && friend.isAccepted))
-      console.log({requests, friends})
       dispatch(setFriendRequests(requests))
       dispatch(setFriends(friends))
     } catch (err) {
@@ -229,3 +228,19 @@ export const sendFriendRequest = (friendId) => {
     }
   };
 };
+
+
+export const handleDelete = async (groupId ,msgId) => {
+  try {
+      await axios({
+          method: 'DELETE',
+          url: `${URL_SERVER}/groups/${groupId}/messages/${msgId}`,
+          headers: {
+              access_token: getAccessToken()
+          }
+      })
+      console.log('berhasil delete');
+  } catch (error) {
+      console.log(error);
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setHomeDrawer, setOpenChat } from "../../store/actions/actionCreator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,7 +25,7 @@ export default function SectionChats() {
     dispatch(setOpenChat(true));
     dispatch(handleFetchMessagesByGroupId(group.id))
   }
-  // console.log(allGroups[0]);
+  
   return (
     <>
       <div className="flex items-center gap-3 mb-4 text-xl text-white md:mb-8">
@@ -90,21 +90,27 @@ export default function SectionChats() {
                     <h5 className="text-sm text-gray-300">{ `${group.Messages[0].createdAt.getHours()}.${group.Messages[0].createdAt.getMinutes()}` }</h5>
                   </div>
                   <div className="flex items-center justify-between">
-                    <h4 className="text-sm text-gray-400">
                     {
-                      group.Messages[0].content.length < 20
-                      ?
-                        group.Messages[0].content
-                      :
-                      `${group.Messages[0].content.slice(0, 20)}...`
-                    }
+                      group.Messages[0].deleted ?
+                      <h4 className="text-sm text-gray-500 italic">
+                        This message has been deleted.
                       </h4>
+                      :
+                      <h4 className="text-sm text-gray-400">
+                      {
+                        group.Messages[0].content.length < 20
+                        ?
+                          group.Messages[0].content
+                        :
+                        `${group.Messages[0].content.slice(0, 20)}...`
+                      }
+                        </h4>
+                    }
                     { group.unreadMessageCount > 0 &&
                       <div className="w-5 h-5 text-sm font-bold text-center text-red-700 rounded-full bg-red-900-blur">
                         {group.unreadMessageCount}
                       </div>
                     }
-                    
                   </div>
                 </div>
               </div>

@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react'
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { useSelector } from 'react-redux'
+import { handleDelete } from '../../store/middlewares/thunk'
 
 export default function ChatRoomMessage() {
     const messageEndRef = useRef(null)
@@ -20,7 +21,7 @@ export default function ChatRoomMessage() {
     useEffect(() => {
         scrollToBottom()
     }, [currentMessages])
-    console.log('counterpartUser', counterpartUser);
+
   return (
     <div className='flex flex-col flex-grow p-5 overflow-x-hidden overflow-y-auto'>
        
@@ -45,45 +46,33 @@ export default function ChatRoomMessage() {
                                             leaveFrom="transform opacity-100 scale-100"
                                             leaveTo="transform opacity-0 scale-95"
                                         >
-                                            <Menu.Items className="absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                            <Menu.Items className="absolute right-0 z-10 max-w-fit mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                 <div className="py-1 bg-darker-gray">
                                                     <Menu.Item>
                                                     {({ active }) => (
-                                                        <a
-                                                        href="#"
+                                                        <button
+                                                        type='button'
                                                         className={classNames(
                                                             active ? 'bg-gray text-gray-300' : 'text-gray-400',
                                                             'block px-4 py-2 text-sm'
                                                         )}
                                                         >
                                                         Edit
-                                                        </a>
+                                                        </button>
                                                     )}
                                                     </Menu.Item>
                                                     <Menu.Item>
                                                     {({ active }) => (
-                                                        <a
-                                                        href="#"
+                                                        <button
+                                                        type='button'
+                                                        onClick={() => handleDelete(msg.GroupId ,msg.id)}
                                                         className={classNames(
                                                             active ? 'bg-gray text-gray-300' : 'text-gray-400',
                                                             'block px-4 py-2 text-sm'
                                                         )}
                                                         >
                                                         Delete
-                                                        </a>
-                                                    )}
-                                                    </Menu.Item>
-                                                    <Menu.Item>
-                                                    {({ active }) => (
-                                                        <a
-                                                        href="#"
-                                                        className={classNames(
-                                                            active ? 'bg-gray text-gray-300' : 'text-gray-400',
-                                                            'block px-4 py-2 text-sm'
-                                                        )}
-                                                        >
-                                                        Translate
-                                                        </a>
+                                                        </button>
                                                     )}
                                                     </Menu.Item>
                                                 </div>
@@ -94,7 +83,7 @@ export default function ChatRoomMessage() {
                                         {
                                             msg.deleted
                                             ?
-                                            <h5 className='text-slate-500 text-sm' style={{wordBreak: 'break-word'}}>(This message has been deleted)</h5>
+                                            <h5 className='text-slate-500 text-sm italic' style={{wordBreak: 'break-word'}}>This message has been deleted</h5>
                                             :
                                             <div className='flex flex-col gap-1'>
                                                 {
@@ -165,34 +154,8 @@ export default function ChatRoomMessage() {
                                             leaveFrom="transform opacity-100 scale-100"
                                             leaveTo="transform opacity-0 scale-95"
                                         >
-                                            <Menu.Items className="absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                            <Menu.Items className="absolute right-0 z-10 max-w-fit mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                 <div className="py-1 bg-darker-gray">
-                                                    <Menu.Item>
-                                                    {({ active }) => (
-                                                        <a
-                                                        href="#"
-                                                        className={classNames(
-                                                            active ? 'bg-gray text-gray-300' : 'text-gray-400',
-                                                            'block px-4 py-2 text-sm'
-                                                        )}
-                                                        >
-                                                        Edit
-                                                        </a>
-                                                    )}
-                                                    </Menu.Item>
-                                                    <Menu.Item>
-                                                    {({ active }) => (
-                                                        <a
-                                                        href="#"
-                                                        className={classNames(
-                                                            active ? 'bg-gray text-gray-300' : 'text-gray-400',
-                                                            'block px-4 py-2 text-sm'
-                                                        )}
-                                                        >
-                                                        Delete
-                                                        </a>
-                                                    )}
-                                                    </Menu.Item>
                                                     <Menu.Item>
                                                     {({ active }) => (
                                                         <a
