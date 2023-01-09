@@ -118,7 +118,7 @@ export default function ChatRoomMessage() {
                                 </div>
                             </div>
                             <div>
-                                <img src={thisUser.Avatar.url} className='avatar-chat' alt='avatar'></img>
+                                <img src={thisUser.Avatar.url ? thisUser.Avatar.url : "https://i.pravatar.cc/150?img=3"} className='avatar-chat' alt='avatar'></img>
                             </div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@ export default function ChatRoomMessage() {
                     <div key={msg.id} className=''>
                         <div className='flex items-end gap-3 mb-7'>
                             <div>
-                                <img src={counterpartUser.Avatar.url} className='avatar-chat' alt='avatar'></img>
+                                <img src={counterpartUser.Avatar.url ? counterpartUser.Avatar.url : "https://i.pravatar.cc/150?img=3" } className='avatar-chat' alt='avatar'></img>
                             </div>
                             <div className='flex flex-col gap-1'>
                                 <div className='flex gap-2'>
