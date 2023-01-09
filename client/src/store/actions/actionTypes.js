@@ -25,3 +25,7 @@ export const SET_SOCKET = 'socket/setSocketConnect'
 export const FETCH_EXPLORE_USERS = "explore/successFetchExploreUsers"
 
 export const FETCH_EXPLORE_GROUPS = "explore/successFetchExploreGroups"
+
+export const FETCH_ALL_FRIENDS = "friends/successFetchAll"
+
+export const FETCH_ALL_FRIEND_REQUESTS = "friends/successFetchAllFriendRequests"

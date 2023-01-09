@@ -7,6 +7,7 @@ import messageReducer from "./reducers/messageReducer";
 import drawerReducer from "./reducers/drawerReducer";
 import socketReducer from "./reducers/socketReducer";
 import exploreReducer from "./reducers/exploreReducer";
+import friendReducer from "./reducers/friendReducer";
 
 const rootReducer = combineReducers ({
     drawerReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers ({
     groupReducer,
     messageReducer,
     socketReducer,
-    exploreReducer
+    exploreReducer,
+    friendReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware( thunk))

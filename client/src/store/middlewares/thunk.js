@@ -12,6 +12,8 @@ import {
   setCounterpartUser,
   setExploreUsers,
   setExploreGroups,
+  setFriendRequests,
+  setFriends,
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
@@ -179,6 +181,27 @@ export const handleFetchExploreGroups = () => {
   };
 };
 
+export const getFriends = () => {
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await axios({
+        method: "get",
+        url: `${URL_SERVER}/friends`,
+        headers: {
+          access_token: getAccessToken(),
+        },
+      });
+      const requests = data.filter(friend => ((friend.Friend.id === localStorage.user_id) && !friend.isAccepted))
+      const friends = data.filter(friend => (friend.isAccepted))
+      console.log({requests, friends})
+      dispatch(setFriendRequests(requests))
+      dispatch(setFriends(friends))
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 export const sendFriendRequest = (friendId) => {
   return async (dispatch, getState) => {
     try {
@@ -189,23 +212,6 @@ export const sendFriendRequest = (friendId) => {
           access_token: getAccessToken(),
         },
       });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-};
-
-export const getFriendRequest = () => {
-  return async (dispatch, getState) => {
-    try {
-      const { data } = await axios({
-        method: "get",
-        url: `${URL_SERVER}/friends`,
-        headers: {
-          access_token: getAccessToken(),
-        },
-      });
-      return data
     } catch (err) {
       console.log(err);
     }

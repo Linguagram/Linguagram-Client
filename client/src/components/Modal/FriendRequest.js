@@ -1,40 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { getFriendRequest } from "../../store/middlewares/thunk";
+
 import FriendRequestCard from "../Cards/FriendRequestCard";
 
-export default function FriendRequest({ onClose, visible }) {
-  const dispatch = useDispatch();
+export default function FriendRequest({ onClose, visible, friendRequests }) {
+  
   const handleOnClose = () => {
     onClose();
   };
-
-  const [friendRequests, setFriendRequests] = useState([])
-
-  //---------------------------------------------------------
-  //                    FRIEND REQUEST
-  //---------------------------------------------------------
-  /*
-    1. Get all friends
-    2. Filter every entry which isAccepted's value is false.
-    3. Set matched entry to friend request
-   */
-
-  useEffect(() => {
-    dispatch(getFriendRequest())
-      .then((friends) => {
-        console.log(friends)
-        let request = []
-        friends.forEach(friend => {
-          if(!friend.isAccepted) request.push(friend)
-        })
-        setFriendRequests(request)
-      })
-      .catch((err) => console.log);
-  }, []);
-
-  //---------------------------------------------------------
-
 
   return (
     <div

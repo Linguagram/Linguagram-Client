@@ -1,22 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FriendRequest from "../Modal/FriendRequest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setHomeDrawer } from "../../store/actions/actionCreator";
+import { getFriends } from "../../store/middlewares/thunk";
 
 export default function SectionFriends() {
-  const dispatch = useDispatch()
+  const { friends, friendRequests } = useSelector(
+    (state) => state.friendReducer
+  );
+  const dispatch = useDispatch();
   const [isFriendRequestModalVisible, setisFriendRequestModalVisible] =
     useState(false);
 
   const handleCloseFriendRequestModal = () =>
     setisFriendRequestModalVisible(false);
 
+  useEffect(() => {
+    dispatch(getFriends())
+      .then((_) => {
+        return;
+      })
+      .catch(console.log);
+  }, []);
+
   return (
     <>
       <div className="flex items-center justify-between mb-4 text-xl md:mb-8">
         <div className="flex gap-3">
-          <button className="md:hidden" onClick={() => dispatch(setHomeDrawer(true))}>
+          <button
+            className="md:hidden"
+            onClick={() => dispatch(setHomeDrawer(true))}>
             <FontAwesomeIcon className="text-xl text-white" icon="bars" />
           </button>
           <h4 className="text-white">Friends</h4>
@@ -36,8 +50,7 @@ export default function SectionFriends() {
           <input
             className="pr-4 text-white bg-transparent focus:border-none focus:outline-none"
             type="text"
-            placeholder="Search friend"
-          ></input>
+            placeholder="Search friend"></input>
         </div>
       </div>
 
@@ -90,6 +103,7 @@ export default function SectionFriends() {
       <FriendRequest
         onClose={handleCloseFriendRequestModal}
         visible={isFriendRequestModalVisible}
+        friendRequests={friendRequests}
       />
     </>
   );
