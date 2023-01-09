@@ -25,7 +25,7 @@ export default function FriendRequest({ onClose, visible, friendRequests }) {
         <div className="flex flex-col gap-5 my-3 lg:my-5 scrollbar-hide overflow-auto">
           {friendRequests.length > 0 ? 
             friendRequests.map(request => {
-              return <FriendRequestCard key={request.id} />
+              return <FriendRequestCard key={request.id} friend={request} />
             }) :
             <p className="text-white">No friend request</p>
           }

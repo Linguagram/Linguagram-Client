@@ -191,8 +191,8 @@ export const getFriends = () => {
           access_token: getAccessToken(),
         },
       });
-      const requests = data.filter(friend => ((friend.Friend.id === localStorage.user_id) && !friend.isAccepted))
-      const friends = data.filter(friend => (friend.isAccepted))
+      const requests = data.filter(friend => ((friend.FriendId == localStorage.user_id) && !friend.isAccepted))
+      const friends = data.filter(friend => ((friend.UserId == localStorage.user_id) && friend.isAccepted))
       console.log({requests, friends})
       dispatch(setFriendRequests(requests))
       dispatch(setFriends(friends))
