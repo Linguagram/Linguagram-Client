@@ -42,11 +42,11 @@ export default function Navbar() {
       </div>
 
       <div
-        className={
+        className={`text-white ease-in duration-300 ${
           color
-            ? "text-white bg-black ease-in duration-300"
-            : "text-white ease-in duration-300"
-        }>
+            ? "bg-black"
+            : ""
+        }`}>
         <div className="px-4 container mx-auto flex justify-between items-center py-4">
           <div className="text-2xl font-bold flex items-center">
             <NavLink to={"/"}>Linguagram</NavLink>

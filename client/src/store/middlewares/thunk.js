@@ -54,7 +54,7 @@ export const handleSetActiveSection = (section) => {
 
 export const register = (inputs) => {
   return (dispatch, getState) => {
-    const { username, email, password, confirmPassword, phoneNumber, country } =
+    const { username, email, password, confirmPassword, country, phoneNumber, nativeLanguage, interestLanguage, interests } =
       inputs;
 
     return axios({
@@ -67,6 +67,9 @@ export const register = (inputs) => {
         confirmPassword,
         phoneNumber,
         country,
+        nativeLanguage,
+        interestLanguage,
+        interests
       },
     });
   };

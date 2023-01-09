@@ -3,10 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { setHomeDrawer } from "../../store/actions/actionCreator";
+import { logOut } from "../../store/middlewares/thunk";
 
 export default function HomeDrawer({ homeDrawer }) {
   const dispatch = useDispatch();
   const currentRoute = useLocation();
+
+  const handleLogout = () => {
+    dispatch(setHomeDrawer(false))
+    dispatch(logOut())
+  }
 
   return (
     <div
@@ -87,7 +93,7 @@ export default function HomeDrawer({ homeDrawer }) {
             <div>Explore</div>
           </NavLink>
 
-          <NavLink to={"/"} onClick={() => dispatch(setHomeDrawer(false))} className="flex items-center gap-4 py-2">
+          <NavLink to={"/"} onClick={handleLogout} className="flex items-center gap-4 py-2">
             <FontAwesomeIcon
               className="w-1/3 text-gray-400 cursor-pointer"
               icon="right-from-bracket"

@@ -9,6 +9,7 @@ import socketReducer from "./reducers/socketReducer";
 import videoReducer from "./reducers/videoReducer";
 import exploreReducer from "./reducers/exploreReducer";
 import friendReducer from "./reducers/friendReducer";
+import languageReducer from "./reducers/languageReducer";
 
 const rootReducer = combineReducers ({
     drawerReducer,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers ({
     videoReducer,
     socketReducer,
     exploreReducer,
-    friendReducer
+    friendReducer,
+    languageReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware( thunk))
