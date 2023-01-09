@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 import UserModal from "../Modal/UserModal";
@@ -11,6 +11,7 @@ export default function ChatRoomHeader() {
 
   const { counterpartUser } = useSelector((state) => state.userReducer);
   const { thisUser } = useSelector((state) => state.userReducer);
+  const { socketConnect } = useSelector((state) => state.socketReducer);
 
   let [isOpen, setIsOpen] = useState(false);
   let [isCalling, setIscalling] = useState(false)
@@ -22,6 +23,108 @@ export default function ChatRoomHeader() {
 
   function openModal() {
     setIsOpen(true);
+  }
+
+  const [yourID, setYourID] = useState("");
+  const [users, setUsers] = useState({});
+  const [stream, setStream] = useState();
+  const [receivingCall, setReceivingCall] = useState(false);
+  const [caller, setCaller] = useState("");
+  const [callerSignal, setCallerSignal] = useState();
+  const [callAccepted, setCallAccepted] = useState(false);
+
+  const userVideo = useRef();
+  const partnerVideo = useRef();
+  const peerRef = useRef();
+
+  useEffect(() => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+      setStream(stream);
+      return stream
+    }).then(stream => {
+      if (userVideo.current) {
+        userVideo.current.srcObject = stream;
+      }
+    })
+
+    socketConnect.on("yourID", (id) => {
+      setYourID(id);
+    })
+    socketConnect.on("allUsers", (users) => {
+      setUsers(users);
+    })
+
+    socketConnect.on("hey", (data) => {
+      setReceivingCall(true);
+      setCaller(data.from);
+      setCallerSignal(data.signal);
+    })
+
+    socketConnect.on("user left", () => {
+      setReceivingCall(false);
+      setCaller("");
+      setCallAccepted(false)
+      setUsers({})
+      socketConnect.off("callAccepted")
+      peerRef.current.destroy()
+    })
+  }, []);
+
+  let key;
+  useEffect(() => {
+    if(yourID === Object.keys(users)[1] || yourID === Object.keys(users)[1]) {
+      key = Object.keys(users)[3]
+    } else {
+      key = Object.keys(users)[1]
+    }
+    console.log(yourID, key)
+  }, [users])
+  
+
+  function callPeer(id) {
+    const peer = new Peer({
+      initiator: true,
+      trickle: false,
+      stream: stream,
+    });
+
+    peer.on("signal", data => {
+      socketConnect.emit("callUser", { userToCall: id, signalData: data, from: yourID })
+    })
+
+    peer.on("stream", stream => {
+      if (partnerVideo.current) {
+        partnerVideo.current.srcObject = stream;
+      }
+    });
+
+    socketConnect.on("callAccepted", signal => {
+      setCallAccepted(true);
+      peer.signal(signal);
+    })
+
+    peerRef.current = peer
+
+  }
+
+  function acceptCall() {
+    setCallAccepted(true);
+    const peer = new Peer({
+      initiator: false,
+      trickle: false,
+      stream: stream,
+    });
+
+    peer.on("signal", data => {
+      socketConnect.emit("acceptCall", { signal: data, to: caller })
+    })
+
+    peer.on("stream", stream => {
+      partnerVideo.current.srcObject = stream;
+    });
+
+    peer.signal(callerSignal);
+    peerRef.current = peer
   }
 
   function calling() {
