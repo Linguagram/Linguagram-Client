@@ -1,19 +1,26 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
-import avatar from '../../pictures/avatar-1.3921191a8acf79d3e907.jpg'
 import { useSelector } from 'react-redux'
 
 export default function ChatRoomMessage() {
-
+    const messageEndRef = useRef(null)
     const { currentMessages } = useSelector((state) => state.messageReducer);
-    const { thisUser } = useSelector((state) => state.userReducer);
+    const { thisUser, counterpartUser } = useSelector((state) => state.userReducer);
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
     }
 
+    const scrollToBottom = () => {
+        messageEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    }
+
+    useEffect(() => {
+        scrollToBottom()
+    }, [currentMessages])
+    console.log('counterpartUser', counterpartUser);
   return (
     <div className='flex flex-col flex-grow p-5 overflow-x-hidden overflow-y-auto'>
        
@@ -119,7 +126,7 @@ export default function ChatRoomMessage() {
                     <div key={msg.id} className=''>
                         <div className='flex items-end gap-3 mb-7'>
                             <div>
-                                <img src={msg.User.Avatar.url} className='avatar-chat' alt='avatar'></img>
+                                <img src={counterpartUser.Avatar.url} className='avatar-chat' alt='avatar'></img>
                             </div>
                             <div className='flex flex-col gap-1'>
                                 <div className='flex gap-2'>
@@ -205,7 +212,7 @@ export default function ChatRoomMessage() {
                                     </Menu>  
                                 </div>
                                 <div className='text-gray-400'>
-                                    {msg.User.username}
+                                    {counterpartUser.username}
                                 </div>
                             </div>
                         </div>
@@ -213,6 +220,8 @@ export default function ChatRoomMessage() {
             })
         }
 
+
+        <div ref={messageEndRef} />
     </div>
   )
 }

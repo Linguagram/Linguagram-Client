@@ -17,7 +17,7 @@ export default function HomeView() {
   const { homeDrawer } = useSelector((state) => state.drawerReducer)
   const { openChat } = useSelector((state) => state.sectionReducer)
   const { thisUser } = useSelector((state) => state.userReducer)
-  const { privateGroups, groupGroups } = useSelector((state) => state.groupReducer)
+  const { privateGroups, groupGroups, allGroups } = useSelector((state) => state.groupReducer)
   const { socketConnect } = useSelector((state) => state.socketReducer)
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function HomeView() {
 
     dispatch(initSocket());
   }, [])
-
+  
   return (
     <div className="fixed flex w-screen h-screen md:flex-row">
       <Sidebar />

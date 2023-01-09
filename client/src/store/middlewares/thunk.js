@@ -110,14 +110,26 @@ export const handleFetchGroups = () => {
           access_token: getAccessToken(),
         },
       });
+      
+      const allGroups = []
+      data.forEach((el) => {
+        if (el.Messages.length > 0) {
+          el.Messages = el.Messages.map(message => {
+            message.createdAt = new Date(message.createdAt)
+            return message
+          })
+          
+          allGroups.push(el)
+        }
+      })
 
       const privateGroups = data.filter((el) => el.type === "dm");
       const groupGroups = data.filter((el) => el.type === "group");
-      dispatch(setAllGroups(data));
+
+      dispatch(setAllGroups(allGroups));
       dispatch(setPrivateGroups(privateGroups));
       dispatch(setGroupGroups(groupGroups));
     } catch (err) {
-      // console.log(err);
       return err;
     }
   };
