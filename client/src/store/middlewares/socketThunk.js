@@ -15,7 +15,7 @@ export const initSocket = () => {
     socket.on(SOCKET_EVENTS.CONNECTION, () => {
       console.log("[ws] Connected to server:", URL_SERVER);
 
-      const userId = localStorage.userId;
+      const userId = localStorage.user_id;
       console.log("[ws] Identifying with userId:", userId)
       socket.emit(SOCKET_EVENTS.IDENTIFY, { userId }); 
     });
@@ -34,7 +34,7 @@ export const closeSocket = () => {
 
     if (socketReducer.socketConnect) {
       socketReducer.socketConnect.close(1000, {
-        userId: localStorage.userId,
+        userId: localStorage.user_id,
       });
 
       dispatch(setSocketConnect(null));

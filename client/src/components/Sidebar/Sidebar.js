@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../store/middlewares/thunk";
+import { closeSocket } from "../../store/middlewares/socketThunk";
 
 export default function Sidebar() {
   const currentRoute = useLocation();
@@ -10,6 +11,7 @@ export default function Sidebar() {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
+    dispatch(closeSocket())
     dispatch(logOut())
     navigate('/')
   }
