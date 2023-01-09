@@ -111,18 +111,18 @@ export const handleFetchGroups = () => {
           access_token: getAccessToken(),
         },
       });
-      
-      const allGroups = []
+
+      const allGroups = [];
       data.forEach((el) => {
         if (el.Messages.length > 0) {
-          el.Messages = el.Messages.map(message => {
-            message.createdAt = new Date(message.createdAt)
-            return message
-          })
-          
-          allGroups.push(el)
+          el.Messages = el.Messages.map((message) => {
+            message.createdAt = new Date(message.createdAt);
+            return message;
+          });
+
+          allGroups.push(el);
         }
-      })
+      });
 
       const privateGroups = data.filter((el) => el.type === "dm");
       const groupGroups = data.filter((el) => el.type === "group");
@@ -204,10 +204,15 @@ export const getFriends = () => {
           access_token: getAccessToken(),
         },
       });
-      const requests = data.filter(friend => ((friend.FriendId == localStorage.user_id) && !friend.isAccepted))
-      const friends = data.filter(friend => ((friend.UserId == localStorage.user_id) && friend.isAccepted))
-      dispatch(setFriendRequests(requests))
-      dispatch(setFriends(friends))
+      const requests = data.filter(
+        (friend) =>
+          friend.FriendId == localStorage.user_id && !friend.isAccepted
+      );
+      const friends = data.filter(
+        (friend) => friend.UserId == localStorage.user_id && friend.isAccepted
+      );
+      dispatch(setFriendRequests(requests));
+      dispatch(setFriends(friends));
     } catch (err) {
       console.log(err);
     }
@@ -252,18 +257,44 @@ export const sendMessage = (groupId, formData) => {
   };
 };
 
-
-export const handleDelete = async (groupId ,msgId) => {
+export const handleDeleteMessage = async (groupId, msgId) => {
   try {
-      await axios({
-          method: 'DELETE',
-          url: `${URL_SERVER}/groups/${groupId}/messages/${msgId}`,
-          headers: {
-              access_token: getAccessToken()
-          }
-      })
-      console.log('berhasil delete');
+    await axios({
+      method: "DELETE",
+      url: `${URL_SERVER}/groups/${groupId}/messages/${msgId}`,
+      headers: {
+        access_token: getAccessToken(),
+      },
+    });
   } catch (error) {
-      console.log(error);
+    console.log(error);
+  }
+};
+
+export const handleEditMessage = async (groupId, msgId) => {
+  try {
+    
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const handleTranslate = async (content, toLanguage) => {
+  try {
+    const { data } = await axios({
+      method: 'POST',
+      url: `${URL_SERVER}/translate`,
+      headers: {
+        access_token: getAccessToken()
+      },
+      data: {
+        text: content,
+        to: toLanguage
+      }
+    })
+
+    return data.translated
+  } catch (error) {
+    console.log(error);
   }
 }
