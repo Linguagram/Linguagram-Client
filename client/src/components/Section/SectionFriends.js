@@ -36,6 +36,7 @@ export default function SectionFriends() {
       .catch(console.log);
   }, []);
 
+
   return (
     <>
       <div className="flex items-center justify-between mb-4 text-xl md:mb-8">

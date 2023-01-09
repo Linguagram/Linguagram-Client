@@ -35,7 +35,8 @@ export const handleSetThisUser = (user) => {
     dispatch(setNativeLanguage(nativeLangObj.Language));
 
     // Added condition to prevent error in development ---------------------------
-    if(interestLangObj) dispatch(setInterestLanguage(interestLangObj.Language));
+    if (interestLangObj)
+      dispatch(setInterestLanguage(interestLangObj.Language));
     //----------------------------------------------------------------------------
   };
 };
@@ -170,7 +171,6 @@ export const handleSetSocketConnect = (socket) => {
 export const handleFetchExploreUsers = () => {
   return async (dispatch, getState) => {
     try {
-      
       const { data } = await axios({
         method: "get",
         url: `${URL_SERVER}/explore/users`,
@@ -214,10 +214,10 @@ export const getFriends = () => {
       });
       const requests = data.filter(
         (friend) =>
-          friend.FriendId == localStorage.user_id && !friend.isAccepted
+          (friend.FriendId == localStorage.user_id) && !friend.isAccepted
       );
       const friends = data.filter(
-        (friend) => friend.UserId == localStorage.user_id && friend.isAccepted
+        (friend) => (friend.UserId == localStorage.user_id) && friend.isAccepted
       );
       dispatch(setFriendRequests(requests));
       dispatch(setFriends(friends));
@@ -230,7 +230,7 @@ export const getFriends = () => {
 export const sendFriendRequest = (friendId) => {
   return async (dispatch, getState) => {
     try {
-      console.log(friendId)
+      console.log(friendId);
       const { data } = await axios({
         method: "post",
         url: `${URL_SERVER}/friends/${friendId}`,
@@ -244,7 +244,7 @@ export const sendFriendRequest = (friendId) => {
       */
       // !TODO: insert to friend list?
     } catch (err) {
-      swalError(err)
+      swalError(err);
     }
   };
 };
@@ -306,7 +306,6 @@ export const handleDeleteMessage = async (groupId, msgId) => {
 
 export const handleEditMessage = async (groupId, msgId) => {
   try {
-    
   } catch (error) {
     console.log(error);
   }
@@ -315,19 +314,36 @@ export const handleEditMessage = async (groupId, msgId) => {
 export const handleTranslate = async (content, toLanguage) => {
   try {
     const { data } = await axios({
-      method: 'POST',
+      method: "POST",
       url: `${URL_SERVER}/translate`,
       headers: {
-        access_token: getAccessToken()
+        access_token: getAccessToken(),
       },
       data: {
         text: content,
-        to: toLanguage
-      }
-    })
+        to: toLanguage,
+      },
+    });
 
-    return data.translated
+    return data.translated;
   } catch (error) {
     console.log(error);
   }
-}
+};
+
+export const acceptFriendRequest = (friendshipId) => {
+  return async (dispatch, getState) => {
+    try {
+      await axios({
+        method: "PATCH",
+        url: `${URL_SERVER}/friendships/${friendshipId}`,
+        headers: {
+          access_token: getAccessToken(),
+        },
+      });
+      dispatch(getFriends());
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
