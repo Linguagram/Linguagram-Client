@@ -14,18 +14,19 @@ export default function FriendRequestCard({ friend }) {
   }, []);
 
   const acceptRequestHandler = () => {
-    console.log({ friend });
-    dispatch(acceptFriendRequest(request.id));
+    dispatch(acceptFriendRequest(friend.UserId));
   };
 
   return (
     <div>
-      {request ? (
+      {friend ? (
         <div className="flex items-center gap-4 p-2 rounded">
-          <img
+          {request.Avatar ? 
+            <img
             src={request.Avatar.url}
             className="avatar-chat"
-            alt="avatar"></img>
+            alt="avatar"></img> : ""
+          }
           <div className="flex justify-between w-full gap-1">
             <div className="flex items-center justify-between">
               <h4 className="text-base text-white cursor-pointer hover:underline">

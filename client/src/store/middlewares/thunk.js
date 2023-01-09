@@ -222,7 +222,8 @@ export const getFriends = () => {
         },
       });
       console.log({data})
-      const requests = data.filter((friend) => friend.isAccepted === false);
+      const notAccepted = data.filter((friend) => friend.isAccepted === false);
+      const requests = notAccepted.filter(friend => friend.FriendId == localStorage.user_id)
       const friends = data.filter((friend) => friend.isAccepted === true);
       console.log({friends}, '<<< from thunk')
       dispatch(setFriendRequests(requests));
@@ -256,7 +257,6 @@ export const sendFriendRequest = (friendId) => {
 };
 
 export const sendMessage = (groupId, formData, content) => {
-  return;
   return async (dispatch, getState) => {
     try {
       if (!formData) throw new TypeError("formData can't be empty");

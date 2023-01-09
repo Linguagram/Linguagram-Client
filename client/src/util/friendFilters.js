@@ -29,7 +29,6 @@ const getFriendsFirstLetter = (friends) => {
 
   });
   result.sort();
-  console.log({result}, 'from getFriendFirstLetter util')
   return result;
 };
 
@@ -38,15 +37,12 @@ const sortFriendsByFirstLetter = (friends) => {
   const firstLetters = getFriendsFirstLetter(friends);
 
   firstLetters.forEach((letter) => (result[letter] = []));
-  console.log({firstLetters} ,'<<<< from sortFriendsByFirstLetter')
 
   friends.forEach((friend) => {
     if(localStorage.user_id == friend.UserId) {
-      console.log({user_id: localStorage.user_id, UserId: friend.UserId}, '<<< willpush friend')
-      result[friend.Friend.username[0].toUpperCase()].push(friend.Friend); console.log('<<< willpush friend')
+      result[friend.Friend.username[0].toUpperCase()].push(friend.Friend);
     } else {
-      console.log({user_id: localStorage.user_id, UserId: friend.UserId}, '<<< willpush user')
-      result[friend.User.username[0].toUpperCase()].push(friend.User); console.log('<<< willpush user')
+      result[friend.User.username[0].toUpperCase()].push(friend.User);
     }
   });
   console.log({result} ,'<<<< from sortFriendsByFirstLetter', 'after pushed')
