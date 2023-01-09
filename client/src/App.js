@@ -39,7 +39,7 @@ import {
   faVideoSlash,
   faMicrophoneSlash,
   faAngleLeft,
-  faCloudArrowUp
+  faCloudArrowUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { RouterProvider } from "react-router-dom";
 
@@ -81,7 +81,7 @@ library.add(
   faVideoSlash,
   faMicrophoneSlash,
   faAngleLeft,
-  faCloudArrowUp
+  faCloudArrowUp,
 );
 
 function App() {
