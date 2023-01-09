@@ -18,6 +18,7 @@ import {
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
+import { swalError } from "../../util/swal";
 
 const getAccessToken = () => {
   return localStorage.getItem("access_token");
@@ -32,7 +33,10 @@ export const handleSetThisUser = (user) => {
 
     dispatch(setThisUser(user));
     dispatch(setNativeLanguage(nativeLangObj.Language));
-    dispatch(setInterestLanguage(interestLangObj.Language));
+
+    // Added condition to prevent error in development ---------------------------
+    if(interestLangObj) dispatch(setInterestLanguage(interestLangObj.Language));
+    //----------------------------------------------------------------------------
   };
 };
 
@@ -163,6 +167,7 @@ export const handleSetSocketConnect = (socket) => {
 export const handleFetchExploreUsers = () => {
   return async (dispatch, getState) => {
     try {
+      
       const { data } = await axios({
         method: "get",
         url: `${URL_SERVER}/explore/users`,
@@ -222,6 +227,7 @@ export const getFriends = () => {
 export const sendFriendRequest = (friendId) => {
   return async (dispatch, getState) => {
     try {
+      console.log(friendId)
       const { data } = await axios({
         method: "post",
         url: `${URL_SERVER}/friends/${friendId}`,
@@ -229,10 +235,13 @@ export const sendFriendRequest = (friendId) => {
           access_token: getAccessToken(),
         },
       });
-
+      /*
+        Fetch ulang people untuk mendapatkan
+        people yang belum dikirimkan friend request
+      */
       // !TODO: insert to friend list?
     } catch (err) {
-      console.log(err);
+      swalError(err)
     }
   };
 };

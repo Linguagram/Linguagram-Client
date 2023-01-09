@@ -1,14 +1,20 @@
 import { useDispatch } from "react-redux";
+import { sendFriendRequest } from "../../store/middlewares/thunk";
 
 export default function PeopleCard({
+  id,
   avatarUrl,
   username,
   country,
   languages,
   interests,
 }) {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
+  const triggerSendFriendRequest = () => {
+    console.log(id)
+    dispatch(sendFriendRequest(id))
+  }
 
   return (
     <div className="w-full p-0 py-2 md:p-4 h-96 2xl:h-full max-h-[400px] min-h-[400px]">
@@ -17,7 +23,7 @@ export default function PeopleCard({
           <img
             alt="Paul Clapton"
             src={avatarUrl}
-            className="h-full w-1/3 2xl:w-1/4 rounded-lg object-cover shadow-sm"
+            className="w-1/4 aspect-square rounded-lg object-cover shadow-sm"
           />
         </div>
         <div className="flex flex-col items-center justify-between w-full">
@@ -61,12 +67,14 @@ export default function PeopleCard({
           })}
         </div>
         <div className="flex justify-center w-full gap-2 mb-5 text-sm">
-          <a
+          {/* Send friend request */}
+          <button
+            onClick={triggerSendFriendRequest}
             className="inline-block w-full p-2 text-center text-white border rounded-lg bg-main-color border-main-color hover:bg-black-blue hover:border-black-blue focus:outline-none focus:ring active:text-main-color md:w-fit"
-            href="/download">
+          >
             <span className="sr-only"> Add Friend </span>
             Add Friend
-          </a>
+          </button>
           <a
             className="inline-block w-full p-2 text-center text-white border rounded-lg bg-main-color border-main-color hover:bg-black-blue hover:border-black-blue focus:outline-none focus:ring active:text-main-color md:w-fit"
             href="/download">
