@@ -82,6 +82,26 @@ export default function VideoCallView() {
       const peer = new Peer({
         initiator: true,
         trickle: false,
+        config: {
+          iceServers: [
+            { url: "stun:stun.l.google.com:19302" },
+            {
+              url: "turn:numb.viagenie.ca",
+              credential: "muazkh",
+              username: "webrtc@live.com",
+            },
+            {
+                urls: "stun:numb.viagenie.ca",
+                username: "sultan1640@gmail.com",
+                credential: "98376683"
+            },
+            {
+                urls: "turn:numb.viagenie.ca",
+                username: "sultan1640@gmail.com",
+                credential: "98376683"
+            }
+          ]
+      },
         stream: stream,
       });
   
