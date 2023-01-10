@@ -191,7 +191,7 @@ export default function VideoCallView() {
       socketConnect.emit("leaveCall", { userToInform: incomingCaller.id, from: thisUser.id })
       dispatch(setIncomingCaller({}))
     }
-    streamRef.getTracks().forEach(function(track) {
+    streamRef?.getTracks().forEach(function(track) {
       track.stop();
     });
     socketConnect.off("callAccepted")
