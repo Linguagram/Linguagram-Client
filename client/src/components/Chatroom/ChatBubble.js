@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import {
   handleDeleteMessage,
@@ -11,6 +11,7 @@ import { getUserAvatar } from "../../util/getAvatar";
 
 export default function ChatBubble({ msg }) {
   const [content, setContent] = useState('')
+  const [editing, setEditing] = useState(null)
   const { thisUser, counterpartUser, nativeLanguage } = useSelector(
     (state) => state.userReducer
   );
@@ -37,7 +38,12 @@ export default function ChatBubble({ msg }) {
     dispatch(handleDeleteMessage(groupId, msgId, thisUser.id));
   }
 
-  const editMessage = (groupId, msgId) => {
+  const editingElement = useRef(null);
+
+  const editMessage = (e, groupId, msgId) => {
+    e.preventDefault();
+    const editContent = editingElement.current?.innerText;
+    console.log(editContent);
   }
 
   if (msg.UserId === thisUser.id) {
@@ -54,7 +60,7 @@ export default function ChatBubble({ msg }) {
                     aria-hidden="true"
                   />
                 </Menu.Button>
-                <Transition
+                { !msg.deleted && <Transition
                   as={Fragment}
                   enter="transition ease-out duration-100"
                   enterFrom="transform opacity-0 scale-95"
@@ -69,9 +75,7 @@ export default function ChatBubble({ msg }) {
                         {({ active }) => (
                           <button
                             type="button"
-                            onClick={() =>
-                              editMessage(msg.GroupId, msg.id)
-                            }
+                            onClick={() => setEditing(msg.id)}
                             className={classNames(
                               active
                                 ? "bg-gray text-gray-300"
@@ -104,6 +108,7 @@ export default function ChatBubble({ msg }) {
                     </div>
                   </Menu.Items>
                 </Transition>
+              }
               </Menu>
               <div
                 className="flex flex-col min-w-10 gap-3 p-3 rounded bg-gray message-box"
@@ -117,29 +122,56 @@ export default function ChatBubble({ msg }) {
                     This message has been deleted
                   </h5>
                 ) : (
-                  <div className="flex flex-col gap-1">
-                    {msg.MediaId ? (
-                      <img
-                        className="img-chat w-full"
-                        src={msg.Medium.url}
-                        alt="picture-chat"
-                      ></img>
-                    ) : (
-                      ""
-                    )}
-                    <h5
-                      className="text-white"
-                      style={{ wordBreak: "break-word" }}
-                    >
-                      { content }{" "}
-                      {msg.edited ? (
-                        <span className="text-slate-500 text-xs">(edited)</span>
-                      ) : (
-                        ""
-                      )}
-                    </h5>
-                  </div>
-                )}
+                    msg.id === editing
+                      ? (<form onSubmit={(e) => { editMessage(e, msg.GroupId, msg.id) }} className="flex flex-col gap-1">
+                        {msg.MediaId ? (
+                          <img
+                            className="img-chat w-full"
+                            src={msg.Medium.url}
+                            alt="picture-chat"
+                          ></img>
+                        ) : (
+                            ""
+                          )}
+                        <textarea
+                          ref={editingElement}
+                          className="text-sm text-white bg-transparent focus:border-none focus:outline-none"
+                          style={{ wordBreak: "break-word" }}
+                        >
+                          { content }
+                        </textarea>
+                        <input
+                          style={{ color: "white" }}
+                          type="submit"
+                          value="Edit"/>
+                        <button
+                          style={{ color: "white" }}
+                          onClick={() => setEditing(null)}
+                        >Cancel</button>
+                      </form>)
+                      : (<div className="flex flex-col gap-1">
+                        {msg.MediaId ? (
+                          <img
+                            className="img-chat w-full"
+                            src={msg.Medium.url}
+                            alt="picture-chat"
+                          ></img>
+                        ) : (
+                            ""
+                          )}
+                        <h5
+                          className="text-white"
+                          style={{ wordBreak: "break-word" }}
+                        >
+                          { content }{" "}
+                          {msg.edited ? (
+                            <span className="text-slate-500 text-xs">(edited)</span>
+                          ) : (
+                              ""
+                            )}
+                        </h5>
+                      </div>)
+                  )}
                 <div className="flex justify-end items-center gap-1">
                   <FontAwesomeIcon
                     className="text-xs text-gray-400"
@@ -233,7 +265,7 @@ export default function ChatBubble({ msg }) {
                     aria-hidden="true"
                   />
                 </Menu.Button>
-                <Transition
+                { !msg.deleted && <Transition
                   as={Fragment}
                   enter="transition ease-out duration-100"
                   enterFrom="transform opacity-0 scale-95"
@@ -266,6 +298,7 @@ export default function ChatBubble({ msg }) {
                     </div>
                   </Menu.Items>
                 </Transition>
+              }
               </Menu>
             </div>
             <div className="text-gray-400">{counterpartUser.username}</div>
