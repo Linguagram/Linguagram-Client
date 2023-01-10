@@ -6,6 +6,7 @@ import {
   addMessage,
   deleteMessage,
   editMessage,
+  setOpenChat,
 } from "../actions/actionCreator";
 import { SOCKET_EVENTS } from "../actions/socketEvents";
 import { handleFetchGroups, handleSetThisUser } from "./thunk";
@@ -54,11 +55,25 @@ export const initSocket = (socketDispatch) => {
       socketDispatch(editMessage(message));
     });
 
-    socket.on(SOCKET_EVENTS.USER_UPDATE, (message) => {
-      const { userReducer} = getState();
-      console.log("[ws USER_EDIT]", message);
-      if(userReducer.thisUser.id === message.id) socketDispatch(handleSetThisUser(message))
-      else socketDispatch(handleFetchGroups()) // mau semua ngefetch baru atau cuma user yg lagi chat aja yg keubah??
+    socket.on(SOCKET_EVENTS.USER_UPDATE, (user) => {
+      console.log("[ws USER_EDIT]", user);
+
+      // check if current user actually the user from server
+      const { userReducer } = getState();
+      const uId = userReducer.thisUser?.id;
+      // console.log("[ws USER_UPDATE]", user.id, uId);
+      if (uId !== user.id) return;
+      socketDispatch(handleSetThisUser(user));
+    });
+
+    socket.on(SOCKET_EVENTS.GROUP_UPDATE, (group) => {
+      console.log("[ws GROUP_UPDATE]", group);
+
+      // check if current user actually the user from server
+      const { sectionReducer } = getState();
+      const uId = sectionReducer.openChat?.id;
+      if (uId !== group.id) return;
+      socketDispatch(setOpenChat(group));
     });
 
     socket.on(SOCKET_EVENTS.ERROR, (error) => {
