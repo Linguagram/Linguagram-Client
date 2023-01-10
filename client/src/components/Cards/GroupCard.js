@@ -39,13 +39,14 @@ export default function GroupCard({ groupId, groupName, members, group }) {
   };
 
   return (
-    <div className="flex flex-col justify-around w-full px-6 text-white rounded-lg md:items-center md:justify-between md:h-20 h-36 md:flex-row lg:max-w-2xl xl:max-w-3xl 2xl:max-w-4xl bg-light-gray">
-    <div className="flex items-center flex-1 gap-8">
+    <div className="flex flex-col justify-around w-full p-6 text-white rounded-lg md:items-center md:justify-between md:h-30 min-h-36 md:py-4 md:flex-row lg:max-w-2xl xl:max-w-3xl 2xl:max-w-4xl bg-light-gray">
+    <div className="flex items-center flex-1 gap-8 mb-4 md:mb-0">
       <img
         src={getGroupAvatar(group)}
       />
       <div>
         <div className="text-xl">{groupName}</div>
+        <div>{group.description}</div>
         <div className="text-sm text-gray-400">{formatMembers(members)}</div>
       </div>
     </div>
