@@ -1,5 +1,6 @@
 import io from "socket.io-client";
 import { URL_SERVER } from "../../baseUrl";
+import { swalErrorStr } from "../../util/swal";
 import {
   setSocketConnect,
   addMessage,
@@ -47,6 +48,7 @@ export const initSocket = (socketDispatch) => {
 
     socket.on(SOCKET_EVENTS.ERROR, (error) => {
       console.error("[ws ERROR]", error);
+      swalErrorStr(error.message);
     });
 
     dispatch(setSocketConnect(socket));
