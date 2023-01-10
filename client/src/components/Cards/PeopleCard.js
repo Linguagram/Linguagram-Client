@@ -1,5 +1,9 @@
 import { useDispatch } from "react-redux";
-import { newChatFromExplore, sendFriendRequest } from "../../store/middlewares/thunk";
+import { useNavigate } from "react-router-dom";
+import {
+  newChatFromExplore,
+  sendFriendRequest,
+} from "../../store/middlewares/thunk";
 
 export default function PeopleCard({
   id,
@@ -10,18 +14,18 @@ export default function PeopleCard({
   interests,
 }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const triggerSendFriendRequest = () => {
-    console.log(id)
-    dispatch(sendFriendRequest(id))
-  }
+    console.log(id);
+    dispatch(sendFriendRequest(id));
+  };
 
   const triggerNewChat = () => {
-    dispatch(newChatFromExplore(id)).then(_ => {
-      // 1. navigate to chat section
-      // 2. enter chat room with user with this id.
-    })
-  }
+    dispatch(newChatFromExplore(id)).then((_) => {
+      navigate("/home/chats");
+    });
+  };
 
   return (
     <div className="w-full p-0 py-2 md:p-4 h-96 2xl:h-full max-h-[400px] min-h-[400px]">
@@ -77,15 +81,13 @@ export default function PeopleCard({
           {/* Send friend request */}
           <button
             onClick={triggerSendFriendRequest}
-            className="inline-block w-full p-2 text-center text-white border rounded-lg bg-main-color border-main-color hover:bg-black-blue hover:border-black-blue focus:outline-none focus:ring active:text-main-color md:w-fit"
-          >
+            className="inline-block w-full p-2 text-center text-white border rounded-lg bg-main-color border-main-color hover:bg-black-blue hover:border-black-blue focus:outline-none focus:ring active:text-main-color md:w-fit">
             <span className="sr-only"> Add Friend </span>
             Add Friend
           </button>
           <button
             className="inline-block w-full p-2 text-center text-white border rounded-lg bg-main-color border-main-color hover:bg-black-blue hover:border-black-blue focus:outline-none focus:ring active:text-main-color md:w-fit"
-            onClick={triggerNewChat}
->
+            onClick={triggerNewChat}>
             <span className="sr-only"> Chat </span>
             Chat
           </button>

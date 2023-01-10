@@ -478,7 +478,6 @@ export const changeNavbarColor = (condition) => {
 export const joinGroup = (groupId) => {
   return async (dispatch, getState) => {
     try {
-      console.log({ groupId }, "<<< dari thunk");
       const { data } = await axios({
         method: "POST",
         url: URL_SERVER + "/groups/" + groupId + "/join",
@@ -559,11 +558,13 @@ export const newChatFromExplore = (userId) => {
     try {
       const { data } = await axios({
         method: "GET",
-        url: `/groups/${userId}`,
+        url: `${URL_SERVER}/groups/${userId}`,
         headers: {
           access_token: getAccessToken(),
         }
       });
+      console.log({data})
+      console.log(data)
     } catch (error) {
       console.log(error);
     }
