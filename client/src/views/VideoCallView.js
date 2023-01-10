@@ -18,6 +18,8 @@ export default function VideoCallView() {
   
   const [callerSignal, setCallerSignal] = useState();
 
+  //
+
   let myCam = {
     name: thisUser.username,
     camera: true,

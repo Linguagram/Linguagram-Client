@@ -67,23 +67,6 @@ export default function ChatRoomHeader() {
       console.log(id, "id diri sendiri")
     })
 
-    socketConnect.on('incomingCall', async (incomingUserId) => {
-
-      if(Object.keys(incomingCaller).length === 0) {
-        const {data} = await axios({
-          method: "GET",
-          url: `${URL_SERVER}/users/${incomingUserId.from}`,
-          headers: {
-            'access_token': localStorage.access_token
-          },
-        });
-  
-        dispatch(setIncomingCaller(data))
-  
-        setIsIncomingCall(true)
-      }
-    });
-
     socketConnect.on('callIsCanceled', async (incomingUserId) => {
       setIsIncomingCall(false)
       dispatch(setIncomingCaller({}))
@@ -108,7 +91,7 @@ export default function ChatRoomHeader() {
       <UserModal isOpen={isUserModalOpen} closeModal={closeUserModal} calling={calling}/>
       {/* <GroupModal isOpen={isOpen} closeModal={closeModal}/> */}
       <CallingModal isOpen={isCalling} closeModal={stopCalling} />
-      <IncomingCallingModal declineCall={declineCall} isOpen={isIncomingCall} closeModal={stopCalling} acceptCall={acceptCall}/>
+      {/* <IncomingCallingModal declineCall={declineCall} isOpen={isIncomingCall} acceptCall={acceptCall}/> */}
 
       <div className="flex items-center w-full gap-3">
         <div onClick={closeChat} className="md:hidden">

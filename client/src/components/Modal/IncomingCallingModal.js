@@ -5,14 +5,14 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 
-export default function IncomingCallingModal({ isOpen, closeModal, acceptCall, declineCall }) {
+export default function IncomingCallingModal({ isOpen, acceptCall, declineCall }) {
   const navigate = useNavigate();
   const { incomingCaller } = useSelector((state) => state.userReducer);
   
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Dialog as="div" className="relative z-10" onClose={declineCall}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
