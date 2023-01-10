@@ -6,7 +6,7 @@ import ComboboxInterest from "../../components/Form/Combobox";
 import { useRef, useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { swalError } from "../../util/swal";
+import { swalError, swalErrorStr } from "../../util/swal";
 import swal from "sweetalert";
 import { editProfile, handleSetThisUser } from '../../store/middlewares/thunk';
 
@@ -23,6 +23,15 @@ export default function ChangeProfile({onClose, visible}) {
 
     const [selectedInterest, setSelectedInterest] = useState([]);
 
+    const deleteInterest = (interestId) => {
+        if(selectedInterest.length > 1) {
+            const updatedSelectedInterest = selectedInterest.filter(el => el.id !== interestId)
+            setSelectedInterest(updatedSelectedInterest)
+        } else {
+            swalErrorStr('You need to have at least one interest...')
+        }
+    }
+
     const inputUsernameRef = useRef();
     const inputEmailRef = useRef();
     const inputPasswordRef = useRef()
@@ -33,6 +42,7 @@ export default function ChangeProfile({onClose, visible}) {
     const inputNativeLanguageRef = useRef();
     const inputInterestLanguageRef = useRef();
     const inputInterestsRef = useRef();
+    
 
     const handleChangeProfile = async (e) => {
         e.preventDefault();
@@ -51,36 +61,33 @@ export default function ChangeProfile({onClose, visible}) {
         };
 
         inputs.interests = selectedInterest.map(el => el.id)
-
         dispatch(editProfile(inputs))
-      .then(() => {
-        handleOnClose()
-        swal(
-          "",
-          `Your profile has been updated `
-        );
-        inputUsernameRef.current.value = "";
-        inputEmailRef.current.value = "";
-        inputPasswordRef = "";
-        inputNewPasswordRef.current.value = "";
-        inputConfirmNewsPassword.current.value = "";
-        inputPhoneNumberRef.current.value = "";
-        inputCountryRef.current.value = ""
-        setSelectedInterest([])
-
-        
-      })
-      .catch((err) => {
-        if (err.response?.data?.message) {
-          swalError(err)
-          inputPasswordRef.current.value = ''
-          inputNewPasswordRef.current.value = "";
-          inputConfirmNewsPassword.current.value = "";
-        }
-    });
+        .then(() => {
+            handleOnClose()
+            swal(
+            "",
+            `Your profile has been updated `
+            );
+            inputUsernameRef.current.value = "";
+            inputEmailRef.current.value = "";
+            inputPasswordRef = "";
+            inputNewPasswordRef.current.value = "";
+            inputConfirmNewsPassword.current.value = "";
+            inputPhoneNumberRef.current.value = "";
+            inputCountryRef.current.value = ""
+            setSelectedInterest([])
+        })
+        .catch((err) => {
+            if (err.response?.data?.message) {
+            swalError(err)
+            inputPasswordRef.current.value = ''
+            inputNewPasswordRef.current.value = "";
+            inputConfirmNewsPassword.current.value = "";
+            }
+        });
         
     };
-    
+   
   
     if(!visible) return null;
   
@@ -101,6 +108,7 @@ export default function ChangeProfile({onClose, visible}) {
                         icon={"user-large"}
                         type={"text"}
                         placeholder={"Name"}
+                        defaultValue={thisUser.username}
                     />
                     <InputField
                         inputRef={inputEmailRef}
@@ -108,6 +116,7 @@ export default function ChangeProfile({onClose, visible}) {
                         icon={"envelope"}
                         type={"text"}
                         placeholder={"Email"}
+                        defaultValue={thisUser.email}
                     />
                     <InputField
                         inputRef={inputPasswordRef}
@@ -138,6 +147,7 @@ export default function ChangeProfile({onClose, visible}) {
                         icon={"globe"}
                         type={"text"}
                         placeholder={"Country"}
+                        defaultValue={thisUser.country}
                     />
                     <InputField
                         inputRef={inputPhoneNumberRef}
@@ -145,6 +155,7 @@ export default function ChangeProfile({onClose, visible}) {
                         icon={"phone"}
                         type={"text"}
                         placeholder={"Phone Number"}
+                        defaultValue={thisUser.phoneNumber}
                     />
                     <div className="flex flex-col">
                         <label className="mb-2 text-sm">Native in</label>
@@ -154,7 +165,7 @@ export default function ChangeProfile({onClose, visible}) {
                             icon="language"
                         />
                         <div className="w-full">
-                            <MyListbox inputRef={inputNativeLanguageRef} />
+                            <MyListbox inputRef={inputNativeLanguageRef}/>
                         </div>
                         </div>
                     </div>
@@ -189,10 +200,13 @@ export default function ChangeProfile({onClose, visible}) {
                 </div>
                 <div className="flex gap-4">
                     {selectedInterest.map((interest) => (
-                    <div
-                        className="bg-darker-gray py-1 px-3 rounded"
-                        key={interest.id}>
-                        {interest.name}
+                    <div className='flex'>
+                        <div
+                            className="bg-darker-gray py-1 px-3 rounded"
+                            key={interest.id}>
+                            {interest.name}
+                        </div>
+                        <h6 onClick={() => deleteInterest(interest.id)} className='text-white cursor-pointer'>&times;</h6>
                     </div>
                     ))}
                 </div>

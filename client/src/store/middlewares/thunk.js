@@ -30,14 +30,13 @@ const getAccessToken = () => {
 
 export const handleSetThisUser = (user) => {
   return (dispatch, getState) => {
-    console.log(user, "nge test balikan user dari put")
     const nativeLangObj = user.UserLanguages.find((el) => el.type === "native");
     const interestLangObj = user.UserLanguages.find(
       (el) => el.type === "interest"
     );
-    console.log(nativeLangObj, 'ini native lang obj')
+
     dispatch(setThisUser(user));
-    // if(nativeLangObj && nativeLangObj.Language)dispatch(setNativeLanguage(nativeLangObj.Language)); masih ERROR 
+    if(nativeLangObj && nativeLangObj.Language )dispatch(setNativeLanguage(nativeLangObj.Language));
 
     // Added condition to prevent error in development ---------------------------
     if (interestLangObj)
@@ -153,8 +152,8 @@ export const editProfile = (inputs) => {
       confirmNewPassword,
       country,
       phoneNumber,
-      nativeLanguage,
-      interestLanguage,
+      nativeLanguages,
+      interestLanguages,
       interests,
     } = inputs;
 
@@ -169,8 +168,8 @@ export const editProfile = (inputs) => {
         confirmNewPassword,
         phoneNumber,
         country,
-        nativeLanguage,
-        interestLanguage,
+        nativeLanguages,
+        interestLanguages,
         interests,
       },
       headers: {

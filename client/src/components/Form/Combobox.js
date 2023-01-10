@@ -39,7 +39,7 @@ export default function ComboboxInterest({
         }
       });
   }, []);
-  console.log(selectedInterest);
+  // console.log(selectedInterest);
   if (interestList.length > 0 && selectedInterest.length > 0) {
     return (
       <Combobox
@@ -48,7 +48,7 @@ export default function ComboboxInterest({
         multiple
       >
         <div className="relative mt-1">
-          <Combobox.Button className="relative w-full cursor-default bg-darker-gray py-2 pl-3 pr-2 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm flex justify-between">
+          <Combobox.Button className="relative w-full cursor-pointer bg-darker-gray py-2 pl-3 pr-2 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm flex justify-between">
             <span className="block truncate">Select interested topics</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"></span>
             <ChevronUpDownIcon
@@ -69,7 +69,7 @@ export default function ComboboxInterest({
                   <Combobox.Option
                     key={interest.id}
                     className={({ active }) =>
-                      `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                      `relative cursor-pointer select-none py-2 pl-10 pr-4 ${
                         active ? "bg-main-color text-white" : "text-white"
                       }`
                     }

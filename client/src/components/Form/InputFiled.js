@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function InputField({ label, icon, type, placeholder, value, inputRef }) {
+export default function InputField({ label, icon, type, placeholder, value, inputRef, defaultValue }) {
   return (
     <div className="flex flex-col">
       <label className="mb-2 text-sm">{label}</label>
@@ -14,6 +14,7 @@ export default function InputField({ label, icon, type, placeholder, value, inpu
           type={type}
           className="text-white text-sm focus:border-none focus:outline-none bg-transparent flex-1"
           placeholder={placeholder}
+          defaultValue={defaultValue}
           value={value}></input>
       </div>
     </div>
