@@ -307,7 +307,7 @@ export const sendFriendRequest = (friendId) => {
           access_token: getAccessToken(),
         },
       });
-      
+
       const { exploreReducer } = getState();
       let updatedExploreUsersList = [];
 
@@ -317,18 +317,17 @@ export const sendFriendRequest = (friendId) => {
           updatedExploreUsersList.push(element)
         }
       }
-      console.log(
-        { before: exploreReducer.users },
-        { updatedExploreUsersList },
-        { data }
-      );
+
       dispatch(setExploreUsers(updatedExploreUsersList))
-      dispatch(getFriends())
+
+
+      // dispatch(getFriends())
+
       /*
         Fetch ulang people untuk mendapatkan
         people yang belum dikirimkan friend request
       */
-     return data
+
       // !TODO: insert to friend list?
     } catch (err) {
       console.log(err)
@@ -534,19 +533,19 @@ export const editStatusUser = (status) => {
         method: 'PATCH',
         url: `${URL_SERVER}/users/status`,
         headers: {
-          access_token: getAccessToken()
+          access_token: getAccessToken(),
         },
         data: {
           status
         }
       })
 
-      return data
+      return data;
     } catch (error) {
       console.log(error);
     }
-  }
-}
+  };
+};
 
 export const newChatFromExplore = (userId) => {
   return async (dispatch, getState) => {

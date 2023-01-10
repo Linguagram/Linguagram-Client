@@ -8,6 +8,7 @@ import {
   editMessage,
   setOpenChat,
   setCounterpartUser,
+  setFriendRequests,
 } from "../actions/actionCreator";
 import { SOCKET_EVENTS } from "../actions/socketEvents";
 import { handleSetThisUser } from "./thunk";
@@ -91,9 +92,9 @@ export const initSocket = (socketDispatch) => {
     socket.on(SOCKET_EVENTS.FRIEND_REQUEST, (friendship) => {
       console.log("[ws FRIEND_REQUEST]", friendship);
 
-      // check if current user actually the user from server
-      const { sectionReducer } = getState();
-      // !TODO
+      const { friendReducer } = getState();
+      const newFriendRequest = [ ...friendReducer.friendRequests, friendship]
+      socketDispatch(setFriendRequests(newFriendRequest))
     });
 
     socket.on(SOCKET_EVENTS.FRIEND_REQUEST_ACCEPT, (friendship) => {
