@@ -92,15 +92,14 @@ export default function ChangeProfile({onClose, visible}) {
     if(!visible) return null;
   
     return (
-      <div className='fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-60'>
-  
-        <div className={`flex flex-col w-full gap-5 p-5 mx-4 rounded h-5/6 md:mx-0 ${pathname === '/home/setting' ? 'bg-light-gray ': 'bg-darker-gray'} md:w-1/2 2xl:w-1/3 lg:h-fit`}>
+      <div className='fixed inset-0 z-10 overflow-auto flex items-center justify-center bg-light-gray md:bg-black bg-opacity-60'>
+        <div className={`flex flex-col w-full gap-5 p-5 mx-4 rounded h-5/6 md:mx-0 ${pathname === '/home/setting' ? 'bg-light-gray ': 'bg-darker-gray'} md:w-1/2 md:pt-80 md:h-min lg:pt-5 lg:w-fit lg:h-fit 2xl:w-1/3 `}>
             <div className='flex items-center justify-between'>
                 <h3 className='text-xl text-white'>Change Profile</h3>
             </div>
             <form onSubmit={handleChangeProfile}>
                 <div className="flex flex-col gap-4 p-4 md:py-0 md:w-full items-center">
-                <div className="flex flex-col md:flex-row w-full justify-between gap-4">
+                <div className="flex flex-col lg:flex-row w-full justify-between gap-4">
                     <div className="flex flex-col gap-4 w-full">
                     <InputField
                         inputRef={inputUsernameRef}
