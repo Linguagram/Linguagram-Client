@@ -17,6 +17,7 @@ export default function People() {
   useEffect(() => {
     dispatch(handleFetchExploreUsers())
       .then((_) => {
+        console.log(users)
         return
       })
       .catch((err) => {

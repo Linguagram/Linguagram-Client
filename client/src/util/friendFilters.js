@@ -45,7 +45,6 @@ const sortFriendsByFirstLetter = (friends) => {
       result[friend.User.username[0].toUpperCase()].push(friend.User);
     }
   });
-  console.log({result} ,'<<<< from sortFriendsByFirstLetter', 'after pushed')
   for (let [key, value] of Object.entries(result)) {
     value.sort((val1, val2) => {
       const userA =  val1.username.toLowerCase()
