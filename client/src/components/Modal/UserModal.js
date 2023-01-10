@@ -6,15 +6,16 @@ import { sendFriendRequest } from "../../store/middlewares/thunk";
 import { getUserAvatar } from "../../util/getAvatar";
 
 export default function UserModal({ isOpen, closeModal, calling }) {
-  const dispatch = useDispatch()
-  const { counterpartUser, thisUser } = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+  const { counterpartUser, thisUser } = useSelector(
+    (state) => state.userReducer
+  );
   const { friends } = useSelector((state) => state.friendReducer);
 
-  // console.log(counterpartUser)
   const addFriend = () => {
-    dispatch(sendFriendRequest(counterpartUser.id))
-  }
-  console.log(friends);
+    dispatch(sendFriendRequest(counterpartUser.id));
+  };
+
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -52,35 +53,27 @@ export default function UserModal({ isOpen, closeModal, calling }) {
                     </button>
                   </div>
                   <div className="flex justify-center my-4">
-                    {counterpartUser.email ? (
-                      <img
-                        src={getUserAvatar(counterpartUser)}
-                        id="avatar-profile"
-                        className="avatar-chat"
-                        alt="avatar"
-                      ></img>
-                    ) : (
-                      <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
-                        {counterpartUser.name[0].toUpperCase()}
-                      </div>
-                    )}
+                    <img
+                      src={getUserAvatar(counterpartUser)}
+                      id="avatar-profile"
+                      className="avatar-chat"
+                      alt="avatar"
+                    ></img>
                   </div>
                   {/* username, email, phone number, country */}
                   <Dialog.Title
                     as="h3"
                     className="text-2xl text-center font-medium leading-6 text-white"
                   >
-                    {counterpartUser.email
-                      ? counterpartUser.username
-                      : counterpartUser.name}
+                    {counterpartUser.username}
                   </Dialog.Title>
                   <div>
-                    {counterpartUser.email && (
-                      <p className="text-center text-slate-400 mt-1 text-sm">
-                        {counterpartUser.country}
-                      </p>
-                    )}
-
+                    <div className="text-gray-300 text-lg font-medium text-center">
+                    ({ counterpartUser.country })
+                    </div>
+                    <p className="text-center text-gray-300 mt-1 text-base">
+                      {counterpartUser.status}
+                    </p>
                     {counterpartUser.email && (
                       <p className="text-center text-slate-400 text-sm mt-3">
                         Interested in: <br />
@@ -104,7 +97,13 @@ export default function UserModal({ isOpen, closeModal, calling }) {
                     )}
                   </div>
                   {counterpartUser.email &&
-                  friends.some((el) => (el.FriendId === counterpartUser.id && el.UserId === thisUser.id) || (el.UserId === counterpartUser.id && el.FriendId === thisUser.id)) ? (
+                  friends.some(
+                    (el) =>
+                      (el.FriendId === counterpartUser.id &&
+                        el.UserId === thisUser.id) ||
+                      (el.UserId === counterpartUser.id &&
+                        el.FriendId === thisUser.id)
+                  ) ? (
                     <div className="mt-4 flex justify-center border-t border-light-gray pt-4">
                       <button
                         type="button"

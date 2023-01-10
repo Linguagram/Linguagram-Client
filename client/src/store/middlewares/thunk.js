@@ -620,3 +620,16 @@ export const handleSetIsIncomingCall = (state) => {
     dispatch(setIsIncomingCall(state));
   }
 }
+
+
+export const readMessages = (groupId) => {
+  return (dispatch, getState) => {
+      return axios({
+        method: 'PATCH',
+        url: `${URL_SERVER}/groups/${groupId}/messages`,
+        headers: {
+          access_token: getAccessToken(),
+        }
+      })
+  }
+}

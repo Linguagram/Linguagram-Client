@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setHomeDrawer, setOpenChat } from "../../store/actions/actionCreator";
+import { setAllGroups, setHomeDrawer, setOpenChat } from "../../store/actions/actionCreator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { handleFetchMessagesByGroupId, handleSetCounterpartUser } from "../../store/middlewares/thunk";
-import { getGroupAvatar, getUserAvatar } from "../../util/getAvatar";
+import { handleFetchMessagesByGroupId, handleSetCounterpartUser, readMessages } from "../../store/middlewares/thunk";
+import { getGroupAvatar } from "../../util/getAvatar";
+import { swalError } from "../../util/swal";
 
 export default function SectionChats() {
   const dispatch = useDispatch();
+  // const [readMsg, setReadMsg] = useState(false)
 
   const { allGroups } = useSelector((state) => state.groupReducer);
   const { thisUser } = useSelector((state) => state.userReducer);
@@ -18,6 +20,24 @@ export default function SectionChats() {
           dispatch(handleSetCounterpartUser(user.User))
           break
         }
+      }
+
+      if(group.unreadMessageCount > 0) {
+        dispatch(readMessages(group.id))
+        .then((res) => {
+          // setReadMsg(!readMsg)
+          const allGroupsRead = allGroups.map(el => {
+            if (group.id === el.id) {
+              el.unreadMessageCount = 0
+            }
+            return el
+          })
+
+          dispatch(setAllGroups(allGroupsRead))
+        })
+        .catch((err) => {
+          swalError(err)
+        })
       }
     } else {
       dispatch(handleSetCounterpartUser(group))
@@ -101,10 +121,20 @@ export default function SectionChats() {
                       }
                         </h4>
                     }
-                    { group.unreadMessageCount > 0 &&
-                      <div className="w-5 h-5 text-sm font-bold text-center text-red-700 rounded-full bg-red-900-blur">
-                        {group.unreadMessageCount}
-                      </div>
+                    {
+                      group.type === 'dm' 
+                      ?
+                      (
+                        group.unreadMessageCount > 0
+                        ?
+                        <div className="w-5 h-5 text-sm font-bold text-center text-red-700 rounded-full bg-red-900-blur">
+                          {group.unreadMessageCount}
+                        </div>
+                        :
+                        null
+                      )
+                      :
+                      null
                     }
                   </div>
                 </div>
