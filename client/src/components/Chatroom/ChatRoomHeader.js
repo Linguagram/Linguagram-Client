@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 import UserModal from "../Modal/UserModal";
 import GroupModal from "../Modal/GroupModal";
 import CallingModal from "../Modal/CallingModal";
@@ -10,6 +9,7 @@ import axios from "axios";
 import { URL_SERVER } from "../../baseUrl";
 import IncomingCallingModal from "../Modal/IncomingCallingModal";
 import { useNavigate } from "react-router-dom";
+import { getUserAvatar } from "../../util/getAvatar";
 
 export default function ChatRoomHeader() {
 
@@ -100,16 +100,7 @@ export default function ChatRoomHeader() {
           icon="angle-left"
         />
         </div>
-        {
-          counterpartUser.email
-          ?
-            <img src={counterpartUser.Avatar.url} className="avatar-chat" alt="avatar"></img>
-          :
-            <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
-              {counterpartUser.name[0].toUpperCase()}
-            </div>
-        }
-        
+        <img src={getUserAvatar(counterpartUser)} className="avatar-chat" alt="avatar"></img>
         <div className="flex items-center gap-1">
           <button onClick={openUserModal}>
             {

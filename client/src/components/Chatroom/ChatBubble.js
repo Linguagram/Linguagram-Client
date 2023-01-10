@@ -7,7 +7,7 @@ import {
   handleTranslate,
 } from "../../store/middlewares/thunk";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserAvatar } from "../../util/getUserAvatar";
+import { getUserAvatar } from "../../util/getAvatar";
 
 export default function ChatBubble({ msg }) {
   const [content, setContent] = useState('')

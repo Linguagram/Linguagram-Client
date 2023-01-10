@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setHomeDrawer, setOpenChat } from "../../store/actions/actionCreator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { handleFetchMessagesByGroupId, handleSetCounterpartUser } from "../../store/middlewares/thunk";
-import { getUserAvatar } from "../../util/getUserAvatar";
+import { getGroupAvatar, getUserAvatar } from "../../util/getAvatar";
 
 export default function SectionChats() {
   const dispatch = useDispatch();
@@ -62,14 +62,11 @@ export default function SectionChats() {
                 className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700"
               >
                 {
-                  group.name === 'private'
+                  group.type === 'dm'
                   ?
-                    group.GroupMembers.length === 2 && 
-                    <img src={getUserAvatar(group.GroupMembers[Number(group.GroupMembers[0].UserId === thisUser.id)].User)} className="avatar-chat" alt="avatar"></img> 
+                    <img src={getGroupAvatar(group, thisUser)} className="avatar-chat" alt="avatar"></img> 
                   :
-                  <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
-                    {group.name[0].toUpperCase()}
-                  </div>
+                  <img src={getGroupAvatar(group)} className="avatar-chat" alt="avatar"></img> 
                 }
                 
                 <div className="flex flex-col w-full gap-1">

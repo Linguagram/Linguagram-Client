@@ -9,6 +9,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { setHomeDrawer } from "../../store/actions/actionCreator";
+import { getUserAvatar } from "../../util/getAvatar";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -40,7 +41,7 @@ export default function SectionSetting() {
         <div className="flex flex-col items-center gap-6">
           <div className="flex items-end">
             <img
-              src={thisUser.Avatar.url}
+              src={getUserAvatar(thisUser)}
               id="avatar-profile"
               alt="avatar"
               className="object-cover"

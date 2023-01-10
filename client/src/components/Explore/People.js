@@ -6,6 +6,7 @@ import {
 } from "../../store/middlewares/thunk";
 import PeopleCard from "../Cards/PeopleCard";
 import { swalError } from "../../util/swal";
+import { getUserAvatar } from "../../util/getAvatar";
 
 export default function People() {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ export default function People() {
           <PeopleCard
             key={user.id}
             id={user.id}
-            avatarUrl={user.Avatar.url}
+            avatarUrl={getUserAvatar(user)}
             username={user.username}
             country={user.country}
             languages={user.UserLanguages}

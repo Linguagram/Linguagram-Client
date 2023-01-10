@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { setHomeDrawer, setOpenChat } from "../../store/actions/actionCreator";
 import { handleFetchMessagesByGroupId, handleSetCounterpartUser } from "../../store/middlewares/thunk";
+import { getGroupAvatar } from "../../util/getAvatar";
 
 export default function SectionGroups() {
   const dispatch = useDispatch();
@@ -56,9 +57,10 @@ export default function SectionGroups() {
                 onClick={() => openChat(group)}
                 className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700"
               >
-                <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
+                {/* <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
                   G
-                </div>
+                </div> */}
+                <img src={getGroupAvatar(group)} className="avatar-chat" alt="avatar"></img>
                 <div className="flex items-center justify-between w-full">
                   <h4 className="text-base text-white">{group.name}</h4>
                   {
