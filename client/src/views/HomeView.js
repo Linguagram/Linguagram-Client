@@ -50,7 +50,7 @@ export default function HomeView() {
     }
 
     dispatch(getFriends())
-    dispatch(initSocket(dispatch));
+    dispatch(initSocket(dispatch, navigate));
   }, [])
 
   useEffect(() => {
@@ -65,9 +65,9 @@ export default function HomeView() {
               'access_token': localStorage.access_token
             },
           });
-    
+
           dispatch(setIncomingCaller(data))
-    
+
           setIsIncomingCall(true)
         }
       });

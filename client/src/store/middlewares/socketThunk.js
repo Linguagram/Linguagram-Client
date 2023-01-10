@@ -9,9 +9,10 @@ import {
   setOpenChat,
   setCounterpartUser,
   setFriendRequests,
+  setAmITheCaller,
 } from "../actions/actionCreator";
 import { SOCKET_EVENTS } from "../actions/socketEvents";
-import { handleSetThisUser } from "./thunk";
+import { handleSetIsCalling, handleSetThisUser } from "./thunk";
 
 const userUpdate = (socketDispatch, user, getState) => {
   // check if current user actually the user from server
@@ -30,7 +31,7 @@ const userUpdate = (socketDispatch, user, getState) => {
 }
 
 
-export const initSocket = (socketDispatch) => {
+export const initSocket = (socketDispatch, socketNavigate) => {
   return (dispatch, getState) => {
     const { socketReducer} = getState();
 
@@ -118,6 +119,31 @@ export const initSocket = (socketDispatch) => {
 
       userUpdate(socketDispatch, user, getState);
     });
+
+    // ============== VIDEO CALL
+
+    socket.on("yourID", (id) => {
+      console.log(id, "id diri sendiri")
+    })
+
+    socket.on('callIsCanceled', async (incomingUserId) => {
+      dispatch(setAmITheCaller(false))
+    });
+
+    socket.on('callIsDeclined', async (userWhoDeclines) => {
+      const { userReducer } = getState();
+      const { counterpartUser } = userReducer;
+      if(userWhoDeclines.from === counterpartUser.id) {
+        dispatch(handleSetIsCalling(false));
+        dispatch(setAmITheCaller(false));
+      }
+    });
+
+    socket.on('confirmAcceptCall', async (confirmerUser) => {
+      socketNavigate('/videocall');
+    });
+
+    // ============== VIDEO CALL
 
     socket.on(SOCKET_EVENTS.ERROR, (error) => {
       console.error("[ws ERROR]", error);

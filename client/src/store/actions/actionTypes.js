@@ -45,3 +45,5 @@ export const FETCH_INTERESTS = "interests/fetchInterests"
 export const FETCH_LANGUAGES = "languages/fetchLanguages"
 
 export const CHANGE_NAVBAR_COLOR = "navbar/ChangeColor"
+
+export const SET_IS_CALLING = "user/setIsCalling"

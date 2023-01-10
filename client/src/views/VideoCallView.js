@@ -133,6 +133,7 @@ export default function VideoCallView() {
   }
 
   useEffect(() => {
+    if (!socketConnect?.connected) navigate("/home/chats");
     socketConnect.on("call_connect", (data) => {
       console.log(data.signal, "signal dari caller, nge set caller signal di state")
       setCallerSignal(data.signal);

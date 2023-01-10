@@ -17,6 +17,7 @@ import {
   addMessage,
   setNavbarColor,
   setInterests,
+  setIsCalling,
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
@@ -562,3 +563,9 @@ export const newChatFromExplore = (userId) => {
     }
   };
 };
+
+export const handleSetIsCalling = (state) => {
+  return (dispatch, getState) => {
+    dispatch(setIsCalling(state));
+  }
+}
