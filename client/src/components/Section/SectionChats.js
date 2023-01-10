@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setHomeDrawer, setOpenChat } from "../../store/actions/actionCreator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { handleFetchMessagesByGroupId, handleSetCounterpartUser } from "../../store/middlewares/thunk";
+import { getUserAvatar } from "../../util/getUserAvatar";
 
 export default function SectionChats() {
   const dispatch = useDispatch();
@@ -63,11 +64,8 @@ export default function SectionChats() {
                 {
                   group.name === 'private'
                   ?
-                    group.GroupMembers[0] && group.GroupMembers[0].UserId === thisUser.id
-                    ?
-                    <img src={group.GroupMembers[1].User.Avatar.url} className="avatar-chat" alt="avatar"></img>
-                    :
-                    <img src={group.GroupMembers[0].User.Avatar.url} className="avatar-chat" alt="avatar"></img> 
+                    group.GroupMembers.length === 2 && 
+                    <img src={getUserAvatar(group.GroupMembers[Number(group.GroupMembers[0].UserId !== thisUser.id)].User)} className="avatar-chat" alt="avatar"></img> 
                   :
                   <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
                     {group.name[0].toUpperCase()}

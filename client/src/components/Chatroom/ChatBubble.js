@@ -7,6 +7,7 @@ import {
   handleTranslate,
 } from "../../store/middlewares/thunk";
 import { useDispatch, useSelector } from "react-redux";
+import { getUserAvatar } from "../../util/getUserAvatar";
 
 export default function ChatBubble({ msg }) {
   const [content, setContent] = useState('')
@@ -155,9 +156,7 @@ export default function ChatBubble({ msg }) {
           <div>
             <img
               src={
-                thisUser.Avatar.url
-                  ? thisUser.Avatar.url
-                  : "https://i.pravatar.cc/150?img=3"
+                getUserAvatar(thisUser)
               }
               className="avatar-chat"
               alt="avatar"
@@ -173,9 +172,7 @@ export default function ChatBubble({ msg }) {
           <div>
             <img
               src={
-                counterpartUser.Avatar?.url
-                  ? counterpartUser.Avatar.url
-                  : "https://i.pravatar.cc/150?img=3"
+                getUserAvatar(counterpartUser)
               }
               className="avatar-chat"
               alt="avatar"
