@@ -199,7 +199,7 @@ export default function SectionSetting() {
                   {
                     thisUser.UserInterests.map(interest => {
                       return (
-                        <p className="font-bold">{ interest.Interest.name }</p>
+                        <p key={interest.id} className="font-bold">{ interest.Interest.name }</p>
                       )
                     })
                   }

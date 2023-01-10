@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import InputField from "../components/Form/InputFiled";
 import MyListbox from "../components/Form/ListBox";
 import { register, changeNavbarColor } from "../store/middlewares/thunk";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 import ComboboxInterest from "../components/Form/Combobox";
@@ -14,6 +14,9 @@ export default function RegisterView() {
   const navigate = useNavigate();
 
   const [selectedInterest, setSelectedInterest] = useState([]);
+
+  const {thisUser} = useSelector((state) => state.userReducer)
+  console.log(thisUser)
 
   const inputUsernameRef = useRef();
   const inputEmailRef = useRef();
@@ -144,7 +147,7 @@ export default function RegisterView() {
                     <div className="flex flex-1 items-center bg-darker-gray">
                       <FontAwesomeIcon
                         className="text-slate-500 text-xl bg-main-color-blur p-3"
-                        icon="globe"
+                        icon="language"
                       />
                       <div className="w-full">
                         <MyListbox inputRef={inputNativeLanguageRef} />
@@ -156,7 +159,7 @@ export default function RegisterView() {
                     <div className="flex flex-1 items-center bg-darker-gray">
                       <FontAwesomeIcon
                         className="text-slate-500 text-xl bg-main-color-blur p-3"
-                        icon="globe"
+                        icon="language"
                       />
                       <div className="w-full">
                         <MyListbox inputRef={inputInterestLanguageRef} />
@@ -170,7 +173,7 @@ export default function RegisterView() {
                 <div className="flex flex-1 items-center bg-darker-gray">
                   <FontAwesomeIcon
                     className="text-slate-500 text-xl bg-main-color-blur p-3"
-                    icon="globe"
+                    icon="person-biking"
                   />
                   <div className="w-full">
                     <ComboboxInterest

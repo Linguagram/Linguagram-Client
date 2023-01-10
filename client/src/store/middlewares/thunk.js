@@ -139,6 +139,41 @@ export const getUserLogin = () => {
   };
 };
 
+export const editProfile = (inputs) => {
+  return (dispatch, getState) => {
+    const {
+      username,
+      email,
+      password,
+      confirmPassword,
+      country,
+      phoneNumber,
+      nativeLanguage,
+      interestLanguage,
+      interests,
+    } = inputs;
+
+    return axios({
+      method: "PUT",
+      url: `${URL_SERVER}/users/@me`,
+      data: {
+        username,
+        email,
+        password,
+        confirmPassword,
+        phoneNumber,
+        country,
+        nativeLanguage,
+        interestLanguage,
+        interests,
+      },
+      headers: {
+        'access_token': localStorage.access_token
+      }
+    });
+  };
+};
+
 export const handleFetchGroups = () => {
   return async (dispatch, getState) => {
     try {

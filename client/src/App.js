@@ -27,6 +27,8 @@ import {
   faUserGroup,
   faMessage,
   faCommentDots,
+  faLanguage,
+  faPersonBiking,
   faBars,
   faXmark,
   faRightFromBracket,
@@ -45,6 +47,8 @@ import { RouterProvider } from "react-router-dom";
 
 library.add(
   faCommentDots,
+  faLanguage,
+  faPersonBiking,
   faEllipsisVertical,
   faAddressCard,
   faCheck,

@@ -24,11 +24,10 @@ export default function EmailVerification() {
                 method: 'POST',
                 url: `${URL_SERVER}/users/verify/?verification=${token}`
             });
-
-            dispatch(handleSetThisUser(data.user))
+            
             localStorage.setItem('access_token', data.access_token)
             localStorage.setItem('user_id', data.user.id)
-
+   
             swal({
                 text: data.message,
                 icon: "success",
@@ -37,6 +36,7 @@ export default function EmailVerification() {
             navigate('/home/chats')
 
             setLoading(false)
+            dispatch(handleSetThisUser(data.user))
         } catch(err) {
             if(err.response?.data?.message) {
                 if(err.response.data.message === 'Your email address has been verified') {
