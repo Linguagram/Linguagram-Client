@@ -10,9 +10,7 @@ import { getUserAvatar } from "../../util/getAvatar";
 
 export default function People() {
   const dispatch = useDispatch();
-  const { friends } = useSelector((state) => state.friendReducer);
   const { users } = useSelector((state) => state.exploreReducer);
-  const [filteredPeople, setFilteredPeople] = useState([]);
 
   useEffect(() => {
     dispatch(handleFetchExploreUsers())

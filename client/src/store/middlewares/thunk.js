@@ -260,7 +260,6 @@ export const getFriends = () => {
 export const sendFriendRequest = (friendId) => {
   return async (dispatch, getState) => {
     try {
-      console.log(friendId);
       const { data } = await axios({
         method: "post",
         url: `${URL_SERVER}/friends/${friendId}`,
@@ -268,6 +267,7 @@ export const sendFriendRequest = (friendId) => {
           access_token: getAccessToken(),
         },
       });
+      dispatch(handleFetchExploreUsers())
       /*
         Fetch ulang people untuk mendapatkan
         people yang belum dikirimkan friend request
@@ -421,6 +421,7 @@ export const joinGroup = (groupId) => {
           access_token: getAccessToken(),
         },
       });
+      dispatch(handleFetchExploreGroups())
       return data;
     } catch (err) {
       console.log(err);
