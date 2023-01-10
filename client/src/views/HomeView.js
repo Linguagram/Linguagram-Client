@@ -7,11 +7,7 @@ import { getUserLogin, handleFetchGroups, handleSetActiveSection, handleSetSocke
 import HomeDrawer from "../components/HomeDrawer/HomeDrawer";
 import { useEffect } from "react";
 import { swalError } from "../util/swal";
-import io from "socket.io-client";
-import { URL_SERVER } from "../baseUrl";
-
-const socket = io.connect(`${URL_SERVER}`)
-if(localStorage.user_id) socket.emit("identify", {userId: localStorage.user_id}); 
+import { initSocket } from "../store/middlewares/socketThunk";
 
 export default function HomeView() {
 
@@ -28,7 +24,6 @@ export default function HomeView() {
       dispatch(getUserLogin())
       .then((res) => {
         const user = res.data
-        socket.emit("identify", {userId: user.id}); 
         dispatch(handleSetThisUser(user))
         dispatch(handleFetchGroups())
       })
@@ -43,13 +38,10 @@ export default function HomeView() {
         }
       })
     } else {
-      socket.emit("identify", {userId: thisUser.id}); 
       dispatch(handleFetchGroups())
     }
-  }, [])
 
-  useEffect(() => {
-    dispatch(handleSetSocketConnect(socket))
+    dispatch(initSocket(dispatch));
   }, [])
 
   return (

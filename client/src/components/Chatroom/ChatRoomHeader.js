@@ -52,7 +52,7 @@ export default function ChatRoomHeader() {
   }
 
   function closeChat() {
-    dispatch(setOpenChat(false))
+    dispatch(setOpenChat(null))
   }
 
   const acceptCall = () => {

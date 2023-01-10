@@ -2,6 +2,7 @@ import React, {useRef, useState} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useDispatch } from 'react-redux';
 import { sendMessage } from '../../store/middlewares/thunk';
+import { useSelector } from "react-redux";
 
 function TextAttachmentName({ attachmentName, clearAttachment }) {
   return (
@@ -16,28 +17,44 @@ function TextAttachmentName({ attachmentName, clearAttachment }) {
   );
 }
 
-export default function ChatRoomFooter({ groupId }) {
+export default function ChatRoomFooter() {
   const dispatch = useDispatch();
   const [attachmentName, setAttachmentName] = useState("");
+
+  const { openChat } = useSelector(state => state.sectionReducer);
+  const { thisUser } = useSelector(
+    (state) => state.userReducer
+  );
 
   /**
    * @type {{current: HTMLFormElement}}
    */
   const formData = useRef(null);
 
+  const fileInput = useRef(null);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (groupId && formData.current) {
+    if (openChat?.id && formData.current) {
       for (const data of formData.current.elements) {
-        console.log(data.value);
+        console.log(data.name, data.value);
       };
 
-      dispatch(sendMessage(groupId, formData.current));
+      const data = {
+        file: formData.current,
+        GroupId: openChat.id,
+        UserId: thisUser.id,
+        content: formData.current.elements.namedItem("content").value,
+      }
+
+      console.log("[DATA MESSAGE]", data);
+
+      dispatch(sendMessage(data));
+      formData.current.reset();
+      setAttachmentName("");
     }
   }
-
-  const fileInput = useRef(null);
 
   const showFilePicker = (e) => {
     e.preventDefault();
@@ -52,8 +69,8 @@ export default function ChatRoomFooter({ groupId }) {
   }
 
   const clearAttachment = () => {
+    fileInput.current.reset();
     setAttachmentName("");
-    fileInput.current.value = "";
   }
 
   return (

@@ -12,7 +12,7 @@ export default function SectionGroups() {
     dispatch(handleFetchMessagesByGroupId(group.id))
     .then((_) => {
       dispatch(handleSetCounterpartUser(group))
-      dispatch(setOpenChat(true));
+      dispatch(setOpenChat(group));
     })
   }
   

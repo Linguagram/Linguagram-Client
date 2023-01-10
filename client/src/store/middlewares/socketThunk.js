@@ -1,10 +1,11 @@
 import io from "socket.io-client";
+import { useDispatch } from "react-redux";
 import { handleSetSocketConnect } from "./thunk";
 import { URL_SERVER } from "../../baseUrl";
-import { setSocketConnect } from "../actions/actionCreator";
+import { setSocketConnect, addMessage } from "../actions/actionCreator";
 import { SOCKET_EVENTS } from "../actions/socketEvents";
 
-export const initSocket = () => {
+export const initSocket = (socketDispatch) => {
   return (dispatch, getState) => {
     const { socketReducer } = getState();
 
@@ -23,6 +24,7 @@ export const initSocket = () => {
     socket.on(SOCKET_EVENTS.MESSAGE, (message) => {
       console.log("[ws message]", message);
       // !TODO: handle message event
+      socketDispatch(addMessage(message));
     });
 
     socket.on(SOCKET_EVENTS.ERROR, (error) => {

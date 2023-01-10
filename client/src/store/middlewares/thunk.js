@@ -20,6 +20,7 @@ import {
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
 import { swalError } from "../../util/swal";
+import { SOCKET_EVENTS } from "../actions/socketEvents";
 
 const getAccessToken = () => {
   return localStorage.getItem("access_token");
@@ -269,15 +270,19 @@ export const sendFriendRequest = (friendId) => {
   };
 };
 
-export const sendMessage = (groupId, formData, content) => {
+export const sendMessage = (data) => {
   return async (dispatch, getState) => {
     try {
-      if (!formData) throw new TypeError("formData can't be empty");
+      if (!data) throw new TypeError("data can't be empty");
+
+      const { socketReducer } = getState();
+
       let uploaded;
 
-      const file = formData.files[0];
+      const { content, file, GroupId, UserId } = data;
 
-      if (file) {
+      if (file.elements.namedItem("attachment").value) {
+        console.log("[sendMessage upload attachment]", file);
         uploaded = await axios({
           method: "post",
           url: `${URL_SERVER}/attachment`,
@@ -287,22 +292,19 @@ export const sendMessage = (groupId, formData, content) => {
           },
           data: file,
         });
+        console.log("[sendMessage upload attachment]", uploaded.data);
       }
 
-      const { data } = await axios({
-        method: "post",
-        url: `${URL_SERVER}/groups/${groupId}/messages`,
-        headers: {
-          access_token: getAccessToken(),
-          "Content-Type": "multipart/form-data",
-        },
-        data: {
-          content,
-          Medium: uploaded.data,
-        },
-      });
+      const toSend = {
+        content,
+        MediaId: uploaded?.data?.id,
+        GroupId,
+        UserId,
+      }
 
-      dispatch(addMessage(data));
+      console.log(toSend, "<<<<<<< to emit MESSAGE");
+
+      socketReducer.socketConnect.emit(SOCKET_EVENTS.MESSAGE, toSend);
     } catch (err) {
       console.log(err);
     }

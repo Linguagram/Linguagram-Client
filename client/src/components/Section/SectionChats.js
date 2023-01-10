@@ -22,7 +22,7 @@ export default function SectionChats() {
       dispatch(handleSetCounterpartUser(group))
     }
 
-    dispatch(setOpenChat(true));
+    dispatch(setOpenChat(group));
     dispatch(handleFetchMessagesByGroupId(group.id))
   }
   

@@ -12,9 +12,10 @@ export default function messageReducer(state = initialState, action) {
                 currentMessages: action.payload
             }
         case ADD_MESSAGE:
+            console.log(state);
             return {
                 ...state,
-                currentMessages: state.concat(action.payload),
+                currentMessages: state.currentMessages.concat(action.payload),
             }
         default:
             return state

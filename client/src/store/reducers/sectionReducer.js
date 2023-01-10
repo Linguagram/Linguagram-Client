@@ -1,7 +1,7 @@
 import { SET_OPEN_CHAT } from "../actions/actionTypes"
 
 const initialState = {
-    openChat: false
+    openChat: null
 }
 
 export default function sectionReducer(state = initialState, action) {
