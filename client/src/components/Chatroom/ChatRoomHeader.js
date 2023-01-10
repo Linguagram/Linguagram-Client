@@ -17,6 +17,7 @@ export default function ChatRoomHeader() {
   const { socketConnect } = useSelector((state) => state.socketReducer);
   const { thisUser } = useSelector((state) => state.userReducer);
   const { incomingCaller } = useSelector((state) => state.userReducer);
+  const { friends } = useSelector((state) => state.friendReducer)
 
   let [isUserModalOpen, setIsUserModalOpen] = useState(false);
   let [isCalling, setIscalling] = useState(false)
@@ -85,11 +86,16 @@ export default function ChatRoomHeader() {
     });
 
   }, [])
-
+  
   return (
     <div className="flex items-center justify-between w-full p-5 h-1/6 max-h-16">
-      <UserModal isOpen={isUserModalOpen} closeModal={closeUserModal} calling={calling}/>
-      {/* <GroupModal isOpen={isOpen} closeModal={closeModal}/> */}
+      {
+        counterpartUser?.type === 'group'
+        ?
+        <GroupModal isOpen={isUserModalOpen} closeModal={closeUserModal} counterpartUser={counterpartUser} />
+        :
+        <UserModal isOpen={isUserModalOpen} closeModal={closeUserModal} calling={calling}/>
+      }
       <CallingModal isOpen={isCalling} closeModal={stopCalling} />
       {/* <IncomingCallingModal declineCall={declineCall} isOpen={isIncomingCall} acceptCall={acceptCall}/> */}
 
@@ -115,12 +121,18 @@ export default function ChatRoomHeader() {
                 <h4 className="text-white">{counterpartUser.name}</h4>
             }
           </button>
-          <FontAwesomeIcon className="status-icon" icon="circle-dot" />
+          {
+            counterpartUser?.isOnline
+            ?
+            <FontAwesomeIcon className="status-icon" icon="circle-dot" />
+            :
+            null
+          }
         </div>
       </div>
       <div className="flex items-center justify-end w-1/3 gap-3 lg:w-1/5 xl:w-1/6 2xl:max-w-fit 2xl:gap-4">
         {
-          counterpartUser.email
+          counterpartUser.email && friends.some(el => el.id === counterpartUser.id)
           ?
             <FontAwesomeIcon
             className="text-gray-400 cursor-pointer small-icons"

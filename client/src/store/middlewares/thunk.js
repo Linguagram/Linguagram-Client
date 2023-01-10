@@ -282,13 +282,13 @@ export const getFriends = () => {
           access_token: getAccessToken(),
         },
       });
-      console.log({ data });
+
       const notAccepted = data.filter((friend) => friend.isAccepted === false);
       const requests = notAccepted.filter(
         (friend) => friend.FriendId == localStorage.user_id
       );
       const friends = data.filter((friend) => friend.isAccepted === true);
-      console.log({ friends }, "<<< from thunk");
+      
       dispatch(setFriendRequests(requests));
       dispatch(setFriends(friends));
     } catch (err) {

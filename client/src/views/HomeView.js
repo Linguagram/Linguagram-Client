@@ -3,7 +3,7 @@ import Section from "../components/Section";
 import ChatRoom from "../components/Chatroom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserLogin, handleFetchGroups, handleSetActiveSection, handleSetSocketConnect, handleSetThisUser } from "../store/middlewares/thunk";
+import { getFriends, getUserLogin, handleFetchGroups, handleSetActiveSection, handleSetSocketConnect, handleSetThisUser } from "../store/middlewares/thunk";
 import HomeDrawer from "../components/HomeDrawer/HomeDrawer";
 import { useEffect, useState } from "react";
 import { swalError } from "../util/swal";
@@ -49,6 +49,7 @@ export default function HomeView() {
       dispatch(handleFetchGroups())
     }
 
+    dispatch(getFriends())
     dispatch(initSocket(dispatch));
   }, [])
 

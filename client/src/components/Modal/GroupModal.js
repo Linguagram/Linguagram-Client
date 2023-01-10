@@ -2,8 +2,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
+import { getGroupAvatar } from "../../util/getAvatar";
 
-export default function GroupModal({ isOpen, closeModal }) {
+export default function GroupModal({ isOpen, closeModal, counterpartUser }) {
 
   // Mock data to test user list
   const users = [
@@ -54,19 +55,20 @@ export default function GroupModal({ isOpen, closeModal }) {
                     </button>
                   </div>
                   <div className="flex justify-center my-4">
-                    <img src={avatar} id="avatar-profile" alt="avatar"></img>
+                    <img src={getGroupAvatar(counterpartUser)} id="avatar-profile" alt="avatar"></img>
                   </div>
                   <Dialog.Title
                     as="h3"
                     className="text-2xl font-medium leading-6 text-center text-white">
-                    Group Name
+                    { counterpartUser.name }
                   </Dialog.Title>
                   <div className="mt-2 text-lg font-light text-center text-white">
-                    Members: {users.length}
+                    Members: {counterpartUser.GroupMembers.length}
                   </div>
                   <div className="flex flex-col flex-1 h-48 p-4 mt-6 overflow-auto text-sm text-center text-white bg-black-blue">
-                    {users.map(user => {
-                      return <p key={user.id}>{user.name}</p>
+                    {counterpartUser.GroupMembers.map(el => {
+                      console.log(el);
+                      return <p key={el.UserId}>{el.User.username}</p>
                     })}
                   </div>
                   <div className="flex justify-center pt-4 mt-4 border-t border-light-gray">
