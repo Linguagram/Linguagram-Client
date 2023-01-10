@@ -59,20 +59,20 @@ export const handleSetActiveSection = (section) => {
 export const getInterests = () => {
   return (dispatch, getState) => {
     return axios({
-      method: 'GET',
-      url: `${URL_SERVER}/interests`
-    })
-  }
-}
+      method: "GET",
+      url: `${URL_SERVER}/interests`,
+    });
+  };
+};
 
 export const getLanguages = () => {
   return (dispatch, getState) => {
     return axios({
-      method: 'GET',
-      url: `${URL_SERVER}/languages`
-    })
-  }
-}
+      method: "GET",
+      url: `${URL_SERVER}/languages`,
+    });
+  };
+};
 
 export const register = (inputs) => {
   return (dispatch, getState) => {
@@ -242,11 +242,13 @@ export const getFriends = () => {
           access_token: getAccessToken(),
         },
       });
-      console.log({data})
+      console.log({ data });
       const notAccepted = data.filter((friend) => friend.isAccepted === false);
-      const requests = notAccepted.filter(friend => friend.FriendId == localStorage.user_id)
+      const requests = notAccepted.filter(
+        (friend) => friend.FriendId == localStorage.user_id
+      );
       const friends = data.filter((friend) => friend.isAccepted === true);
-      console.log({friends}, '<<< from thunk')
+      console.log({ friends }, "<<< from thunk");
       dispatch(setFriendRequests(requests));
       dispatch(setFriends(friends));
     } catch (err) {
@@ -307,7 +309,7 @@ export const sendMessage = (data) => {
         MediaId: uploaded?.data?.id,
         GroupId,
         UserId,
-      }
+      };
 
       console.log(toSend, "<<<<<<< to emit MESSAGE");
 
@@ -321,7 +323,8 @@ export const sendMessage = (data) => {
 export const handleDeleteMessage = (groupId, msgId, userId) => {
   return async (dispatch, getState) => {
     try {
-      if (!groupId || !msgId || !userId) throw new TypeError("groupId or msgId or userId can't be empty");
+      if (!groupId || !msgId || !userId)
+        throw new TypeError("groupId or msgId or userId can't be empty");
 
       const { socketReducer } = getState();
 
@@ -382,6 +385,24 @@ export const acceptFriendRequest = (friendshipId) => {
 
 export const changeNavbarColor = (condition) => {
   return async (dispatch, getState) => {
-    dispatch(setNavbarColor(condition))
-  }
-}
+    dispatch(setNavbarColor(condition));
+  };
+};
+
+export const joinGroup = (groupId) => {
+  return async (dispatch, getState) => {
+    try {
+      console.log({ groupId }, "<<< dari thunk");
+      const { data } = await axios({
+        method: "POST",
+        url: URL_SERVER + '/groups/' + groupId + '/join',
+        headers: {
+          access_token: getAccessToken(),
+        },
+      });
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
