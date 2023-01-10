@@ -12,6 +12,22 @@ import {
 import { SOCKET_EVENTS } from "../actions/socketEvents";
 import { handleSetThisUser } from "./thunk";
 
+const userUpdate = (socketDispatch, user, getState) => {
+  // check if current user actually the user from server
+  const { userReducer, sectionReducer } = getState();
+  const uId = userReducer.thisUser?.id;
+  // console.log("[ws USER_UPDATE]", user.id, uId);
+  if (uId !== user.id) {
+    const { openChat } = sectionReducer;
+    if (!openChat || openChat.type !== "dm") return;
+    const userIndex = openChat.GroupMembers.findIndex(gm => gm.UserId === user.id);
+    if (userIndex === -1) return;
+    socketDispatch(setCounterpartUser(user));
+    return;
+  }
+  socketDispatch(handleSetThisUser(user));
+}
+
 
 export const initSocket = (socketDispatch) => {
   return (dispatch, getState) => {
@@ -59,19 +75,7 @@ export const initSocket = (socketDispatch) => {
     socket.on(SOCKET_EVENTS.USER_UPDATE, (user) => {
       console.log("[ws USER_EDIT]", user);
 
-      // check if current user actually the user from server
-      const { userReducer, sectionReducer } = getState();
-      const uId = userReducer.thisUser?.id;
-      // console.log("[ws USER_UPDATE]", user.id, uId);
-      if (uId !== user.id) {
-        const { openChat } = sectionReducer;
-        if (!openChat || openChat.type !== "dm") return;
-        const userIndex = openChat.GroupMembers.findIndex(gm => gm.UserId === user.id);
-        if (userIndex === -1) return;
-        socketDispatch(setCounterpartUser(user));
-        return;
-      }
-      socketDispatch(handleSetThisUser(user));
+      userUpdate(socketDispatch, user, getState);
     });
 
     socket.on(SOCKET_EVENTS.GROUP_UPDATE, (group) => {
@@ -104,12 +108,14 @@ export const initSocket = (socketDispatch) => {
 
     socket.on(SOCKET_EVENTS.ONLINE, (user) => {
       console.log("[ws ONLINE]", user);
-      // !TODO
+
+      userUpdate(socketDispatch, user, getState);
     });
 
     socket.on(SOCKET_EVENTS.OFFLINE, (user) => {
       console.log("[ws OFFLINE]", user);
-      // !TODO
+
+      userUpdate(socketDispatch, user, getState);
     });
 
     socket.on(SOCKET_EVENTS.ERROR, (error) => {
