@@ -65,7 +65,7 @@ export default function SectionChats() {
                   group.name === 'private'
                   ?
                     group.GroupMembers.length === 2 && 
-                    <img src={getUserAvatar(group.GroupMembers[Number(group.GroupMembers[0].UserId !== thisUser.id)].User)} className="avatar-chat" alt="avatar"></img> 
+                    <img src={getUserAvatar(group.GroupMembers[Number(group.GroupMembers[0].UserId === thisUser.id)].User)} className="avatar-chat" alt="avatar"></img> 
                   :
                   <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
                     {group.name[0].toUpperCase()}
