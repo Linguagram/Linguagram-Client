@@ -3,7 +3,6 @@ import ChangeAvatar from "../Modal/ChangeAvatar";
 import ChangeProfile from "../Modal/ChangeProfile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Collapsible from "react-collapsible";
-import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";

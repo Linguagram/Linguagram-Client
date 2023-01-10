@@ -8,6 +8,7 @@ import {
   editMessage,
 } from "../actions/actionCreator";
 import { SOCKET_EVENTS } from "../actions/socketEvents";
+import { handleSetThisUser } from "./thunk";
 
 export const initSocket = (socketDispatch) => {
   return (dispatch, getState) => {
@@ -50,6 +51,11 @@ export const initSocket = (socketDispatch) => {
       if (!message) return;
       if (sectionReducer.openChat?.id !== message?.GroupId) return;
       socketDispatch(editMessage(message));
+    });
+
+    socket.on(SOCKET_EVENTS.USER_UPDATE, (message) => {
+      console.log("[ws USER_EDIT]", message);
+      socketDispatch(handleSetThisUser(message));
     });
 
     socket.on(SOCKET_EVENTS.ERROR, (error) => {

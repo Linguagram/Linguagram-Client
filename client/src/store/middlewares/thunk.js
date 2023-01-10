@@ -406,3 +406,24 @@ export const joinGroup = (groupId) => {
     }
   };
 };
+
+export const changeAvatarUser = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      const { avatar } = data
+      const res = await axios({
+        method: 'POST',
+        url: `${URL_SERVER}/users/avatar`,
+        headers: {
+          access_token: getAccessToken(),
+          "Content-Type": "multipart/form-data",
+        },
+        data: avatar
+      })
+
+      return res.data
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
