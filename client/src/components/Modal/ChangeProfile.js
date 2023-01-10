@@ -25,8 +25,9 @@ export default function ChangeProfile({onClose, visible}) {
 
     const inputUsernameRef = useRef();
     const inputEmailRef = useRef();
-    const inputPasswordRef = useRef();
-    const inputConfirmPasswordRef = useRef();
+    const inputPasswordRef = useRef()
+    const inputNewPasswordRef = useRef();
+    const inputConfirmNewsPassword = useRef();
     const inputCountryRef = useRef();
     const inputPhoneNumberRef = useRef();
     const inputNativeLanguageRef = useRef();
@@ -40,39 +41,41 @@ export default function ChangeProfile({onClose, visible}) {
           username: inputUsernameRef.current.value,
           email: inputEmailRef.current.value,
           password: inputPasswordRef.current.value,
-          confirmPassword: inputConfirmPasswordRef.current.value,
+          newPassword: inputNewPasswordRef.current.value,
+          confirmNewPassword: inputConfirmNewsPassword.current.value,
           country: inputCountryRef.current.value,
           phoneNumber: inputPhoneNumberRef.current.value,
           nativeLanguages: [inputNativeLanguageRef.current.id],
           interestLanguages: [inputInterestLanguageRef.current.id],
           interests: []
         };
-        
+
         inputs.interests = selectedInterest.map(el => el.id)
 
         dispatch(editProfile(inputs))
-      .then((response) => {
-        dispatch(handleSetThisUser(response))
-
+      .then(() => {
+        handleOnClose()
         swal(
           "",
           `Your profile has been updated `
         );
-
         inputUsernameRef.current.value = "";
         inputEmailRef.current.value = "";
-        inputPasswordRef.current.value = "";
-        inputConfirmPasswordRef.current.value = "";
+        inputPasswordRef = "";
+        inputNewPasswordRef.current.value = "";
+        inputConfirmNewsPassword.current.value = "";
         inputPhoneNumberRef.current.value = "";
         inputCountryRef.current.value = ""
         setSelectedInterest([])
 
+        
       })
       .catch((err) => {
         if (err.response?.data?.message) {
           swalError(err)
-          inputPasswordRef.current.value = "";
-          inputConfirmPasswordRef.current.value = "";
+          inputPasswordRef.current.value = ''
+          inputNewPasswordRef.current.value = "";
+          inputConfirmNewsPassword.current.value = "";
         }
     });
         
@@ -108,13 +111,20 @@ export default function ChangeProfile({onClose, visible}) {
                     />
                     <InputField
                         inputRef={inputPasswordRef}
+                        label={"Old Password"}
+                        icon={"lock"}
+                        type={"password"}
+                        placeholder={"*****"}
+                    />
+                    <InputField
+                        inputRef={inputNewPasswordRef}
                         label={"Password"}
                         icon={"lock"}
                         type={"password"}
                         placeholder={"*****"}
                     />
                     <InputField
-                        inputRef={inputConfirmPasswordRef}
+                        inputRef={inputConfirmNewsPassword}
                         label={"Confirm Password"}
                         icon={"lock"}
                         type={"password"}

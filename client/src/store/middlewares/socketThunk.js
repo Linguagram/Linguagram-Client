@@ -8,7 +8,8 @@ import {
   editMessage,
 } from "../actions/actionCreator";
 import { SOCKET_EVENTS } from "../actions/socketEvents";
-import { handleSetThisUser } from "./thunk";
+import { handleFetchGroups, handleSetThisUser } from "./thunk";
+
 
 export const initSocket = (socketDispatch) => {
   return (dispatch, getState) => {
@@ -54,8 +55,10 @@ export const initSocket = (socketDispatch) => {
     });
 
     socket.on(SOCKET_EVENTS.USER_UPDATE, (message) => {
+      const { userReducer} = getState();
       console.log("[ws USER_EDIT]", message);
-      socketDispatch(handleSetThisUser(message));
+      if(userReducer.thisUser.id === message.id) socketDispatch(handleSetThisUser(message))
+      else socketDispatch(handleFetchGroups()) // mau semua ngefetch baru atau cuma user yg lagi chat aja yg keubah??
     });
 
     socket.on(SOCKET_EVENTS.ERROR, (error) => {
