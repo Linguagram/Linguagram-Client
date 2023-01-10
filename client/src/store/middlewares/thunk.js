@@ -307,15 +307,31 @@ export const sendFriendRequest = (friendId) => {
           access_token: getAccessToken(),
         },
       });
-      dispatch(handleFetchExploreUsers())
+      
+      const { exploreReducer } = getState();
+      let updatedExploreUsersList = [];
+
+      for (let i = 0; i < exploreReducer.users.length; i++) {
+        const element = exploreReducer.users[i];
+        if(element.id != friendId) {
+          updatedExploreUsersList.push(element)
+        }
+      }
+      console.log(
+        { before: exploreReducer.users },
+        { updatedExploreUsersList },
+        { data }
+      );
+      dispatch(setExploreUsers(updatedExploreUsersList))
       dispatch(getFriends())
       /*
         Fetch ulang people untuk mendapatkan
         people yang belum dikirimkan friend request
       */
+     return data
       // !TODO: insert to friend list?
     } catch (err) {
-      swalError(err);
+      console.log(err)
     }
   };
 };
@@ -390,7 +406,9 @@ export const handleEditMessage = (data) => {
       const { content, GroupId, MessageId, UserId } = data;
 
       if (!content || !GroupId || !MessageId || !UserId)
-        throw new TypeError("content or GroupId or MessageId or UserId can't be empty");
+        throw new TypeError(
+          "content or GroupId or MessageId or UserId can't be empty"
+        );
 
       const toSend = {
         content,
@@ -457,12 +475,12 @@ export const joinGroup = (groupId) => {
       console.log({ groupId }, "<<< dari thunk");
       const { data } = await axios({
         method: "POST",
-        url: URL_SERVER + '/groups/' + groupId + '/join',
+        url: URL_SERVER + "/groups/" + groupId + "/join",
         headers: {
           access_token: getAccessToken(),
         },
       });
-      dispatch(handleFetchExploreGroups())
+      dispatch(handleFetchExploreGroups());
       return data;
     } catch (err) {
       console.log(err);
@@ -473,41 +491,41 @@ export const joinGroup = (groupId) => {
 export const changeAvatarUser = (data) => {
   return async (dispatch, getState) => {
     try {
-      const { avatar } = data
+      const { avatar } = data;
       const res = await axios({
-        method: 'POST',
+        method: "POST",
         url: `${URL_SERVER}/users/avatar`,
         headers: {
           access_token: getAccessToken(),
           "Content-Type": "multipart/form-data",
         },
-        data: avatar
-      })
+        data: avatar,
+      });
 
-      return res.data
+      return res.data;
     } catch (error) {
       console.log(error);
     }
-  }
-}
+  };
+};
 
 export const deleteAvatarUser = () => {
   return async (dispatch, getState) => {
     try {
       const { data } = await axios({
-        method: 'DELETE',
+        method: "DELETE",
         url: `${URL_SERVER}/users/avatar`,
         headers: {
-          access_token: getAccessToken()
+          access_token: getAccessToken(),
         },
-      })
+      });
 
-      return data
+      return data;
     } catch (error) {
       console.log(error);
     }
-  }
-}
+  };
+};
 
 export const editStatusUser = (status) => {
   return async (dispatch, getState) => {
@@ -531,11 +549,17 @@ export const editStatusUser = (status) => {
 }
 
 export const newChatFromExplore = (userId) => {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     try {
-      console.log({ userId}, '<<< from newChatFromExplore in thunk')
+      const { data } = await axios({
+        method: "GET",
+        url: `/groups/${userId}`,
+        headers: {
+          access_token: getAccessToken(),
+        },
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-}
+  };
+};
