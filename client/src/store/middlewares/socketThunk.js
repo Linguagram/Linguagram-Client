@@ -7,9 +7,10 @@ import {
   deleteMessage,
   editMessage,
   setOpenChat,
+  setCounterpartUser,
 } from "../actions/actionCreator";
 import { SOCKET_EVENTS } from "../actions/socketEvents";
-import { handleFetchGroups, handleSetThisUser } from "./thunk";
+import { handleSetThisUser } from "./thunk";
 
 
 export const initSocket = (socketDispatch) => {
@@ -59,10 +60,17 @@ export const initSocket = (socketDispatch) => {
       console.log("[ws USER_EDIT]", user);
 
       // check if current user actually the user from server
-      const { userReducer } = getState();
+      const { userReducer, sectionReducer } = getState();
       const uId = userReducer.thisUser?.id;
       // console.log("[ws USER_UPDATE]", user.id, uId);
-      if (uId !== user.id) return;
+      if (uId !== user.id) {
+        const { openChat } = sectionReducer;
+        if (!openChat || openChat.type !== "dm") return;
+        const userIndex = openChat.GroupMembers.findIndex(gm => gm.UserId === user.id);
+        if (userIndex === -1) return;
+        socketDispatch(setCounterpartUser(user));
+        return;
+      }
       socketDispatch(handleSetThisUser(user));
     });
 
@@ -74,6 +82,34 @@ export const initSocket = (socketDispatch) => {
       const uId = sectionReducer.openChat?.id;
       if (uId !== group.id) return;
       socketDispatch(setOpenChat(group));
+    });
+
+    socket.on(SOCKET_EVENTS.FRIEND_REQUEST, (friendship) => {
+      console.log("[ws FRIEND_REQUEST]", friendship);
+
+      // check if current user actually the user from server
+      const { sectionReducer } = getState();
+      // !TODO
+    });
+
+    socket.on(SOCKET_EVENTS.FRIEND_REQUEST_ACCEPT, (friendship) => {
+      console.log("[ws FRIEND_REQUEST_ACCEPT]", friendship);
+      // !TODO
+    });
+
+    socket.on(SOCKET_EVENTS.FRIEND_REQUEST_DELETE, (friendship) => {
+      console.log("[ws FRIEND_REQUEST_DELETE]", friendship);
+      // !TODO
+    });
+
+    socket.on(SOCKET_EVENTS.ONLINE, (user) => {
+      console.log("[ws ONLINE]", user);
+      // !TODO
+    });
+
+    socket.on(SOCKET_EVENTS.OFFLINE, (user) => {
+      console.log("[ws OFFLINE]", user);
+      // !TODO
     });
 
     socket.on(SOCKET_EVENTS.ERROR, (error) => {

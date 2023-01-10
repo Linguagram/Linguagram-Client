@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
+import { getUserAvatar } from "../../util/getAvatar";
 
 export default function UserModal({ isOpen, closeModal, calling }) {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ export default function UserModal({ isOpen, closeModal, calling }) {
                     {
                       counterpartUser.email
                       ?
-                        <img src={counterpartUser.Avatar.url} id='avatar-profile' className="avatar-chat" alt="avatar"></img>
+                        <img src={getUserAvatar(counterpartUser)} id='avatar-profile' className="avatar-chat" alt="avatar"></img>
                       :
                         <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
                           {counterpartUser.name[0].toUpperCase()}
