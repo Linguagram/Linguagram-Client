@@ -311,21 +311,24 @@ export const sendMessage = (data) => {
   };
 };
 
-export const handleDeleteMessage = async (groupId, msgId) => {
-  try {
-    await axios({
-      method: "DELETE",
-      url: `${URL_SERVER}/groups/${groupId}/messages/${msgId}`,
-      headers: {
-        access_token: getAccessToken(),
-      },
-    });
-  } catch (error) {
-    console.log(error);
-  }
+export const handleDeleteMessage = (groupId, msgId) => {
+  return async (dispatch, getState) => {
+    try {
+      if (!groupId || !msgId) throw new TypeError("groupId or msgId can't be empty");
+
+      const { socketReducer } = getState();
+
+      socketReducer.socketConnect.emit(SOCKET_EVENTS.MESSAGE_DELETE, {
+        GroupId: groupId,
+        MessageId: msgId,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 };
 
-export const handleEditMessage = async (groupId, msgId) => {
+export const handleEditMessage = (groupId, msgId) => {
   try {
   } catch (error) {
     console.log(error);

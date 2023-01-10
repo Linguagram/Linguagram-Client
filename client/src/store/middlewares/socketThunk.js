@@ -40,7 +40,7 @@ export const initSocket = (socketDispatch) => {
     });
 
     socket.on(SOCKET_EVENTS.ERROR, (error) => {
-      console.error(error);
+      console.error("[ws ERROR]", error);
     });
 
     dispatch(setSocketConnect(socket));

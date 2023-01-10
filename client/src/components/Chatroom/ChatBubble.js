@@ -6,13 +6,14 @@ import {
   handleEditMessage,
   handleTranslate,
 } from "../../store/middlewares/thunk";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ChatBubble({ msg }) {
   const [content, setContent] = useState('')
   const { thisUser, counterpartUser, nativeLanguage } = useSelector(
     (state) => state.userReducer
   );
+  const dispatch = useDispatch();
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -30,6 +31,13 @@ export default function ChatBubble({ msg }) {
   useEffect(() => {
     setContent(msg.content)
   }, [])
+
+  const deleteMessage = (groupId, msgId) => {
+    dispatch(handleDeleteMessage(groupId, msgId));
+  }
+
+  const editMessage = (groupId, msgId) => {
+  }
 
   if (msg.UserId === thisUser.id) {
     return (
@@ -61,7 +69,7 @@ export default function ChatBubble({ msg }) {
                           <button
                             type="button"
                             onClick={() =>
-                              handleEditMessage(msg.GroupId, msg.id)
+                              editMessage(msg.GroupId, msg.id)
                             }
                             className={classNames(
                               active
@@ -79,7 +87,7 @@ export default function ChatBubble({ msg }) {
                           <button
                             type="button"
                             onClick={() =>
-                              handleDeleteMessage(msg.GroupId, msg.id)
+                              deleteMessage(msg.GroupId, msg.id)
                             }
                             className={classNames(
                               active
