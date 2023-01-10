@@ -33,7 +33,7 @@ export default function ChatBubble({ msg }) {
   }, [])
 
   const deleteMessage = (groupId, msgId) => {
-    dispatch(handleDeleteMessage(groupId, msgId));
+    dispatch(handleDeleteMessage(groupId, msgId, thisUser.id));
   }
 
   const editMessage = (groupId, msgId) => {

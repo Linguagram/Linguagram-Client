@@ -311,16 +311,17 @@ export const sendMessage = (data) => {
   };
 };
 
-export const handleDeleteMessage = (groupId, msgId) => {
+export const handleDeleteMessage = (groupId, msgId, userId) => {
   return async (dispatch, getState) => {
     try {
-      if (!groupId || !msgId) throw new TypeError("groupId or msgId can't be empty");
+      if (!groupId || !msgId || !userId) throw new TypeError("groupId or msgId or userId can't be empty");
 
       const { socketReducer } = getState();
 
       socketReducer.socketConnect.emit(SOCKET_EVENTS.MESSAGE_DELETE, {
         GroupId: groupId,
         MessageId: msgId,
+        UserId: userId,
       });
     } catch (err) {
       console.log(err);
