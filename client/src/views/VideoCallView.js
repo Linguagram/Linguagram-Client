@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Peer from "simple-peer";
 import { setAmITheCaller, setIncomingCaller } from "../store/actions/actionCreator";
+import { FerrisWheelSpinner } from 'react-spinner-overlay'
 
 export default function VideoCallView() {
 
@@ -17,7 +18,7 @@ export default function VideoCallView() {
   const { amITheCaller } = useSelector((state) => state.videoReducer);
   
   const [callerSignal, setCallerSignal] = useState();
-
+  const [loading, setLoading] = useState(true)
   //
 
   let myCam = {
@@ -109,7 +110,7 @@ export default function VideoCallView() {
       });
   
       peer.on("signal", data => {
-        console.log(data, "kirim signal waktu pertama call")
+        setLoading(true)
         socketConnect.emit("call", { userToCall: counterpartUser.id, signalData: data, from: thisUser.id })
       })
   
@@ -120,7 +121,7 @@ export default function VideoCallView() {
       });
   
       socketConnect.on("call_accepted", signal => {
-        console.log(signal, "signal yang diterima caller dari receiver habis accept call")
+        setLoading(false)
         peer.signal(signal);
       })
 
@@ -129,15 +130,19 @@ export default function VideoCallView() {
   }
 
   if(amITheCaller) {
+    setLoading(false)
     call()
   }
 
   useEffect(() => {
     if (!socketConnect?.connected) navigate("/home/chats");
-    socketConnect.on("call_connect", (data) => {
-      console.log(data.signal, "signal dari caller, nge set caller signal di state")
-      setCallerSignal(data.signal);
-    })
+    
+    if(!amITheCaller) {
+      socketConnect.on("call_connect", (data) => {
+        setLoading(false)
+        setCallerSignal(data.signal);
+      })
+    }
     
     socketConnect.on("user left", (data) => {
       if(amITheCaller) {
@@ -202,7 +207,6 @@ export default function VideoCallView() {
   
   useEffect(() => {
     if(callerSignal) receiveCall()
-    console.log(callerSignal, "state callerSignal trigger receive call")
   }, [callerSignal]); 
 
   const receiveCall = () => {
@@ -223,15 +227,13 @@ export default function VideoCallView() {
       });
 
       peer.on("signal", data => {
-        console.log(data, "signal yang dikirim receiver waktu accept call")
         socketConnect.emit("accept_call", { signal: data, to: incomingCaller.id })
       })
   
       peer.on("stream", stream => {
         partnerVideo.current.srcObject = stream;
       });
-  
-      console.log(callerSignal, "callerSignal di receivecCall terakhir")
+
       peer.signal(callerSignal);
 
       peerRef.current = peer
@@ -239,6 +241,8 @@ export default function VideoCallView() {
   }
 
   return (
+    <>
+    <FerrisWheelSpinner message={'Please wait while your friend is trying to connect'} loading={loading}　size={80} overlayColor="rgba(255,255,146,0.3)" />
     <div className="bg-darker-gray flex h-screen max-h-screen w-screen flex-1 flex-col items-stretch justify-between overflow-hidden">
       {/* Video call body */}
       <div className="flex max-h-[calc(100%-8rem)] flex-1 flex-col lg:flex-row gap-4 p-4">
@@ -324,6 +328,7 @@ export default function VideoCallView() {
         </button>
       </div>
     </div>
+    </>
   );
 }
 

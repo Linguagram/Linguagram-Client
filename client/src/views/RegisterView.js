@@ -68,7 +68,7 @@ export default function RegisterView() {
           inputPasswordRef.current.value = "";
           inputConfirmPasswordRef.current.value = "";
         }
-      });
+    });
   };
 
 
