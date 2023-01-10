@@ -308,6 +308,7 @@ export const sendFriendRequest = (friendId) => {
         },
       });
       dispatch(handleFetchExploreUsers())
+      dispatch(getFriends())
       /*
         Fetch ulang people untuk mendapatkan
         people yang belum dikirimkan friend request

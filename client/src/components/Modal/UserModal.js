@@ -1,17 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { sendFriendRequest } from "../../store/middlewares/thunk";
 import { getUserAvatar } from "../../util/getAvatar";
 
 export default function UserModal({ isOpen, closeModal, calling }) {
-  const navigate = useNavigate();
-  const { counterpartUser } = useSelector((state) => state.userReducer);
-  const { thisUser } = useSelector((state) => state.userReducer);
-  // console.log(counterpartUser)
+  const dispatch = useDispatch()
+  const { counterpartUser, thisUser } = useSelector((state) => state.userReducer);
+  const { friends } = useSelector((state) => state.friendReducer);
 
+  // console.log(counterpartUser)
+  const addFriend = () => {
+    dispatch(sendFriendRequest(counterpartUser.id))
+  }
+  console.log(friends);
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -23,7 +26,8 @@ export default function UserModal({ isOpen, closeModal, calling }) {
             enterTo="opacity-100"
             leave="ease-in duration-200"
             leaveFrom="opacity-100"
-            leaveTo="opacity-0">
+            leaveTo="opacity-0"
+          >
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
 
@@ -36,7 +40,8 @@ export default function UserModal({ isOpen, closeModal, calling }) {
                 enterTo="opacity-100 scale-100"
                 leave="ease-in duration-200"
                 leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95">
+                leaveTo="opacity-0 scale-95"
+              >
                 <Dialog.Panel className="w-80 transform overflow-hidden rounded-lg bg-darker-gray p-6 text-left align-middle shadow-lg transition-all">
                   <div className="w-full flex justify-end mb-2">
                     <button onClick={closeModal}>
@@ -47,82 +52,79 @@ export default function UserModal({ isOpen, closeModal, calling }) {
                     </button>
                   </div>
                   <div className="flex justify-center my-4">
-                    {
-                      counterpartUser.email
-                      ?
-                        <img src={getUserAvatar(counterpartUser)} id='avatar-profile' className="avatar-chat" alt="avatar"></img>
-                      :
-                        <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
-                          {counterpartUser.name[0].toUpperCase()}
-                        </div>
-                    }
+                    {counterpartUser.email ? (
+                      <img
+                        src={getUserAvatar(counterpartUser)}
+                        id="avatar-profile"
+                        className="avatar-chat"
+                        alt="avatar"
+                      ></img>
+                    ) : (
+                      <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
+                        {counterpartUser.name[0].toUpperCase()}
+                      </div>
+                    )}
                   </div>
                   {/* username, email, phone number, country */}
                   <Dialog.Title
                     as="h3"
-                    className="text-2xl text-center font-medium leading-6 text-white">
-                    {
-                      counterpartUser.email
-                      ?
-                        counterpartUser.username
-                      :
-                        counterpartUser.name
-                    }
+                    className="text-2xl text-center font-medium leading-6 text-white"
+                  >
+                    {counterpartUser.email
+                      ? counterpartUser.username
+                      : counterpartUser.name}
                   </Dialog.Title>
                   <div>
-                    {
-                      counterpartUser.email &&
-                      <p className="text-center text-slate-400 mt-1 text-sm">
-                        {counterpartUser.email}
-                      </p>
-                    }
-
-                    {
-                      counterpartUser.email &&
-                      <p className="text-center text-slate-400 mt-1 text-sm">
-                        {counterpartUser.phoneNumber}
-                      </p>
-                    }
-
-                    {
-                      counterpartUser.email &&
+                    {counterpartUser.email && (
                       <p className="text-center text-slate-400 mt-1 text-sm">
                         {counterpartUser.country}
                       </p>
-                    }
+                    )}
 
-                    {
-                      counterpartUser.email &&
+                    {counterpartUser.email && (
                       <p className="text-center text-slate-400 text-sm mt-3">
-                        Interested in: <br /> 
-                          <p className="text-center text-slate-400 mt-1 text-sm">
-                            {counterpartUser.UserLanguages.map(el => el.Language.name).join(', ')}
-                          </p>
+                        Interested in: <br />
+                        <p className="text-center text-slate-400 mt-1 text-sm">
+                          {counterpartUser.UserLanguages.map(
+                            (el) => el.Language.name
+                          ).join(", ")}
+                        </p>
                       </p>
-                    }
+                    )}
 
-                    {
-                      counterpartUser.email &&
+                    {counterpartUser.email && (
                       <p className="text-center text-slate-400 text-sm mt-3">
-                        Matching topics: <br /> 
-                          <p className="text-center text-slate-400 mt-1 text-sm">
-                            {counterpartUser.UserInterests.map(el => el.Interest.name).join(', ')}
-                          </p>
+                        Interested topic: <br />
+                        <p className="text-center text-slate-400 mt-1 text-sm">
+                          {counterpartUser.UserInterests.map(
+                            (el) => el.Interest.name
+                          ).join(", ")}
+                        </p>
                       </p>
-                    }
-                    
+                    )}
                   </div>
-                  {
-                    counterpartUser.email &&
+                  {counterpartUser.email &&
+                  friends.some((el) => (el.FriendId === counterpartUser.id && el.UserId === thisUser.id) || (el.UserId === counterpartUser.id && el.FriendId === thisUser.id)) ? (
                     <div className="mt-4 flex justify-center border-t border-light-gray pt-4">
                       <button
                         type="button"
                         className="inline-flex justify-center rounded-md border border-transparent bg-transparent p-4 text-sm font-medium text-white hover:bg-main-color focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                        onClick={calling}>
+                        onClick={calling}
+                      >
                         <FontAwesomeIcon icon="video" className="text-2xl" />
                       </button>
                     </div>
-                  }
+                  ) : (
+                    <div className="flex justify-center w-full gap-2 my-5 text-sm">
+                      <button
+                        onClick={addFriend}
+                        className="inline-block w-full p-2 text-center text-white border rounded-lg bg-main-color border-main-color hover:bg-black-blue hover:border-black-blue focus:outline-none focus:ring active:text-main-color md:w-fit"
+                      >
+                        <span className="sr-only"> Add Friend </span>
+                        Add Friend
+                      </button>
+                    </div>
+                  )}
                 </Dialog.Panel>
               </Transition.Child>
             </div>

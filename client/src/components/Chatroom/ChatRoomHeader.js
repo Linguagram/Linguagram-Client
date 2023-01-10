@@ -86,7 +86,7 @@ export default function ChatRoomHeader() {
     });
 
   }, [])
-  
+
   return (
     <div className="flex items-center justify-between w-full p-5 h-1/6 max-h-16">
       {
@@ -106,7 +106,7 @@ export default function ChatRoomHeader() {
           icon="angle-left"
         />
         </div>
-        <img src={getUserAvatar(counterpartUser)} className="avatar-chat" alt="avatar"></img>
+        <img onClick={openUserModal} src={getUserAvatar(counterpartUser)} className="avatar-chat" alt="avatar"></img>
         <div className="flex items-center gap-1">
           <button onClick={openUserModal}>
             {
@@ -132,7 +132,7 @@ export default function ChatRoomHeader() {
       </div>
       <div className="flex items-center justify-end w-1/3 gap-3 lg:w-1/5 xl:w-1/6 2xl:max-w-fit 2xl:gap-4">
         {
-          counterpartUser.email && friends.some(el => el.id === counterpartUser.id)
+          counterpartUser.email && friends.some(el => (el.FriendId === counterpartUser.id && el.UserId === thisUser.id) || (el.UserId === counterpartUser.id && el.FriendId === thisUser.id))
           ?
             <FontAwesomeIcon
             className="text-gray-400 cursor-pointer small-icons"
