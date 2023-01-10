@@ -7,7 +7,7 @@ import { getUserLogin, handleFetchGroups, handleSetActiveSection, handleSetSocke
 import HomeDrawer from "../components/HomeDrawer/HomeDrawer";
 import { useEffect } from "react";
 import { swalError } from "../util/swal";
-import { initSocket } from "../store/middlewares/socketThunk";
+import { initSocket, closeSocket } from "../store/middlewares/socketThunk";
 
 export default function HomeView() {
 
@@ -42,6 +42,9 @@ export default function HomeView() {
     }
 
     dispatch(initSocket(dispatch));
+    return () => {
+      dispatch(closeSocket());
+    }
   }, [])
 
   return (

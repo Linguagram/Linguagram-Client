@@ -1,8 +1,6 @@
 import io from "socket.io-client";
-import { useDispatch } from "react-redux";
-import { handleSetSocketConnect } from "./thunk";
 import { URL_SERVER } from "../../baseUrl";
-import { setSocketConnect, addMessage } from "../actions/actionCreator";
+import { setSocketConnect, addMessage, deleteMessage } from "../actions/actionCreator";
 import { SOCKET_EVENTS } from "../actions/socketEvents";
 
 export const initSocket = (socketDispatch) => {
@@ -22,9 +20,13 @@ export const initSocket = (socketDispatch) => {
     });
 
     socket.on(SOCKET_EVENTS.MESSAGE, (message) => {
-      console.log("[ws message]", message);
-      // !TODO: handle message event
+      console.log("[ws MESSAGE]", message);
       socketDispatch(addMessage(message));
+    });
+
+    socket.on(SOCKET_EVENTS.MESSAGE_DELETE, (message) => {
+      console.log("[ws MESSAGE_DELETE]", message);
+      socketDispatch(deleteMessage(message));
     });
 
     socket.on(SOCKET_EVENTS.ERROR, (error) => {
