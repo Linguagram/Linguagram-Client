@@ -42,9 +42,6 @@ export default function HomeView() {
     }
 
     dispatch(initSocket(dispatch));
-    return () => {
-      dispatch(closeSocket());
-    }
   }, [])
 
   return (
