@@ -9,7 +9,11 @@ import {
   setOpenChat,
   setCounterpartUser,
   setFriendRequests,
+<<<<<<< HEAD
   setAmITheCaller,
+=======
+  setFriends,
+>>>>>>> 9b8f3d6 (fix: integrate accept friend request with socket)
 } from "../actions/actionCreator";
 import { SOCKET_EVENTS } from "../actions/socketEvents";
 import { handleSetIsCalling, handleSetThisUser } from "./thunk";
@@ -100,6 +104,9 @@ export const initSocket = (socketDispatch, socketNavigate) => {
 
     socket.on(SOCKET_EVENTS.FRIEND_REQUEST_ACCEPT, (friendship) => {
       console.log("[ws FRIEND_REQUEST_ACCEPT]", friendship);
+      const { friendReducer } = getState();
+      const newFriendList = [ ...friendReducer.friends, friendship]
+      socketDispatch(setFriends(newFriendList))
       // !TODO
     });
 

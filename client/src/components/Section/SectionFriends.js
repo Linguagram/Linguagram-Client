@@ -36,6 +36,12 @@ export default function SectionFriends() {
       .catch(console.log);
   }, []);
 
+  useEffect(() => {
+    const letters = getFriendsFirstLetter(friends);
+    const sorted = sortFriendsByFirstLetter(friends);
+    setFirstLetters(letters);
+    setSortedFriends(sorted);
+  }, [friends]);
 
   return (
     <>

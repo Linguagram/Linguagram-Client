@@ -30,13 +30,14 @@ const getAccessToken = () => {
 
 export const handleSetThisUser = (user) => {
   return (dispatch, getState) => {
+    console.log(user, "nge test balikan user dari put");
     const nativeLangObj = user.UserLanguages.find((el) => el.type === "native");
     const interestLangObj = user.UserLanguages.find(
       (el) => el.type === "interest"
     );
-
+    console.log(nativeLangObj, "ini native lang obj");
     dispatch(setThisUser(user));
-    if(nativeLangObj && nativeLangObj.Language )dispatch(setNativeLanguage(nativeLangObj.Language));
+    // if(nativeLangObj && nativeLangObj.Language)dispatch(setNativeLanguage(nativeLangObj.Language)); masih ERROR
 
     // Added condition to prevent error in development ---------------------------
     if (interestLangObj)
@@ -173,8 +174,8 @@ export const editProfile = (inputs) => {
         interests,
       },
       headers: {
-        'access_token': localStorage.access_token
-      }
+        access_token: localStorage.access_token,
+      },
     });
   };
 };
@@ -288,7 +289,7 @@ export const getFriends = () => {
         (friend) => friend.FriendId == localStorage.user_id
       );
       const friends = data.filter((friend) => friend.isAccepted === true);
-      
+
       dispatch(setFriendRequests(requests));
       dispatch(setFriends(friends));
     } catch (err) {
@@ -313,24 +314,16 @@ export const sendFriendRequest = (friendId) => {
 
       for (let i = 0; i < exploreReducer.users.length; i++) {
         const element = exploreReducer.users[i];
-        if(element.id != friendId) {
-          updatedExploreUsersList.push(element)
+        if (element.id != friendId) {
+          updatedExploreUsersList.push(element);
         }
       }
 
-      dispatch(setExploreUsers(updatedExploreUsersList))
-
-
-      // dispatch(getFriends())
-
-      /*
-        Fetch ulang people untuk mendapatkan
-        people yang belum dikirimkan friend request
-      */
+      dispatch(setExploreUsers(updatedExploreUsersList));
 
       // !TODO: insert to friend list?
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 };
@@ -448,14 +441,28 @@ export const handleTranslate = async (content, toLanguage) => {
 export const acceptFriendRequest = (friendshipId) => {
   return async (dispatch, getState) => {
     try {
-      await axios({
+      const { data } = await axios({
         method: "PATCH",
         url: `${URL_SERVER}/friendships/${friendshipId}`,
         headers: {
           access_token: getAccessToken(),
         },
       });
-      dispatch(getFriends());
+      const { friendReducer } = getState();
+      console.log(friendReducer.friendRequests, {friendshipId})
+      let updatedFriendRequestList = [];
+      for (let i = 0; i < friendReducer.friendRequests.length; i++) {
+        const element = friendReducer.friendRequests[i];
+        if (element.User.id != friendshipId) {
+          updatedFriendRequestList.push(element);
+        }
+      }
+
+      console.log({updatedFriendRequestList})
+      
+      const newFriendList = [ ...friendReducer.friends, data]
+      dispatch(setFriends(newFriendList))
+      dispatch(setFriendRequests(updatedFriendRequestList))
     } catch (err) {
       console.log(err);
     }
@@ -530,15 +537,15 @@ export const editStatusUser = (status) => {
   return async (dispatch, getState) => {
     try {
       const { data } = await axios({
-        method: 'PATCH',
+        method: "PATCH",
         url: `${URL_SERVER}/users/status`,
         headers: {
           access_token: getAccessToken(),
         },
         data: {
-          status
-        }
-      })
+          status,
+        },
+      });
 
       return data;
     } catch (error) {
