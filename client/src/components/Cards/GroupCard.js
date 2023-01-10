@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setCounterpartUser } from "../../store/actions/actionCreator";
 import { joinGroup } from "../../store/middlewares/thunk";
 import { getGroupAvatar } from "../../util/getAvatar";
 import { swalError } from "../../util/swal";
@@ -27,6 +28,7 @@ export default function GroupCard({ groupId, groupName, members, group }) {
   const handleJoinGroup = () => {
     dispatch(joinGroup(groupId))
       .then((_) => {
+        dispatch(setCounterpartUser(group))
         navigate("/home/groups");
       })
       .catch((err) => {

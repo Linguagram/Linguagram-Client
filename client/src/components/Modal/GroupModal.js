@@ -1,24 +1,28 @@
+import { Fragment } from "react";
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
-import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 import { getGroupAvatar } from "../../util/getAvatar";
+import { leaveGroup } from "../../store/middlewares/thunk";
+import { swalError, swalSuccess } from "../../util/swal";
 
 export default function GroupModal({ isOpen, closeModal, counterpartUser }) {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  // Mock data to test user list
-  const users = [
-    {id: 1, name: "Patricia Smith"},
-    {id: 2, name: "John Smith"},
-    {id: 3, name: "Adam Smith"},
-    {id: 4, name: "Doris Brown"},
-    {id: 5, name: "Jack White"},
-    {id: 6, name: "Slash"},
-    {id: 7, name: "Lead Belly"},
-    {id: 8, name: "Howling Wolf"},
-    {id: 9, name: "Chet Baker"},
-    {id: 10, name: "Good Day"},
-  ]
+  const handleLeaveGroup = () => {
+    dispatch(leaveGroup(counterpartUser.id))
+    .then((_) => {
+      closeModal()
+      swalSuccess('Success to leave group!')
+      console.log(counterpartUser);
+      navigate('/home/chats')
+    })
+    .catch((err) => {
+      swalError(err)
+    })
+  }
 
   return (
     <>
@@ -63,11 +67,11 @@ export default function GroupModal({ isOpen, closeModal, counterpartUser }) {
                     { counterpartUser.name }
                   </Dialog.Title>
                   <div className="mt-2 text-lg font-light text-center text-white">
-                    Members: {counterpartUser.GroupMembers.length}
+                    { counterpartUser.description }
                   </div>
-                  <div className="flex flex-col flex-1 h-48 p-4 mt-6 overflow-auto text-sm text-center text-white bg-black-blue">
+                  <p className="text-white w-full bg-black-blue mt-3 py-1 border-b border-gray-500 text-lg text-gray-300 text-center">Member</p>
+                  <div className="flex flex-col flex-1 h-48 p-4 overflow-auto text-sm text-center text-white bg-black-blue">
                     {counterpartUser.GroupMembers.map(el => {
-                      console.log(el);
                       return <p key={el.UserId}>{el.User.username}</p>
                     })}
                   </div>
@@ -75,7 +79,7 @@ export default function GroupModal({ isOpen, closeModal, counterpartUser }) {
                     <button
                       type="button"
                       className="inline-flex flex-col items-center justify-center gap-1 p-2 text-sm font-medium text-white border border-transparent rounded-md bg-main-color-blur hover:bg-main-color focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}>
+                      onClick={handleLeaveGroup}>
                       <p>Leave Group</p>
                     </button>
                   </div>

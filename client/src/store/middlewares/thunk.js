@@ -562,7 +562,7 @@ export const newChatFromExplore = (userId) => {
         url: `/groups/${userId}`,
         headers: {
           access_token: getAccessToken(),
-        },
+        }
       });
     } catch (error) {
       console.log(error);
@@ -573,5 +573,42 @@ export const newChatFromExplore = (userId) => {
 export const handleSetIsCalling = (state) => {
   return (dispatch, getState) => {
     dispatch(setIsCalling(state));
+  }
+}
+
+export const leaveGroup = (groupId) => {
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await axios({
+        method: 'DELETE',
+        url: `${URL_SERVER}/groupmembers/${groupId}`,
+        headers: {
+          access_token: getAccessToken(),
+        }
+      })
+
+      const { groupReducer } = getState()
+
+      const allGroups = []
+      const groupGroups = []
+
+      groupReducer.allGroups.forEach(el => {
+        if (el.id !== data.GroupId) {
+          allGroups.push(el)
+        }
+      })
+
+      groupReducer.groupGroups.forEach(el => {
+        if (el.id !== data.GroupId) {
+          groupGroups.push(el)
+        }
+      })
+
+      dispatch(setCounterpartUser({}))
+      dispatch(setAllGroups(allGroups))
+      dispatch(setGroupGroups(groupGroups))
+    } catch (error) {
+      return error
+    }
   }
 }
