@@ -16,6 +16,7 @@ import {
   setFriends,
   addMessage,
   setInterests,
+  setNavbarColor,
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
@@ -372,3 +373,9 @@ export const acceptFriendRequest = (friendshipId) => {
     }
   };
 };
+
+export const changeNavbarColor = (condition) => {
+  return async (dispatch, getState) => {
+    dispatch(setNavbarColor(condition))
+  }
+}

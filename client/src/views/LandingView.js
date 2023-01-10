@@ -1,6 +1,20 @@
+import { useDispatch } from "react-redux";
+import { changeNavbarColor } from "../store/middlewares/thunk";
+
 export default function LandingView() {
+  const dispatch = useDispatch()
+  
+  const handleScrollEvent = (e) => {
+    e.preventDefault()
+    if(e.target.scrollTop >= 90) {
+      dispatch(changeNavbarColor(true))
+    } else {
+      dispatch(changeNavbarColor(false))
+    }
+  }
+
   return (
-    <div className="w-full h-full fixed overflow-auto">
+    <div className="w-full h-full fixed overflow-auto" id="main-content" onScroll={handleScrollEvent}>
       <div className="flex flex-col flex-1 min-h-screen bg-darker-gray text-white">
         {/* Hero */}
         <header

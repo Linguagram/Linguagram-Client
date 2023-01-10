@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux'
-import { login } from "../store/middlewares/thunk";
+import { changeNavbarColor, login } from "../store/middlewares/thunk";
 import swal from 'sweetalert'
 import { useNavigate } from "react-router-dom";
 import { handleSetThisUser } from "../store/middlewares/thunk";
@@ -54,9 +54,21 @@ export default function LoginView() {
     }) 
   }
 
+  const handleScrollEvent = (e) => {
+    e.preventDefault()
+    if(e.target.scrollTop >= 90) {
+      dispatch(changeNavbarColor(true))
+    } else {
+      dispatch(changeNavbarColor(false))
+    }
+  }
+
+  useEffect(() => {
+    dispatch(changeNavbarColor(false))
+  }, [])
 
   return (
-    <div className="bg-darker-gray min-h-screen flex text-white justify-center items-center fixed w-full overflow-auto">
+    <div className="bg-darker-gray min-h-screen flex text-white justify-center items-center fixed w-full overflow-auto" onScroll={handleScrollEvent}>
       <div className="flex flex-col gap-8 flex-1">
         <div>
           <h1 className="text-center text-3xl font-bold mb-2">Login</h1>

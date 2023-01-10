@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import InputField from "../components/Form/InputFiled";
 import MyListbox from "../components/Form/ListBox";
-import { register } from "../store/middlewares/thunk";
+import { register, changeNavbarColor } from "../store/middlewares/thunk";
 import { useDispatch } from "react-redux";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
@@ -36,12 +36,12 @@ export default function RegisterView() {
       phoneNumber: inputPhoneNumberRef.current.value,
       nativeLanguage: [],
       interestLanguage: [],
-      interests: []
+      interests: [],
     };
 
     console.log(inputInterestLanguageRef.current);
 
-    inputs.interests = selectedInterest.map(el => el.id)
+    inputs.interests = selectedInterest.map((el) => el.id);
 
     console.log(inputs);
 
@@ -72,8 +72,21 @@ export default function RegisterView() {
     //   });
   };
 
+  const handleScrollEvent = (e) => {
+    e.preventDefault();
+    if (e.target.scrollTop >= 90) {
+      dispatch(changeNavbarColor(true));
+    } else {
+      dispatch(changeNavbarColor(false));
+    }
+  };
+
+  useEffect(() => {
+    dispatch(changeNavbarColor(false));
+  }, []);
+
   return (
-    <div className="bg-light-gray h-screen w-screen fixed overflow-auto flex text-white justify-center">
+    <div className="bg-light-gray h-screen w-screen fixed overflow-auto flex text-white justify-center" onScroll={handleScrollEvent}>
       <div className="flex flex-col gap-4 md:gap-4 flex-1">
         <div className="flex flex-col gap-2">
           <h1 className="text-center text-3xl font-bold mt-20 md:mt-12 lg:mt-20">
@@ -173,13 +186,16 @@ export default function RegisterView() {
               </div>
               <div className="flex gap-4">
                 {selectedInterest.map((interest) => (
-                  <div className="bg-darker-gray py-1 px-3 rounded" key={interest.id}>{interest.name}</div>
+                  <div
+                    className="bg-darker-gray py-1 px-3 rounded"
+                    key={interest.id}>
+                    {interest.name}
+                  </div>
                 ))}
               </div>
               <button
                 type="submit"
-                className="bg-main-color rounded p-3 text-sm w-full"
-                >
+                className="bg-main-color rounded p-3 text-sm w-full">
                 Login
               </button>
             </div>
