@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
+import { getUserAvatar } from "../../util/getAvatar";
 
 export default function CallingModal({ isOpen, closeModal }) {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ export default function CallingModal({ isOpen, closeModal }) {
                 leaveTo="opacity-0 scale-95">
                 <Dialog.Panel className="w-80 transform overflow-hidden rounded-lg bg-darker-gray p-6 text-left align-middle shadow-lg transition-all">
                   <div className="flex justify-center my-4">
-                    <img src={counterpartUser.Avatar.url} id="avatar-profile" alt="avatar"></img>
+                    <img src={getUserAvatar(counterpartUser)} id="avatar-profile" alt="avatar"></img>
                   </div>
                   <Dialog.Title
                     as="h3"
