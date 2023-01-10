@@ -9,11 +9,8 @@ import {
   setOpenChat,
   setCounterpartUser,
   setFriendRequests,
-<<<<<<< HEAD
   setAmITheCaller,
-=======
   setFriends,
->>>>>>> 9b8f3d6 (fix: integrate accept friend request with socket)
 } from "../actions/actionCreator";
 import { SOCKET_EVENTS } from "../actions/socketEvents";
 import { handleSetIsCalling, handleSetThisUser } from "./thunk";
