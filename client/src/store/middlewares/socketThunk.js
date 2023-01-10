@@ -10,7 +10,7 @@ import { SOCKET_EVENTS } from "../actions/socketEvents";
 
 export const initSocket = (socketDispatch) => {
   return (dispatch, getState) => {
-    const { socketReducer } = getState();
+    const { socketReducer, sectionReducer } = getState();
 
     if (socketReducer.socketConnect) return;
 
@@ -26,16 +26,22 @@ export const initSocket = (socketDispatch) => {
 
     socket.on(SOCKET_EVENTS.MESSAGE, (message) => {
       console.log("[ws MESSAGE]", message);
+      if (!message) return;
+      if (sectionReducer.openChat?.id !== message?.GroupId) return;
       socketDispatch(addMessage(message));
     });
 
     socket.on(SOCKET_EVENTS.MESSAGE_DELETE, (message) => {
       console.log("[ws MESSAGE_DELETE]", message);
+      if (!message) return;
+      if (sectionReducer.openChat?.id !== message?.GroupId) return;
       socketDispatch(deleteMessage(message));
     });
 
     socket.on(SOCKET_EVENTS.MESSAGE_EDIT, (message) => {
       console.log("[ws MESSAGE_EDIT]", message);
+      if (!message) return;
+      if (sectionReducer.openChat?.id !== message?.GroupId) return;
       socketDispatch(editMessage(message));
     });
 
