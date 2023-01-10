@@ -1,13 +1,32 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getLanguages } from '../../store/middlewares/thunk';
+import { setLanguages } from '../../store/actions/actionCreator';
+import { swalError } from '../../util/swal';
 
 export default function MyListbox({ inputRef }) {
+  const dispatch = useDispatch()
   const { languageList } = useSelector((state) => state.languageReducer);
-  const [selected, setSelected] = useState(languageList[0])
+  const [selected, setSelected] = useState({})
 
   inputRef.current = selected
+
+  useEffect(() => {
+    dispatch(getLanguages())
+    .then((res) => {
+      dispatch(setLanguages(res.data));
+      setSelected(res.data[0]);
+    })
+    .catch((err) => {
+      if (err.response?.data?.message) {
+        swalError(err);
+      } else {
+        console.log(err);
+      }
+    });
+  }, [])
 
   return (
     <>
@@ -29,9 +48,9 @@ export default function MyListbox({ inputRef }) {
             leaveTo="opacity-0"
           >
             <Listbox.Options className="absolute mt-1 max-h-32 w-full overflow-auto bg-darker-gray py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-20 overflow-y-auto">
-              {languageList.map((language, idx) => (
+              {languageList.map((language) => (
                 <Listbox.Option
-                  key={idx}
+                  key={language.id}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
                       active ? 'bg-main-color text-white' : 'text-white'

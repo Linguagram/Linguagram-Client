@@ -7,8 +7,8 @@ export const swalErrorStr = (msg) => {
   })
 }
 
-export const swalError = (msg) => {
-  return swalErrorStr(msg.response.data.message);
+export const swalError = (err) => {
+  return swalErrorStr(err.response.data.message);
 }
 
 export const swalSuccess = (msg) => {

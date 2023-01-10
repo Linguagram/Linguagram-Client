@@ -42,4 +42,6 @@ export const EDIT_MESSAGE = "groups/editMessage"
 
 export const FETCH_INTERESTS = "interests/fetchInterests"
 
+export const FETCH_LANGUAGES = "languages/fetchLanguages"
+
 export const CHANGE_NAVBAR_COLOR = "navbar/ChangeColor"

@@ -21,7 +21,8 @@ import {
   FETCH_INTERESTS,
   DELETE_MESSAGE,
   EDIT_MESSAGE,
-  CHANGE_NAVBAR_COLOR
+  CHANGE_NAVBAR_COLOR,
+  FETCH_LANGUAGES,
 } from "./actionTypes";
 
 export const setActiveSection = (payload) => {
@@ -182,6 +183,13 @@ export const setInterests = (payload) => {
 export const setNavbarColor = (payload) => {
   return {
     type: CHANGE_NAVBAR_COLOR,
+    payload
+  }
+}
+
+export const setLanguages = (payload) => {
+  return {
+    type: FETCH_LANGUAGES,
     payload
   }
 }

@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 import ComboboxInterest from "../components/Form/Combobox";
+import { swalError } from "../util/swal";
 
 export default function RegisterView() {
   const dispatch = useDispatch();
@@ -34,43 +35,38 @@ export default function RegisterView() {
       confirmPassword: inputConfirmPasswordRef.current.value,
       country: inputCountryRef.current.name,
       phoneNumber: inputPhoneNumberRef.current.value,
-      nativeLanguage: [],
-      interestLanguage: [],
-      interests: [],
+      nativeLanguages: [inputNativeLanguageRef.current.id],
+      interestLanguages: [inputInterestLanguageRef.current.id],
+      interests: []
     };
 
-    console.log(inputInterestLanguageRef.current);
+    inputs.interests = selectedInterest.map(el => el.id)
 
-    inputs.interests = selectedInterest.map((el) => el.id);
+    dispatch(register(inputs))
+      .then((response) => {
+        swal(
+          "",
+          `Please check your inbox. We have sent a verification link to ${response.data.user.email}. `
+        );
 
-    console.log(inputs);
+        inputUsernameRef.current.value = "";
+        inputEmailRef.current.value = "";
+        inputPasswordRef.current.value = "";
+        inputConfirmPasswordRef.current.value = "";
+        inputPhoneNumberRef.current.value = "";
+        inputCountryRef.current.value = ""
 
-    // dispatch(register(inputs))
-    //   .then((response) => {
-    //     swal(
-    //       "",
-    //       `Please check your inbox. We have sent a verification link to ${response.data.user.email}. `
-    //     );
-
-    //     inputUsernameRef.current.value = "";
-    //     inputEmailRef.current.value = "";
-    //     inputPasswordRef.current.value = "";
-    //     inputConfirmPasswordRef.current.value = "";
-    //     inputPhoneNumberRef.current.value = "";
-
-    //     navigate("/login");
-    //   })
-    //   .catch((err) => {
-    //     if (err.response?.data?.message) {
-    //       swal({
-    //         text: `${err.response.data.message}`,
-    //         icon: "error",
-    //       });
-    //       inputPasswordRef.current.value = "";
-    //       inputConfirmPasswordRef.current.value = "";
-    //     }
-    //   });
+        navigate("/login");
+      })
+      .catch((err) => {
+        if (err.response?.data?.message) {
+          swalError(err)
+          inputPasswordRef.current.value = "";
+          inputConfirmPasswordRef.current.value = "";
+        }
+      });
   };
+
 
   const handleScrollEvent = (e) => {
     e.preventDefault();
@@ -195,8 +191,9 @@ export default function RegisterView() {
               </div>
               <button
                 type="submit"
-                className="bg-main-color rounded p-3 text-sm w-full">
-                Login
+                className="bg-main-color rounded p-3 text-sm w-full"
+                >
+                  Sign Up
               </button>
             </div>
           </form>

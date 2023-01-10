@@ -3,8 +3,8 @@ import { Combobox, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getInterests } from "../../store/middlewares/thunk";
 import { setInterests } from "../../store/actions/actionCreator";
-import { swalError } from "../../util/swal";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { swalError, swalErrorStr } from "../../util/swal";
 
 export default function ComboboxInterest({
   selectedInterest,
@@ -12,27 +12,24 @@ export default function ComboboxInterest({
 }) {
   const dispatch = useDispatch();
   const { interestList } = useSelector((state) => state.interestReducer);
-  const [query, setQuery] = useState("");
+  // const [query, setQuery] = useState("");
 
-  const filteredInterest =
-    query === ""
-      ? interestList
-      : interestList.filter((interest) =>
-          interest.name
-            .toLowerCase()
-            .replace(/\s+/g, "")
-            .includes(query.toLowerCase().replace(/\s+/g, ""))
-        );
-
-  const handleDisplay = () => {
-    interestList.map((interest) => interest.name).join(", ");
-  };
+  const handleOnChange = (payload) => {
+    console.log(payload);
+    if (payload.length < 1) {
+      swalErrorStr('You must select minimum 1 topic')
+    } else if (payload.length > 3) {
+      swalErrorStr('You must select maximum 3 topics')
+    } else {
+      setSelectedInterest(payload)
+    }
+  }
 
   useEffect(() => {
     dispatch(getInterests())
       .then((res) => {
         dispatch(setInterests(res.data));
-        setSelectedInterest([res.data[0], res.data[1]]);
+        setSelectedInterest([res.data[0]]);
       })
       .catch((err) => {
         if (err.response?.data?.message) {
@@ -42,12 +39,12 @@ export default function ComboboxInterest({
         }
       });
   }, []);
-
+  console.log(selectedInterest);
   if (interestList.length > 0 && selectedInterest.length > 0) {
     return (
       <Combobox
         value={selectedInterest}
-        onChange={setSelectedInterest}
+        onChange={handleOnChange}
         multiple
       >
         <div className="relative mt-1">
@@ -64,7 +61,7 @@ export default function ComboboxInterest({
             leave="transition ease-in duration-100"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
-            afterLeave={() => setQuery("")}
+            // afterLeave={() => setQuery("")}
           >
             <Combobox.Options className="absolute mt-1 max-h-32 w-full overflow-auto bg-darker-gray py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-20 overflow-y-auto">
               {
@@ -96,6 +93,11 @@ export default function ComboboxInterest({
                             <CheckIcon className="h-5 w-5" aria-hidden="true" />
                           </span>
                         ) : null}
+                        {/* {selectedInterest ? (
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-white">
+                          <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                        </span>
+                      ) : null} */}
                       </>
                     )}
                   </Combobox.Option>
