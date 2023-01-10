@@ -38,6 +38,7 @@ export default function RegisterView() {
       confirmPassword: inputConfirmPasswordRef.current.value,
       country: inputCountryRef.current.name,
       phoneNumber: inputPhoneNumberRef.current.value,
+      status: "Available",
       nativeLanguages: [inputNativeLanguageRef.current.id],
       interestLanguages: [inputInterestLanguageRef.current.id],
       interests: []

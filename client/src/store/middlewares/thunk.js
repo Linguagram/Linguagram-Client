@@ -84,8 +84,9 @@ export const register = (inputs) => {
       confirmPassword,
       country,
       phoneNumber,
-      nativeLanguage,
-      interestLanguage,
+      status,
+      nativeLanguages,
+      interestLanguages,
       interests,
     } = inputs;
 
@@ -97,10 +98,11 @@ export const register = (inputs) => {
         email,
         password,
         confirmPassword,
-        phoneNumber,
         country,
-        nativeLanguage,
-        interestLanguage,
+        phoneNumber,
+        status,
+        nativeLanguages,
+        interestLanguages,
         interests,
       },
     });
@@ -497,6 +499,27 @@ export const deleteAvatarUser = () => {
         headers: {
           access_token: getAccessToken()
         },
+      })
+
+      return data
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+export const editStatusUser = (status) => {
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await axios({
+        method: 'PATCH',
+        url: `${URL_SERVER}/users/status`,
+        headers: {
+          access_token: getAccessToken()
+        },
+        data: {
+          status
+        }
       })
 
       return data

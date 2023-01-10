@@ -9,6 +9,8 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { setHomeDrawer } from "../../store/actions/actionCreator";
 import { getUserAvatar } from "../../util/getAvatar";
+import { editStatusUser, handleSetThisUser } from "../../store/middlewares/thunk";
+import { swalSuccess } from "../../util/swal";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -22,6 +24,17 @@ export default function SectionSetting() {
 
   const handleCloseAvatarModal = () => setIsAvatarModalVisible(false);
   const handleCloseProfileModal = () => setisProfileModalVisible(false);
+
+  const setStatus = (payload) => {
+    dispatch(editStatusUser(payload))
+    .then((res) => {
+      dispatch(handleSetThisUser(res))
+      swalSuccess('Success to update status')
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
 
   if (!thisUser.id) return null;
   else {
@@ -59,7 +72,7 @@ export default function SectionSetting() {
             <Menu as="div" className="relative inline-block text-left">
               <div>
                 <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-300 bg-transparent rounded-md focus:outline-none ">
-                  Available
+                  { thisUser.status }
                   <ChevronDownIcon
                     className="w-5 h-5 ml-2 -mr-1"
                     aria-hidden="true"
@@ -80,56 +93,64 @@ export default function SectionSetting() {
                   <div className="py-1 bg-darker-gray">
                     <Menu.Item>
                       {({ active }) => (
-                        <a
-                          href="#"
+                        <button
+                        type="button"
+                          onClick={() => setStatus('Available')}
                           className={classNames(
                             active ? "bg-gray text-gray-300" : "text-gray-400",
-                            "block px-4 py-2 text-sm"
+                            "block px-4 py-2 text-sm w-full text-left"
                           )}
                         >
                           Available
-                        </a>
+                        </button>
                       )}
                     </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href="#"
-                          className={classNames(
-                            active ? "bg-gray text-gray-300" : "text-gray-400",
-                            "block px-4 py-2 text-sm"
-                          )}
-                        >
-                          Busy
-                        </a>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href="#"
-                          className={classNames(
-                            active ? "bg-gray text-gray-300" : "text-gray-400",
-                            "block px-4 py-2 text-sm"
-                          )}
-                        >
-                          Do not disturb
-                        </a>
-                      )}
-                    </Menu.Item>
+
                     <Menu.Item>
                       {({ active }) => (
                         <button
-                          type="submit"
+                        type="button"
+                          onClick={() => setStatus('Busy')}
                           className={classNames(
                             active ? "bg-gray text-gray-300" : "text-gray-400",
-                            "block w-full px-4 py-2 text-left text-sm"
+                            "block px-4 py-2 text-sm w-full text-left"
+                          )}
+                        >
+                          Busy
+                        </button>
+                      )}
+                    </Menu.Item>
+
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                        type="button"
+                          onClick={() => setStatus('Do not disturb')}
+                          className={classNames(
+                            active ? "bg-gray text-gray-300" : "text-gray-400",
+                            "block px-4 py-2 text-sm w-full text-left"
+                          )}
+                        >
+                          Do not disturb
+                        </button>
+                      )}
+                    </Menu.Item>
+
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                        type="button"
+                          onClick={() => setStatus('Idle')}
+                          className={classNames(
+                            active ? "bg-gray text-gray-300" : "text-gray-400",
+                            "block px-4 py-2 text-sm w-full text-left"
                           )}
                         >
                           Idle
                         </button>
                       )}
                     </Menu.Item>
+                    
                   </div>
                 </Menu.Items>
               </Transition>
@@ -140,11 +161,6 @@ export default function SectionSetting() {
         <hr className="mt-5 line-break" />
 
         <div className="flex flex-col w-full h-full gap-2 overflow-y-auto scrollbar-hide">
-          {/* <div className="text-sm text-gray-400">
-            If several languages coalesce, the grammar of the resulting language
-            is more simple and regular than that of the individual.
-          </div> */}
-
           <div className="text-sm text-white mt-7">
             <Collapsible
               className="w-full"
