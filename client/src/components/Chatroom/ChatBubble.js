@@ -32,7 +32,7 @@ export default function ChatBubble({ msg }) {
 
   useEffect(() => {
     setContent(msg.content)
-  }, [])
+  }, [msg])
 
   const deleteMessage = (groupId, msgId) => {
     dispatch(handleDeleteMessage(groupId, msgId, thisUser.id));
@@ -42,8 +42,17 @@ export default function ChatBubble({ msg }) {
 
   const editMessage = (e, groupId, msgId) => {
     e.preventDefault();
-    const editContent = editingElement.current?.innerText;
-    console.log(editContent);
+    const editContent = editingElement.current?.value;
+
+    const data = {
+      content: editContent,
+      GroupId: groupId,
+      MessageId: msgId,
+      UserId: thisUser.id,
+    };
+
+    dispatch(handleEditMessage(data));
+    setEditing(null);
   }
 
   if (msg.UserId === thisUser.id) {
@@ -137,15 +146,16 @@ export default function ChatBubble({ msg }) {
                           ref={editingElement}
                           className="text-sm text-white bg-transparent focus:border-none focus:outline-none"
                           style={{ wordBreak: "break-word" }}
-                        >
-                          { content }
-                        </textarea>
+                          defaultValue={ content }
+                        />
                         <input
                           style={{ color: "white" }}
                           type="submit"
+                          className="cursor-pointer"
                           value="Edit"/>
                         <button
                           style={{ color: "white" }}
+                          className="cursor-pointer"
                           onClick={() => setEditing(null)}
                         >Cancel</button>
                       </form>)

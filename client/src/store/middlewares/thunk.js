@@ -339,11 +339,32 @@ export const handleDeleteMessage = (groupId, msgId, userId) => {
   };
 };
 
-export const handleEditMessage = (groupId, msgId) => {
-  try {
-  } catch (error) {
-    console.log(error);
-  }
+export const handleEditMessage = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      if (!data) throw new TypeError("data can't be empty");
+
+      const { socketReducer } = getState();
+
+      const { content, GroupId, MessageId, UserId } = data;
+
+      if (!content || !GroupId || !MessageId || !UserId)
+        throw new TypeError("content or GroupId or MessageId or UserId can't be empty");
+
+      const toSend = {
+        content,
+        GroupId,
+        MessageId,
+        UserId,
+      };
+
+      console.log(toSend, "<<<<<<< to emit MESSAGE_EDIT");
+
+      socketReducer.socketConnect.emit(SOCKET_EVENTS.MESSAGE_EDIT, toSend);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 };
 
 export const handleTranslate = async (content, toLanguage) => {
