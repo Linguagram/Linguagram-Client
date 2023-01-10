@@ -1,6 +1,11 @@
 import io from "socket.io-client";
 import { URL_SERVER } from "../../baseUrl";
-import { setSocketConnect, addMessage, deleteMessage } from "../actions/actionCreator";
+import {
+  setSocketConnect,
+  addMessage,
+  deleteMessage,
+  editMessage,
+} from "../actions/actionCreator";
 import { SOCKET_EVENTS } from "../actions/socketEvents";
 
 export const initSocket = (socketDispatch) => {
@@ -27,6 +32,11 @@ export const initSocket = (socketDispatch) => {
     socket.on(SOCKET_EVENTS.MESSAGE_DELETE, (message) => {
       console.log("[ws MESSAGE_DELETE]", message);
       socketDispatch(deleteMessage(message));
+    });
+
+    socket.on(SOCKET_EVENTS.MESSAGE_EDIT, (message) => {
+      console.log("[ws MESSAGE_EDIT]", message);
+      socketDispatch(editMessage(message));
     });
 
     socket.on(SOCKET_EVENTS.ERROR, (error) => {

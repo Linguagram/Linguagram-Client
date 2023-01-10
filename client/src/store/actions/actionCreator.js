@@ -20,6 +20,7 @@ import {
   SET_AM_I_THE_CALLER,
   FETCH_INTERESTS,
   DELETE_MESSAGE,
+  EDIT_MESSAGE,
 } from "./actionTypes";
 
 export const setActiveSection = (payload) => {
@@ -159,6 +160,13 @@ export const addMessage = (payload) => {
 export const deleteMessage = (payload) => {
   return {
     type: DELETE_MESSAGE,
+    payload,
+  };
+};
+
+export const editMessage = (payload) => {
+  return {
+    type: EDIT_MESSAGE,
     payload,
   };
 };

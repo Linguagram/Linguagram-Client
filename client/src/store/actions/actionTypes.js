@@ -38,4 +38,6 @@ export const ADD_MESSAGE = "groups/addMessage"
 
 export const DELETE_MESSAGE = "groups/deleteMessage"
 
+export const EDIT_MESSAGE = "groups/editMessage"
+
 export const FETCH_INTERESTS = "interests/fetchInterests"
