@@ -24,7 +24,7 @@ export default function HomeView() {
   const { privateGroups, groupGroups } = useSelector((state) => state.groupReducer)
 
   const setIsIncomingCall = (state) => {
-    handleSetIsIncomingCall(state);
+    dispatch(handleSetIsIncomingCall(state));
   }
 
   useEffect(() => {
@@ -90,7 +90,7 @@ export default function HomeView() {
 
   return (
     <div className="fixed flex w-screen h-screen md:flex-row">
-      <IncomingCallingModal declineCall={declineCall} isOpen={isIncomingCall} acceptCall={acceptCall}/>
+      <IncomingCallingModal declineCall={declineCall} acceptCall={acceptCall}/>
       <Sidebar />
       <Section openChat={openChat} />
 

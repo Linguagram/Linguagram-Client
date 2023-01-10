@@ -6,13 +6,13 @@ import { useNavigate } from "react-router-dom";
 import avatar from "../../pictures/avatar-1.3921191a8acf79d3e907.jpg";
 import { getUserAvatar } from "../../util/getAvatar";
 
-export default function IncomingCallingModal({ isOpen, acceptCall, declineCall }) {
+export default function IncomingCallingModal({ acceptCall, declineCall }) {
   const navigate = useNavigate();
-  const { incomingCaller } = useSelector((state) => state.userReducer);
+  const { incomingCaller, isIncomingCall } = useSelector((state) => state.userReducer);
   
   return (
     <>
-      <Transition appear show={isOpen} as={Fragment}>
+      <Transition appear show={isIncomingCall} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={declineCall}>
           <Transition.Child
             as={Fragment}
