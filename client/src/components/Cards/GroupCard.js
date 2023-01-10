@@ -1,9 +1,10 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { joinGroup } from "../../store/middlewares/thunk";
+import { getGroupAvatar } from "../../util/getAvatar";
 import { swalError } from "../../util/swal";
 
-export default function GroupCard({ groupId, groupName, members }) {
+export default function GroupCard({ groupId, groupName, members, group }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -39,10 +40,15 @@ export default function GroupCard({ groupId, groupName, members }) {
 
   return (
     <div className="flex flex-col justify-around w-full px-6 text-white rounded-lg md:items-center md:justify-between md:h-20 h-36 md:flex-row lg:max-w-2xl xl:max-w-3xl 2xl:max-w-4xl bg-light-gray">
+    <div className="flex items-center flex-1 gap-8">
+      <img
+        src={getGroupAvatar(group)}
+      />
       <div>
         <div className="text-xl">{groupName}</div>
         <div className="text-sm text-gray-400">{formatMembers(members)}</div>
       </div>
+    </div>
       <button
         className="inline-block w-full p-2 text-center text-white border rounded-lg md:w-fit bg-main-color border-main-color hover:bg-black-blue hover:border-black-blue focus:outline-none focus:ring active:text-main-color"
         onClick={handleJoinGroup}>
