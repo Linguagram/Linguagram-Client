@@ -427,3 +427,21 @@ export const changeAvatarUser = (data) => {
     }
   }
 }
+
+export const deleteAvatarUser = () => {
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await axios({
+        method: 'DELETE',
+        url: `${URL_SERVER}/users/avatar`,
+        headers: {
+          access_token: getAccessToken()
+        },
+      })
+
+      return data
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}

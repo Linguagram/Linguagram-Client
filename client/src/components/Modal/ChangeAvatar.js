@@ -2,68 +2,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { changeAvatarUser, handleSetThisUser } from "../../store/middlewares/thunk";
+import { changeAvatarUser, deleteAvatarUser, handleSetThisUser } from "../../store/middlewares/thunk";
 import { useDispatch } from "react-redux";
 
-// Kalau udah fix, mungkin ini bisa dihapus ? -----
-function OldChangeAvatar({ onClose, visible }) {
-  const handleOnClose = () => {
-    onClose();
-  };
-
-  return (
-    <div
-      className={`${
-        visible ? "" : "hidden"
-      } fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-60`}
-    >
-      <div className="flex flex-col w-full gap-3 p-5 mx-4 rounded md:mx-0 md:w-1/2 bg-darker-gray lg:h-2/5 2xl:h-1/5 2xl:w-1/5 h-3/5">
-        <div className="flex items-center justify-between">
-          <h3 className="text-xl text-white">Select an Image</h3>
-          <h3
-            onClick={handleOnClose}
-            className="text-4xl text-gray-400 cursor-pointer"
-          >
-            &times;
-          </h3>
-        </div>
-        <div className="flex w-full h-full gap-4">
-          <div className="flex items-center justify-center w-1/2 h-full rounded cursor-pointer md:h-fit md:w-full -flex-col bg-black-blue">
-            <div className="flex flex-col items-center gap-2 p-5 md:gap-5">
-              <div className="flex items-center justify-center w-16 h-16 md:w-32 md:h-32 bg-main-color-icon">
-                <FontAwesomeIcon
-                  className="text-xl text-white"
-                  icon="cloud-arrow-up"
-                />
-              </div>
-              <h3 className="text-sm text-center text-gray-400 md:text-base">
-                Upload Image
-              </h3>
-            </div>
-          </div>
-          <div className="flex items-center justify-center w-1/2 h-full rounded cursor-pointer md:h-fit md:w-full -flex-col bg-black-blue">
-            <div className="flex flex-col items-center gap-2 p-5 md:gap-5">
-              <div className="flex items-center justify-center w-16 h-16 md:w-32 md:h-32 bg-main-color-icon">
-                <FontAwesomeIcon className="text-xl text-white" icon="ban" />
-              </div>
-              <h3 className="text-sm text-center text-gray-400 md:text-base">
-                Remove Picture
-              </h3>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-//-------------------------------------------------
-
-// Karena ini kurang lebih copy-an dari yang di atas ---------
 export default function ChangeAvatar({ onClose, visible }) {
   const dispatch = useDispatch()
   const fileInput = useRef(null);
   const formData = useRef(null);
-  const [attachmentName, setAttachmentName] = useState("");
 
   const showFilePicker = (e) => {
     e.preventDefault();
@@ -72,11 +17,6 @@ export default function ChangeAvatar({ onClose, visible }) {
       fileInput.current.click();
     }
   };
-
-  const handleFileSubmit = (e) => {
-    setAttachmentName(e.target.files[0].name);
-    handleFormSubmit()
-  }
 
   const handleFormSubmit = () => {
     if(formData.current) {
@@ -96,6 +36,16 @@ export default function ChangeAvatar({ onClose, visible }) {
         console.log(err);
       })
     }
+  }
+
+  const handleDeleteAvatar = () => {
+    dispatch(deleteAvatarUser())
+    .then((_) => {
+      onClose()
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   return (
@@ -141,7 +91,7 @@ export default function ChangeAvatar({ onClose, visible }) {
                     >
                     <input
                       ref={fileInput}
-                      onChange={handleFileSubmit}
+                      onChange={() => handleFormSubmit()}
                       style={{ display: "none" }}
                       type="file"
                       id="attachment-input"
@@ -162,7 +112,7 @@ export default function ChangeAvatar({ onClose, visible }) {
                     <button
                       type="button"
                       className="flex flex-1 flex-col gap-2 w-full aspect-square justify-center items-center rounded-md bg-black-blue px-4 py-2 text-sm font-medium text-white"
-                      onClick={onClose}
+                      onClick={handleDeleteAvatar}
                     >
                       <FontAwesomeIcon
                         className="text-xl text-white"
@@ -188,4 +138,3 @@ export default function ChangeAvatar({ onClose, visible }) {
     </>
   );
 }
-// -----------------------------------------------------------
