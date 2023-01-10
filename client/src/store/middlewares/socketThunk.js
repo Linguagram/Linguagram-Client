@@ -11,9 +11,14 @@ import {
   setFriendRequests,
   setAmITheCaller,
   setFriends,
+  setIncomingCaller,
 } from "../actions/actionCreator";
 import { SOCKET_EVENTS } from "../actions/socketEvents";
-import { handleSetIsCalling, handleSetThisUser } from "./thunk";
+import {
+  handleSetIsCalling,
+  handleSetThisUser,
+  handleSetIsIncomingCall,
+} from "./thunk";
 
 const userUpdate = (socketDispatch, user, getState) => {
   // check if current user actually the user from server
@@ -131,7 +136,11 @@ export const initSocket = (socketDispatch, socketNavigate) => {
     })
 
     socket.on('callIsCanceled', async (incomingUserId) => {
-      dispatch(setAmITheCaller(false))
+      console.log("[ws callIsCanceled]", incomingUserId);
+
+      handleSetIsIncomingCall(false)
+      dispatch(setIncomingCaller({}))
+      dispatch(setAmITheCaller(false));
     });
 
     socket.on('callIsDeclined', async (userWhoDeclines) => {

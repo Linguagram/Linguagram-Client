@@ -47,3 +47,5 @@ export const FETCH_LANGUAGES = "languages/fetchLanguages"
 export const CHANGE_NAVBAR_COLOR = "navbar/ChangeColor"
 
 export const SET_IS_CALLING = "user/setIsCalling"
+
+export const SET_IS_INCOMING_CALL = "user/setIsIncomingCall"

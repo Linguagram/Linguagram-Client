@@ -12,9 +12,7 @@ export default function VideoCallView() {
   const dispatch = useDispatch()
 
   const { socketConnect } = useSelector((state) => state.socketReducer);
-  const { thisUser } = useSelector((state) => state.userReducer);
-  const { incomingCaller } = useSelector((state) => state.userReducer);
-  const { counterpartUser } = useSelector((state) => state.userReducer);
+  const { thisUser, counterpartUser, incomingCaller } = useSelector((state) => state.userReducer);
   const { amITheCaller } = useSelector((state) => state.videoReducer);
   
   const [callerSignal, setCallerSignal] = useState();

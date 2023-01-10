@@ -1,4 +1,12 @@
-import { SET_COUNTERPART_USER, SET_INCOMING_CALLER, SET_INTEREST_LANGUAGE, SET_IS_CALLING, SET_NATIVE_LANGUAGE, SET_THIS_USER } from "../actions/actionTypes"
+import {
+    SET_COUNTERPART_USER,
+    SET_INCOMING_CALLER,
+    SET_INTEREST_LANGUAGE,
+    SET_IS_CALLING,
+    SET_NATIVE_LANGUAGE,
+    SET_THIS_USER,
+    SET_IS_INCOMING_CALL,
+} from "../actions/actionTypes"
 
 const initialState = {
     thisUser: {},
@@ -8,6 +16,7 @@ const initialState = {
     interestLanguage: {},
     counterpartUser: {},
     isCalling: false,
+    isIncomingCall: false,
 }
 
 export default function userReducer(state = initialState, action) {
@@ -41,6 +50,11 @@ export default function userReducer(state = initialState, action) {
             return {
                 ...state,
                 isCalling: action.payload
+            }
+        case SET_IS_INCOMING_CALL:
+            return {
+                ...state,
+                isIncomingCall: action.payload
             }
         default:
             return state

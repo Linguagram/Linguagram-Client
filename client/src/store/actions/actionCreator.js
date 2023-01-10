@@ -24,6 +24,7 @@ import {
   CHANGE_NAVBAR_COLOR,
   FETCH_LANGUAGES,
   SET_IS_CALLING,
+  SET_IS_INCOMING_CALL,
 } from "./actionTypes";
 
 export const setActiveSection = (payload) => {
@@ -198,6 +199,13 @@ export const setLanguages = (payload) => {
 export const setIsCalling = (payload) => {
   return {
     type: SET_IS_CALLING,
+    payload
+  }
+}
+
+export const setIsIncomingCall = (payload) => {
+  return {
+    type: SET_IS_INCOMING_CALL,
     payload
   }
 }

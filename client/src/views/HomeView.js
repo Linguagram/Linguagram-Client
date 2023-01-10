@@ -3,7 +3,7 @@ import Section from "../components/Section";
 import ChatRoom from "../components/Chatroom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getFriends, getUserLogin, handleFetchGroups, handleSetActiveSection, handleSetSocketConnect, handleSetThisUser } from "../store/middlewares/thunk";
+import { getFriends, getUserLogin, handleFetchGroups, handleSetActiveSection, handleSetIsIncomingCall, handleSetSocketConnect, handleSetThisUser } from "../store/middlewares/thunk";
 import HomeDrawer from "../components/HomeDrawer/HomeDrawer";
 import { useEffect, useState } from "react";
 import { swalError } from "../util/swal";
@@ -14,18 +14,18 @@ import { URL_SERVER } from "../baseUrl";
 import { initSocket, closeSocket } from "../store/middlewares/socketThunk";
 
 export default function HomeView() {
-
   const currentRoute = useLocation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [isIncomingCall, setIsIncomingCall] = useState(false)
   const { homeDrawer } = useSelector((state) => state.drawerReducer)
   const { openChat } = useSelector((state) => state.sectionReducer)
-  const { thisUser } = useSelector((state) => state.userReducer)
   const { socketConnect } = useSelector((state) => state.socketReducer);
-  const { incomingCaller } = useSelector((state) => state.userReducer);
+  const { thisUser, incomingCaller, isIncomingCall } = useSelector((state) => state.userReducer);
   const { privateGroups, groupGroups } = useSelector((state) => state.groupReducer)
 
+  const setIsIncomingCall = (state) => {
+    handleSetIsIncomingCall(state);
+  }
 
   useEffect(() => {
     if(localStorage.access_token && !thisUser.id) {
@@ -56,6 +56,7 @@ export default function HomeView() {
   useEffect(() => {
     if(socketConnect) {
       socketConnect.on('incomingCall', async (incomingUserId) => {
+        console.log("[incomingCaller]", incomingCaller);
 
         if(Object.keys(incomingCaller).length === 0) {
           const {data} = await axios({
@@ -84,6 +85,8 @@ export default function HomeView() {
     socketConnect.emit("acceptCall", { userToReceive: incomingCaller.id, from: thisUser.id })
     navigate('/videocall')
   }
+
+  console.log("[isIncomingCall]", isIncomingCall);
 
   return (
     <div className="fixed flex w-screen h-screen md:flex-row">

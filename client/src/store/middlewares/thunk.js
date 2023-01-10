@@ -18,6 +18,7 @@ import {
   setNavbarColor,
   setInterests,
   setIsCalling,
+  setIsIncomingCall,
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
@@ -611,5 +612,11 @@ export const leaveGroup = (groupId) => {
     } catch (error) {
       return error
     }
+  }
+}
+
+export const handleSetIsIncomingCall = (state) => {
+  return (dispatch, getState) => {
+    dispatch(setIsIncomingCall(state));
   }
 }
