@@ -467,3 +467,13 @@ export const deleteAvatarUser = () => {
     }
   }
 }
+
+export const newChatFromExplore = (userId) => {
+  return (dispatch, getState) => {
+    try {
+      console.log({ userId}, '<<< from newChatFromExplore in thunk')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}

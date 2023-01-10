@@ -11,7 +11,6 @@ export default function Groups() {
   useEffect(() => {
     dispatch(handleFetchExploreGroups())
       .then((_) => {
-        console.log(groups[0]);
         return;
       })
       .catch((err) => {
@@ -25,7 +24,15 @@ export default function Groups() {
   return (
     <div className="flex flex-wrap items-center justify-center w-full gap-2 px-4 mx-auto mt-8 overflow-auto md:px-8 2xl:flex 2xl:flex-col 2xl:justify-start">
       {groups.map((group) => {
-        return <GroupCard key={group.id} groupId={group.id} groupName={group.name} members={group.GroupMembers} group={group} />;
+        return (
+          <GroupCard
+            key={group.id}
+            groupId={group.id}
+            groupName={group.name}
+            members={group.GroupMembers}
+            group={group}
+          />
+        );
       })}
     </div>
   );

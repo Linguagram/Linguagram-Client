@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { sendFriendRequest } from "../../store/middlewares/thunk";
+import { newChatFromExplore, sendFriendRequest } from "../../store/middlewares/thunk";
 
 export default function PeopleCard({
   id,
@@ -14,6 +14,13 @@ export default function PeopleCard({
   const triggerSendFriendRequest = () => {
     console.log(id)
     dispatch(sendFriendRequest(id))
+  }
+
+  const triggerNewChat = () => {
+    dispatch(newChatFromExplore(id)).then(_ => {
+      // 1. navigate to chat section
+      // 2. enter chat room with user with this id.
+    })
   }
 
   return (
@@ -75,12 +82,13 @@ export default function PeopleCard({
             <span className="sr-only"> Add Friend </span>
             Add Friend
           </button>
-          <a
+          <button
             className="inline-block w-full p-2 text-center text-white border rounded-lg bg-main-color border-main-color hover:bg-black-blue hover:border-black-blue focus:outline-none focus:ring active:text-main-color md:w-fit"
-            href="/download">
+            onClick={triggerNewChat}
+>
             <span className="sr-only"> Chat </span>
             Chat
-          </a>
+          </button>
         </div>
       </div>
     </div>
