@@ -219,7 +219,7 @@ export default function ChatBubble({ msg }) {
         </div>
       </div>
     );
-  } else if(counterUser.id) {
+  } else if(counterUser?.id) {
     return (
       <div className="">
         <div className="flex items-end gap-3 mb-7">

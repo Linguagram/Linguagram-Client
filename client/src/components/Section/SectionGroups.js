@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { setHomeDrawer, setOpenChat } from "../../store/actions/actionCreator";
@@ -9,12 +9,28 @@ export default function SectionGroups() {
   const dispatch = useDispatch();
   const { groupGroups } = useSelector((state) => state.groupReducer);
 
+  const [filteredGroupGroups, setFilteredGroupGroups] = useState([])
+
   function openChat(group) {
     dispatch(handleFetchMessagesByGroupId(group.id))
     .then((_) => {
       dispatch(handleSetCounterpartUser(group))
       dispatch(setOpenChat(group));
     })
+  }
+
+  useEffect(() => {
+    setFilteredGroupGroups(groupGroups)
+  }, [groupGroups])
+
+  const handleChange = (e) => {
+    console.log(e.target.value)
+
+    console.log(filteredGroupGroups)
+
+    const newFilteredGroups = groupGroups.filter(el => el.name.toLowerCase().includes(e.target.value.toLowerCase()))
+
+    setFilteredGroupGroups(newFilteredGroups)
   }
   
   return (
@@ -41,6 +57,7 @@ export default function SectionGroups() {
         </div>
         <div className="flex w-5/6">
           <input
+            onChange={handleChange}
             className="pr-4 text-white bg-transparent focus:border-none focus:outline-none"
             type="text"
             placeholder="Search groups"
@@ -49,8 +66,8 @@ export default function SectionGroups() {
       </div>
 
       <div className="flex flex-col h-full gap-3 mt-5 overflow-y-auto scrollbar-hide">
-        {groupGroups &&
-          groupGroups.map((group) => {
+        {filteredGroupGroups &&
+          filteredGroupGroups.map((group) => {
             return (
               <div
                 key={group.id}
