@@ -37,7 +37,7 @@ export default function Sidebar() {
             onClick={() => navigate("/home/chats")}
             className={`w-full cursor-pointer ${
               currentRoute.pathname.includes("/home/chats")
-                ? "text-main-color"
+                ? "text-light-blue"
                 : "text-gray-400"
             }`}
             icon="message"
@@ -54,7 +54,7 @@ export default function Sidebar() {
             onClick={() => navigate("/home/friends")}
             className={`w-full cursor-pointer ${
               currentRoute.pathname.includes("/home/friends")
-                ? "text-main-color"
+                ? "text-light-blue"
                 : "text-gray-400"
             }`}
             icon="address-card"
@@ -71,7 +71,7 @@ export default function Sidebar() {
             onClick={() => navigate("/home/groups")}
             className={`w-full cursor-pointer ${
               currentRoute.pathname.includes("/home/groups")
-                ? "text-main-color"
+                ? "text-light-blue"
                 : "text-gray-400"
             }`}
             icon="user-group"
@@ -88,7 +88,7 @@ export default function Sidebar() {
             onClick={() => navigate("/home/setting")}
             className={`w-full cursor-pointer ${
               currentRoute.pathname.includes("/home/setting")
-                ? "text-main-color"
+                ? "text-light-blue"
                 : "text-gray-400"
             }`}
             icon="user-large"
@@ -107,7 +107,7 @@ export default function Sidebar() {
             onClick={() => navigate("/explore/people")}
             className={`w-full cursor-pointer ${
               currentRoute.pathname.includes("explore")
-                ? "text-main-color"
+                ? "text-light-blue"
                 : "text-gray-400"
             }`}
             icon="globe"
