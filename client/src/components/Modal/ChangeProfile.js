@@ -11,16 +11,13 @@ import swal from "sweetalert";
 import { editProfile } from "../../store/middlewares/thunk";
 
 export default function ChangeProfile({ onClose, visible }) {
-  const { thisUser } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
+  const [selectedInterest, setSelectedInterest] = useState([]);
+  const { thisUser } = useSelector((state) => state.userReducer);
 
   const handleOnClose = () => {
     onClose();
   };
-
-  const { pathname } = useLocation();
-
-  const [selectedInterest, setSelectedInterest] = useState([]);
 
   const deleteInterest = (interestId) => {
     if (selectedInterest.length > 1) {
@@ -42,7 +39,6 @@ export default function ChangeProfile({ onClose, visible }) {
   const inputPhoneNumberRef = useRef();
   const inputNativeLanguageRef = useRef();
   const inputInterestLanguageRef = useRef();
-  const inputInterestsRef = useRef();
 
   const handleChangeProfile = async (e) => {
     e.preventDefault();
@@ -157,8 +153,8 @@ export default function ChangeProfile({ onClose, visible }) {
                   defaultValue={thisUser.phoneNumber}
                 />
                 <div className="flex flex-col">
-                  <label className="mb-2 text-sm">Want to learn</label>
-                  <div className="flex items-center flex-1 gap-2 md:gap-4 bg-darker-gray">
+                  <label className="mb-2 text-sm">Native in</label>
+                  <div className="flex items-center flex-1 md:gap-4 bg-darker-gray">
                     <FontAwesomeIcon
                       className="p-2 text-base text-slate-500 md:text-xl bg-main-color-blur md:p-3"
                       icon="language"
@@ -170,7 +166,7 @@ export default function ChangeProfile({ onClose, visible }) {
                 </div>
                 <div className="flex flex-col">
                   <label className="mb-2 text-sm">Want to learn</label>
-                  <div className="flex items-center flex-1 gap-2 md:gap-4 bg-darker-gray">
+                  <div className="flex items-center flex-1 md:gap-4 bg-darker-gray">
                     <FontAwesomeIcon
                       className="p-2 text-base text-slate-500 md:text-xl bg-main-color-blur md:p-3"
                       icon="language"
@@ -184,7 +180,7 @@ export default function ChangeProfile({ onClose, visible }) {
             </div>
             <div className="flex flex-col w-full">
               <label className="mb-2 text-sm">Interest Topic</label>
-              <div className="flex items-center flex-1 gap-2 md:gap-4 bg-darker-gray">
+              <div className="flex items-center flex-1 md:gap-4 bg-darker-gray">
                 <FontAwesomeIcon
                   className="p-2 text-base text-slate-500 md:text-xl bg-main-color-blur md:p-3"
                   icon="person-biking"

@@ -153,10 +153,10 @@ export default function RegisterView() {
                     placeholder={"Phone Number"}
                   />
                   <div className="flex flex-col">
-                    <label className="mb-2 text-sm">Native in</label>
+                    <label className="mb-2 text-xs md:text-sm">Native in</label>
                     <div className="flex items-center flex-1 bg-darker-gray">
                       <FontAwesomeIcon
-                        className="p-3 text-xl text-slate-500 bg-main-color-blur"
+                        className="p-2 text-base text-slate-500 md:text-xl bg-main-color-blur md:p-3"
                         icon="language"
                       />
                       <div className="w-full">
@@ -165,10 +165,10 @@ export default function RegisterView() {
                     </div>
                   </div>
                   <div className="flex flex-col">
-                    <label className="mb-2 text-sm">Want to learn</label>
+                    <label className="mb-2 text-xs md:text-sm">Want to learn</label>
                     <div className="flex items-center flex-1 bg-darker-gray">
                       <FontAwesomeIcon
-                        className="p-3 text-xl text-slate-500 bg-main-color-blur"
+                        className="p-2 text-base text-slate-500 md:text-xl bg-main-color-blur md:p-3"
                         icon="language"
                       />
                       <div className="w-full">
@@ -179,10 +179,10 @@ export default function RegisterView() {
                 </div>
               </div>
               <div className="flex flex-col w-full">
-                <label className="mb-2 text-sm">Interest Topic</label>
+                <label className="mb-2 text-xs md:text-sm">Interest Topic</label>
                 <div className="flex items-center flex-1 bg-darker-gray">
                   <FontAwesomeIcon
-                    className="p-3 text-xl text-slate-500 bg-main-color-blur"
+                    className="p-2 text-base text-slate-500 md:text-xl bg-main-color-blur md:p-3"
                     icon="person-biking"
                   />
                   <div className="w-full">

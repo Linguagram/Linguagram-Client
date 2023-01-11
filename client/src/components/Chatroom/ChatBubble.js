@@ -88,7 +88,7 @@ export default function ChatBubble({ msg }) {
                   leaveFrom="transform opacity-100 scale-100"
                   leaveTo="transform opacity-0 scale-95"
                 >
-                  <Menu.Items className="absolute right-0 z-10 max-w-fit mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <Menu.Items className="absolute right-0 z-10 mt-2 origin-top-right bg-white rounded-md shadow-lg max-w-fit ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="py-1 bg-darker-gray">
                       <Menu.Item>
                         {({ active }) => (
@@ -130,12 +130,12 @@ export default function ChatBubble({ msg }) {
               }
               </Menu>
               <div
-                className="flex flex-col min-w-10 gap-3 p-3 rounded bg-gray message-box"
+                className="flex flex-col gap-3 p-3 rounded min-w-10 bg-gray message-box"
                 style={{ maxWidth: "70%" }}
               >
                 {msg.deleted ? (
                   <h5
-                    className="text-slate-500 text-sm italic"
+                    className="text-sm italic text-slate-500"
                     style={{ wordBreak: "break-word" }}
                   >
                     This message has been deleted
@@ -145,7 +145,7 @@ export default function ChatBubble({ msg }) {
                       ? (<form onSubmit={(e) => { editMessage(e, msg.GroupId, msg.id) }} className="flex flex-col gap-1">
                         {msg.MediaId ? (
                           <img
-                            className="img-chat w-full"
+                            className="w-full img-chat"
                             src={msg.Medium.url}
                             alt="picture-chat"
                           ></img>
@@ -154,7 +154,7 @@ export default function ChatBubble({ msg }) {
                           )}
                         <textarea
                           ref={editingElement}
-                          className="text-sm text-white bg-transparent rounded focus:border-none focus:outline-none bg-darker-gray py-1 px-2"
+                          className="px-2 py-1 text-sm text-white bg-transparent rounded focus:border-none focus:outline-none bg-darker-gray"
                           style={{ wordBreak: "break-word" }}
                           defaultValue={ content }
                         />
@@ -162,11 +162,11 @@ export default function ChatBubble({ msg }) {
                         <input
                           style={{ color: "white" }}
                           type="submit"
-                          className="cursor-pointer text-left"
+                          className="text-left cursor-pointer"
                           value="Save"/>
                         <button
                           style={{ color: "white" }}
-                          className="cursor-pointer text-left"
+                          className="text-left cursor-pointer"
                           onClick={() => setEditing(null)}
                         >Cancel</button>
                         </div>
@@ -174,7 +174,7 @@ export default function ChatBubble({ msg }) {
                       : (<div className="flex flex-col gap-1">
                         {msg.MediaId ? (
                           <img
-                            className="img-chat w-full"
+                            className="w-full img-chat"
                             src={msg.Medium.url}
                             alt="picture-chat"
                           ></img>
@@ -187,17 +187,17 @@ export default function ChatBubble({ msg }) {
                         >
                           { content }{" "}
                           {msg.edited ? (
-                            <span className="text-slate-500 text-xs">(edited)</span>
+                            <span className="text-xs text-slate-500">(edited)</span>
                           ) : (
                               ""
                             )}
                         </h5>
                       </div>)
                   )}
-                <div className="flex justify-end items-center gap-1">
+                <div className="flex items-center justify-end gap-1">
                   <FontAwesomeIcon
                     className="text-xs text-gray-400"
-                    icon="clock"
+                    icon="check"
                   />
                   <h6 className="text-xs text-gray-400">
                     {new Date(msg.updatedAt).toLocaleString("id-ID").slice(0,15).replace('.',':')}
@@ -235,12 +235,12 @@ export default function ChatBubble({ msg }) {
           <div className="flex flex-col gap-1">
             <div className="flex gap-2">
               <div
-                className="flex flex-col gap-3 p-3 min-w-10 rounded bg-main-color message-box"
+                className="flex flex-col gap-3 p-3 rounded min-w-10 bg-main-color message-box"
                 style={{ maxWidth: "70%" }}
               >
                 {msg.deleted ? (
                   <h5
-                    className="text-slate-500 text-sm"
+                    className="text-sm text-slate-500"
                     style={{ wordBreak: "break-word" }}
                   >
                     (This message has been deleted)
@@ -249,7 +249,7 @@ export default function ChatBubble({ msg }) {
                   <div className="flex flex-col gap-1">
                     {msg.MediaId ? (
                       <img
-                        className="img-chat w-full"
+                        className="w-full img-chat"
                         src={msg.Medium.url}
                         alt="picture-chat"
                       ></img>
@@ -262,7 +262,7 @@ export default function ChatBubble({ msg }) {
                     >
                       { content }{" "}
                       {msg.edited ? (
-                        <span className="text-slate-500 text-xs">(edited)</span>
+                        <span className="text-xs text-slate-500">(edited)</span>
                       ) : (
                         ""
                       )}
@@ -272,7 +272,7 @@ export default function ChatBubble({ msg }) {
                 <div className="flex items-center justify-start gap-1">
                   <FontAwesomeIcon
                     className="text-xs text-gray-400"
-                    icon="clock"
+                    icon="check"
                   />
                   <h6 className="text-xs text-gray-400">
                     {new Date(msg.updatedAt).toLocaleString("id-ID").slice(0,15).replace('.',':')}
@@ -296,7 +296,7 @@ export default function ChatBubble({ msg }) {
                   leaveFrom="transform opacity-100 scale-100"
                   leaveTo="transform opacity-0 scale-95"
                 >
-                  <Menu.Items className="absolute right-0 z-10 max-w-fit mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <Menu.Items className="absolute right-0 z-10 mt-2 origin-top-right bg-white rounded-md shadow-lg max-w-fit ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="py-1 bg-darker-gray">
                       <Menu.Item>
                         {({ active }) => (
@@ -346,12 +346,12 @@ export default function ChatBubble({ msg }) {
           <div className="flex flex-col gap-1">
             <div className="flex gap-2">
               <div
-                className="flex flex-col gap-3 p-3 min-w-10 rounded bg-main-color message-box"
+                className="flex flex-col gap-3 p-3 rounded min-w-10 bg-main-color message-box"
                 style={{ maxWidth: "70%" }}
               >
                 {msg.deleted ? (
                   <h5
-                    className="text-slate-500 text-sm"
+                    className="text-sm text-slate-500"
                     style={{ wordBreak: "break-word" }}
                   >
                     (This message has been deleted)
@@ -360,7 +360,7 @@ export default function ChatBubble({ msg }) {
                   <div className="flex flex-col gap-1">
                     {msg.MediaId ? (
                       <img
-                        className="img-chat w-full"
+                        className="w-full img-chat"
                         src={msg.Medium.url}
                         alt="picture-chat"
                       ></img>
@@ -373,7 +373,7 @@ export default function ChatBubble({ msg }) {
                     >
                       { content }{" "}
                       {msg.edited ? (
-                        <span className="text-slate-500 text-xs">(edited)</span>
+                        <span className="text-xs text-slate-500">(edited)</span>
                       ) : (
                         ""
                       )}
@@ -383,7 +383,7 @@ export default function ChatBubble({ msg }) {
                 <div className="flex items-center justify-start gap-1">
                   <FontAwesomeIcon
                     className="text-xs text-gray-400"
-                    icon="clock"
+                    icon="check"
                   />
                   <h6 className="text-xs text-gray-400">
                     {new Date(msg.updatedAt).toLocaleString("id-ID").slice(0,15).replace('.',':')}
@@ -407,7 +407,7 @@ export default function ChatBubble({ msg }) {
                   leaveFrom="transform opacity-100 scale-100"
                   leaveTo="transform opacity-0 scale-95"
                 >
-                  <Menu.Items className="absolute right-0 z-10 max-w-fit mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <Menu.Items className="absolute right-0 z-10 mt-2 origin-top-right bg-white rounded-md shadow-lg max-w-fit ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="py-1 bg-darker-gray">
                       <Menu.Item>
                         {({ active }) => (

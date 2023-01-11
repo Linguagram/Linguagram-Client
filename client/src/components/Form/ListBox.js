@@ -51,7 +51,7 @@ export default function MyListbox({ inputRef }) {
             <Combobox.Input
               onChange={handleOnChange}
               displayValue={(language) => language.name}
-              className="relative w-full py-2 pr-3 text-xs text-left cursor-pointer bg-darker-gray focus:outline-none focus-visible:border-indigo-500 sm:text-sm"
+              className="relative w-full py-2 pl-3 pr-3 text-xs text-left cursor-pointer bg-darker-gray focus:outline-none focus-visible:border-indigo-500 sm:text-sm"
             />
             <Combobox.Button className="relative w-1/3 text-xs cursor-pointer bg-darker-gray focus:outline-none focus-visible:border-indigo-500 sm:text-sm">
               <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">

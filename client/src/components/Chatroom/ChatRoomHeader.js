@@ -32,7 +32,6 @@ export default function ChatRoomHeader() {
     setIsUserModalOpen(false)
     setIsCalling(true)
     dispatch(setAmITheCaller(true))
-    // socketConnect.emit("identify", {userId: thisUser.id}); 
     socketConnect.emit("clickCall", { userToCall: counterpartUser.id, from: thisUser.id })
   }
 
@@ -55,7 +54,6 @@ export default function ChatRoomHeader() {
         <UserModal isOpen={isUserModalOpen} closeModal={closeUserModal} calling={calling}/>
     }
       <CallingModal isOpen={isCalling} closeModal={stopCalling} />
-      {/* <IncomingCallingModal declineCall={declineCall} isOpen={isIncomingCall} acceptCall={acceptCall}/> */}
 
       <div className="flex items-center w-full gap-3">
         <div onClick={closeChat} className="md:hidden">
@@ -88,7 +86,7 @@ export default function ChatRoomHeader() {
         }
         </div>
       </div>
-      <div className="flex items-center justify-end w-1/3 gap-3 lg:w-1/5 xl:w-1/6 2xl:max-w-fit 2xl:gap-4">
+      <div className="flex items-center justify-end gap-3 md:w-1/3 lg:w-1/5 xl:w-1/6 2xl:max-w-fit 2xl:gap-4">
         {
         counterpartUser.email && friends.some(el => (el.FriendId === counterpartUser.id && el.UserId === thisUser.id) || (el.UserId === counterpartUser.id && el.FriendId === thisUser.id))
           ?

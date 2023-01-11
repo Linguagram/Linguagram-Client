@@ -18,7 +18,6 @@ export default function PeopleCard({
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { allGroups } = useSelector((state) => state.groupReducer);
 
   const triggerSendFriendRequest = () => {
     dispatch(sendFriendRequest(id));
@@ -35,6 +34,7 @@ export default function PeopleCard({
     })
     .catch((err) => {
       swalError(err)
+      console.log(err);
     })
   };
 

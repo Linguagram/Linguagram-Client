@@ -12,10 +12,8 @@ export default function ComboboxInterest({
 }) {
   const dispatch = useDispatch();
   const { interestList } = useSelector((state) => state.interestReducer);
-  // const [query, setQuery] = useState("");
 
   const handleOnChange = (payload) => {
-    console.log(payload);
     if (payload.length < 1) {
       swalErrorStr('You must select minimum 1 topic')
     } else if (payload.length > 3) {
@@ -39,7 +37,7 @@ export default function ComboboxInterest({
         }
       });
   }, []);
-  // console.log(selectedInterest);
+
   if (interestList.length > 0 && selectedInterest.length > 0) {
     return (
       <Combobox
@@ -48,7 +46,7 @@ export default function ComboboxInterest({
         multiple
       >
         <div className="relative">
-          <Combobox.Button className="relative flex justify-between w-full pr-2 text-xs text-left cursor-pointer md:py-2 bg-darker-gray focus:outline-none focus-visible:border-indigo-500 sm:text-sm">
+          <Combobox.Button className="relative flex justify-between w-full pl-3 pr-2 text-xs text-left cursor-pointer md:py-2 bg-darker-gray focus:outline-none focus-visible:border-indigo-500 sm:text-sm">
             <span className="block truncate">Select interested topics</span>
             <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"></span>
             <ChevronUpDownIcon
@@ -61,7 +59,6 @@ export default function ComboboxInterest({
             leave="transition ease-in duration-100"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
-            // afterLeave={() => setQuery("")}
           >
             <Combobox.Options className="absolute z-20 w-full py-1 mt-1 overflow-auto overflow-y-auto text-base shadow-lg max-h-32 bg-darker-gray ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {
@@ -69,7 +66,7 @@ export default function ComboboxInterest({
                   <Combobox.Option
                     key={interest.id}
                     className={({ active }) =>
-                      `relative cursor-pointer select-none py-2 pl-10 pr-4 ${
+                      `relative cursor-pointer select-none py-2 pl-10 pr-4 lg:text-base text-xs ${
                         active ? "bg-main-color text-white" : "text-white"
                       }`
                     }

@@ -11,36 +11,29 @@ import { openChat } from "../../store/middlewares/thunk";
 
 export default function SectionChats() {
   const dispatch = useDispatch();
-  // const [readMsg, setReadMsg] = useState(false)
-
   const { allGroups } = useSelector((state) => state.groupReducer);
   const { filteredGroups } = useSelector((state) => state.groupReducer);
   const { thisUser } = useSelector((state) => state.userReducer);
 
-  
   useEffect(() => {
     if(allGroups.length) dispatch(setFilteredGroups(allGroups))
   }, [allGroups])
 
   const handleChange = (e) => {
-    console.log(e.target.value)
-
     const newFilteredGroups = allGroups.filter(el =>  {
       for(let i=0;i<el.GroupMembers.length;i++) {
-        if(el.GroupMembers[i].User.username.toLowerCase().includes(e.target.value.toLowerCase())) return el        
+        if(el.GroupMembers[i].User.username.toLowerCase().includes(e.target.value.toLowerCase())) return el
       }
+
+      if (el.type === 'group' && el.name.toLowerCase().includes(e.target.value.toLowerCase())) return el
     })
 
     dispatch(setFilteredGroups(newFilteredGroups))
   }
 
-  console.log(filteredGroups, 'filteredgroups di reducer')
-
   const handleOpenChat = (group) => {
     dispatch(openChat(group, dispatch));
   }
-
-  console.log(allGroups, "<<<<<< allGroups SectionChat");
 
   return (
     <>
@@ -62,7 +55,7 @@ export default function SectionChats() {
           <input
             className="pr-4 text-white bg-transparent focus:border-none focus:outline-none"
             type="text"
-            placeholder="Search users..."
+            placeholder="Search users or groups"
             onChange={handleChange}
           ></input>
         </div>
@@ -109,7 +102,7 @@ export default function SectionChats() {
                       )}
                     <h5 className="text-sm text-gray-300">
                       {group.Messages.length > 0
-                        ? `${group.Messages[0].createdAt.getHours()}.${group.Messages[0].createdAt.getMinutes()}`
+                        ? `${group.Messages[0].createdAt.getHours()}:${group.Messages[0].createdAt.getMinutes()}`
                         : null}
                     </h5>
                   </div>
