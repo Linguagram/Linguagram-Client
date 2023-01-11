@@ -20,9 +20,9 @@ export default function SectionChats() {
     if(allGroups.length) dispatch(setFilteredGroups(allGroups))
   }, [allGroups])
 
-  useEffect(() => {
-    dispatch(handleFetchGroups())
-  }, [])
+  // useEffect(() => {
+  //   dispatch(handleFetchGroups())
+  // }, [])
 
   const handleChange = (e) => {
     const newFilteredGroups = allGroups.filter(el =>  {
