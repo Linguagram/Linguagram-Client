@@ -31,7 +31,7 @@ export default function LoginView() {
       localStorage.setItem('access_token', response.data.access_token)
       localStorage.setItem('user_id', response.data.user.id)
 
-      navigate('/home/chats')
+      navigate('/explore/people')
 
       inputEmailRef.current.value = '' 
       inputPasswordRef.current.value = ''
@@ -47,7 +47,7 @@ export default function LoginView() {
           inputEmailRef.current.value = '' 
           inputPasswordRef.current.value = ''
         }
-         
+
       } else {
         console.log(err)
       }
