@@ -22,7 +22,7 @@ export default function FriendRequest({ onClose, visible, friendRequests }) {
             &times;
           </h3>
         </div>
-        <div className="flex flex-col gap-5 my-3 lg:my-5 scrollbar-hide overflow-auto">
+        <div className="flex flex-col gap-5 my-3 overflow-auto lg:my-5 scrollbar-hide">
           {friendRequests.length > 0 ? 
             friendRequests.map(request => {
               return <FriendRequestCard key={request.id} friend={request} />

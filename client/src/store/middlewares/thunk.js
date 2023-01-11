@@ -633,3 +633,15 @@ export const readMessages = (groupId) => {
       })
   }
 }
+
+export const deleteFriendship = (friendId) => {
+  return (dispatch, getState) => {
+      return axios({
+        method: 'DELETE',
+        url: `${URL_SERVER}/friendships/${friendId}`,
+        headers: {
+          access_token: getAccessToken(),
+        }
+      })
+  }
+}
