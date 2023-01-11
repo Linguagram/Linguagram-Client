@@ -13,6 +13,7 @@ export default function ExploreView() {
   const dispatch = useDispatch();
   const sections = useSelector((state) => state.sectionReducer);
   const { homeDrawer } = useSelector((state) => state.drawerReducer);
+  const {isNewUser} = useSelector((state) => state.userReducer)
 
   const changeSection = (section) => {
     if (currentRoute.pathname.includes("/explore")) {
@@ -30,7 +31,7 @@ export default function ExploreView() {
 
   return (
     <div className="fixed flex w-screen h-screen">
-        <TutorialModal />
+        {isNewUser ? <TutorialModal /> : ""}
       <Sidebar />
       <div className="fixed top-0 z-50 w-full">
         <HomeDrawer homeDrawer={homeDrawer} />

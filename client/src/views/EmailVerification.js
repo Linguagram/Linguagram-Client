@@ -6,6 +6,7 @@ import { FerrisWheelSpinner } from 'react-spinner-overlay'
 import { URL_SERVER } from '../baseUrl'
 import { useDispatch } from 'react-redux'
 import { handleSetThisUser } from '../store/middlewares/thunk'
+import { setIsNewUser } from '../store/actions/actionCreator'
 
 export default function EmailVerification() {
 
@@ -32,7 +33,7 @@ export default function EmailVerification() {
                 text: data.message,
                 icon: "success",
             });
-
+            dispatch(setIsNewUser(true))
             navigate('/explore/people')
 
             setLoading(false)
@@ -44,6 +45,7 @@ export default function EmailVerification() {
                         text: `${err.response.data.message}`,
                         icon: "success",
                     });
+                    dispatch(setIsNewUser(true))
                     navigate('/explore/people')
                 } else {
                     swal({

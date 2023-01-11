@@ -1,9 +1,12 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setIsNewUser } from "../../store/actions/actionCreator";
 
 export default function TutorialModal() {
   let [isOpen, setIsOpen] = useState(true);
   const [steps, setSteps] = useState(1);
+  const dispatch = useDispatch()
 
   const nextStep = () => {
     if (steps < 4) setSteps(steps + 1);
@@ -15,6 +18,7 @@ export default function TutorialModal() {
 
   function closeModal() {
     setIsOpen(false);
+    dispatch(setIsNewUser(false))
   }
 
   function openModal() {
@@ -55,7 +59,7 @@ export default function TutorialModal() {
                 leave="ease-in duration-200"
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95">
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-darker-gray p-6 text-left align-middle shadow-xl transition-all">
                   {steps === 1 ? (
                     <StepsContent
                       title={"Welcome to Linguagram"}
@@ -91,8 +95,10 @@ export default function TutorialModal() {
                   )}
                   {steps === 4 ? (
                     <StepsContent
-                      title={""}
-                      body={""}
+                      title={"Translate"}
+                      body={
+                        "Don't know what your friend is talking about? Translate!"
+                      }
                       imgUrl={
                         "https://ik.imagekit.io/mbahol5g6/linguagram-tutor/Screenshot_2023-01-12_at_00.00.38.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673453050137"
                       }
@@ -107,26 +113,43 @@ export default function TutorialModal() {
                   <div className="my-4 flex justify-center gap-3">
                     <div
                       className={`h-2 aspect-square rounded-full ${
-                        steps === 1 ? "bg-main-color" : "bg-slate-400"
+                        steps === 1 ? "bg-blue-500" : "bg-slate-200"
                       }`}></div>
                     <div
                       className={`h-2 aspect-square rounded-full ${
-                        steps === 2 ? "bg-main-color" : "bg-slate-400"
+                        steps === 2 ? "bg-blue-500" : "bg-slate-200"
+                      }`}></div>
+                    <div
+                      className={`h-2 aspect-square rounded-full ${
+                        steps === 3 ? "bg-blue-500" : "bg-slate-200"
+                      }`}></div>
+                    <div
+                      className={`h-2 aspect-square rounded-full ${
+                        steps === 4 ? "bg-blue-500" : "bg-slate-200"
                       }`}></div>
                   </div>
                   <div className="mt-4 flex w-full gap-4">
                     <button
                       type="button"
-                      className="w-full inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="w-full inline-flex justify-center rounded-md border border-transparent bg-light-gray px-4 py-2 text-sm font-medium text-white"
                       onClick={PrevStep}>
                       Back
                     </button>
-                    <button
-                      type="button"
-                      className="w-full inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={nextStep}>
-                      Next
-                    </button>
+                    {steps === 4 ? (
+                      <button
+                        type="button"
+                        className="w-full inline-flex justify-center rounded-md border border-transparent bg-main-color px-4 py-2 text-sm font-medium text-white"
+                        onClick={closeModal}>
+                        Get Started
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        className="w-full inline-flex justify-center rounded-md border border-transparent bg-main-color px-4 py-2 text-sm font-medium text-white"
+                        onClick={nextStep}>
+                        Next
+                      </button>
+                    )}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
@@ -143,30 +166,25 @@ function StepsContent({ title, imgUrl, imgUrl2, body }) {
     <>
       <Dialog.Title
         as="h3"
-        className="text-lg font-medium leading-6 text-gray-900 text-center">
+        className="text-lg font-medium leading-6 text-white text-center">
         {title}
       </Dialog.Title>
       <div className="mt-2">
-      {imgUrl2 ?
-
-      <div className="flex flex-col gap-4 max-w-full">
-      <img
-          className="flex-1 object-contain object-center"
-          src={imgUrl}
-        />
-      <img
-          className="flex-1 object-contain object-center"
-          src={imgUrl2}
-        />
-
-      </div>
-      : 
-        <img
-          className="w-full aspect-square object-contain object-center"
-          src={imgUrl}
-        />
-      }
-        <p className="mt-2 text-center">{body}</p>
+        {imgUrl2 ? (
+          <div className="flex flex-col gap-4 max-w-full">
+            <img className="flex-1 object-contain object-center" src={imgUrl} />
+            <img
+              className="flex-1 object-contain object-center"
+              src={imgUrl2}
+            />
+          </div>
+        ) : (
+          <img
+            className="w-full aspect-square object-contain object-center"
+            src={imgUrl}
+          />
+        )}
+        <p className="mt-2 text-center text-white">{body}</p>
       </div>
     </>
   );

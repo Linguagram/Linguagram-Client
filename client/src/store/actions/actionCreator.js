@@ -30,6 +30,7 @@ import {
   ADD_PRIVATE_GROUPS,
   ADD_GROUP_GROUPS,
   SET_GROUP_MESSAGES_READ,
+  SET_IS_NEW_USER,
 } from "./actionTypes";
 
 export const setActiveSection = (payload) => {
@@ -246,6 +247,13 @@ export const addGroupGroups = (payload) => {
 export const setGroupMessagesRead = (payload) => {
   return {
     type: SET_GROUP_MESSAGES_READ,
+    payload
+  }
+}
+
+export const setIsNewUser = (payload) => {
+  return {
+    type: SET_IS_NEW_USER,
     payload
   }
 }
