@@ -29,7 +29,6 @@ export default function FriendRequestCard({ friend }) {
         }
       })
       dispatch(setFriendRequests(friendReqFilter))
-      onclose()
     })
     .catch((err) => {
       swalError(err)
