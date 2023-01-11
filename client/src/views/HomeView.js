@@ -21,6 +21,7 @@ export default function HomeView() {
   const { openChat } = useSelector((state) => state.sectionReducer)
   const { socketConnect } = useSelector((state) => state.socketReducer);
   const { thisUser, incomingCaller, isIncomingCall } = useSelector((state) => state.userReducer);
+  const { friendsFetched } = useSelector((state) => state.friendReducer)
   const { privateGroups, groupGroups } = useSelector((state) => state.groupReducer)
 
   const setIsIncomingCall = (state) => {
@@ -45,11 +46,12 @@ export default function HomeView() {
           console.log(err)
         }
       })
-    } else {
-      dispatch(handleFetchGroups())
     }
+    // else {
+    //   dispatch(handleFetchGroups())
+    // }
 
-    dispatch(getFriends())
+    if (!friendsFetched) dispatch(getFriends())
     dispatch(initSocket(dispatch, navigate));
   }, [])
 

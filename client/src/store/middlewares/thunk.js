@@ -20,6 +20,7 @@ import {
   setIsCalling,
   setIsIncomingCall,
   setOpenChat,
+  setGroupMessagesRead,
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
@@ -567,7 +568,7 @@ export const newChatFromExplore = (userId, componentDispatch) => {
       });
       console.log({data, fn: "newChatFromExplore"});
 
-      dispatch(openChat)
+      return data;
     } catch (error) {
       console.log(error);
     }
@@ -665,15 +666,7 @@ export function openChat(group, componentDispatch) {
       if (group.unreadMessageCount > 0) {
         componentDispatch(readMessages(group.id))
           .then((res) => {
-            // setReadMsg(!readMsg)
-            const allGroupsRead = allGroups.map((el) => {
-              if (group.id === el.id) {
-                el.unreadMessageCount = 0;
-              }
-              return el;
-            });
-
-            componentDispatch(setAllGroups(allGroupsRead));
+            componentDispatch(setGroupMessagesRead(group.id));
           })
           .catch((err) => {
             swalError(err);
@@ -683,6 +676,7 @@ export function openChat(group, componentDispatch) {
       componentDispatch(handleSetCounterpartUser(group));
     }
 
+    console.log(group, "<<<<< GROUP openChat");
     componentDispatch(setOpenChat(group));
     componentDispatch(handleFetchMessagesByGroupId(group.id));
   }

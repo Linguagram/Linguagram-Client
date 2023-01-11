@@ -26,6 +26,10 @@ import {
   FETCH_LANGUAGES,
   SET_IS_CALLING,
   SET_IS_INCOMING_CALL,
+  ADD_ALL_GROUPS,
+  ADD_PRIVATE_GROUPS,
+  ADD_GROUP_GROUPS,
+  SET_GROUP_MESSAGES_READ,
 } from "./actionTypes";
 
 export const setActiveSection = (payload) => {
@@ -214,6 +218,34 @@ export const setIsCalling = (payload) => {
 export const setIsIncomingCall = (payload) => {
   return {
     type: SET_IS_INCOMING_CALL,
+    payload
+  }
+}
+
+export const addAllGroups = (payload) => {
+  return {
+    type: ADD_ALL_GROUPS,
+    payload
+  }
+}
+
+export const addPrivateGroups = (payload) => {
+  return {
+    type: ADD_PRIVATE_GROUPS,
+    payload
+  }
+}
+
+export const addGroupGroups = (payload) => {
+  return {
+    type: ADD_GROUP_GROUPS,
+    payload
+  }
+}
+
+export const setGroupMessagesRead = (payload) => {
+  return {
+    type: SET_GROUP_MESSAGES_READ,
     payload
   }
 }

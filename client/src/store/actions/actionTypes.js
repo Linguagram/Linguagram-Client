@@ -51,3 +51,11 @@ export const CHANGE_NAVBAR_COLOR = "navbar/ChangeColor"
 export const SET_IS_CALLING = "user/setIsCalling"
 
 export const SET_IS_INCOMING_CALL = "user/setIsIncomingCall"
+
+export const ADD_ALL_GROUPS = 'groups/successAddAllGroups'
+
+export const ADD_PRIVATE_GROUPS = 'groups/successAddPrivateGroups'
+
+export const ADD_GROUP_GROUPS = 'groups/successAddGroupGroups'
+
+export const SET_GROUP_MESSAGES_READ = 'groups/successGroupMessagesRead'

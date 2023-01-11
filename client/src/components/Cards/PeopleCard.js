@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addAllGroups, addPrivateGroups } from "../../store/actions/actionCreator";
 import {
   newChatFromExplore,
+  openChat,
   sendFriendRequest,
 } from "../../store/middlewares/thunk";
 import { swalError } from "../../util/swal";
@@ -24,8 +26,12 @@ export default function PeopleCard({
 
   const triggerNewChat = () => {
     dispatch(newChatFromExplore(id))
-    .then((_) => {
-      navigate("/home/chats");
+    .then((data) => {
+        data.Messages = [];
+        dispatch(addAllGroups(data));
+        dispatch(addPrivateGroups(data));
+        dispatch(openChat(data, dispatch));
+        navigate("/home/chats");
     })
     .catch((err) => {
       swalError(err)
