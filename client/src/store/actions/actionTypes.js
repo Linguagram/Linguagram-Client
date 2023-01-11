@@ -54,6 +54,9 @@ export const SET_IS_INCOMING_CALL = "user/setIsIncomingCall"
 
 export const ADD_ALL_GROUPS = 'groups/successAddAllGroups'
 
+export const JOIN_GROUP = 'groups/successJoinGroup'
+
+
 export const ADD_PRIVATE_GROUPS = 'groups/successAddPrivateGroups'
 
 export const ADD_GROUP_GROUPS = 'groups/successAddGroupGroups'

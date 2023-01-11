@@ -30,6 +30,7 @@ import {
   ADD_PRIVATE_GROUPS,
   ADD_GROUP_GROUPS,
   SET_GROUP_MESSAGES_READ,
+  JOIN_GROUP,
 } from "./actionTypes";
 
 export const setActiveSection = (payload) => {
@@ -148,6 +149,13 @@ export const setExploreUsers = (payload) => {
 export const setExploreGroups = (payload) => {
   return {
     type: FETCH_EXPLORE_GROUPS,
+    payload,
+  };
+};
+
+export const setJoinGroup = (payload) => {
+  return {
+    type: JOIN_GROUP,
     payload,
   };
 };

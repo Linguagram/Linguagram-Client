@@ -22,7 +22,7 @@ export default function VideoCallView() {
   let myCam = {
     name: thisUser.username,
     camera: true,
-    mic: true,
+    mic: false,
   }
 
   let counterpartCam = {
@@ -251,7 +251,6 @@ export default function VideoCallView() {
             <video
               playsInline
               className="w-full h-fit object-contain max-h-full aspect-video lg:w-full lg:h-fit bg-black"
-              muted
               ref={userVideo}
               autoPlay
             />
@@ -273,7 +272,6 @@ export default function VideoCallView() {
             <video
               playsInline
               className="w-full h-fit object-contain max-h-full aspect-video lg:w-full lg:h-fit bg-black"
-              muted
               ref={partnerVideo}
               autoPlay
             />
@@ -300,7 +298,7 @@ export default function VideoCallView() {
               ? "w-16 h-16 inline-flex items-center justify-center rounded-full bg-main-color font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
               : "w-16 h-16 inline-flex items-center justify-center rounded-full bg-slate-500 font-medium text-white hover:bg-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2"
           }
-          onClick={turnCamera}>
+          >
           <FontAwesomeIcon
             icon={mySetting.camera ? "video" : "video-slash"}
             className="text-xl p-4"
@@ -314,7 +312,6 @@ export default function VideoCallView() {
         </button>
         <button
           type="button"
-          onClick={turnMic}
           className={
             mySetting.mic
               ? "w-16 h-16 inline-flex items-center justify-center rounded-full bg-main-color font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
