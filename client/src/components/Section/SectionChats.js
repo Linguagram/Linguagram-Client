@@ -93,8 +93,8 @@ export default function SectionChats() {
 
                 <div className="flex flex-col w-full gap-1">
                   <div className="flex items-center justify-between">
-                    {group.name === "private" ? (
-                      group.GroupMembers[0] &&
+                    { /* group.name === "private" ? ( */
+                    group.GroupMembers[0] &&
                       group.GroupMembers[0].UserId === thisUser.id ? (
                         <h4 className="text-base text-white">
                           {group.GroupMembers[1].User.username}
@@ -104,9 +104,9 @@ export default function SectionChats() {
                           {group.GroupMembers[0].User.username}
                         </h4>
                       )
-                    ) : (
-                      <h4 className="text-base text-white">{group.name}</h4>
-                    )}
+                    /* ) : ( 
+                       <h4 className="text-base text-white">{group.name}</h4>
+                     )} */}
                     <h5 className="text-sm text-gray-300">
                       {group.Messages.length > 0
                         ? `${group.Messages[0].createdAt.getHours()}.${group.Messages[0].createdAt.getMinutes()}`
