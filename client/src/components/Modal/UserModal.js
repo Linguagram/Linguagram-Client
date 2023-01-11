@@ -76,18 +76,18 @@ export default function UserModal({ isOpen, closeModal, calling }) {
                     </p>
                     {counterpartUser.email && (
                       <p className="text-center text-slate-400 text-sm mt-3">
-                        Interested in: <br />
-                        <p className="text-center text-slate-400 mt-1 text-sm">
+                        Languages:<br/>
+                        <span className="text-center text-slate-400 mt-1 text-sm">
                           {counterpartUser.UserLanguages.map(
-                            (el) => el.Language.name
-                          ).join(", ")}
-                        </p>
+                            (el) => <span>{`${el.Language.name} (${el.type === "native" ? "Native" : "Learning"})`}<br/></span>
+                          )}
+                        </span>
                       </p>
                     )}
 
                     {counterpartUser.email && (
                       <p className="text-center text-slate-400 text-sm mt-3">
-                        Interested topic: <br />
+                        { counterpartUser.UserInterests.length ? "Interested in:" : "" } <br />
                         <p className="text-center text-slate-400 mt-1 text-sm">
                           {counterpartUser.UserInterests.map(
                             (el) => el.Interest.name
