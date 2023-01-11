@@ -1,9 +1,10 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   newChatFromExplore,
   sendFriendRequest,
 } from "../../store/middlewares/thunk";
+import { swalError } from "../../util/swal";
 
 export default function PeopleCard({
   id,
@@ -15,16 +16,20 @@ export default function PeopleCard({
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { allGroups } = useSelector((state) => state.groupReducer);
 
   const triggerSendFriendRequest = () => {
-    console.log(id);
     dispatch(sendFriendRequest(id));
   };
 
   const triggerNewChat = () => {
-    dispatch(newChatFromExplore(id)).then((_) => {
+    dispatch(newChatFromExplore(id))
+    .then((_) => {
       navigate("/home/chats");
-    });
+    })
+    .catch((err) => {
+      swalError(err)
+    })
   };
 
   return (
@@ -34,7 +39,7 @@ export default function PeopleCard({
           <img
             alt="Paul Clapton"
             src={avatarUrl}
-            className="w-1/4 aspect-square rounded-lg object-cover shadow-sm"
+            className="object-cover w-1/4 rounded-lg shadow-sm aspect-square"
           />
         </div>
         <div className="flex flex-col items-center justify-between w-full">
@@ -71,7 +76,7 @@ export default function PeopleCard({
             return (
               <span
                 key={interest.id}
-                className="px-3 py-1 rounded-full text-gray-200  bg-black-blue ">
+                className="px-3 py-1 text-gray-200 rounded-full bg-black-blue ">
                 {interest.Interest.name}
               </span>
             );

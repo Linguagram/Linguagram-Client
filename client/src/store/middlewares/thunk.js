@@ -564,8 +564,22 @@ export const newChatFromExplore = (userId) => {
           access_token: getAccessToken(),
         }
       });
-      console.log({data})
       console.log(data)
+      const { groupReducer } = getState()
+
+      await dispatch(handleFetchGroups())
+      console.log(groupReducer.privateGroups);
+      const newGroup = groupReducer.privateGroups.find(el => el.id === data.id)
+      newGroup.unreadMessageCount = 0
+      console.log(newGroup);
+      const newAllGroup = [
+        ...groupReducer.allGroups,
+        newGroup
+      ]
+      const counterpartUserNew = newGroup.GroupMembers.find(el => el.UserId === userId)
+      
+      dispatch(setAllGroups(newAllGroup))
+      dispatch(setCounterpartUser(counterpartUserNew.User))
     } catch (error) {
       console.log(error);
     }
