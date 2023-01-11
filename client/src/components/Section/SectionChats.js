@@ -7,7 +7,7 @@ import {
 } from "../../store/actions/actionCreator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getGroupAvatar } from "../../util/getAvatar";
-import { openChat } from "../../store/middlewares/thunk";
+import { handleFetchGroups, openChat } from "../../store/middlewares/thunk";
 
 export default function SectionChats() {
   const dispatch = useDispatch();
@@ -19,15 +19,24 @@ export default function SectionChats() {
 
   
   useEffect(() => {
+    console.log(allGroups, "<<<<<< allGroups SectionChat");
     if(allGroups.length) dispatch(setFilteredGroups(allGroups))
   }, [allGroups])
+
+  useEffect(() => {
+    dispatch(handleFetchGroups())
+  }, [])
 
   const handleChange = (e) => {
     console.log(e.target.value)
 
     const newFilteredGroups = allGroups.filter(el =>  {
-      for(let i=0;i<el.GroupMembers.length;i++) {
-        if(el.GroupMembers[i].User.username.toLowerCase().includes(e.target.value.toLowerCase())) return el        
+      if(el.type === 'dm') {
+        for(let i=0;i<el.GroupMembers.length;i++) {
+          if(el.GroupMembers[i].User.username.toLowerCase().includes(e.target.value.toLowerCase())) return el        
+        }
+      } else {
+        if(el.name.toLowerCase().includes(e.target.value.toLowerCase())) return el
       }
     })
 
@@ -40,7 +49,7 @@ export default function SectionChats() {
     dispatch(openChat(group, dispatch));
   }
 
-  console.log(allGroups, "<<<<<< allGroups SectionChat");
+  
 
   return (
     <>
@@ -93,6 +102,7 @@ export default function SectionChats() {
 
                 <div className="flex flex-col w-full gap-1">
                   <div className="flex items-center justify-between">
+<<<<<<< Updated upstream
                     { group.type === "dm" ? (
                       group.GroupMembers[0] &&
                         group.GroupMembers[0].UserId === thisUser.id ? (
@@ -107,6 +117,22 @@ export default function SectionChats() {
                     ) : ( 
                         <h4 className="text-base text-white">{group.name}</h4>
                       )}
+=======
+                    {  group.name === "private" ? ( 
+                    group.GroupMembers[0] &&
+                      group.GroupMembers[0].UserId === thisUser.id ? (
+                        <h4 className="text-base text-white">
+                          {group.GroupMembers[1].User.username}
+                        </h4>
+                      ) : (
+                        <h4 className="text-base text-white">
+                          {group.GroupMembers[0].User.username}
+                        </h4>
+                      )
+                      ) : ( 
+                       <h4 className="text-base text-white">{group.name}</h4>
+                     )} 
+>>>>>>> Stashed changes
                     <h5 className="text-sm text-gray-300">
                       {group.Messages.length > 0
                         ? `${group.Messages[0].createdAt.getHours()}.${group.Messages[0].createdAt.getMinutes()}`

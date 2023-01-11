@@ -31,7 +31,7 @@ export default function LoginView() {
       localStorage.setItem('access_token', response.data.access_token)
       localStorage.setItem('user_id', response.data.user.id)
 
-      navigate('/explore/people')
+      navigate('/home/chats')
 
       inputEmailRef.current.value = '' 
       inputPasswordRef.current.value = ''
