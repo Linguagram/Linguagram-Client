@@ -1,0 +1,9 @@
+.friend-card-hover {
+  transition: .2s;
+  border-radius: 4px;
+}
+
+.friend-card-hover:hover {
+  background-color: #36404a;
+  transition: .2s;
+}
