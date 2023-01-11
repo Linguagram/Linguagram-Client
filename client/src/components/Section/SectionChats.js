@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setAllGroups,
   setHomeDrawer,
-  setOpenChat,
 } from "../../store/actions/actionCreator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  handleFetchMessagesByGroupId,
-  handleSetCounterpartUser,
-  readMessages,
-} from "../../store/middlewares/thunk";
 import { getGroupAvatar } from "../../util/getAvatar";
-import { swalError } from "../../util/swal";
+import { openChat } from "../../store/middlewares/thunk";
 
 export default function SectionChats() {
   const dispatch = useDispatch();
@@ -21,38 +14,8 @@ export default function SectionChats() {
   const { allGroups } = useSelector((state) => state.groupReducer);
   const { thisUser } = useSelector((state) => state.userReducer);
 
-  async function openChat(group) {
-    if (group.type === "dm") {
-      for (const user of group.GroupMembers) {
-        if (user.User.id !== thisUser.id) {
-          dispatch(handleSetCounterpartUser(user.User));
-          break;
-        }
-      }
-
-      if (group.unreadMessageCount > 0) {
-        dispatch(readMessages(group.id))
-          .then((res) => {
-            // setReadMsg(!readMsg)
-            const allGroupsRead = allGroups.map((el) => {
-              if (group.id === el.id) {
-                el.unreadMessageCount = 0;
-              }
-              return el;
-            });
-
-            dispatch(setAllGroups(allGroupsRead));
-          })
-          .catch((err) => {
-            swalError(err);
-          });
-      }
-    } else {
-      dispatch(handleSetCounterpartUser(group));
-    }
-
-    dispatch(setOpenChat(group));
-    dispatch(handleFetchMessagesByGroupId(group.id));
+  const handleOpenChat = (group) => {
+    dispatch(openChat(group, dispatch));
   }
 
   return (
@@ -86,7 +49,7 @@ export default function SectionChats() {
             return (
               <div
                 key={group.id}
-                onClick={() => openChat(group)}
+                onClick={() => handleOpenChat(group)}
                 className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700"
               >
                 {group.type === "dm" ? (

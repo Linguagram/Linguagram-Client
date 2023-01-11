@@ -19,7 +19,7 @@ import {
   setInterests,
   setIsCalling,
   setIsIncomingCall,
-  setOpenChat
+  setOpenChat,
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
@@ -555,7 +555,7 @@ export const editStatusUser = (status) => {
   };
 };
 
-export const newChatFromExplore = (userId) => {
+export const newChatFromExplore = (userId, componentDispatch) => {
   return async (dispatch, getState) => {
     try {
       const { data } = await axios({
@@ -565,22 +565,9 @@ export const newChatFromExplore = (userId) => {
           access_token: getAccessToken(),
         }
       });
-      console.log({data, fn: "newChatFromExplore"})
-      const { groupReducer } = getState()
+      console.log({data, fn: "newChatFromExplore"});
 
-      await dispatch(handleFetchGroups())
-      console.log(groupReducer.privateGroups);
-      const newGroup = groupReducer.privateGroups.find(el => el.id === data.id)
-      newGroup.unreadMessageCount = 0
-      console.log(newGroup);
-      const newAllGroup = [
-        ...groupReducer.allGroups,
-        newGroup
-      ]
-      const counterpartUserNew = newGroup.GroupMembers.find(el => el.UserId === userId)
-      
-      dispatch(setAllGroups(newAllGroup))
-      dispatch(setCounterpartUser(counterpartUserNew.User))
+      dispatch(openCha)
     } catch (error) {
       console.log(error);
     }
@@ -658,5 +645,45 @@ export const deleteFriendship = (friendId) => {
           access_token: getAccessToken(),
         }
       })
+  }
+}
+
+export function openChat(group, componentDispatch) {
+  return (dispatch, getState) => {
+    const { groupReducer, userReducer } = getState();
+    const { allGroups } = groupReducer;
+    const { thisUser } = userReducer;
+
+    if (group.type === "dm") {
+      for (const user of group.GroupMembers) {
+        if (user.User.id !== thisUser.id) {
+          componentDispatch(handleSetCounterpartUser(user.User));
+          break;
+        }
+      }
+
+      if (group.unreadMessageCount > 0) {
+        componentDispatch(readMessages(group.id))
+          .then((res) => {
+            // setReadMsg(!readMsg)
+            const allGroupsRead = allGroups.map((el) => {
+              if (group.id === el.id) {
+                el.unreadMessageCount = 0;
+              }
+              return el;
+            });
+
+            componentDispatch(setAllGroups(allGroupsRead));
+          })
+          .catch((err) => {
+            swalError(err);
+          });
+      }
+    } else {
+      componentDispatch(handleSetCounterpartUser(group));
+    }
+
+    componentDispatch(setOpenChat(group));
+    componentDispatch(handleFetchMessagesByGroupId(group.id));
   }
 }
