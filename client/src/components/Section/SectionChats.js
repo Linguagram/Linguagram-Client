@@ -37,7 +37,6 @@ export default function SectionChats() {
   console.log(filteredGroups, 'filteredgroups di reducer')
 
   const handleOpenChat = (group) => {
-    console.log(group, 'group yang chat nya mau dibuka')
     dispatch(openChat(group, dispatch));
   }
 
