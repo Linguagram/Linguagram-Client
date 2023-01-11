@@ -12,7 +12,7 @@ export default function InputField({
   return (
     <div className="flex flex-col">
       <label className="mb-2 text-xs md:text-sm">{label}</label>
-      <div className="flex items-center flex-1 gap-2 pr-4 md:gap-4 md:pr-6 bg-darker-gray">
+      <div className="flex items-center flex-1 gap-2 pr-4 md:gap-4 md:pr-4 bg-darker-gray">
         <FontAwesomeIcon
           className="p-2 text-base text-slate-500 md:text-xl bg-main-color-blur md:p-3"
           icon={icon}
