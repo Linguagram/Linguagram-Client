@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import InputField from "../../components/Form/InputFiled";
 import MyListbox from "../../components/Form/ListBox";
 import ComboboxInterest from "../../components/Form/Combobox";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { swalError, swalErrorStr } from "../../util/swal";
@@ -21,6 +21,12 @@ export default function ChangeProfile({ onClose, visible }) {
   const { pathname } = useLocation();
 
   const [selectedInterest, setSelectedInterest] = useState([]);
+
+  useEffect(() => {
+    const userInterests = thisUser.UserInterests?.map(ui => ui.Interest);
+    console.log("[userInterests]", userInterests);
+    if (userInterests?.length) setSelectedInterest(userInterests);
+  }, [thisUser]);
 
   const deleteInterest = (interestId) => {
     if (selectedInterest.length > 1) {
@@ -164,7 +170,7 @@ export default function ChangeProfile({ onClose, visible }) {
                       icon="language"
                     />
                     <div className="w-full">
-                      <MyListbox inputRef={inputNativeLanguageRef} />
+                        <MyListbox inputRef={inputNativeLanguageRef} userLang={thisUser.UserLanguages?.filter(l => l.type === "native")[0]?.Language} />
                     </div>
                   </div>
                 </div>
@@ -176,7 +182,7 @@ export default function ChangeProfile({ onClose, visible }) {
                       icon="language"
                     />
                     <div className="w-full">
-                      <MyListbox inputRef={inputInterestLanguageRef} />
+                      <MyListbox inputRef={inputInterestLanguageRef} userLang={thisUser.UserLanguages?.filter(l => l.type === "interest")[0]?.Language}/>
                     </div>
                   </div>
                 </div>
@@ -193,6 +199,7 @@ export default function ChangeProfile({ onClose, visible }) {
                   <ComboboxInterest
                     selectedInterest={selectedInterest}
                     setSelectedInterest={setSelectedInterest}
+                      userInterests={selectedInterest}
                   />
                 </div>
               </div>

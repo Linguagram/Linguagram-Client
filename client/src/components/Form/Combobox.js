@@ -9,6 +9,7 @@ import { swalError, swalErrorStr } from "../../util/swal";
 export default function ComboboxInterest({
   selectedInterest,
   setSelectedInterest,
+  userInterests
 }) {
   const dispatch = useDispatch();
   const { interestList } = useSelector((state) => state.interestReducer);
@@ -21,6 +22,7 @@ export default function ComboboxInterest({
     } else if (payload.length > 3) {
       swalErrorStr('You must select maximum 3 topics')
     } else {
+      // console.log(payload, "<<<<< selectedInterests");
       setSelectedInterest(payload)
     }
   }
@@ -29,7 +31,9 @@ export default function ComboboxInterest({
     dispatch(getInterests())
       .then((res) => {
         dispatch(setInterests(res.data));
-        setSelectedInterest([res.data[0]]);
+        if (userInterests?.length)
+          setSelectedInterest(userInterests);
+        else setSelectedInterest([res.data[0]]);
       })
       .catch((err) => {
         if (err.response?.data?.message) {
