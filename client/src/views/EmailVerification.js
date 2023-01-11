@@ -27,13 +27,13 @@ export default function EmailVerification() {
             
             localStorage.setItem('access_token', data.access_token)
             localStorage.setItem('user_id', data.user.id)
-   
+  
             swal({
                 text: data.message,
                 icon: "success",
             });
 
-            navigate('/home/chats')
+            navigate('/explore/people')
 
             setLoading(false)
             dispatch(handleSetThisUser(data.user))
