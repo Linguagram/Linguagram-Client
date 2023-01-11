@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
-  const { color } = useSelector(state => {
-    return state.navbarReducer
-  })
+  const { color } = useSelector((state) => {
+    return state.navbarReducer;
+  });
 
   const [drawer, setDrawer] = useState(false);
   const element = document.querySelector("#main-content");
@@ -28,6 +28,18 @@ export default function Navbar() {
               <FontAwesomeIcon icon="xmark" className="text-white text-2xl" />
             </button>
           </div>
+          <div className="h-16 text-2xl text-white font-bold ">
+            <NavLink
+              to={"/"}
+              className="flex justify-center items-center w-full">
+              <img
+                src="https://ik.imagekit.io/enybtlxa2/linguagram.-logo-only-cropped.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673084814327"
+                alt="linguagram-logo"
+                className="h-16"
+              />
+              Linguagram
+            </NavLink>
+          </div>
           <div className="flex flex-col text-xl text-white font-bold gap-2">
             <div className="border-b border-white-500 py-2">
               <NavLink to={"/register"}>Register</NavLink>
@@ -43,9 +55,16 @@ export default function Navbar() {
         className={`text-white ease-in duration-300 ${
           color ? "bg-darker-gray" : ""
         }`}>
-        <div className="px-4 container mx-auto flex justify-between items-center py-4">
+        <div className="container mx-auto flex justify-between items-center py-4 pl-2 pr-4">
           <div className="text-2xl font-bold flex items-center">
-            <NavLink to={"/"}>Linguagram</NavLink>
+            <NavLink to={"/"} className="flex items-center justify-start">
+              <img
+                src="https://ik.imagekit.io/enybtlxa2/linguagram.-logo-only-cropped.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673084814327"
+                alt="linguagram-logo"
+                className="h-12 object-cover"
+              />
+              Linguagram
+            </NavLink>
           </div>
           <div className="flex justify-end">
             <div className="hidden sm:flex justify-end items-center gap-4">

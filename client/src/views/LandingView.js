@@ -51,9 +51,9 @@ export default function LandingView() {
             </h3>
           </div>
 
-          <div className="flex flex-col lg:flex-none lg:grid lg:grid-cols-2 h-screen gap-4 lg:gap-8 px-4 mb-4">
+          <div className="flex flex-col md:flex-none md:grid md:grid-cols-2 h-screen gap-4 md:gap-8 px-4 mb-4">
             <div
-              className="lg:flex-none bg-center bg-cover rounded-xl flex justify-start items-end flex-1"
+              className="md:flex-none bg-center bg-cover rounded-xl flex justify-start items-end flex-1"
               style={{
                 backgroundImage:
                   "url(https://images.unsplash.com/flagged/photo-1557898246-9fd78587bcc7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80)",
