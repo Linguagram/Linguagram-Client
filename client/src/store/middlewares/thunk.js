@@ -565,8 +565,7 @@ export const newChatFromExplore = (userId) => {
           access_token: getAccessToken(),
         }
       });
-<<<<<<< Updated upstream
-      console.log(data)
+      console.log({data, fn: "newChatFromExplore"})
       const { groupReducer } = getState()
 
       await dispatch(handleFetchGroups())
@@ -582,9 +581,6 @@ export const newChatFromExplore = (userId) => {
       
       dispatch(setAllGroups(newAllGroup))
       dispatch(setCounterpartUser(counterpartUserNew.User))
-=======
-      console.log({data, fn: "newChatFromExplore"})
->>>>>>> Stashed changes
     } catch (error) {
       console.log(error);
     }
