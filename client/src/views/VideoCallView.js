@@ -109,6 +109,7 @@ export default function VideoCallView() {
   
       peer.on("signal", data => {
         // setLoading(true)
+        // console.log(data, "signal yang dikirim waktu call")
         socketConnect.emit("call", { userToCall: counterpartUser.id, signalData: data, from: thisUser.id })
       })
   

@@ -3,6 +3,7 @@ import {
   SET_THIS_USER,
   SET_INCOMING_CALLER,
   FETCH_ALL_GROUPS,
+  SET_FILTERED_GROUPS,
   FETCH_MESSAGES_BY_GROUPID,
   SET_HOME_DRAWER,
   SET_OPEN_CHAT,
@@ -94,6 +95,13 @@ export const setIncomingCaller = (payload) => {
 export const setAllGroups = (payload) => {
   return {
     type: FETCH_ALL_GROUPS,
+    payload,
+  };
+};
+
+export const setFilteredGroups = (payload) => {
+  return {
+    type: SET_FILTERED_GROUPS,
     payload,
   };
 };

@@ -18,6 +18,8 @@ export const SET_AM_I_THE_CALLER = 'video/setAmITheCaller'
 
 export const FETCH_ALL_GROUPS = 'groups/successFetchAllGroups'
 
+export const SET_FILTERED_GROUPS = 'groups/filterGroups'
+
 export const FETCH_PRIVATE_GROUPS = 'groups/successFetchPrivateGroups'
 
 export const FETCH_GROUP_GROUPS = 'groups/successFetchGroupGroups'

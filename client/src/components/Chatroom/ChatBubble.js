@@ -200,7 +200,7 @@ export default function ChatBubble({ msg }) {
                     icon="clock"
                   />
                   <h6 className="text-xs text-gray-400">
-                    {new Date(msg.updatedAt).toLocaleString("id-ID")}
+                    {new Date(msg.updatedAt).toLocaleString("id-ID").slice(0,15).replace('.',':')}
                   </h6>
                 </div>
               </div>
@@ -275,7 +275,7 @@ export default function ChatBubble({ msg }) {
                     icon="clock"
                   />
                   <h6 className="text-xs text-gray-400">
-                    {new Date(msg.updatedAt).toLocaleString("id-ID")}
+                    {new Date(msg.updatedAt).toLocaleString("id-ID").slice(0,15).replace('.',':')}
                   </h6>
                 </div>
               </div>
@@ -386,7 +386,7 @@ export default function ChatBubble({ msg }) {
                     icon="clock"
                   />
                   <h6 className="text-xs text-gray-400">
-                    {new Date(msg.updatedAt).toLocaleString("id-ID")}
+                    {new Date(msg.updatedAt).toLocaleString("id-ID").slice(0,15).replace('.',':')}
                   </h6>
                 </div>
               </div>
