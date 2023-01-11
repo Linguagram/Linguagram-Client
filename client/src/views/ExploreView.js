@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import HomeDrawer from "../components/HomeDrawer/HomeDrawer";
+import TutorialModal from "../components/Modal/TutorialModal";
 import Sidebar from "../components/Sidebar/Sidebar";
 import { setHomeDrawer } from "../store/actions/actionCreator";
 import { handleSetActiveSection } from "../store/middlewares/thunk";
@@ -29,6 +30,7 @@ export default function ExploreView() {
 
   return (
     <div className="fixed flex w-screen h-screen">
+        {/* <TutorialModal /> */}
       <Sidebar />
       <div className="fixed top-0 z-50 w-full">
         <HomeDrawer homeDrawer={homeDrawer} />

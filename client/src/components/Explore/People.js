@@ -17,6 +17,7 @@ export default function People() {
     console.log({ thisUser });
     dispatch(handleFetchExploreUsers())
       .then((_) => {
+        console.log(users)
         return;
       })
       .catch((err) => {
