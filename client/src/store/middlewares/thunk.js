@@ -567,7 +567,7 @@ export const newChatFromExplore = (userId, componentDispatch) => {
       });
       console.log({data, fn: "newChatFromExplore"});
 
-      dispatch(openCha)
+      dispatch(openChat)
     } catch (error) {
       console.log(error);
     }

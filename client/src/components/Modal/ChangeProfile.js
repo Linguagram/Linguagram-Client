@@ -92,15 +92,15 @@ export default function ChangeProfile({onClose, visible}) {
     if(!visible) return null;
   
     return (
-      <div className='fixed inset-0 z-10 overflow-auto flex items-center justify-center bg-light-gray md:bg-black bg-opacity-60'>
+      <div className='fixed inset-0 z-10 flex items-center justify-center overflow-auto bg-light-gray md:bg-black bg-opacity-60'>
         <div className={`flex flex-col w-full gap-5 p-5 mx-4 rounded h-5/6 md:mx-0 ${pathname === '/home/setting' ? 'bg-light-gray ': 'bg-darker-gray'} md:w-1/2 md:pt-80 md:h-min lg:pt-5 lg:w-fit lg:h-fit 2xl:w-1/3 `}>
             <div className='flex items-center justify-between'>
                 <h3 className='text-xl text-white'>Change Profile</h3>
             </div>
             <form onSubmit={handleChangeProfile}>
-                <div className="flex flex-col gap-4 p-4 md:py-0 md:w-full items-center">
-                <div className="flex flex-col lg:flex-row w-full justify-between gap-4">
-                    <div className="flex flex-col gap-4 w-full">
+                <div className="flex flex-col items-center gap-4 p-4 md:py-0 md:w-full">
+                <div className="flex flex-col justify-between w-full gap-4 lg:flex-row">
+                    <div className="flex flex-col w-full gap-4">
                     <InputField
                         inputRef={inputUsernameRef}
                         label={"Name"}
@@ -139,7 +139,7 @@ export default function ChangeProfile({onClose, visible}) {
                         placeholder={"**********"}
                     />
                     </div>
-                    <div className="flex flex-col gap-4 w-full">
+                    <div className="flex flex-col w-full gap-4">
                     <InputField
                         inputRef={inputCountryRef}
                         label={"Country"}
@@ -158,9 +158,9 @@ export default function ChangeProfile({onClose, visible}) {
                     />
                     <div className="flex flex-col">
                         <label className="mb-2 text-sm">Native in</label>
-                        <div className="flex flex-1 items-center bg-darker-gray">
+                        <div className="flex items-center flex-1 bg-darker-gray">
                         <FontAwesomeIcon
-                            className="text-slate-500 text-xl bg-main-color-blur p-3"
+                            className="p-3 text-xl text-slate-500 bg-main-color-blur"
                             icon="language"
                         />
                         <div className="w-full">
@@ -170,9 +170,9 @@ export default function ChangeProfile({onClose, visible}) {
                     </div>
                     <div className="flex flex-col">
                         <label className="mb-2 text-sm">Want to learn</label>
-                        <div className="flex flex-1 items-center bg-darker-gray">
+                        <div className="flex items-center flex-1 bg-darker-gray">
                         <FontAwesomeIcon
-                            className="text-slate-500 text-xl bg-main-color-blur p-3"
+                            className="p-3 text-xl text-slate-500 bg-main-color-blur"
                             icon="language"
                         />
                         <div className="w-full">
@@ -184,9 +184,9 @@ export default function ChangeProfile({onClose, visible}) {
                 </div>
                 <div className="flex flex-col w-full">
                     <label className="mb-2 text-sm">Interest Topic</label>
-                    <div className="flex flex-1 items-center bg-darker-gray">
+                    <div className="flex items-center flex-1 bg-darker-gray">
                     <FontAwesomeIcon
-                        className="text-slate-500 text-xl bg-main-color-blur p-3"
+                        className="p-3 text-xl text-slate-500 bg-main-color-blur"
                         icon="person-biking"
                     />
                     <div className="w-full">
@@ -199,9 +199,9 @@ export default function ChangeProfile({onClose, visible}) {
                 </div>
                 <div className="flex gap-4">
                     {selectedInterest.map((interest) => (
-                    <div className='flex'>
+                    <div className='flex items-center gap-1'>
                         <div
-                            className="bg-darker-gray py-1 px-3 rounded"
+                            className="px-3 py-1 rounded bg-darker-gray"
                             key={interest.id}>
                             {interest.name}
                         </div>
@@ -211,14 +211,14 @@ export default function ChangeProfile({onClose, visible}) {
                 </div>
                 <div className='flex gap-10'>
                     <button
-                        className="bg-main-color rounded p-3 text-sm w-20"
+                        className="w-20 p-3 text-sm rounded bg-main-color"
                         onClick={onClose}
                         >
                         Cancel
                     </button>
                     <button
                         type="submit"
-                        className="bg-main-color rounded p-3 text-sm w-20"
+                        className="w-20 p-3 text-sm rounded bg-main-color"
                         >
                         Edit
                     </button>

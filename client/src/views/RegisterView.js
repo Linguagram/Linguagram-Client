@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 import ComboboxInterest from "../components/Form/Combobox";
-import { swalError } from "../util/swal";
+import { swalError, swalErrorStr } from "../util/swal";
 
 export default function RegisterView() {
   const dispatch = useDispatch();
@@ -27,6 +27,15 @@ export default function RegisterView() {
   const inputNativeLanguageRef = useRef();
   const inputInterestLanguageRef = useRef();
   const inputInterestsRef = useRef();
+
+  const deleteInterest = (interestId) => {
+    if(selectedInterest.length > 1) {
+        const updatedSelectedInterest = selectedInterest.filter(el => el.id !== interestId)
+        setSelectedInterest(updatedSelectedInterest)
+    } else {
+        swalErrorStr('You need to have at least one interest...')
+    }
+}
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
@@ -86,19 +95,19 @@ export default function RegisterView() {
   }, []);
 
   return (
-    <div className="bg-light-gray h-screen w-screen fixed overflow-auto flex text-white justify-center" onScroll={handleScrollEvent}>
-      <div className="flex flex-col gap-4 md:gap-4 flex-1">
+    <div className="fixed flex justify-center w-screen h-screen overflow-auto text-white bg-light-gray" onScroll={handleScrollEvent}>
+      <div className="flex flex-col flex-1 gap-4 md:gap-4">
         <div className="flex flex-col gap-2">
-          <h1 className="text-center text-3xl font-bold mt-20 md:mt-12 lg:mt-20">
+          <h1 className="mt-20 text-3xl font-bold text-center md:mt-12 lg:mt-20">
             Register
           </h1>
           <h3 className="text-center">Create new account</h3>
         </div>
-        <div className="bg-light-gray h-content px-4 w-full mx-auto pb-8 md:max-w-full lg:max-w-2xl xl:max-w-3xl lg:py-4 lg:p-2">
+        <div className="w-full px-4 pb-8 mx-auto bg-light-gray h-content md:max-w-full lg:max-w-2xl xl:max-w-3xl lg:py-4 lg:p-2">
           <form onSubmit={handleRegisterSubmit}>
-            <div className="flex flex-col gap-4 p-4 md:py-0 md:w-full items-center">
-              <div className="flex flex-col md:flex-row w-full justify-between gap-4">
-                <div className="flex flex-col gap-4 w-full">
+            <div className="flex flex-col items-center gap-4 p-4 md:py-0 md:w-full">
+              <div className="flex flex-col justify-between w-full gap-4 md:flex-row">
+                <div className="flex flex-col w-full gap-4">
                   <InputField
                     inputRef={inputUsernameRef}
                     label={"Name"}
@@ -128,7 +137,7 @@ export default function RegisterView() {
                     placeholder={"*****"}
                   />
                 </div>
-                <div className="flex flex-col gap-4 w-full">
+                <div className="flex flex-col w-full gap-4">
                   <InputField
                     inputRef={inputCountryRef}
                     label={"Country"}
@@ -145,9 +154,9 @@ export default function RegisterView() {
                   />
                   <div className="flex flex-col">
                     <label className="mb-2 text-sm">Native in</label>
-                    <div className="flex flex-1 items-center bg-darker-gray">
+                    <div className="flex items-center flex-1 bg-darker-gray">
                       <FontAwesomeIcon
-                        className="text-slate-500 text-xl bg-main-color-blur p-3"
+                        className="p-3 text-xl text-slate-500 bg-main-color-blur"
                         icon="language"
                       />
                       <div className="w-full">
@@ -157,9 +166,9 @@ export default function RegisterView() {
                   </div>
                   <div className="flex flex-col">
                     <label className="mb-2 text-sm">Want to learn</label>
-                    <div className="flex flex-1 items-center bg-darker-gray">
+                    <div className="flex items-center flex-1 bg-darker-gray">
                       <FontAwesomeIcon
-                        className="text-slate-500 text-xl bg-main-color-blur p-3"
+                        className="p-3 text-xl text-slate-500 bg-main-color-blur"
                         icon="language"
                       />
                       <div className="w-full">
@@ -171,9 +180,9 @@ export default function RegisterView() {
               </div>
               <div className="flex flex-col w-full">
                 <label className="mb-2 text-sm">Interest Topic</label>
-                <div className="flex flex-1 items-center bg-darker-gray">
+                <div className="flex items-center flex-1 bg-darker-gray">
                   <FontAwesomeIcon
-                    className="text-slate-500 text-xl bg-main-color-blur p-3"
+                    className="p-3 text-xl text-slate-500 bg-main-color-blur"
                     icon="person-biking"
                   />
                   <div className="w-full">
@@ -187,15 +196,20 @@ export default function RegisterView() {
               <div className="flex gap-4">
                 {selectedInterest.map((interest) => (
                   <div
-                    className="bg-darker-gray py-1 px-3 rounded"
+                    className="flex items-center gap-1 px-3 py-1 rounded bg-darker-gray"
                     key={interest.id}>
-                    {interest.name}
+                      <div>
+                        {interest.name}
+                      </div>
+                      <div onClick={() => deleteInterest(interest.id)} className="cursor-pointer">
+                        &times;
+                      </div>
                   </div>
                 ))}
               </div>
               <button
                 type="submit"
-                className="bg-main-color rounded p-3 text-sm w-full"
+                className="w-full p-3 text-sm rounded bg-main-color"
                 >
                   Sign Up
               </button>
