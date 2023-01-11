@@ -20,7 +20,6 @@ export default function SectionGroups() {
   }
 
   useEffect(() => {
-    console.log(groupGroups)
     setFilteredGroupGroups(groupGroups)
   }, [groupGroups])
 

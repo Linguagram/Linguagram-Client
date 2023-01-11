@@ -8,7 +8,6 @@ import {
   ADD_GROUP_GROUPS,
   SET_GROUP_MESSAGES_READ,
   SET_FILTERED_GROUPS,
-  JOIN_GROUP
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -35,23 +34,6 @@ export default function groupReducer(state = initialState, action) {
         ...state,
         privateGroups: action.payload,
       };
-    case JOIN_GROUP:
-      return {
-        ...state,
-        allGroups: [
-          ...state.allGroups,
-          action.payload
-        ],
-    };
-    case ADD_GROUP_GROUPS:
-      console.log(action.payload, "group yg mau ditambah")
-      return {
-        ...state,
-        groupGroups: [
-          ...state.groupGroups,
-          action.payload
-        ],
-    };
     case FETCH_GROUP_GROUPS:
       return {
         ...state,
