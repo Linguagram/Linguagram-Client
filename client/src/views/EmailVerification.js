@@ -44,7 +44,7 @@ export default function EmailVerification() {
                         text: `${err.response.data.message}`,
                         icon: "success",
                     });
-                    navigate('/home/chats')
+                    navigate('/explore/people')
                 } else {
                     swal({
                         text: `${err.response.data.message}`,

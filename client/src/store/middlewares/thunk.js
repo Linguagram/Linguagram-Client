@@ -488,6 +488,7 @@ export const joinGroup = (groupId) => {
           access_token: getAccessToken(),
         },
       });
+      dispatch(handleFetchGroups())
       dispatch(handleFetchExploreGroups());
       return data;
     } catch (err) {
