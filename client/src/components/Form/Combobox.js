@@ -47,8 +47,8 @@ export default function ComboboxInterest({
         onChange={handleOnChange}
         multiple
       >
-        <div className="relative mt-1">
-          <Combobox.Button className="relative flex justify-between w-full py-2 pl-3 pr-2 text-left cursor-pointer bg-darker-gray focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+        <div className="relative">
+          <Combobox.Button className="relative flex justify-between w-full pr-2 text-xs text-left cursor-pointer md:py-2 bg-darker-gray focus:outline-none focus-visible:border-indigo-500 sm:text-sm">
             <span className="block truncate">Select interested topics</span>
             <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"></span>
             <ChevronUpDownIcon
