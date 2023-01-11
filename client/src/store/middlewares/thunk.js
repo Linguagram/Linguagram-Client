@@ -45,6 +45,8 @@ export const handleSetThisUser = (user) => {
     // Added condition to prevent error in development ---------------------------
     if (interestLangObj)
       dispatch(setInterestLanguage(interestLangObj.Language));
+    if (nativeLangObj)
+      dispatch(setNativeLanguage(nativeLangObj.Language));
     //----------------------------------------------------------------------------
   };
 };
