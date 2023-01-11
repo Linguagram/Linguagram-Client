@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { acceptFriendRequest, deleteFriendship } from "../../store/middlewares/thunk";
 import { useEffect, useState } from "react";
-import { swalError, swalSuccess } from "../../util/swal";
+import { swalError } from "../../util/swal";
 import { setFriendRequests } from "../../store/actions/actionCreator";
 
 export default function FriendRequestCard({ friend }) {
@@ -22,7 +22,6 @@ export default function FriendRequestCard({ friend }) {
   const deleteFriendReq = () => {
     dispatch(deleteFriendship(request.id))
     .then((res) => {
-      console.log('berhasil delete');
       const friendReqFilter = []
       friendRequests.forEach((el) => {
         if (el.User.id !== request.id) {
@@ -36,9 +35,6 @@ export default function FriendRequestCard({ friend }) {
       swalError(err)
     })
   }
-
-  console.log('friendRequests', friendRequests);
-  console.log('request', request);
 
   return (
     <div>

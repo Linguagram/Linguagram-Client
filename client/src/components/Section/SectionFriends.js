@@ -16,6 +16,7 @@ export default function SectionFriends() {
   );
   const [firstLetters, setFirstLetters] = useState([]);
   const [sortedFriends, setSortedFriends] = useState({});
+  const [query, setQuery] = useState('');
 
   const dispatch = useDispatch();
   const [isFriendRequestModalVisible, setisFriendRequestModalVisible] =
@@ -43,6 +44,19 @@ export default function SectionFriends() {
     setSortedFriends(sorted);
   }, [friends]);
 
+  useEffect(() => {
+    const filtered = query === ''
+      ? friends
+      : friends.filter((friend) => {
+          return friend.Friend.username.toLowerCase().includes(query.toLowerCase());
+        });
+    
+    const letters = getFriendsFirstLetter(filtered);
+    const sorted = sortFriendsByFirstLetter(filtered);
+    setFirstLetters(letters);
+    setSortedFriends(sorted);
+  }, [query])
+
   return (
     <>
       <div className="flex items-center justify-between mb-4 text-xl md:mb-8">
@@ -55,10 +69,10 @@ export default function SectionFriends() {
           <h4 className="text-white">Friends</h4>
         </div>
         <div className="relative">
-        {friendRequests.length > 0 ? <div className="bg-red-500 h-2 aspect-square rounded-full absolute inset-x-3 inset-y-1 z-50"></div> : ""}
+        {friendRequests.length > 0 ? <div className="absolute z-50 h-2 bg-red-500 rounded-full aspect-square inset-x-3 inset-y-1"></div> : ""}
           <FontAwesomeIcon
             onClick={() => setisFriendRequestModalVisible(true)}
-            className="text-gray-400 cursor-pointer small-icons relative"
+            className="relative text-gray-400 cursor-pointer small-icons"
             icon="bell"
           />
         </div>
@@ -70,6 +84,8 @@ export default function SectionFriends() {
         </div>
         <div className="flex w-5/6">
           <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
             className="pr-4 text-white bg-transparent focus:border-none focus:outline-none"
             type="text"
             placeholder="Search friend"></input>
