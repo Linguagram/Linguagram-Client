@@ -41,7 +41,7 @@ export default function groupReducer(state = initialState, action) {
       };
     case ADD_ALL_GROUPS: {
       let groups;
-      if (state.allGroups.find(g => g.id === action.payload.id) === -1)
+      if (state.allGroups.findIndex(g => g.id === action.payload.id) === -1)
         groups = state.allGroups.concat(action.payload);
       console.log(groups, "<<<<<<<< allGroups");
       return {
@@ -51,7 +51,7 @@ export default function groupReducer(state = initialState, action) {
     }
     case ADD_PRIVATE_GROUPS: {
       let groups;
-      if (state.privateGroups.find(g => g.id === action.payload.id) === -1)
+      if (state.privateGroups.findIndex(g => g.id === action.payload.id) === -1)
         groups = state.privateGroups.concat(action.payload);
       console.log(groups, "<<<<<<<< privateGroups");
       return {
@@ -61,7 +61,7 @@ export default function groupReducer(state = initialState, action) {
     }
     case ADD_GROUP_GROUPS: {
       let groups;
-      if (state.groupGroups.find(g => g.id === action.payload.id) === -1)
+      if (state.groupGroups.findIndex(g => g.id === action.payload.id) === -1)
         groups = state.groupGroups.concat(action.payload);
       return {
         ...state,
@@ -69,7 +69,7 @@ export default function groupReducer(state = initialState, action) {
       };
     }
     case SET_GROUP_MESSAGES_READ:
-      const indx = state.allGroups.find(g => g.id === action.payload);
+      const indx = state.allGroups.findIndex(g => g.id === action.payload);
       let newAllGroups;
       if (indx !== -1) {
         newAllGroups = state.allGroups.slice();
