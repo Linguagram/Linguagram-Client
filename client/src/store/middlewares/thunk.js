@@ -494,7 +494,7 @@ export const joinGroup = (groupId) => {
       dispatch(handleFetchExploreGroups());
       return data;
     } catch (err) {
-      console.log(err);
+      swalError(err);
     }
   };
 };

@@ -4,6 +4,7 @@ import { setCounterpartUser } from "../../store/actions/actionCreator";
 import { joinGroup } from "../../store/middlewares/thunk";
 import { getGroupAvatar } from "../../util/getAvatar";
 import { swalError } from "../../util/swal";
+import { openChat } from "../../store/middlewares/thunk";
 
 export default function GroupCard({ groupId, groupName, members, group }) {
   const dispatch = useDispatch();
@@ -26,18 +27,15 @@ export default function GroupCard({ groupId, groupName, members, group }) {
   };
 
   const handleJoinGroup = () => {
+    console.log("[handleJoinGroup]", group);
+    console.log("[groupId]", groupId);
     dispatch(joinGroup(groupId))
-      .then((_) => {
+      .then((data) => {
         dispatch(setCounterpartUser(group))
+        console.log(data, "<<<<<<< data joinGroup");
+        dispatch(openChat(data.Group, dispatch));
         navigate("/home/groups");
       })
-      .catch((err) => {
-        if (err.response?.data?.message) {
-          swalError(err);
-        } else {
-          console.log(err);
-        }
-      });
   };
 
   return (
