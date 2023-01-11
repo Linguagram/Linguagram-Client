@@ -153,6 +153,7 @@ export const initSocket = (socketDispatch, socketNavigate) => {
     });
 
     socket.on('confirmAcceptCall', async (confirmerUser) => {
+      socketDispatch(handleSetIsCalling(false));
       socketNavigate('/videocall');
     });
 

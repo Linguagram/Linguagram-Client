@@ -83,6 +83,7 @@ export default function HomeView() {
 
   const acceptCall = () => {
     socketConnect.emit("acceptCall", { userToReceive: incomingCaller.id, from: thisUser.id })
+    setIsIncomingCall(false)
     navigate('/videocall')
   }
 
