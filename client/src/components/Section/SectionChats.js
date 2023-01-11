@@ -40,6 +40,8 @@ export default function SectionChats() {
     dispatch(openChat(group, dispatch));
   }
 
+  console.log(allGroups, "<<<<<< allGroups SectionChat");
+
   return (
     <>
       <div className="flex items-center gap-3 mb-4 text-xl text-white md:mb-8">

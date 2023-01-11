@@ -39,23 +39,35 @@ export default function groupReducer(state = initialState, action) {
         ...state,
         groupGroups: action.payload,
       };
-    case ADD_ALL_GROUPS:
-      const groups = state.allGroups.concat(action.payload);
+    case ADD_ALL_GROUPS: {
+      let groups;
+      if (state.allGroups.find(g => g.id === action.payload.id) === -1)
+        groups = state.allGroups.concat(action.payload);
       console.log(groups, "<<<<<<<< allGroups");
       return {
         ...state,
-        allGroups: groups,
+        allGroups: groups || state.allGroups,
       };
-    case ADD_PRIVATE_GROUPS:
+    }
+    case ADD_PRIVATE_GROUPS: {
+      let groups;
+      if (state.privateGroups.find(g => g.id === action.payload.id) === -1)
+        groups = state.privateGroups.concat(action.payload);
+      console.log(groups, "<<<<<<<< privateGroups");
       return {
         ...state,
-        privateGroups: state.privateGroups.concat(action.payload),
+        privateGroups: groups || state.privateGroups,
       };
-    case ADD_GROUP_GROUPS:
+    }
+    case ADD_GROUP_GROUPS: {
+      let groups;
+      if (state.groupGroups.find(g => g.id === action.payload.id) === -1)
+        groups = state.groupGroups.concat(action.payload);
       return {
         ...state,
-        groupGroups: state.groupGroups.concat(action.payload),
+        groupGroups: groups || state.groupGroups,
       };
+    }
     case SET_GROUP_MESSAGES_READ:
       const indx = state.allGroups.find(g => g.id === action.payload);
       let newAllGroups;
