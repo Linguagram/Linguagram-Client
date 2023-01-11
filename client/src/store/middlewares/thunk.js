@@ -18,7 +18,11 @@ import {
   setNavbarColor,
   setInterests,
   setIsCalling,
+<<<<<<< HEAD
   setIsIncomingCall,
+=======
+  setOpenChat
+>>>>>>> 673727d (note in thunk)
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
@@ -564,6 +568,7 @@ export const newChatFromExplore = (userId) => {
           access_token: getAccessToken(),
         }
       });
+<<<<<<< HEAD
       console.log(data)
       const { groupReducer } = getState()
 
@@ -580,6 +585,38 @@ export const newChatFromExplore = (userId) => {
       
       dispatch(setAllGroups(newAllGroup))
       dispatch(setCounterpartUser(counterpartUserNew.User))
+=======
+      dispatch(handleFetchGroups())
+      
+      /**
+       * ! [NOTE]
+       * ! Kembalian dari request tidak sesuai dengan object
+       * ! yang dibutuhkan oleh setAllGroups, setCounterpartUser,
+       * ! dan setOpenChat. Apakah perlu melakukan:
+       * ! 1. Perubahan pada response.data dari server?
+       * ! 2. Penyesuaian data sebelum melakukan dispatch?
+       */
+      const { userReducer, groupReducer } = getState()
+      // console.log({allGroups: groupReducer.allGroups})
+      // console.log({thisUser: userReducer.thisUser})
+
+      console.log({data}, '<<< from newChatFromExplore')
+
+      // const newAllGroups = [data, ...groupReducer.allGroups]
+      // console.log({newAllGroups})
+
+      // for (const user of data.GroupMembers) {
+      //   console.log({user})
+      //   if(user.User.UserId != userReducer.thisUser.id) {
+      //     dispatch(handleSetCounterpartUser(user.User))
+      //     break
+      //   }
+      // }
+      // dispatch(setAllGroups(newAllGroups))
+      // dispatch(setOpenChat(data));
+      // dispatch(handleFetchMessagesByGroupId(data.id))
+
+>>>>>>> 673727d (note in thunk)
     } catch (error) {
       console.log(error);
     }
