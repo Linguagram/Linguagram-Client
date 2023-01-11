@@ -11,6 +11,7 @@ import { getUserAvatar } from "../../util/getAvatar";
 
 export default function ChatBubble({ msg }) {
   const [content, setContent] = useState('')
+  const [untranslated, setUntranslated] = useState('')
   const [editing, setEditing] = useState(null)
   const [counterUser, setCounterUser] = useState({})
   const { thisUser, counterpartUser, nativeLanguage } = useSelector(
@@ -25,11 +26,17 @@ export default function ChatBubble({ msg }) {
   const translateMessage = async (content, toLanguage) => {
     try {
       const translated = await handleTranslate(content, toLanguage);
-      setContent(translated)
+      setUntranslated(content);
+      setContent(translated);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const untranslateMessage = () => {
+    setContent(untranslated);
+    setUntranslated('');
+  }
 
   useEffect(() => {
     setContent(msg.content)
@@ -64,6 +71,29 @@ export default function ChatBubble({ msg }) {
   }, [])
 
   console.log(counterUser);
+
+  const TranslateButton = (active) => {
+    return (
+      <button
+        type="button"
+        onClick={() =>
+          untranslated.length
+            ? untranslateMessage()
+            : translateMessage(
+              msg.content,
+              nativeLanguage.name
+            )}
+        className={classNames(
+          active
+            ? "bg-gray text-gray-300"
+            : "text-gray-400",
+          "block px-4 py-2 text-sm"
+        )}
+      >
+        {untranslated.length ? "Untranslate" : "Translate"}
+      </button>
+    );
+  }
 
   if (msg.UserId === thisUser.id) {
     return (
@@ -300,21 +330,7 @@ export default function ChatBubble({ msg }) {
                     <div className="py-1 bg-darker-gray">
                       <Menu.Item>
                         {({ active }) => (
-                          <button
-                            type="button"
-                            onClick={() => translateMessage(
-                              msg.content,
-                              nativeLanguage.name
-                            )}
-                            className={classNames(
-                              active
-                                ? "bg-gray text-gray-300"
-                                : "text-gray-400",
-                              "block px-4 py-2 text-sm"
-                            )}
-                          >
-                            Translate
-                          </button>
+                          TranslateButton(active)
                         )}
                       </Menu.Item>
                     </div>
@@ -411,21 +427,7 @@ export default function ChatBubble({ msg }) {
                     <div className="py-1 bg-darker-gray">
                       <Menu.Item>
                         {({ active }) => (
-                          <button
-                            type="button"
-                            onClick={() => translateMessage(
-                              msg.content,
-                              nativeLanguage.name
-                            )}
-                            className={classNames(
-                              active
-                                ? "bg-gray text-gray-300"
-                                : "text-gray-400",
-                              "block px-4 py-2 text-sm"
-                            )}
-                          >
-                            Translate
-                          </button>
+                          TranslateButton(active)
                         )}
                       </Menu.Item>
                     </div>
