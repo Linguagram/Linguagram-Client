@@ -48,11 +48,11 @@ export default function ComboboxInterest({
         multiple
       >
         <div className="relative mt-1">
-          <Combobox.Button className="relative w-full cursor-pointer bg-darker-gray py-2 pl-3 pr-2 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm flex justify-between">
+          <Combobox.Button className="relative flex justify-between w-full py-2 pl-3 pr-2 text-left cursor-pointer bg-darker-gray focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
             <span className="block truncate">Select interested topics</span>
-            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"></span>
+            <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"></span>
             <ChevronUpDownIcon
-              className="h-5 w-5 text-gray-400"
+              className="w-5 h-5 text-gray-400"
               aria-hidden="true"
             />
           </Combobox.Button>
@@ -63,7 +63,7 @@ export default function ComboboxInterest({
             leaveTo="opacity-0"
             // afterLeave={() => setQuery("")}
           >
-            <Combobox.Options className="absolute mt-1 max-h-32 w-full overflow-auto bg-darker-gray py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-20 overflow-y-auto">
+            <Combobox.Options className="absolute z-20 w-full py-1 mt-1 overflow-auto overflow-y-auto text-base shadow-lg max-h-32 bg-darker-gray ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {
                 interestList.map((interest) => (
                   <Combobox.Option
@@ -75,29 +75,22 @@ export default function ComboboxInterest({
                     }
                     value={interest}
                   >
-                    {({ selectedInterest, active }) => (
+                    {({ selected, active }) => (
                       <>
                         <span
                           className={`block truncate ${
-                            selectedInterest ? "font-medium" : "font-normal"
+                            selected ? "font-medium" : "font-normal"
                           }`}
                         >
                           {interest.name}
                         </span>
-                        {selectedInterest ? (
+                        {selected ? (
                           <span
-                            className={`absolute inset-y-0 left-0 flex items-center pl-3 text-white ${
-                              active ? "text-white" : "text-teal-600"
-                            }`}
+                            className={`absolute inset-y-0 left-0 flex items-center pl-3 text-white`}
                           >
-                            <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                            <CheckIcon className="w-5 h-5" aria-hidden="true" />
                           </span>
                         ) : null}
-                        {/* {selectedInterest ? (
-                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-white">
-                          <CheckIcon className="h-5 w-5" aria-hidden="true" />
-                        </span>
-                      ) : null} */}
                       </>
                     )}
                   </Combobox.Option>

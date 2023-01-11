@@ -193,6 +193,7 @@ export default function RegisterView() {
                   </div>
                 </div>
               </div>
+              <div className="font-medium">Selected topic</div>
               <div className="flex gap-4">
                 {selectedInterest.map((interest) => (
                   <div
