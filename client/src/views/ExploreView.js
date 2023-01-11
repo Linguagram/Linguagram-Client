@@ -30,7 +30,7 @@ export default function ExploreView() {
 
   return (
     <div className="fixed flex w-screen h-screen">
-        {/* <TutorialModal /> */}
+        <TutorialModal />
       <Sidebar />
       <div className="fixed top-0 z-50 w-full">
         <HomeDrawer homeDrawer={homeDrawer} />
