@@ -70,7 +70,7 @@ export default function ChangeProfile({onClose, visible}) {
             );
             inputUsernameRef.current.value = "";
             inputEmailRef.current.value = "";
-            inputPasswordRef = "";
+            inputPasswordRef.current.value = "";
             inputNewPasswordRef.current.value = "";
             inputConfirmNewsPassword.current.value = "";
             inputPhoneNumberRef.current.value = "";
@@ -118,25 +118,25 @@ export default function ChangeProfile({onClose, visible}) {
                         defaultValue={thisUser.email}
                     />
                     <InputField
-                        inputRef={inputPasswordRef}
-                        label={"Old Password"}
-                        icon={"lock"}
-                        type={"password"}
-                        placeholder={"*****"}
-                    />
-                    <InputField
                         inputRef={inputNewPasswordRef}
-                        label={"Password"}
+                        label={"New Password"}
                         icon={"lock"}
                         type={"password"}
-                        placeholder={"*****"}
+                        placeholder={"**********"}
                     />
                     <InputField
                         inputRef={inputConfirmNewsPassword}
-                        label={"Confirm Password"}
+                        label={"Confirm New Password"}
                         icon={"lock"}
                         type={"password"}
-                        placeholder={"*****"}
+                        placeholder={"**********"}
+                    />
+                    <InputField
+                        inputRef={inputPasswordRef}
+                        label={"Password (required)"}
+                        icon={"lock"}
+                        type={"password"}
+                        placeholder={"**********"}
                     />
                     </div>
                     <div className="flex flex-col gap-4 w-full">

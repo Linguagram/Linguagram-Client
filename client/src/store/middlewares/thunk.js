@@ -565,6 +565,7 @@ export const newChatFromExplore = (userId) => {
           access_token: getAccessToken(),
         }
       });
+<<<<<<< Updated upstream
       console.log(data)
       const { groupReducer } = getState()
 
@@ -581,6 +582,9 @@ export const newChatFromExplore = (userId) => {
       
       dispatch(setAllGroups(newAllGroup))
       dispatch(setCounterpartUser(counterpartUserNew.User))
+=======
+      console.log({data, fn: "newChatFromExplore"})
+>>>>>>> Stashed changes
     } catch (error) {
       console.log(error);
     }
