@@ -54,11 +54,14 @@ export default function SectionFriends() {
           </button>
           <h4 className="text-white">Friends</h4>
         </div>
-        <FontAwesomeIcon
-          onClick={() => setisFriendRequestModalVisible(true)}
-          className="text-gray-400 cursor-pointer small-icons"
-          icon="bell"
-        />
+        <div className="relative">
+        {friendRequests.length > 0 ? <div className="bg-red-500 h-2 aspect-square rounded-full absolute inset-x-3 inset-y-1 z-50"></div> : ""}
+          <FontAwesomeIcon
+            onClick={() => setisFriendRequestModalVisible(true)}
+            className="text-gray-400 cursor-pointer small-icons relative"
+            icon="bell"
+          />
+        </div>
       </div>
 
       <div className="flex items-center w-full rounded h-14 bg-light-gray lg:h-18">
