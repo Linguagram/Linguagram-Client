@@ -197,7 +197,7 @@ export default function RegisterView() {
               <div className="flex gap-4">
                 {selectedInterest.map((interest) => (
                   <div
-                    className="flex items-center gap-1 px-3 py-1 rounded bg-darker-gray"
+                    className="flex items-center gap-1 px-3 py-1 text-xs rounded lg:text-base bg-darker-gray"
                     key={interest.id}>
                       <div>
                         {interest.name}
