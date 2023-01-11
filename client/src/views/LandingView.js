@@ -1,20 +1,24 @@
 import { useDispatch } from "react-redux";
 import { changeNavbarColor } from "../store/middlewares/thunk";
+import { Link } from "react-router-dom";
 
 export default function LandingView() {
-  const dispatch = useDispatch()
-  
+  const dispatch = useDispatch();
+
   const handleScrollEvent = (e) => {
-    e.preventDefault()
-    if(e.target.scrollTop >= 90) {
-      dispatch(changeNavbarColor(true))
+    e.preventDefault();
+    if (e.target.scrollTop >= 90) {
+      dispatch(changeNavbarColor(true));
     } else {
-      dispatch(changeNavbarColor(false))
+      dispatch(changeNavbarColor(false));
     }
-  }
+  };
 
   return (
-    <div className="w-full h-full fixed overflow-auto" id="main-content" onScroll={handleScrollEvent}>
+    <div
+      className="w-full h-full fixed overflow-auto"
+      id="main-content"
+      onScroll={handleScrollEvent}>
       <div className="flex flex-col flex-1 min-h-screen bg-darker-gray text-white">
         {/* Hero */}
         <header
@@ -31,9 +35,9 @@ export default function LandingView() {
               Speak your mind <br /> in any tounge.
             </h1>
             <div className="flex flex-col items-center lg:mb-36">
-              <button className="bg-main-color rounded py-2 px-8 ">
+              <Link to={'/login'} className="bg-main-color rounded py-2 px-8 ">
                 Get Started
-              </button>
+              </Link>
             </div>
           </div>
         </header>
@@ -84,9 +88,9 @@ export default function LandingView() {
             <h3 className="text-lg lg:text-2xl font-light text-center mb-8">
               Join Stefania and Anne and start improve your language!
             </h3>
-            <button className="bg-main-color rounded py-2 px-8 ">
+            <Link to="/login" className="bg-main-color rounded py-2 px-8">
               Get Started
-            </button>
+            </Link>
           </div>
         </main>
       </div>
