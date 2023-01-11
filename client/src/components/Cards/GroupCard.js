@@ -47,9 +47,9 @@ export default function GroupCard({ groupId, groupName, members, group }) {
         src={getGroupAvatar(group)}
       />
       <div>
-        <div className="text-xl">{groupName}</div>
-        <div>{group.description}</div>
-        <div className="text-sm text-gray-400">{formatMembers(members)}</div>
+        <div className="text-2xl font-bold">{groupName}</div>
+        <div className="text-base">{group.description}</div>
+        <div className="text-xs text-gray-400">Members: {formatMembers(members)}</div>
       </div>
     </div>
       <button
