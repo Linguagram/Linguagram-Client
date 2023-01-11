@@ -16,7 +16,7 @@ export default function VideoCallView() {
   const { amITheCaller } = useSelector((state) => state.videoReducer);
   
   const [callerSignal, setCallerSignal] = useState();
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
   //
 
   let myCam = {
@@ -108,7 +108,7 @@ export default function VideoCallView() {
       });
   
       peer.on("signal", data => {
-        setLoading(true)
+        // setLoading(true)
         socketConnect.emit("call", { userToCall: counterpartUser.id, signalData: data, from: thisUser.id })
       })
   
@@ -119,7 +119,7 @@ export default function VideoCallView() {
       });
   
       socketConnect.on("call_accepted", signal => {
-        setLoading(false)
+        // setLoading(false)
         peer.signal(signal);
       })
 
@@ -128,7 +128,7 @@ export default function VideoCallView() {
   }
 
   if(amITheCaller) {
-    setLoading(false)
+    // setLoading(false)
     call()
   }
 
@@ -137,7 +137,7 @@ export default function VideoCallView() {
     
     if(!amITheCaller) {
       socketConnect.on("call_connect", (data) => {
-        setLoading(false)
+        // setLoading(false)
         setCallerSignal(data.signal);
       })
     }
@@ -145,14 +145,14 @@ export default function VideoCallView() {
     socketConnect.on("user left", (data) => {
       if(amITheCaller) {
         if(data.user_left === counterpartUser.id) {
-          socketConnect.off("callAccepted")
+          socketConnect.off("call_accepted")
           dispatch(setAmITheCaller(false))
           peerRef.current.destroy()
           navigate('/home/chats')
         } 
       } else {
         if (data.user_left === incomingCaller.id) {
-          socketConnect.off("callAccepted")
+          socketConnect.off("call_accepted")
           peerRef.current.destroy()
           dispatch(setIncomingCaller({}))
           navigate('/home/chats')
@@ -166,14 +166,14 @@ export default function VideoCallView() {
     socketConnect.on("anotherUserLeaveTheCall", (data) => {
       if(amITheCaller) {
         if(data.from === counterpartUser.id) {
-          socketConnect.off("callAccepted")
+          socketConnect.off("call_accepted")
           dispatch(setAmITheCaller(false))
           peerRef.current.destroy()
           navigate('/home/chats')
         } 
       } else {
         if (data.from === incomingCaller.id) {
-          socketConnect.off("callAccepted")
+          socketConnect.off("call_accepted")
           peerRef.current.destroy()
           dispatch(setIncomingCaller({}))
           navigate('/home/chats')
@@ -197,7 +197,7 @@ export default function VideoCallView() {
     streamRef?.getTracks().forEach(function(track) {
       track.stop();
     });
-    socketConnect.off("callAccepted")
+    socketConnect.off("call_accepted")
     navigate('/home/chats')
   }
 
@@ -240,7 +240,7 @@ export default function VideoCallView() {
 
   return (
     <>
-    <FerrisWheelSpinner message={'Please wait while your friend is trying to connect'} loading={loading}　size={80} overlayColor="rgba(255,255,146,0.3)" />
+    {/* <FerrisWheelSpinner message={'Please wait while your friend is trying to connect'} loading={loading}　size={80} overlayColor="rgba(255,255,146,0.3)" /> */}
     <div className="bg-darker-gray flex h-screen max-h-screen w-screen flex-1 flex-col items-stretch justify-between overflow-hidden">
       {/* Video call body */}
       <div className="flex max-h-[calc(100%-8rem)] flex-1 flex-col lg:flex-row gap-4 p-4">

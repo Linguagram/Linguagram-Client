@@ -31,12 +31,12 @@ const getAccessToken = () => {
 
 export const handleSetThisUser = (user) => {
   return (dispatch, getState) => {
-    console.log(user, "nge test balikan user dari put");
+    // console.log(user, "nge test balikan user dari put");
     const nativeLangObj = user.UserLanguages.find((el) => el.type === "native");
     const interestLangObj = user.UserLanguages.find(
       (el) => el.type === "interest"
     );
-    console.log(nativeLangObj, "ini native lang obj");
+    // console.log(nativeLangObj, "ini native lang obj");
     dispatch(setThisUser(user));
     // if(nativeLangObj && nativeLangObj.Language)dispatch(setNativeLanguage(nativeLangObj.Language)); masih ERROR
 
