@@ -45,10 +45,6 @@ export default function SectionGroups() {
           </button>
           <h4 className="text-white">Groups</h4>
         </div>
-        <FontAwesomeIcon
-          className="text-gray-400 small-icons"
-          icon="user-group"
-        />
       </div>
 
       <div className="flex items-center w-full rounded h-14 bg-light-gray lg:h-18">
@@ -74,18 +70,9 @@ export default function SectionGroups() {
                 onClick={() => openChat(group)}
                 className="flex items-center gap-4 p-2 rounded cursor-pointer hover:bg-gray-700"
               >
-                {/* <div className="flex items-center justify-center w-12 h-10 font-bold text-gray-500 rounded-full bg-main-color-blur">
-                  G
-                </div> */}
                 <img src={getGroupAvatar(group)} className="avatar-chat" alt="avatar"></img>
                 <div className="flex items-center justify-between w-full">
                   <h4 className="text-base text-white">{group.name}</h4>
-                  {
-                    group.unreadMessageCount > 0 &&
-                      <div className="h-5 text-sm font-bold text-center text-red-700 bg-red-900-blur w-7">
-                        { group.unreadMessageCount }
-                      </div>
-                  }
                 </div>
               </div>
             );
