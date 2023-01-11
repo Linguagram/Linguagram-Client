@@ -7,6 +7,7 @@ export default function ChatRoomMessage() {
   const { currentMessages } = useSelector((state) => state.messageReducer);
   const { counterpartUser } = useSelector((state) => state.userReducer);
   const [currentMessagesLength, setCurrentMessagesLength] = useState(0);
+  const [nativeLanguage, setNativeLanguage] = useState({});
 
   const scrollToBottom = () => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -21,6 +22,13 @@ export default function ChatRoomMessage() {
     scrollToBottom();
   }, [currentMessagesLength]);
 
+  useEffect(() => {
+    if(counterpartUser.username) {
+      const native = counterpartUser.UserLanguages.find((el => el.type === 'native'))
+      setNativeLanguage(native)
+    }
+  }, [])
+
   return (
     <div className="flex flex-col flex-grow p-5 overflow-x-hidden overflow-y-auto">
       {currentMessages.length == 0 ? (
@@ -32,9 +40,7 @@ export default function ChatRoomMessage() {
             </p>
             <p className="text-center text-gray-500">
               {counterpartUser.username} wants to learn{" "}
-              {counterpartUser.UserLanguages.map((el) => el.Language.name).join(
-                ", "
-              )}{" "}
+              {nativeLanguage.Language.name}{" "}
               and is interested about{" "}
               {counterpartUser.UserInterests.map((el) => el.Interest.name).join(
                 ", "
