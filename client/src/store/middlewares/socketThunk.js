@@ -108,6 +108,7 @@ export const initSocket = (socketDispatch, socketNavigate) => {
       console.log("[ws FRIEND_REQUEST_ACCEPT]", friendship);
       const { friendReducer } = getState();
       const newFriendList = [ ...friendReducer.friends, friendship]
+      console.log("[FRIEND_REQUEST_ACCEPT] newFriendList", newFriendList);
       socketDispatch(setFriends(newFriendList))
       // !TODO
     });
