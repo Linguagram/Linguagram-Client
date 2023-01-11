@@ -35,7 +35,7 @@ export default function People() {
       <div className="justify-center w-full h-full px-4 mx-auto mt-8 overflow-auto md:px-8 scrollbar-hide">
         <div className="w-full flex justify-center mt-8 items-center">
           <div className="text-white px-2 text-center">
-            {users ? (
+            {users.length > 0 ? (
               <>
                 <div className="text-xl font-bold mb-2">
                   {users.length} people are native to <br className="" />{" "}
@@ -46,7 +46,14 @@ export default function People() {
                 </div>
               </>
             ) : (
-              <div>Oops, no matching user</div>
+              <>
+                <div className="text-xl font-bold mb-2">
+                  Oops, we couldn't find any match!
+                </div>
+                <div className="text-base">
+                  Try to change your interested in profile language to see another result
+                </div>
+              </>
             )}
           </div>
         </div>
