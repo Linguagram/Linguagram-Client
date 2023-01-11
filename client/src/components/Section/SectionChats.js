@@ -7,7 +7,7 @@ import {
 } from "../../store/actions/actionCreator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getGroupAvatar } from "../../util/getAvatar";
-import { openChat } from "../../store/middlewares/thunk";
+import { handleFetchGroups, openChat } from "../../store/middlewares/thunk";
 
 export default function SectionChats() {
   const dispatch = useDispatch();
@@ -16,8 +16,13 @@ export default function SectionChats() {
   const { thisUser } = useSelector((state) => state.userReducer);
 
   useEffect(() => {
+    console.log(allGroups, "<<<<<< allGroups SectionChat");
     if(allGroups.length) dispatch(setFilteredGroups(allGroups))
   }, [allGroups])
+
+  useEffect(() => {
+    dispatch(handleFetchGroups())
+  }, [])
 
   const handleChange = (e) => {
     const newFilteredGroups = allGroups.filter(el =>  {

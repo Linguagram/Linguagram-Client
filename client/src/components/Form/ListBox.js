@@ -6,7 +6,7 @@ import { getLanguages } from "../../store/middlewares/thunk";
 import { setLanguages } from "../../store/actions/actionCreator";
 import { swalError } from "../../util/swal";
 
-export default function MyListbox({ inputRef }) {
+export default function MyListbox({ inputRef, userLang }) {
   const dispatch = useDispatch();
   const { languageList } = useSelector((state) => state.languageReducer);
   const [selected, setSelected] = useState({});
@@ -32,7 +32,11 @@ export default function MyListbox({ inputRef }) {
     dispatch(getLanguages())
       .then((res) => {
         dispatch(setLanguages(res.data));
-        setSelected(res.data[0]);
+        if (userLang?.name) {
+          for (const lang of res.data)
+            if (lang.name === userLang.name) setSelected(lang);
+        }
+        else setSelected(res.data[0]);
       })
       .catch((err) => {
         if (err.response?.data?.message) {
