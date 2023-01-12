@@ -130,8 +130,18 @@ export const login = (inputs) => {
   };
 };
 
-export const logOut = (inputs) => {
+export const logOut = (dispatcher, inputs) => {
   return (dispatch, getState) => {
+    dispatcher(setAllGroups([]));
+    dispatcher(setPrivateGroups([]));
+    dispatcher(setGroupGroups([]));
+    dispatcher(setCounterpartUser([]));
+    dispatcher(setCurrentMessages([]));
+    dispatcher(setOpenChat(null));
+    dispatcher(setThisUser({}));
+    dispatcher(setInterestLanguage({}));
+    dispatcher(setNativeLanguage({}));
+    dispatcher(setIsCalling(false));
     localStorage.clear();
   };
 };
