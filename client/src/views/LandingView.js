@@ -59,7 +59,7 @@ export default function LandingView() {
                   "url(https://images.unsplash.com/flagged/photo-1557898246-9fd78587bcc7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80)",
               }}>
               <p className=" text-2xl font-light p-4 lg:p-8 lg:text-3xl">
-                <span className="font-bold">Stefania</span> is a native German
+                <span className="font-bold">Sylvie</span> is a native French
                 speaker. She wants to work on her English.
               </p>
             </div>
@@ -70,15 +70,15 @@ export default function LandingView() {
                   "url(https://images.unsplash.com/photo-1513712834987-81c201758592?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fHBvcnRyYWl0JTIwd2FybXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60)",
               }}>
               <p className="text-2xl font-light p-4 lg:p-8 lg:text-3xl">
-                <span className="font-bold">Anne</span> is a native English
-                speaker. She wants to improve her German skills.
+                <span className="font-bold">Jane</span> is a native English
+                speaker. She wants to improve her French skills.
               </p>
             </div>
           </div>
 
           <div className="flex flex-col items-center px-8 justify-center flex-1 lg:max-w-screen-sm lg:mx-auto my-16">
             <h1 className="text-center font-bold text-4xl py-2 mb-4">
-              Stefanie and Anne connect on Linguagram...
+            Sylvie and Jane meet on Linguagram...
             </h1>
             <h3 className="text-lg lg:text-2xl font-light text-center mb-4">
               ...and use Linguagram to practice their target language together!
