@@ -1,5 +1,4 @@
 import {
-  FETCH_GROUPS,
   FETCH_GROUP_GROUPS,
   FETCH_PRIVATE_GROUPS,
   FETCH_ALL_GROUPS,
@@ -14,7 +13,8 @@ const initialState = {
   privateGroups: [],
   groupGroups: [],
   allGroups: [],
-  filteredGroups: []
+  filteredGroups: [],
+  groupsFetched: false,
 };
 
 export default function groupReducer(state = initialState, action) {
@@ -23,6 +23,7 @@ export default function groupReducer(state = initialState, action) {
       return {
         ...state,
         allGroups: action.payload,
+        groupsFetched: true,
       };
     case SET_FILTERED_GROUPS:
       return {

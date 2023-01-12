@@ -22,7 +22,7 @@ export default function HomeView() {
   const { socketConnect } = useSelector((state) => state.socketReducer);
   const { thisUser, incomingCaller, isIncomingCall } = useSelector((state) => state.userReducer);
   const { friendsFetched } = useSelector((state) => state.friendReducer)
-  const { privateGroups, groupGroups } = useSelector((state) => state.groupReducer)
+  const { privateGroups, groupGroups, groupsFetched } = useSelector((state) => state.groupReducer)
 
   const setIsIncomingCall = (state) => {
     dispatch(handleSetIsIncomingCall(state));
@@ -37,7 +37,7 @@ export default function HomeView() {
         dispatch(handleFetchGroups())
       })
       .then((_) => {
-        return
+        return;
       })
       .catch((err) => {
         if(err.response?.data?.message) {
@@ -45,13 +45,14 @@ export default function HomeView() {
         } else {
           console.log(err)
         }
-      })
+      });
     }
-    // else {
-    //   dispatch(handleFetchGroups())
-    // }
 
-    if (!friendsFetched) dispatch(getFriends())
+    if (!groupsFetched) {
+      dispatch(handleFetchGroups());
+    }
+
+    if (!friendsFetched) dispatch(getFriends());
     dispatch(initSocket(dispatch, navigate));
   }, [])
 
