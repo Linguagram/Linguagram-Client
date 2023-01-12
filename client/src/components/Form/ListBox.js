@@ -1,68 +1,110 @@
-import { Fragment, useState } from 'react'
-import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { Fragment, useEffect, useState } from "react";
+import { Combobox, Transition } from "@headlessui/react";
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { useDispatch, useSelector } from "react-redux";
+import { getLanguages } from "../../store/middlewares/thunk";
+import { setLanguages } from "../../store/actions/actionCreator";
+import { swalError } from "../../util/swal";
 
-const people = [
-  { name: 'Indonesia' },
-  { name: 'Mexico' },
-  { name: 'France' },
-]
+export default function MyListbox({ inputRef, userLang }) {
+  const dispatch = useDispatch();
+  const { languageList } = useSelector((state) => state.languageReducer);
+  const [selected, setSelected] = useState({});
+  const [query, setQuery] = useState("");
 
-export default function MyListbox() {
-  const [selected, setSelected] = useState(people[0])
+  inputRef.current = selected;
+  const filtered = query === ''
+    ? languageList
+    : languageList.filter((language) => {
+        return language.name.toLowerCase().includes(query.toLowerCase());
+      });
+
+  const handleOnChange = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const handleSelect = (language) => {
+    setSelected(language)
+    setQuery('')
+  }
+
+  useEffect(() => {
+    dispatch(getLanguages())
+      .then((res) => {
+        dispatch(setLanguages(res.data));
+        if (userLang?.name) {
+          for (const lang of res.data)
+            if (lang.name === userLang.name) setSelected(lang);
+        }
+        else setSelected(res.data[0]);
+      })
+      .catch((err) => {
+        if (err.response?.data?.message) {
+          swalError(err);
+        } else {
+          console.log(err);
+        }
+      });
+  }, []);
 
   return (
-    <div className="">
-      <Listbox value={selected} onChange={setSelected}>
-        <div className="relative mt-1">
-          <Listbox.Button className="relative w-full cursor-default bg-darker-gray py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-            <span className="block truncate">{selected.name}</span>
-            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-              <ChevronUpDownIcon
-                className="h-5 w-5 text-gray-400"
-                aria-hidden="true"
-              />
-            </span>
-          </Listbox.Button>
+    <>
+      <Combobox value={selected} onChange={handleSelect}>
+        <div className="relative">
+          <div className="flex gap-2">
+            <Combobox.Input
+              onChange={handleOnChange}
+              displayValue={(language) => language.name}
+              className="relative w-full py-2 pl-3 pr-3 text-xs text-left cursor-pointer bg-darker-gray focus:outline-none focus-visible:border-indigo-500 sm:text-sm"
+            />
+            <Combobox.Button className="relative w-1/3 text-xs cursor-pointer bg-darker-gray focus:outline-none focus-visible:border-indigo-500 sm:text-sm">
+              <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                <ChevronUpDownIcon
+                  className="w-5 h-5 text-gray-400"
+                  aria-hidden="true"
+                />
+              </span>
+            </Combobox.Button>
+          </div>
           <Transition
             as={Fragment}
             leave="transition ease-in duration-100"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-1 max-h-32 w-full overflow-auto bg-darker-gray py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {people.map((person, personIdx) => (
-                <Listbox.Option
-                  key={personIdx}
+            <Combobox.Options className="absolute z-20 w-full py-1 mt-1 overflow-auto overflow-y-auto text-xs shadow-lg max-h-32 bg-darker-gray ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              {filtered.map((language) => (
+                <Combobox.Option
+                  key={language.id}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                      active ? 'bg-main-color text-white' : 'text-white'
+                    `relative cursor-pointer select-none py-2 pl-10 pr-4 ${
+                      active ? "bg-main-color text-white" : "text-white"
                     }`
                   }
-                  value={person}
+                  value={language}
                 >
                   {({ selected }) => (
                     <>
                       <span
                         className={`block truncate ${
-                          selected ? 'font-medium' : 'font-normal'
+                          selected ? "font-medium" : "font-normal"
                         }`}
                       >
-                        {person.name}
+                        {language.name}
                       </span>
                       {selected ? (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-white">
-                          <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                          <CheckIcon className="w-5 h-5" aria-hidden="true" />
                         </span>
                       ) : null}
                     </>
                   )}
-                </Listbox.Option>
+                </Combobox.Option>
               ))}
-            </Listbox.Options>
+            </Combobox.Options>
           </Transition>
         </div>
-      </Listbox>
-    </div>
-  )
+      </Combobox>
+    </>
+  );
 }

@@ -1,43 +1,140 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useRef } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, useState } from "react";
+import { changeAvatarUser, deleteAvatarUser, handleSetThisUser } from "../../store/middlewares/thunk";
+import { useDispatch } from "react-redux";
 
-export default function ChangeAvatar({onClose, visible}) {
+export default function ChangeAvatar({ onClose, visible }) {
+  const dispatch = useDispatch()
+  const fileInput = useRef(null);
+  const formData = useRef(null);
 
-  const handleOnClose = () => {
-    onClose()
+  const showFilePicker = (e) => {
+    e.preventDefault();
+
+    if (fileInput.current) {
+      fileInput.current.click();
+    }
+  };
+
+  const handleFormSubmit = () => {
+    if(formData.current) {
+      for (const data of formData.current.elements) {
+        console.log(data.name, data.value);
+      }
+
+      const data = {
+        avatar: formData.current
+      }
+
+      dispatch(changeAvatarUser(data))
+      .then((_) => {
+        onClose()
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
   }
 
-  if(!visible) return null;
+  const handleDeleteAvatar = () => {
+    dispatch(deleteAvatarUser())
+    .then((_) => {
+      onClose()
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
 
   return (
-    <div className='fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-60'>
+    <>
+      <Transition appear show={visible} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={onClose}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-25" />
+          </Transition.Child>
 
-      <div className='flex flex-col w-1/2 gap-3 p-5 rounded bg-darker-gray lg:h-2/5 2xl:h-1/5 2xl:w-1/5 h-3/5'>
-        <div className='flex items-center justify-between'>
-          <h3 className='text-xl text-white'>Select an Image</h3>
-          <h3 onClick={handleOnClose} className='text-4xl text-gray-400 cursor-pointer'>&times;</h3>
-        </div>
-        <div className='flex justify-between w-full h-full gap-4'>
-          <div className='flex items-center justify-center w-full rounded cursor-pointer -flex-col bg-black-blue'>
-            <div className='flex flex-col items-center gap-5 p-5'>
-              <div className='flex items-center justify-center w-32 h-32 bg-main-color-icon'>
-                <FontAwesomeIcon className='text-xl text-white' icon='cloud-arrow-up'/>
-              </div>
-              <h3 className='text-gray-400'>Upload Image</h3>
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-4/5 flex flex-col gap-8 items-center max-w-sm h-[75%] transform overflow-hidden rounded-2xl bg-darker-gray p-6 text-left align-middle transition-all">
+                  <Dialog.Title
+                    as="div"
+                    className="text-xl font-medium leading-6 text-white"
+                  >
+                    <h3>Select an Image</h3>
+                  </Dialog.Title>
+
+                  <div className="flex flex-col h-full max-h-1/2 gap-4 md:flex-row">
+                    <form
+                    ref={formData}
+                    encType="multipart/form-data"
+                    onSubmit={handleFormSubmit}
+                    >
+                    <input
+                      ref={fileInput}
+                      onChange={() => handleFormSubmit()}
+                      style={{ display: "none" }}
+                      type="file"
+                      id="attachment-input"
+                      name="avatar"
+                    />
+                    </form>
+                    <button
+                      type="button"
+                      className="flex flex-1 flex-col gap-2 w-full aspect-square justify-center items-center rounded-md bg-black-blue px-4 py-2 text-sm font-medium text-white"
+                      onClick={showFilePicker}
+                    >
+                      <FontAwesomeIcon
+                        className="text-xl text-white"
+                        icon="cloud-arrow-up"
+                      />
+                      Upload Image
+                    </button>
+                    <button
+                      type="button"
+                      className="flex flex-1 flex-col gap-2 w-full aspect-square justify-center items-center rounded-md bg-black-blue px-4 py-2 text-sm font-medium text-white"
+                      onClick={handleDeleteAvatar}
+                    >
+                      <FontAwesomeIcon
+                        className="text-xl text-white"
+                        icon="ban"
+                      />
+                      Remove Picture
+                    </button>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="flex flex-1 w-3/5 justify-center items-center rounded-md bg-black-blue px-4 py-2 text-sm font-medium text-white"
+                    onClick={onClose}
+                  >
+                    Close
+                  </button>
+                </Dialog.Panel>
+              </Transition.Child>
             </div>
           </div>
-          <div className='flex items-center justify-center w-full rounded cursor-pointer -flex-col bg-black-blue'>
-            <div className='flex flex-col items-center gap-5 p-5'>
-              <div className='flex items-center justify-center w-32 h-32 bg-main-color-icon'>
-                <FontAwesomeIcon className='text-xl text-white' icon='ban'/>
-              </div>
-              <h3 className='text-gray-400'>Remove Picture</h3>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  )
+        </Dialog>
+      </Transition>
+    </>
+  );
 }

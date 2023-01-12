@@ -1,210 +1,37 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
-import avatar from '../../pictures/avatar-1.3921191a8acf79d3e907.jpg'
+import React from "react";
 
-export default function FriendRequest({onClose, visible}) {
+import FriendRequestCard from "../Cards/FriendRequestCard";
 
+export default function FriendRequest({ onClose, visible, friendRequests }) {
+  
   const handleOnClose = () => {
-    onClose()
-  }
-
-  if(!visible) return null;
+    onClose();
+  };
 
   return (
-    <div className='fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-60'>
-
-        <div className='flex flex-col w-1/2 p-5 rounded lg:p-8 bg-darker-gray h-3/4'>
-            <div className='flex items-center justify-between'>
-                <h3 className='text-xl text-white'>Friend Requests</h3>
-                <h3 onClick={handleOnClose} className='text-4xl text-gray-400 cursor-pointer'>&times;</h3>
-            </div>
-            <div className='flex flex-col h-full gap-5 my-3 overflow-y-auto lg:my-5 scrollbar-hide'>
-                <div>
-                    <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
-                    <div className='flex justify-between w-full gap-1'>
-                        <div className='flex items-center justify-between'>
-                            <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
-                        </div>
-                        <div className='flex items-center justify-between gap-6'>
-                            <h6 className='text-2xl text-gray-300 cursor-pointer '>&times;</h6>
-                            <FontAwesomeIcon className='text-base text-gray-300 cursor-pointer ' icon='check'/>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
-                    <div className='flex justify-between w-full gap-1'>
-                        <div className='flex items-center justify-between'>
-                            <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
-                        </div>
-                        <div className='flex items-center justify-between gap-6'>
-                            <h6 className='text-2xl text-gray-300 cursor-pointer '>&times;</h6>
-                            <FontAwesomeIcon className='text-base text-gray-300 cursor-pointer ' icon='check'/>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
-                    <div className='flex justify-between w-full gap-1'>
-                        <div className='flex items-center justify-between'>
-                            <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
-                        </div>
-                        <div className='flex items-center justify-between gap-6'>
-                            <h6 className='text-2xl text-gray-300 cursor-pointer '>&times;</h6>
-                            <FontAwesomeIcon className='text-base text-gray-300 cursor-pointer ' icon='check'/>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
-                    <div className='flex justify-between w-full gap-1'>
-                        <div className='flex items-center justify-between'>
-                            <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
-                        </div>
-                        <div className='flex items-center justify-between gap-6'>
-                            <h6 className='text-2xl text-gray-300 cursor-pointer '>&times;</h6>
-                            <FontAwesomeIcon className='text-base text-gray-300 cursor-pointer ' icon='check'/>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
-                    <div className='flex justify-between w-full gap-1'>
-                        <div className='flex items-center justify-between'>
-                            <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
-                        </div>
-                        <div className='flex items-center justify-between gap-6'>
-                            <h6 className='text-2xl text-gray-300 cursor-pointer '>&times;</h6>
-                            <FontAwesomeIcon className='text-base text-gray-300 cursor-pointer ' icon='check'/>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
-                    <div className='flex justify-between w-full gap-1'>
-                        <div className='flex items-center justify-between'>
-                            <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
-                        </div>
-                        <div className='flex items-center justify-between gap-6'>
-                            <h6 className='text-2xl text-gray-300 cursor-pointer '>&times;</h6>
-                            <FontAwesomeIcon className='text-base text-gray-300 cursor-pointer ' icon='check'/>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
-                    <div className='flex justify-between w-full gap-1'>
-                        <div className='flex items-center justify-between'>
-                            <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
-                        </div>
-                        <div className='flex items-center justify-between gap-6'>
-                            <h6 className='text-2xl text-gray-300 cursor-pointer '>&times;</h6>
-                            <FontAwesomeIcon className='text-base text-gray-300 cursor-pointer ' icon='check'/>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
-                    <div className='flex justify-between w-full gap-1'>
-                        <div className='flex items-center justify-between'>
-                            <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
-                        </div>
-                        <div className='flex items-center justify-between gap-6'>
-                            <h6 className='text-2xl text-gray-300 cursor-pointer '>&times;</h6>
-                            <FontAwesomeIcon className='text-base text-gray-300 cursor-pointer ' icon='check'/>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
-                    <div className='flex justify-between w-full gap-1'>
-                        <div className='flex items-center justify-between'>
-                            <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
-                        </div>
-                        <div className='flex items-center justify-between gap-6'>
-                            <h6 className='text-2xl text-gray-300 cursor-pointer '>&times;</h6>
-                            <FontAwesomeIcon className='text-base text-gray-300 cursor-pointer ' icon='check'/>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
-                    <div className='flex justify-between w-full gap-1'>
-                        <div className='flex items-center justify-between'>
-                            <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
-                        </div>
-                        <div className='flex items-center justify-between gap-6'>
-                            <h6 className='text-2xl text-gray-300 cursor-pointer '>&times;</h6>
-                            <FontAwesomeIcon className='text-base text-gray-300 cursor-pointer ' icon='check'/>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
-                    <div className='flex justify-between w-full gap-1'>
-                        <div className='flex items-center justify-between'>
-                            <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
-                        </div>
-                        <div className='flex items-center justify-between gap-6'>
-                            <h6 className='text-2xl text-gray-300 cursor-pointer '>&times;</h6>
-                            <FontAwesomeIcon className='text-base text-gray-300 cursor-pointer ' icon='check'/>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
-                    <div className='flex justify-between w-full gap-1'>
-                        <div className='flex items-center justify-between'>
-                            <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
-                        </div>
-                        <div className='flex items-center justify-between gap-6'>
-                            <h6 className='text-2xl text-gray-300 cursor-pointer '>&times;</h6>
-                            <FontAwesomeIcon className='text-base text-gray-300 cursor-pointer ' icon='check'/>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className='flex items-center gap-4 p-2 rounded'>
-                        <img src={avatar} class='avatar-chat' alt='avatar'></img>
-                    <div className='flex justify-between w-full gap-1'>
-                        <div className='flex items-center justify-between'>
-                            <h4 className='text-base text-white cursor-pointer hover:underline'>Patrick Hendriks</h4>
-                        </div>
-                        <div className='flex items-center justify-between gap-6'>
-                            <h6 className='text-2xl text-gray-300 cursor-pointer '>&times;</h6>
-                            <FontAwesomeIcon className='text-base text-gray-300 cursor-pointer ' icon='check'/>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div
+      className={`${
+        visible ? "" : "hidden"
+      } fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-60 max-h-full`}>
+      <div className="flex flex-col w-full p-5 mx-4 rounded md:mx-0 md:w-1/2 lg:p-8 bg-darker-gray min-h-fit max-h-[80%]">
+        <div className="flex items-center justify-between">
+          <h3 className="text-xl text-white">Friend Requests</h3>
+          <h3
+            onClick={handleOnClose}
+            className="text-4xl text-gray-400 cursor-pointer">
+            &times;
+          </h3>
         </div>
-
+        <div className="flex flex-col gap-5 my-3 overflow-auto lg:my-5 scrollbar-hide">
+          {friendRequests.length > 0 ? 
+            friendRequests.map(request => {
+              return <FriendRequestCard key={request.id} friend={request} />
+            }) :
+            <p className="text-white">No friend request</p>
+          }
+          
+        </div>
+      </div>
     </div>
-
-  )
+  );
 }

@@ -1,15 +1,81 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useRef } from "react";
+import { useDispatch } from 'react-redux'
+import { changeNavbarColor, login } from "../store/middlewares/thunk";
+import swal from 'sweetalert'
+import { useNavigate } from "react-router-dom";
+import { handleSetThisUser } from "../store/middlewares/thunk";
 
 export default function LoginView() {
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const inputEmailRef = useRef()
+  const inputPasswordRef = useRef()
+
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
+
+    const inputs = {
+      email: inputEmailRef.current.value, 
+      password: inputPasswordRef.current.value
+    }
+
+    dispatch(login(inputs))
+    .then((response) => {
+      console.log(response)
+      console.log(response.data.user)
+      dispatch(handleSetThisUser(response.data.user))
+      localStorage.setItem('access_token', response.data.access_token)
+      localStorage.setItem('user_id', response.data.user.id)
+
+      navigate('/home/chats')
+
+      inputEmailRef.current.value = '' 
+      inputPasswordRef.current.value = ''
+    })
+    .catch((err) => {
+      if(err.response?.data?.message) {
+        swal({
+          text: `${err.response.data.message}`,
+          icon: "error",
+        });
+
+        if(err.response.data.message !== 'Email is required' && err.response.data.message !== 'Password is required') {
+          inputEmailRef.current.value = '' 
+          inputPasswordRef.current.value = ''
+        }
+
+      } else {
+        console.log(err)
+      }
+    }) 
+  }
+
+  const handleScrollEvent = (e) => {
+    e.preventDefault()
+    if(e.target.scrollTop >= 90) {
+      dispatch(changeNavbarColor(true))
+    } else {
+      dispatch(changeNavbarColor(false))
+    }
+  }
+
+  useEffect(() => {
+    dispatch(changeNavbarColor(false))
+  }, [])
+
   return (
-    <div className="bg-darker-gray min-h-screen flex text-white justify-center items-center fixed w-full overflow-auto">
+    <div className="bg-darker-gray min-h-screen flex text-white justify-center items-center fixed w-full overflow-auto" onScroll={handleScrollEvent}>
       <div className="flex flex-col gap-8 flex-1">
         <div>
           <h1 className="text-center text-3xl font-bold mb-2">Login</h1>
           <h3 className="text-center">Login to your account</h3>
         </div>
         <div className="bg-light-gray flex-1 p-4 w-sm mx-auto">
-          <form>
+          <form onSubmit={handleLogin}>
             <div className="flex flex-col gap-8 p-4">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col">
@@ -20,8 +86,9 @@ export default function LoginView() {
                     icon="user-large"
                   />
                   <input
+                    ref={inputEmailRef}
                     type="text"
-                    className="text-white text-sm focus:border-none focus:outline-none bg-transparent flex-1"
+                    className="text-white text-sm focus:border-none focus:outline-none mr-4 bg-transparent flex-1"
                     placeholder="Email"></input>
                 </div>
               </div>
@@ -33,13 +100,14 @@ export default function LoginView() {
                     icon="lock"
                   />
                   <input
+                    ref={inputPasswordRef}
                     type="password"
-                    className="text-white text-sm focus:border-none focus:outline-none bg-transparent flex-1"
+                    className="text-white text-sm focus:border-none focus:outline-none mr-4 bg-transparent flex-1"
                     placeholder="*****"></input>
                 </div>
               </div>
             </div>
-              <button className="bg-main-color rounded p-3 text-sm">
+              <button type='submit' className="bg-main-color rounded p-3 text-sm">
                 Login
               </button>
             </div>

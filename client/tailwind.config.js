@@ -16,6 +16,7 @@ module.exports = {
         'darker-gray': '#303841',
         'black-blue': '#262d36',
         'main-color': '#005792',
+        'light-blue': '#047dcf',
         'main-color-blur': 'rgba(0, 87, 146, 0.5)',
         'red-900-blur': 'rgba(240, 50, 50, 0.15)'
       }

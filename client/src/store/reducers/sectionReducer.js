@@ -1,25 +1,15 @@
-import { SET_ACTIVE_SECTION } from "../actions/actionTypes"
+import { SET_OPEN_CHAT } from "../actions/actionTypes"
 
 const initialState = {
-    user: false,
-    group: false,
-    message: true,
-    address: false,
-    gear: false,
-    explore: false
+    openChat: null
 }
 
 export default function sectionReducer(state = initialState, action) {
     switch(action.type) {
-        case SET_ACTIVE_SECTION:
+        case SET_OPEN_CHAT:
             return {
-                user: false,
-                group: false,
-                message: false,
-                address: false,
-                gear: false,
-                explore: false,
-                [action.payload]: true
+                ...state,
+                openChat: action.payload
             }
         default:
             return state

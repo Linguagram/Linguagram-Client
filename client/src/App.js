@@ -27,20 +27,28 @@ import {
   faUserGroup,
   faMessage,
   faCommentDots,
+  faLanguage,
+  faPersonBiking,
   faBars,
   faXmark,
   faRightFromBracket,
   faLock,
   faEnvelope,
   faPhone,
-  faRightToBracket
+  faRightToBracket,
+  faPhoneSlash,
+  faMicrophone,
+  faVideoSlash,
+  faMicrophoneSlash,
+  faAngleLeft,
+  faCloudArrowUp,
 } from "@fortawesome/free-solid-svg-icons";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { RouterProvider } from "react-router-dom";
 
 library.add(
   faCommentDots,
+  faLanguage,
+  faPersonBiking,
   faEllipsisVertical,
   faAddressCard,
   faCheck,
@@ -71,7 +79,13 @@ library.add(
   faLock,
   faEnvelope,
   faPhone,
-  faRightToBracket
+  faRightToBracket,
+  faPhoneSlash,
+  faMicrophone,
+  faVideoSlash,
+  faMicrophoneSlash,
+  faAngleLeft,
+  faCloudArrowUp,
 );
 
 function App() {

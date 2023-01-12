@@ -125,6 +125,8 @@
   clip-path: circle();
   width: 40px;
   height: 40px;
+  min-width: 40px;
+  min-height: 40px;
 }
 
 /* sidebar groups */ 
@@ -153,7 +155,15 @@
   min-height: 10%;
 }
 
-/* chatroom header */ 
+/* chatroom message */ 
+
+.min-w-10 {
+  min-width: 10rem;
+}
+
+.img-chat {
+  max-width: 20rem;
+}
 
 .h-chatroom-message {
   max-height: 45rem;
