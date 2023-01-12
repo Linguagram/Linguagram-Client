@@ -1,7 +1,8 @@
-import { SET_SOCKET } from "../actions/actionTypes"
+import { SET_SOCKET, SET_USER_SOCKET_CONNECTED } from "../actions/actionTypes"
 
 const initialState = {
     socketConnect: null,
+    userConnected: false,
 }
 
 export default function socketReducer(state = initialState, action) {
@@ -10,6 +11,11 @@ export default function socketReducer(state = initialState, action) {
             return {
                 ...state,
                 socketConnect: action.payload
+            }
+        case SET_USER_SOCKET_CONNECTED:
+            return {
+                ...state,
+                userConnected: action.payload,
             }
         default:
             return state

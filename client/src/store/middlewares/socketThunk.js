@@ -17,6 +17,7 @@ import {
   addPrivateGroups,
   addGroupGroups,
   setPreviewMessage,
+  setUserSocketConnected,
   // setGroupPreviewMessage,
 } from "../actions/actionCreator";
 import { SOCKET_EVENTS } from "../actions/socketEvents";
@@ -44,18 +45,25 @@ const userUpdate = (socketDispatch, user, getState) => {
 
 export const initSocket = (socketDispatch, socketNavigate) => {
   return (dispatch, getState) => {
-    const { socketReducer} = getState();
+    const { socketReducer } = getState();
 
-    if (socketReducer.socketConnect) return;
+    if (socketReducer.userConnected) return;
 
-    const socket = io.connect(`${URL_SERVER}`)
+    const socket = io.connect(`${URL_SERVER}`);
 
     socket.on(SOCKET_EVENTS.CONNECTION, () => {
       console.log("[ws] Connected to server:", URL_SERVER);
 
       const userId = localStorage.user_id;
-      console.log("[ws] Identifying with userId:", userId)
+      console.log("[ws] Identifying with userId:", userId);
       socket.emit(SOCKET_EVENTS.IDENTIFY, { userId }); 
+    });
+
+    socket.on(SOCKET_EVENTS.IDENTIFY, (data) => {
+      const { userReducer } = getState();
+      if (data.userId === userReducer.thisUser?.id) {
+        if (data.ok === 1) socketDispatch(setUserSocketConnected(true));
+      }
     });
 
     socket.on(SOCKET_EVENTS.MESSAGE, (message) => {
@@ -199,6 +207,7 @@ export const closeSocket = () => {
         userId: localStorage.user_id,
       });
 
+      dispatch(setUserSocketConnected(false));
       dispatch(setSocketConnect(null));
     }
   };

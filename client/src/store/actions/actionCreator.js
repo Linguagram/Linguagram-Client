@@ -32,6 +32,7 @@ import {
   SET_GROUP_MESSAGES_READ,
   SET_IS_NEW_USER,
   SET_PREVIEW_MESSAGE,
+  SET_USER_SOCKET_CONNECTED,
 } from "./actionTypes";
 
 export const setActiveSection = (payload) => {
@@ -262,6 +263,13 @@ export const setIsNewUser = (payload) => {
 export const setPreviewMessage = (payload) => {
   return {
     type: SET_PREVIEW_MESSAGE,
+    payload
+  }
+}
+
+export const setUserSocketConnected = (payload) => {
+  return {
+    type: SET_USER_SOCKET_CONNECTED,
     payload
   }
 }
