@@ -42,7 +42,7 @@ export default function FriendCard({friend}) {
   }
 
   return (
-    <div className="flex items-center justify-start">
+    <div className="flex items-center justify-start friend-card-hover p-2 pl-2">
       <h5 className="text-white cursor-pointer" onClick={() => handleOpenChat(friend.id)}>{friend.username}</h5>
       {/* <FontAwesomeIcon
         onClick={deleteFriend}
