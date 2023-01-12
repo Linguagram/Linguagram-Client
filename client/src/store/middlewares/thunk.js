@@ -1,7 +1,6 @@
 import {
   setActiveSection,
   setThisUser,
-  setGroups,
   setCurrentMessages,
   setPrivateGroups,
   setGroupGroups,
@@ -21,6 +20,7 @@ import {
   setIsIncomingCall,
   setOpenChat,
   setGroupMessagesRead,
+  setFilteredGroups,
 } from "../actions/actionCreator";
 import { URL_SERVER } from "../../baseUrl";
 import axios from "axios";
@@ -142,6 +142,15 @@ export const logOut = (dispatcher, inputs) => {
     dispatcher(setInterestLanguage({}));
     dispatcher(setNativeLanguage({}));
     dispatcher(setIsCalling(false));
+    dispatcher(setCurrentMessages([]));
+    dispatcher(setCounterpartUser([]));
+    dispatcher(setExploreUsers([]));
+    dispatcher(setExploreGroups([]));
+    dispatcher(setFriendRequests([]));
+    dispatcher(setFriends([]));
+    dispatcher(setNavbarColor(false));
+    dispatcher(setInterests([]));
+    dispatcher(setFilteredGroups([]));
     localStorage.clear();
   };
 };

@@ -24,7 +24,7 @@ export default function groupReducer(state = initialState, action) {
       return {
         ...state,
         allGroups: action.payload,
-        groupsFetched: true,
+        groupsFetched: action.payload?.length && action.payload.length > 0,
       };
     case SET_FILTERED_GROUPS:
       return {

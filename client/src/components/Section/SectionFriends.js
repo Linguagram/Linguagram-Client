@@ -27,13 +27,6 @@ export default function SectionFriends() {
 
   useEffect(() => {
     dispatch(getFriends())
-      .then((_) => {
-        const letters = getFriendsFirstLetter(friends);
-        const sorted = sortFriendsByFirstLetter(friends);
-        setFirstLetters(letters);
-        setSortedFriends(sorted);
-        return;
-      })
       .catch(console.log);
   }, []);
 
