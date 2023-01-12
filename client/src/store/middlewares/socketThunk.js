@@ -13,6 +13,9 @@ import {
   setFriends,
   setIncomingCaller,
   setIsIncomingCall,
+  addAllGroups,
+  addPrivateGroups,
+  addGroupGroups,
   // setGroupPreviewMessage,
 } from "../actions/actionCreator";
 import { SOCKET_EVENTS } from "../actions/socketEvents";
@@ -56,9 +59,22 @@ export const initSocket = (socketDispatch, socketNavigate) => {
 
     socket.on(SOCKET_EVENTS.MESSAGE, (message) => {
       console.log("[ws MESSAGE]", message);
-      const { sectionReducer } = getState()
+      const { groupReducer, sectionReducer } = getState()
 
       if (!message) return;
+      if (groupReducer.allGroups.findIndex(g => g.id === message.Group.id) === -1) {
+        dispatch(addAllGroups(message.Group));
+        switch(message.Group.type) {
+          case "dm": {
+            dispatch(addPrivateGroups(message.Group));
+            break;
+          }
+          case "group": {
+            dispatch(addGroupGroups(message.Group));
+            break;
+          }
+        }
+      }
       if (sectionReducer.openChat?.id !== message?.GroupId) return;
       socketDispatch(addMessage(message));
     });
