@@ -88,7 +88,7 @@ export default function LoginView() {
                   <input
                     ref={inputEmailRef}
                     type="text"
-                    className="text-white text-sm focus:border-none focus:outline-none bg-transparent flex-1"
+                    className="text-white text-sm focus:border-none focus:outline-none mr-4 bg-transparent flex-1"
                     placeholder="Email"></input>
                 </div>
               </div>
@@ -102,7 +102,7 @@ export default function LoginView() {
                   <input
                     ref={inputPasswordRef}
                     type="password"
-                    className="text-white text-sm focus:border-none focus:outline-none bg-transparent flex-1"
+                    className="text-white text-sm focus:border-none focus:outline-none mr-4 bg-transparent flex-1"
                     placeholder="*****"></input>
                 </div>
               </div>
