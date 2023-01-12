@@ -40,6 +40,7 @@ export default function ChatBubble({ msg }) {
 
   useEffect(() => {
     setContent(msg.content)
+    // setCounterUser(msg.User)
   }, [msg])
 
   const deleteMessage = (groupId, msgId) => {
@@ -68,9 +69,9 @@ export default function ChatBubble({ msg }) {
       const counterUserTemp = counterpartUser.GroupMembers.find(el => el.UserId === msg.UserId)
       setCounterUser(counterUserTemp)
     }
-  }, [])
+  }, [counterpartUser]);
 
-  console.log(counterUser);
+  // console.log(counterUser);
 
   const TranslateButton = (active) => {
     return (
