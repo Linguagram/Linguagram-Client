@@ -12,7 +12,7 @@ export default function Sidebar() {
 
   const handleLogOut = () => {
     dispatch(closeSocket())
-    dispatch(logOut())
+    dispatch(logOut(dispatch))
     navigate('/')
   }
 
