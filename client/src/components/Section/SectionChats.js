@@ -69,6 +69,7 @@ export default function SectionChats() {
       <div className="flex flex-col h-full gap-3 mt-5 overflow-y-auto scrollbar-hide">
         {filteredGroups &&
           filteredGroups.map((group) => {
+            if (!group.Messages) group.Messages = [];
             return (
               <div
                 key={group.id}

@@ -63,6 +63,8 @@ export const initSocket = (socketDispatch, socketNavigate) => {
 
       if (!message) return;
       if (groupReducer.allGroups.findIndex(g => g.id === message.Group.id) === -1) {
+        message.createdAt = new Date(message.createdAt);
+        message.Group.Messages = [message];
         dispatch(addAllGroups(message.Group));
         switch(message.Group.type) {
           case "dm": {
