@@ -7,6 +7,7 @@ import {
   ADD_GROUP_GROUPS,
   SET_GROUP_MESSAGES_READ,
   SET_FILTERED_GROUPS,
+  SET_PREVIEW_MESSAGE,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -69,7 +70,7 @@ export default function groupReducer(state = initialState, action) {
         groupGroups: groups || state.groupGroups,
       };
     }
-    case SET_GROUP_MESSAGES_READ:
+    case SET_GROUP_MESSAGES_READ: {
       const indx = state.allGroups.findIndex(g => g.id === action.payload);
       let newAllGroups;
       if (indx !== -1) {
@@ -80,6 +81,20 @@ export default function groupReducer(state = initialState, action) {
         ...state,
         allGroups: newAllGroups || state.allGroups,
       };
+    }
+    case SET_PREVIEW_MESSAGE: {
+      const indx = state.allGroups.findIndex(g => g.id === action.payload.GroupId);
+      let newAllGroups;
+      if (indx !== -1) {
+        newAllGroups = state.allGroups.slice();
+        action.payload.createdAt = new Date(action.payload.createdAt);
+        newAllGroups[indx].Messages[0] = action.payload;
+      }
+      return {
+        ...state,
+        allGroups: newAllGroups || state.allGroups,
+      };
+    }
     default:
       return state;
   }

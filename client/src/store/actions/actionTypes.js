@@ -61,3 +61,5 @@ export const ADD_GROUP_GROUPS = 'groups/successAddGroupGroups'
 export const SET_GROUP_MESSAGES_READ = 'groups/successGroupMessagesRead'
 
 export const SET_IS_NEW_USER = 'user/isNewUser'
+
+export const SET_PREVIEW_MESSAGE = 'groups/setPreviewMessage'

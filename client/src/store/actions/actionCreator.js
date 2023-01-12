@@ -31,6 +31,7 @@ import {
   ADD_GROUP_GROUPS,
   SET_GROUP_MESSAGES_READ,
   SET_IS_NEW_USER,
+  SET_PREVIEW_MESSAGE,
 } from "./actionTypes";
 
 export const setActiveSection = (payload) => {
@@ -254,6 +255,13 @@ export const setGroupMessagesRead = (payload) => {
 export const setIsNewUser = (payload) => {
   return {
     type: SET_IS_NEW_USER,
+    payload
+  }
+}
+
+export const setPreviewMessage = (payload) => {
+  return {
+    type: SET_PREVIEW_MESSAGE,
     payload
   }
 }

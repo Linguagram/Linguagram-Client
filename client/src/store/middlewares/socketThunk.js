@@ -16,6 +16,7 @@ import {
   addAllGroups,
   addPrivateGroups,
   addGroupGroups,
+  setPreviewMessage,
   // setGroupPreviewMessage,
 } from "../actions/actionCreator";
 import { SOCKET_EVENTS } from "../actions/socketEvents";
@@ -79,6 +80,7 @@ export const initSocket = (socketDispatch, socketNavigate) => {
       }
       if (sectionReducer.openChat?.id !== message?.GroupId) return;
       socketDispatch(addMessage(message));
+      socketDispatch(setPreviewMessage(message));
     });
 
     socket.on(SOCKET_EVENTS.MESSAGE_DELETE, (message) => {
