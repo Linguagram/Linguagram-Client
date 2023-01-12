@@ -679,6 +679,7 @@ export function openChat(group, componentDispatch) {
 
     if (group.type === "dm") {
       for (const user of group.GroupMembers) {
+        console.log("[member openChat]", user);
         if (user.User.id !== thisUser.id) {
           componentDispatch(handleSetCounterpartUser(user.User));
           break;

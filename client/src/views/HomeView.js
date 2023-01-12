@@ -36,9 +36,6 @@ export default function HomeView() {
         dispatch(handleSetThisUser(user))
         dispatch(handleFetchGroups())
       })
-      .then((_) => {
-        return;
-      })
       .catch((err) => {
         if(err.response?.data?.message) {
           swalError(err)

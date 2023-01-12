@@ -34,7 +34,7 @@ export default function EmailVerification() {
                 icon: "success",
             });
             dispatch(setIsNewUser(true))
-            navigate('/explore/people')
+            navigate('/home')
 
             setLoading(false)
             dispatch(handleSetThisUser(data.user))

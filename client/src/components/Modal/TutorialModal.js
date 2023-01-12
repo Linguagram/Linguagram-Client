@@ -1,12 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { setIsNewUser } from "../../store/actions/actionCreator";
 
 export default function TutorialModal() {
   let [isOpen, setIsOpen] = useState(true);
   const [steps, setSteps] = useState(1);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const nextStep = () => {
     if (steps < 4) setSteps(steps + 1);
