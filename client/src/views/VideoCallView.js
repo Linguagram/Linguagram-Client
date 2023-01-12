@@ -254,7 +254,7 @@ export default function VideoCallView() {
               ref={userVideo}
               autoPlay
             />
-            <div className="absolute w-full h-fit max-h-full max-w-full aspect-video text-slate-400  text-sm lg:gap-8 lg:text-base 2xl:text-xl 2xl:mt-2 2xl:justify-center flex flex-col justify-end">
+            <div className="absolute w-full h-fit max-h-full max-w-full aspect-video text-slate-400  text-sm lg:gap-8 lg:text-base 2xl:text-xl 2xl:mt-2  flex flex-col justify-end">
               <div className="flex justify-between items-center bg-black bg-opacity-50 px-4">
                 <div>{mySetting.name}</div>
                 <div className="flex items-center gap-3">
@@ -275,7 +275,7 @@ export default function VideoCallView() {
               ref={partnerVideo}
               autoPlay
             />
-            <div className="absolute w-full h-fit max-h-full max-w-full aspect-video text-slate-400  text-sm lg:gap-8 lg:text-base 2xl:text-xl 2xl:mt-2 2xl:justify-center flex flex-col justify-end">
+            <div className="absolute w-full h-fit max-h-full max-w-full aspect-video text-slate-400  text-sm lg:gap-8 lg:text-base 2xl:text-xl 2xl:mt-2 flex flex-col justify-end">
               <div className="flex justify-between items-center bg-black bg-opacity-50 px-4">
                 <div>{friendSetting.name}</div>
                 <div className="flex items-center gap-3">
