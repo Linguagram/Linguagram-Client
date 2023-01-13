@@ -91,6 +91,7 @@ export default function ChatRoomFooter() {
           onChange={handleFileInputChange}
           style={{ display: "none" }}
           type="file"
+          accept="audio/*, video/*, image/*"
           id="attachment-input"
           name="attachment"
         />
