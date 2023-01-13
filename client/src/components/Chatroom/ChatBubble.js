@@ -9,6 +9,49 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { getUserAvatar } from "../../util/getAvatar";
 
+const MessageMedia = (msg) => {
+  console.log("[msg.Medium]", msg.Medium);
+  if (msg.MediaId && msg.Medium) {
+    const type = msg.Medium.format;
+    const url = msg.Medium.url;
+    if (type.startsWith("image")) {
+      return (<img
+        className="w-full img-chat"
+        src={url}
+        type={type}
+        alt="picture-chat"
+      ></img>);
+    }
+    if (type.startsWith("video")) {
+      return (<video
+        className="w-full img-chat"
+        alt="video-chat"
+        controls
+      >
+        <source 
+          src={url}
+          type={type}
+          />
+        Unsupported video.
+      </video>);
+    }
+    if (type.startsWith("audio")) {
+      return (<audio
+        className="w-full img-chat"
+        alt="audio-chat"
+        controls
+      >
+        <source 
+          src={url}
+          type={type}
+          />
+        Unsupported audio.
+      </audio>);
+    }
+  }
+  else return "";
+}
+
 export default function ChatBubble({ msg }) {
   const [content, setContent] = useState('')
   const [untranslated, setUntranslated] = useState('')
@@ -174,15 +217,9 @@ export default function ChatBubble({ msg }) {
                 ) : (
                     msg.id === editing
                       ? (<form onSubmit={(e) => { editMessage(e, msg.GroupId, msg.id) }} className="flex flex-col gap-1">
-                        {msg.MediaId ? (
-                          <img
-                            className="w-full img-chat"
-                            src={msg.Medium.url}
-                            alt="picture-chat"
-                          ></img>
-                        ) : (
-                            ""
-                          )}
+                        {
+                        MessageMedia(msg)
+                      }
                         <textarea
                           ref={editingElement}
                           className="px-2 py-1 text-sm text-white bg-transparent rounded focus:border-none focus:outline-none bg-darker-gray"
@@ -203,15 +240,9 @@ export default function ChatBubble({ msg }) {
                         </div>
                       </form>)
                       : (<div className="flex flex-col gap-1">
-                        {msg.MediaId ? (
-                          <img
-                            className="w-full img-chat"
-                            src={msg.Medium.url}
-                            alt="picture-chat"
-                          ></img>
-                        ) : (
-                            ""
-                          )}
+                        {
+                        MessageMedia(msg)
+                      }
                         <h5
                           className="text-white"
                           style={{ wordBreak: "break-word" }}
@@ -278,15 +309,9 @@ export default function ChatBubble({ msg }) {
                   </h5>
                 ) : (
                   <div className="flex flex-col gap-1">
-                    {msg.MediaId ? (
-                      <img
-                        className="w-full img-chat"
-                        src={msg.Medium.url}
-                        alt="picture-chat"
-                      ></img>
-                    ) : (
-                      ""
-                    )}
+                      {
+                      MessageMedia(msg)
+                    }
                     <h5
                       className="text-white"
                       style={{ wordBreak: "break-word" }}
@@ -375,15 +400,9 @@ export default function ChatBubble({ msg }) {
                   </h5>
                 ) : (
                   <div className="flex flex-col gap-1">
-                    {msg.MediaId ? (
-                      <img
-                        className="w-full img-chat"
-                        src={msg.Medium.url}
-                        alt="picture-chat"
-                      ></img>
-                    ) : (
-                      ""
-                    )}
+                      {
+                      MessageMedia(msg)
+                    }
                     <h5
                       className="text-white"
                       style={{ wordBreak: "break-word" }}
